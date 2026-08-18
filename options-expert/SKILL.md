@@ -44,14 +44,41 @@ would prove you wrong.
 
 ---
 
-## 1. Config — required before sizing
+## 1. Config
 
 ```
-MAX_TRADE_RISK_PCT   = 0.02      # of live account equity, per trade
-MAX_OPEN_HEAT_PCT    = 0.10      # of live account equity, all open option risk
-MAX_CONCURRENT       = 4
-ACCOUNT              = <the account_number to size against>
+MAX_TRADE_PREMIUM_USD = 400       # hard cap on premium deployed to open a trade
+MAX_TRADE_RISK_PCT    = 0.04      # of live equity, max LOSS on one trade
+MAX_OPEN_HEAT_PCT     = 0.12      # of live equity, all open risk combined
+MAX_CONCURRENT        = 4
+ACCOUNT               = <the account_number to size against>
 ```
+
+Set 2026-08-18. `MAX_TRADE_PREMIUM_USD` is a **spend** cap, not a loss cap.
+
+### The rule that makes those two numbers coherent
+
+A $400 premium cap is only conservative **if a stop is actually working.** A long
+option held with no resting stop can go to zero, so its risk *is* its premium —
+and $400 of unprotected premium is a $400 loss exposure, which blows straight
+through `MAX_TRADE_RISK_PCT`.
+
+Therefore:
+
+- **With a resting stop order placed:** risk = `(entry − stop) × 100 ×
+  contracts`. The premium may run up to `MAX_TRADE_PREMIUM_USD` provided that
+  computed risk stays inside `MAX_TRADE_RISK_PCT`.
+- **With no resting stop:** risk = **full premium**. The position must then fit
+  inside `MAX_TRADE_RISK_PCT` on its own, which at current equity means roughly
+  $50, not $400.
+
+There is no third case. A card that claims the $400 allowance **must** name the
+stop and state that it is resting, not planned. "I'll watch it" is the no-stop
+case and is sized accordingly.
+
+The same rule governs open heat: a position with a working stop contributes its
+stop-risk to heat; a position without one contributes its **entire remaining
+premium.**
 
 Equity is **read live** from Robinhood `get_portfolio` on every run — never
 hardcoded, never carried from a previous session. If `get_portfolio` fails, do
@@ -60,8 +87,6 @@ not guess an account size: report `NA_no_data` and produce no sized cards.
 Check `get_accounts` for `option_level` on the sizing account. Level 2 is
 long options only — **do not recommend a spread the account cannot open.**
 Level 3 permits verticals and calendars.
-
----
 
 ## 2. Hard rules
 
@@ -278,9 +303,14 @@ trade**, not the least-bad contract.
 important line in this document at a small account size.
 
 ```
+# with a resting stop:
 risk_per_contract = (entry_price - stop_price) x 100
+# with no resting stop:
+risk_per_contract = entry_price x 100          # the whole premium can be lost
+
 max_risk_$        = live_equity x MAX_TRADE_RISK_PCT
 contracts         = floor(max_risk_$ / risk_per_contract)
+premium_$         = contracts x entry_price x 100
 ```
 
 Then check, in order, and fail loudly on any:
@@ -288,11 +318,18 @@ Then check, in order, and fail loudly on any:
 1. `contracts >= 1` — if it rounds to zero, **the trade is unaffordable. Say
    that plainly.** Do not widen the stop to make the size work. Widening a stop
    to fit a budget is how a $25 risk becomes a $160 loss.
-2. `contracts x entry x 100 <= buying_power` — you must be able to pay for it.
-3. Open heat + this trade's risk ≤ `MAX_OPEN_HEAT_PCT x equity`. Compute open
+2. `premium_$ <= MAX_TRADE_PREMIUM_USD` — the spend cap. If it binds, reduce
+   contracts; do not reduce the stop.
+3. `premium_$ <= buying_power` — you must be able to pay for it.
+4. Open heat + this trade's risk ≤ `MAX_OPEN_HEAT_PCT x equity`. Compute open
    heat from `get_option_positions`; for long options with no stop resting,
    **heat is the full remaining premium at risk**, not a notional.
-4. Open positions < `MAX_CONCURRENT`.
+5. Open positions < `MAX_CONCURRENT`.
+6. **Correlation check.** Two positions on the same underlying driver (two oil
+   names, two AI-semis names) are **one bet held twice** and count as one
+   position against `MAX_CONCURRENT` and as a single combined risk against
+   `MAX_TRADE_RISK_PCT`. `/api/market/correlations` measures this; absent that,
+   say plainly that the check was made by judgment.
 
 At a four-figure account, a single SPY near-money contract can exceed the
 per-trade *premium* budget while still passing the *risk* budget. That is
@@ -356,7 +393,8 @@ CONTRACT      <ticker> <expiry> <strike><C|P>   (DTE n)
 STRUCTURE     <long call | debit vertical | ...>   — why this structure, one line
 ENTRY         <mark / limit>          bid x.xx / ask x.xx  (spread x.x%)
 GREEKS        Δ x.xx  Γ x.xxx  Θ -x.xx (-xx%/day)  V x.xx   IV x.xx  [source: robinhood]
-SIZE          n contract(s) = $xxx premium · risk $xx (x.x% of equity)
+SIZE          n contract(s) = $xxx premium (cap $400) · risk $xx (x.x% of equity)
+              stop RESTING at $x.xx — required to claim the premium allowance
 EDGE TEST     E1 vol mispricing — implied move x.x% vs thesis needs x.x%
               E2 flow — ask-side x:1, vol/OI x.x, n days OI increase
 TRIGGER       5-min close above/below <level>
