@@ -263,6 +263,83 @@ do not exist (`/api/options/flow`, `/api/stock/{t}/flow`, anything under
 25 of 26 probed paths returned 200 (`/api/api-usage` 404s — the usage/rate-limit
 endpoint is documented in a separate UW skill, not probed here).
 
+### 3a-0. The whitelist is a subset, not an inventory — 207 endpoints exist
+
+`skill.md` says "If a URL is not on that list, it does not exist." **That is an
+anti-hallucination guardrail, not a description of the API.** The full OpenAPI
+spec at `GET /api/openapi` (≈957 KB YAML, no auth issues) documents **207
+paths**. The whitelist covers 26 of them.
+
+Treat `skill.md` as the safe-by-default list and `/api/openapi` as the truth.
+Anything not on the whitelist must be probed before use — but its absence there
+is not evidence it is missing. `iv-rank` was the first example of this.
+
+Verified working beyond the whitelist (2026-08-18):
+
+| Endpoint | Why it matters |
+|---|---|
+| `/api/stock/{t}/gex-levels` | **`call_wall`, `put_wall`, `gamma_magnet`, `gamma_flip` in one call** — the regime read, vendor-computed. Prefer this over summing strikes yourself (§3e). |
+| `/api/stock/{t}/max-pain` | max pain per expiry |
+| `/api/stock/{t}/volatility/realized` | **paired `implied_volatility` + `realized_volatility`** per day, 251 rows |
+| `/api/stock/{t}/volatility/variance-risk-premium` | IV−RV premium, 231 rows — the core vol-edge metric, vendor-computed |
+| `/api/stock/{t}/volatility/term-structure` | IV per expiry, 34 rows |
+| `/api/stock/{t}/volatility/stats` | `iv`, `iv_high`, `iv_low` — IV rank properly framed |
+| `/api/stock/{t}/historical-risk-reversal-skew` | 25-delta risk reversal — **this is edge test E5, measured** |
+| `/api/stock/{t}/ohlc/{candle_size}` | **UW does have intraday bars** — 2,500 5-min rows on SPY |
+| `/api/stock/{t}/flow-per-strike-intraday` | intraday flow by strike, 2,338 rows |
+| `/api/stock/{t}/greek-flow` | greek flow through the session, 405 rows |
+| `/api/stock/{t}/oi-change` | per-contract OI change with `curr_oi` |
+| `/api/stock/{t}/nope` | Net Options Pricing Effect, per-minute |
+| `/api/market/{sector}/sector-tide` | **sector-level tide** — energy vs tech rotation, directly |
+| `/api/market/top-net-impact` | biggest net-premium names market-wide |
+| `/api/market/sector-etfs`, `/api/market/movers` | breadth and movers |
+| `/api/option-trades/multi-leg` | spread/combo detection, so multi-leg volume is not misread as directional |
+| `/api/shorts/{t}/volume-and-ratio`, `/interest-float` | squeeze inputs |
+| `/api/seasonality/{t}/monthly` | 19y monthly stats |
+| `/api/potus/posts` | market-moving posts |
+| `/api/socket/*` (15 channels) | **websocket streams** — `gex`, `market_tide`, `option_trades`, `price`, `news`, `flow_alerts`, `trading_halts`. Replaces the playbook's 5-minute polling scripts with a push feed. Not yet implemented. |
+
+Needing parameters before they return data: `/api/volatility/anomaly/top`
+(`direction=short_vol|long_vol`), `/api/market/correlations` (`tickers=`),
+`/api/stock/{t}/atm-chains` (`expirations=`).
+
+**Plan-gated:** `/api/volatility/vix-term-structure` returns **403
+`volatility_scope_required`** — it needs a volatility data add-on this key does
+not carry. VIX term structure therefore remains a genuine gap, but for a
+subscription reason rather than absence.
+
+### 3e. GEX — use the vendor's levels, do not sum strikes yourself
+
+**This rule exists because summing them produced a wrong answer on 2026-08-18.**
+
+`/api/stock/{t}/spot-exposures/strike` **defaults to roughly 50 rows sorted
+ascending by strike.** On SPY that window ran 150 → 763 — it stopped *below*
+spot (767.27) and contained no strike above it. Summing that window produced a
+confident-looking conclusion ("all major gamma sits below spot; there is a
+negative-gamma shelf at 760–763 that will accelerate a break") which was an
+**artifact of truncation**, not a market structure. Every strike above spot had
+simply been cut off.
+
+Pass `limit=500` to get the full chain (491 rows, strikes 50 → 1480). With the
+full window the picture changed completely: the dominant concentration sat **at**
+the money (strike 767, −320.9B, ~92% of the total) with positive gamma just
+above (769: +19.8B, 770: +9.9B) — a very different trade.
+
+Two standing rules follow:
+
+1. **Prefer `/api/stock/{t}/gex-levels`.** It returns `call_wall`, `put_wall`,
+   `gamma_magnet` and `gamma_flip` computed by the vendor across the whole
+   chain. It cannot be truncated by a paging default.
+2. If you do sum strikes, **assert the window brackets spot** — strikes both
+   above and below — before drawing any conclusion. A window that is entirely
+   on one side of spot is a paging artifact and must be discarded, not
+   interpreted.
+
+More generally: **a default response length is a silent filter.** Alongside the
+`data: []` trap in §3d, this is the second way this API produces a confident
+wrong answer without ever returning an error.
+
+
 ### 3a. The edge layer — what only UW has
 
 **Signed trade-level tape.** `/api/option-trades` returns individual prints with
