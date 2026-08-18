@@ -72,6 +72,27 @@ always read `timestamp`/`date` off the payload rather than assuming freshness.
 | `historical-chart/{1min,5min,15min,1hour}?symbol=` | OHLCV bars | 5-min is the playbook's decision chart; 1-min is execution timing; volume drives the participation floor |
 | `historical-price-eod/{full,light}?symbol=` | daily OHLCV (+ VWAP/change in `full`) | PDH/PDL/PDC, ATR, realized vol, gap statistics |
 
+### 1b-2. Index symbols — partly gated
+
+Index quotes go through the same `quote?symbol=` path with a URL-encoded caret
+(`%5EVIX`). Verified 2026-08-18:
+
+| Symbol | Result |
+|---|---|
+| `^VIX` | 200 — CBOE Volatility Index, full quote (15.79 at test time) |
+| `^GSPC` | 200 — S&P 500 cash index, with index volume |
+| `^NDX` | **402** — not on this plan |
+| `^VIX9D` | **402** — not on this plan |
+| `^VVIX` | **402** — not on this plan |
+
+Consequence: **VIX term structure is unavailable from FMP.** VIX9D/VIX (the
+short-dated-vol-vs-30-day read that tells you whether the market is pricing an
+event into *this week* specifically) needs Robinhood's index tools or UW. NDX
+likewise comes from Robinhood `get_indexes`/`get_index_quotes`, not FMP.
+
+Note `^VIX` returns `volume: 0` — the index itself does not trade. Never use
+that field as a participation signal.
+
 ### 1c. Movers, breadth and sector rotation
 
 `biggest-gainers`, `biggest-losers`, `most-actives`,
@@ -139,6 +160,7 @@ context only. Not an intraday input.
 |---|---|---|
 | `options-chain`, `options/quote` | 404 | FMP serves no options data at all |
 | `historical-social-sentiment` | 404 | no social feed |
+| `quote?symbol=^NDX` / `^VIX9D` / `^VVIX` | 402 | index symbols gated; no VIX term structure |
 | `etf/holdings` | 402 | payment required — higher tier |
 | `institutional-ownership/symbol-positions-summary` | 402 | higher tier |
 | `earnings-surprises-bulk` | 402 | higher tier (per-symbol `earnings` works) |
@@ -179,10 +201,21 @@ an exact `strike_price` returns exactly 2 contracts (call + put) and is cheap.
 Unfiltered, it returns **100 contracts per page starting from the lowest strike**
 (SPY 2026-08-21 calls began at strike 360) and paginates by cursor. Walking a
 full SPY chain that way costs enormous context for strikes nobody will trade.
-**Rule: always query by explicit strike, over a spot-anchored window.** There is
-an apparent cursor shortcut — the cursor decodes as base64 `p=<strike>`, so a
-crafted cursor could seek straight to the money — but that is an inference from
-one observed value and is **UNVERIFIED**; do not build on it until tested.
+**Rule: never call it unfiltered from the default cursor.** Two access patterns
+work:
+
+- *By explicit strike* — `strike_price=768.0000` returns exactly the call and
+  the put. Cheap, exact, ~1 call per strike.
+- *By crafted cursor (verified 2026-08-18)* — the pagination cursor is base64 of
+  `p=<strike>`, and a hand-built cursor seeks straight to that strike. Passing
+  `cD05MDAuMDAwMA==` (= `p=900.0000`) to SPY 2026-08-19 calls returned strikes
+  905→950 and nothing below. So `base64("p=744.0000")` opens a page at the money
+  and one page of 100 covers the whole tradable window.
+
+That second pattern is the one to build on: a full near-money chain for an
+expiration costs **2 calls** (one per option type), not ~90. Sequence is
+`get_option_chains` → crafted-cursor `get_option_instruments` → batched
+`get_option_quotes`.
 
 ### 2b. Underlying and account
 
