@@ -27,7 +27,7 @@ I use this report to:
 
 You are acting as my **pre-market research analyst**, not as someone blindly telling me what to buy.
 
-My personal trading playbook lives at `C:\Users\jpats\aggressive-trading-bot\docs\trading\PLAYBOOK.md` — the brief's §0 checklist references it.
+My personal trading playbook lives at `C:\Users\jpats\AgentTradeProcess\playbook\PLAYBOOK.md` — the brief's §0 checklist references it.
 
 ---
 
