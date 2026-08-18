@@ -13,6 +13,13 @@ Read `DATA_LAYER.md` in this directory before your first call of the session. It
 is the verified inventory of what the three connections actually return. If a
 field is not in it, do not assume it exists.
 
+`reference/` holds the vendored Unusual Whales docs — the API skill, the
+websocket skill, the usage-monitor skill — plus a `README.md` recording where
+each is wrong. **Read that README before trusting the API skill's endpoint
+list:** its "if it is not on this list it does not exist" line is a guardrail,
+not an inventory, and the API has 207 paths against its 26. The authority is
+`GET https://api.unusualwhales.com/api/openapi`.
+
 Read `../playbook/PLAYBOOK.md`. It governs entries, stops, timing and grading.
 This document does not replace it — it feeds it. The playbook decides *when* a
 trade is allowed; this decides *whether the option is worth owning at all*.
@@ -169,22 +176,41 @@ the thesis looks. Say so and stop.
 
 ### Stage 1 — Regime gate (this runs first and it can veto everything)
 
-From UW `spot-exposures/strike`, sum `call_gamma_oi + call_gamma_vol` against
-`put_gamma_oi + put_gamma_vol` across strikes around spot. Identify the largest
-per-strike concentrations (**the walls**) and the sign change (**the flip zone**).
+**Primary source: `/api/stock/{t}/gex-levels`.** One call, vendor-computed
+across the whole chain, returns `call_wall`, `put_wall`, `gamma_magnet` and
+`gamma_flip`. Use it.
+
+**Do not derive the regime by summing strikes.** That method produced a wrong
+answer on 2026-08-18: `spot-exposures/strike` defaults to ~50 rows sorted
+ascending by strike, the window stopped below spot, and "all the gamma is below
+us" was a fact about the response rather than the market. `DATA_LAYER.md` §3e
+has the full account.
+
+If you need the per-strike profile (to see *shape*, not to decide regime):
+
+- Pass **`limit=500`**.
+- **Assert the window brackets spot** — strikes must exist both above and below
+  it. A one-sided window is a paging artifact: discard it, do not interpret it.
+- Prefer the `_vol` component alongside `_oi`. `_oi` is yesterday's positioning;
+  `_vol` is today's, and on expiration day that difference is the whole story.
 
 | Regime | Behaviour | What is allowed |
 |---|---|---|
 | **Positive gamma (GLUE)** | dealers fade moves; pinny, breakouts fail, walls hold | fade edges toward walls; debit verticals over naked longs; take profit at walls; **demand full retest confirmation on any break** |
 | **Negative gamma (GASOLINE)** | dealers amplify; breaks run, stops gap | continuation and breakout structures; naked long premium is at its best here; tighten stops |
-| **Near flip zone** | unstable, whipsaw-prone | smallest size or no trade |
+| **Near `gamma_flip`** | unstable, whipsaw-prone | smallest size or no trade |
 
-Use the `_vol` component, not just `_oi`. `_oi` is yesterday's positioning;
-`_vol` is today's, and on expiration day that difference is the whole story.
+Cross-check `/api/stock/{t}/max-pain` for the traded expiries. A `gamma_magnet`
+and a max-pain level that agree is a genuine pin read; when they disagree, say
+so rather than picking the one that suits the thesis.
+
+**Expiration days invalidate yesterday's profile.** A large ATM gamma
+concentration on an expiry date is mostly contracts that cease to exist at the
+bell. Re-pull `gex-levels` pre-open; never carry a regime read overnight.
 
 **The regime decides which edge tests you are permitted to act on.** A
 continuation setup in strong positive gamma is not a setup, it is a fade
-waiting to happen. This is the playbook's regime gate, and it is not optional.
+waiting to happen.
 
 ### Stage 2 — Candidate intake
 
@@ -199,21 +225,45 @@ the candidate dies here — and most do.
 
 #### E1 — Vol mispricing (the primary test)
 
-Compare what the thesis *needs* against what the option *charges*.
+Three measurements, all vendor-computed. None of these is a proxy any more.
 
-Pull `interpolated-iv` at the DTE you would trade. It returns
-`implied_move_perc` directly — the move the market is paying for.
+**1. Is vol cheap or rich in its own history?**
+`/api/stock/{t}/volatility/stats` — one call returns `iv`, `iv_high`, `iv_low`,
+**`iv_rank`**, `rv`, `rv_low`, `rv_high`. This is the whole IV-rank question
+answered, with realized vol alongside for free.
 
-- Thesis needs a move **larger** than `implied_move_perc` → the market is
-  underpricing your scenario → **long premium has edge.**
-- Thesis needs a move **smaller**, or is "this stalls" → **long premium has
-  negative edge**; use a spread or sell premium.
+**2. Is implied above or below what the stock actually does?**
+`/api/stock/{t}/volatility/variance-risk-premium` returns `risk_premium` and its
+`rank`. Positive premium = options are charging more than the stock has been
+delivering (favours selling/spreads); negative = the opposite (favours buying).
+`/api/stock/{t}/volatility/realized` gives the paired
+`implied_volatility` / `realized_volatility` series behind it.
+
+> **Both are lagged, and the lag is structural.** Realized vol needs the
+> forward window to have actually happened, so the most recent rows carry
+> `realized_volatility: null` and `variance-risk-premium` trails by weeks
+> (`unshifted_rv_date` tells you the real as-of). **Never present VRP as a
+> live reading.** It is a statement about the recent regime, not about today.
+> Today's IV-vs-RV comparison comes from `volatility/stats`.
+
+**3. Does the thesis need more than the market is paying for?**
+`/api/stock/{t}/volatility/term-structure` returns one row **per real expiry**
+(34 on SPY) with `dte`, `implied_move` in points and `implied_move_perc`.
+Prefer it over `interpolated-iv`, which interpolates to fixed DTEs that may not
+be tradable dates.
+
+Then judge:
+
+- Thesis needs a move **larger** than `implied_move_perc` at the expiry you
+  would actually trade → the market is underpricing your scenario →
+  **long premium has edge.**
+- Thesis needs **less**, or is "this stalls" → long premium has negative edge;
+  use a spread or sell premium.
 - Thesis needs **more than ~1.5×** the implied move → **kill it.** You are not
   being paid for a tail; you are buying a lottery ticket.
 
-Cross-check `iv-rank` (`iv_rank_1y`). Low rank + directional thesis = buy
-premium. High rank + directional = structure it as a spread so you are not
-paying the crush.
+Combine with `iv_rank`: low rank + directional = buy premium; high rank +
+directional = structure it as a spread so you are not paying the crush.
 
 #### E2 — Aggressor-side flow divergence
 
@@ -257,11 +307,22 @@ handled explicitly, not noticed afterwards.
 
 #### E5 — Skew and structure
 
-From the Robinhood chain, compare IV at equidistant deltas on each side
-(e.g. 25Δ put vs 25Δ call). Extreme put skew makes a put *spread* finance far
-better than a naked put; unusually cheap calls favour a long call over stock
-exposure. This test rarely creates a trade on its own — it usually changes the
-*structure* of a trade that already passed E1–E4.
+**Measured, not eyeballed:**
+`/api/stock/{t}/historical-risk-reversal-skew` returns a dated series of
+25-delta `risk_reversal` — call IV minus put IV at matched deltas.
+
+- **Negative** = puts bid over calls (downside skew). Put premium is expensive:
+  a put *spread* finances far better than a naked put, and selling put premium
+  is comparatively well paid.
+- **Positive** = calls bid over puts. Unusual in index products; often a
+  squeeze or a chase. Long calls are expensive here.
+- **The change matters more than the level.** The series is dated, so read the
+  trajectory: SPY went +0.0045 on 2026-08-04 to −0.0277 on 2026-08-18 — puts
+  getting bid over a fortnight, a real shift in what protection costs.
+
+This test rarely creates a trade by itself. It changes the **structure** of a
+trade that already passed E1–E4, and it is the reason a card must justify its
+structure in one line rather than defaulting to a long single leg.
 
 ### Stage 4 — Structure selection
 
@@ -354,6 +415,12 @@ Straight from the playbook — no card ships without all four:
 
 For 0DTE: the real bell is **3:30 PM ET**, not 4:00. Robinhood force-closes at
 3:45. Whatever exists at 3:30 is the result.
+
+**Once a card is live, run the monitor:** `tools/uw_stream.py --tickers SPY,QQQ`
+streams the tide, per-ticker GEX and net flow, news (including Truth Social
+posts) and trading halts, and fires the playbook §4 tripwires on live data
+instead of 5-minute polls. Halts are always surfaced — a halt on an open
+position is not a low-priority event.
 
 ---
 

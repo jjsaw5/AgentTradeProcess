@@ -297,7 +297,7 @@ Verified working beyond the whitelist (2026-08-18):
 | `/api/shorts/{t}/volume-and-ratio`, `/interest-float` | squeeze inputs |
 | `/api/seasonality/{t}/monthly` | 19y monthly stats |
 | `/api/potus/posts` | market-moving posts |
-| `/api/socket/*` (15 channels) | **websocket streams** — `gex`, `market_tide`, `option_trades`, `price`, `news`, `flow_alerts`, `trading_halts`. Replaces the playbook's 5-minute polling scripts with a push feed. Not yet implemented. |
+| `/api/socket/*` | **websocket streams — implemented, see §3f** |
 
 Needing parameters before they return data: `/api/volatility/anomaly/top`
 (`direction=short_vol|long_vol`), `/api/market/correlations` (`tickers=`),
@@ -307,6 +307,33 @@ Needing parameters before they return data: `/api/volatility/anomaly/top`
 `volatility_scope_required`** — it needs a volatility data add-on this key does
 not carry. VIX term structure therefore remains a genuine gap, but for a
 subscription reason rather than absence.
+
+### 3f. Websocket — verified working
+
+`wss://api.unusualwhales.com/socket?token=<KEY>` — the token rides in the query
+string, so **never log the URL**. Join a channel by sending
+`{"channel":"<name>","msg_type":"join"}`; the server acknowledges with
+`["<name>",{"response":{},"status":"ok"}]` and thereafter sends
+`[<channel>, <payload>]`.
+
+Verified 2026-08-18: `market_tide`, `gex:SPY`, `news` and `trading_halts` all
+joined `ok`, and live `news` payloads arrived after the close.
+
+Channels that matter here: `market_tide`, `gex:TICKER`, `gex_strike:TICKER`,
+`net_flow:TICKER`, `flow-alerts`, `option_trades[:TICKER]`, `price:TICKER`,
+`news` (includes Truth Social posts, flagged `is_trump_ts`), `off_lit_trades`
+(dark pool), `interval_flow`, `contract_screener`, `trading_halts`.
+`periscope` (market-maker greek exposure on SPX/VIX/XSP/NANOS) and the
+`futures_*` channels are plan-gated.
+
+**Throughput is the design constraint.** `option_trades` alone is 6–10M records
+a day, and **the server drops messages when the client falls behind** — so the
+receive loop must do nothing but enqueue, and any persistence must be batched.
+`tools/uw_stream.py` implements this: bounded queue, drop-oldest with a counter,
+exponential-backoff reconnect, and a heartbeat printing queue depth and drops so
+"the server dropped it" stays distinguishable from "we fell behind."
+
+Historic tape: `/api/option-trades/full-tape/{date}`.
 
 ### 3e. GEX — use the vendor's levels, do not sum strikes yourself
 
