@@ -7,8 +7,11 @@ assume it exists.**
 
 **Verified:** 2026-08-18, ~15:50 ET (market open), from the Claude Code remote
 session container.
-**Re-verify with:** `tools/probe_fmp.sh` (FMP). Robinhood was probed by hand
-through the MCP connector; UW is unprobed — see §3.
+**Re-verify with:** `tools/probe_fmp.sh` and `tools/probe_uw.sh`. Robinhood was
+probed by hand through the MCP connector.
+**UW probed:** 2026-08-18 ~16:00 ET against the endpoint whitelist published at
+https://unusualwhales.com/skill.md, which is authoritative and also lists
+commonly-hallucinated paths that do not exist. Consult it before adding a call.
 
 A capability's presence here is a claim about *this key on this date*. Plans
 change and endpoints get deprecated mid-flight; the FMP legacy API died on
@@ -34,10 +37,19 @@ buried below because each one invalidates an obvious-looking design.
    a vendor-supplied greek, not one we model — so it is labeled
    `greeks_source: robinhood`, and it is *not* subject to the "modeled is
    labeled" caveat that applies to a Black-Scholes value we compute ourselves.
-4. **Unusual Whales is not connected.** No key in this environment. Everything
-   the daily brief attributes to UW — flow, net premium tide, GEX, dark pool,
-   IV rank — is currently **unavailable to the expert**. §3 covers what that
-   costs and what can be reconstructed without it.
+4. **Unusual Whales is connected and is the edge layer.** 25 of 26 probed
+   endpoints return 200. It supplies the three things neither other source can:
+   **signed trade-level options tape** (aggressor side, sweeps, floor prints),
+   **dealer greek exposure by strike** (gamma/vanna/charm, spot-based and live),
+   and **IV percentile with implied move per DTE**. The plan to reconstruct GEX
+   from Robinhood OI is therefore **abandoned** — UW measures it properly, and a
+   reconstructed estimate would be strictly worse and assumption-laden.
+5. **UW technical indicators are daily/weekly/monthly only.** No intraday
+   interval works, and `vwap` returns nothing at any interval. Intraday
+   technicals come from FMP; intraday VWAP must be computed from bars.
+6. **A wrong UW parameter returns HTTP 200 with `data: []`, not an error.**
+   `interval=5m` on a technical indicator looks exactly like "no signal." This
+   is the single most dangerous behaviour in the whole data layer — see §3d.
 
 ---
 
@@ -233,67 +245,186 @@ against a number someone typed into a config file.
 
 ---
 
-## 3. Unusual Whales — NOT CONNECTED
+## 3. Unusual Whales — verified
 
-`UNUSUAL_WHALES_API_KEY` is unset in this environment and no `.env` exists here.
-**No UW endpoint has been probed. This section is a statement of absence, not a
-capability list.**
-
-### 3a. What is actually lost
-
-The daily brief leans on UW for things nothing else here provides:
-
-| Capability | Reconstructable? |
-|---|---|
-| Options flow — sweeps, blocks, ask/bid-side aggression | **No.** Needs trade-level tape with venue and aggressor side. Nothing in FMP or Robinhood exposes it. |
-| Net premium tide (the §4 tripwires) | **No.** Same reason — it is an aggregation over signed trades. |
-| Dark pool prints | **No.** |
-| GEX / gamma walls / flip zone | **Partly — see 3b.** |
-| IV rank / IV percentile | **Weak proxy only.** No IV history source. FMP `standarddeviation` gives realized vol, so IV-vs-RV is available; that answers "is IV rich vs recent movement" but *not* "where does IV sit in its own year." Not the same statistic — do not label a proxy as IV rank. |
-
-### 3b. GEX is reconstructable, and that is worth knowing
-
-Robinhood returns `gamma` **and** `open_interest` per contract. Dealer gamma
-exposure per strike is therefore computable directly:
+Base URL `https://api.unusualwhales.com`. Every request needs **both** headers:
 
 ```
-GEX(strike) ≈ gamma × open_interest × 100 × spot² × 0.01
-              summed with calls positive and puts negative
+Authorization: Bearer $UNUSUAL_WHALES_API_KEY
+UW-CLIENT-API-ID: 100001
 ```
 
-over a spot-anchored strike window, which is exactly the cheap per-strike query
-pattern §2a allows (~40–60 strike calls for a ±3% SPY window). That yields the
-per-strike profile the playbook's regime gate needs: the walls, the sign, and
-the approximate flip zone.
+All endpoints are `GET`. There is no `apiKey=` query parameter — auth is the
+header only. **The endpoint whitelist at https://unusualwhales.com/skill.md is
+authoritative**; it also publishes a blacklist of plausible-looking paths that
+do not exist (`/api/options/flow`, `/api/stock/{t}/flow`, anything under
+`/api/v1/` or `/api/v2/`). Check a path against it before writing code.
 
-Three honesty caveats, all load-bearing:
+25 of 26 probed paths returned 200 (`/api/api-usage` 404s — the usage/rate-limit
+endpoint is documented in a separate UW skill, not probed here).
 
-1. The call-positive/put-negative convention is the standard *assumption* about
-   dealer positioning, not a measurement. It is wrong in specific names where
-   the customer base is net short calls. Label the output
-   `gex_source: reconstructed_from_oi`, never as a vendor GEX print.
-2. Open interest is **T-1** — it updates overnight. Same-day 0DTE positioning
-   is invisible to it. On expiration day this is a serious limitation, which is
-   precisely the day GEX matters most.
-3. It has not been built or validated against a UW GEX print. Until it is, it is
-   **UNCALIBRATED** and must display as such.
+### 3a. The edge layer — what only UW has
 
-### 3c. What the expert must do meanwhile
+**Signed trade-level tape.** `/api/option-trades` returns individual prints with
+`ask_vol` / `bid_vol` / `mid_vol` / `no_side_vol`, `nbbo_bid` / `nbbo_ask`,
+`ewma_nbbo_*`, `exchange`, `size`, `premium`, `theo`, per-trade greeks and IV,
+`tags`, and `executed_at` to the millisecond. This is the aggressor-side
+information the playbook's flow-confirmation step needs, and nothing in FMP or
+Robinhood exposes it at any price.
 
-Every flow-derived confirmation in the playbook (§1c "flow confirmation",
-§4 tide tripwires) currently has **no data source**. The expert must report
-those as `NA_no_data` and must not silently drop the confirmation step or
-substitute a proxy for it — a setup that would have required flow confirmation
-is a setup graded without it, and it says so.
+`/api/option-trades/flow-alerts` is the aggregated "unusual activity" view:
+`total_ask_side_prem` vs `total_bid_side_prem`, `has_sweep`, `has_floor`,
+`has_multileg`, `all_opening_trades`, `volume_oi_ratio`, `iv_start`/`iv_end`,
+`next_earnings_date`. Filterable by `min_premium`, `is_call`/`is_put`, `is_otm`,
+`size_greater_oi`.
 
----
+`/api/screener/option-contracts` is the widest net — per contract it adds
+`sweep_volume`, `floor_volume`, `cross_volume`, `ask_side_perc_7_day`,
+`days_of_oi_increases`, `days_of_vol_greater_than_oi`, `iv_change`, `prev_oi`,
+`prev_iv`, `roc`. `days_of_oi_increases` is a genuine multi-day accumulation
+signal, not a one-day snapshot.
 
-## 4. Gaps, stated plainly
+**Dealer greek exposure.** Two distinct endpoints, and the difference matters:
+
+| Endpoint | What it is | Fields |
+|---|---|---|
+| `/api/stock/{t}/greek-exposure/strike` | *static* — OI-based, end-of-day frame, 491 strikes on SPY | `call_gex`, `put_gex`, `call_delta`, `put_delta`, `call_vanna`, `put_vanna`, `call_charm`, `put_charm` |
+| `/api/stock/{t}/spot-exposures/strike` | *spot* — live, timestamped to the second, 50 strikes around spot | same greeks split three ways per side: `_oi`, `_vol`, `_bid`, `_ask` (e.g. `call_gamma_oi`, `put_gamma_ask`), plus `price` and `time` |
+
+Spot exposures carried `time: 2026-08-18T19:58:22Z` with `price: 767.265` —
+live to the second. Use *spot* for the intraday regime read (walls, flip zone)
+and *static* for the overnight/pre-market frame. The `_oi` vs `_vol` split is
+the answer to the T-1 open-interest problem: `_vol` reflects **today's** trading,
+so same-day 0DTE positioning is visible after all.
+
+**IV term structure and percentile.** `/api/stock/{t}/interpolated-iv` returns
+one row per DTE (1, 5, 7, 14, 30, 60, 90, 180, 365) with `volatility`,
+`percentile`, and **`implied_move_perc`** — the expected move for that horizon,
+straight from the vendor rather than derived by us. SPY at test time:
+
+| DTE | IV | percentile | implied move |
+|---|---|---|---|
+| 1 | 0.111 | 0.196 | 0.40% |
+| 7 | 0.099 | 0.105 | 0.90% |
+| 30 | 0.132 | 0.211 | 2.60% |
+| 365 | 0.187 | 0.341 | 12.70% |
+
+**IV rank.** `/api/stock/{t}/iv-rank` returns a daily series of `iv_rank_1y`,
+`volatility`, `close`. **This path is not on the published whitelist but works**
+— it returned current data through today (SPY `iv_rank_1y` 12.49 on 2026-08-18).
+The trading-bot repo's own `.env.example` already referenced it. Treat it as
+working-but-undocumented: it may vanish without notice, so handle an empty or
+404 response as a real possibility rather than an assertion failure.
+
+Together, `interpolated-iv` + `iv-rank` close the gap the earlier draft of this
+file called unclosable. **IV rank is available. Do not ship the realized-vol
+proxy.**
+
+**Market-wide sentiment.** `/api/market/market-tide` returns 5-minute bars from
+09:30 with `net_call_premium`, `net_put_premium`, `net_volume` — this is the
+"tide" the playbook's §4 tripwires are written against.
+`/api/stock/{t}/net-prem-ticks` is the per-ticker, per-minute version and adds
+**`net_delta`**, a directional-exposure measure the market-wide tide lacks.
+389 ticks were present at 15:58 ET.
+
+`/api/stock/{t}/options-volume` gives the daily aggregate: call/put volume split
+by ask and bid side, `net_call_premium`, `bullish_premium` / `bearish_premium`,
+open interest, and 3/7/30-day average volumes for a relative-volume denominator.
+
+**Dark pool.** `/api/darkpool/{ticker}` and `/api/darkpool/recent` return prints
+with `price`, `size`, `premium`, `market_center`, `executed_at`, and the NBBO on
+both sides at execution — so a print can be classified above/below/at mid rather
+than just logged.
+
+**News.** `/api/news/headlines` carries `headline`, `tickers`, `sentiment`,
+`is_major`, `source`, and a `meta` block with current and prior close per ticker.
+Lower latency and more structure than FMP's news, and `is_major` is a usable
+triage flag.
+
+### 3b. Also available, lower priority
+
+`/api/stock/{t}/option-contracts` (500 contracts/ticker with volume, OI,
+`prev_oi`, sweep/floor/multileg volume splits, greeks, IV),
+`/api/stock/{t}/greeks` (211 rows by strike x expiry with both sides),
+`/api/stock/{t}/flow-recent`, `/api/insider/transactions`,
+`/api/congress/recent-trades`, and the financial statements
+(`financials`, `income-statements`, `balance-sheets`, `cash-flows`, `earnings`).
+
+### 3c. Technical indicators — daily and slower only
+
+`/api/stock/{t}/technical-indicator/{function}?interval=&time_period=&series_type=`
+
+- **Valid intervals: `daily`, `weekly`, `monthly`.** Verified working:
+  `rsi`, `macd`, `bbands`, `stoch`, `sma`, `ema`, `adx`, `atr`, `obv`.
+- **`vwap` returns 0 rows at every interval** — there is no UW VWAP.
+- Every intraday interval tried (`1min`, `5min`, `15min`, `30min`, `60min`,
+  `1h`, `hourly`, `intraday`) returned 0 rows.
+
+So **all intraday technicals come from FMP**, and intraday VWAP — which the
+playbook uses as a live level — must be computed from FMP 1-min or 5-min bars.
+Neither vendor hands it to us.
+
+### 3d. The silent-failure trap — read this before writing any UW call
+
+An unrecognised parameter value does **not** produce a 4xx. It produces
+`HTTP 200` with `{"data": []}`.
+
+`interval=5m` and `interval=daily` are indistinguishable by status code; one
+returns 195 rows and the other returns zero. An empty array therefore means
+either *"no data exists"* or *"you wrote the parameter wrong"*, and the API will
+not tell you which.
+
+This collides directly with the honesty rules: an empty result silently
+presented as "no signal found" is a fabricated absence. **Mandatory handling:**
+
+1. Never treat `data: []` as a validated negative. Row count is part of the
+   health check, not just HTTP status.
+2. On an empty response from an endpoint that should have data, re-request with
+   known-good parameters before reporting anything.
+3. An empty result that cannot be explained is reported as `NA_unresolved`,
+   never as zero, none, or "no unusual activity."
+
+## 4. Division of labour
+
+With all three connected, each source has one job. Overlap is resolved in favour
+of the column marked authoritative.
+
+| Need | Source | Note |
+|---|---|---|
+| Option chain, strikes, contract greeks/IV/OI | **Robinhood** | tradable marks + the account's real fill context |
+| Signed flow, sweeps, dark pool, tide | **UW** | nothing else has aggressor side |
+| Dealer gamma/vanna/charm by strike | **UW** `spot-exposures/strike` | live; `_vol` split solves T-1 |
+| IV rank, IV percentile, implied move by DTE | **UW** | `iv-rank` + `interpolated-iv` |
+| Intraday bars, VWAP inputs, intraday technicals | **FMP** | UW has no intraday; RH bars are secondary |
+| Underlying quote / PDH / PDL / PDC | **FMP** | `quote` + `historical-price-eod` |
+| VIX level | **FMP** `^VIX` | VIX term structure: neither — see §5 |
+| News | **UW** primary, FMP secondary | UW has `sentiment` + `is_major` |
+| Econ + earnings calendar | **FMP** | UW has earnings history, not a calendar |
+| Account equity, positions, open heat | **Robinhood** | read-only |
+
+## 5. Gaps, stated plainly
 
 | Gap | Consequence | Fix |
 |---|---|---|
-| No UW key | No flow, no tide, no dark pool, no vendor GEX, no IV rank | Provide `UNUSUAL_WHALES_API_KEY`; then probe and extend this file |
-| No IV history anywhere | IV rank/percentile impossible; only IV-vs-RV | UW, or persist our own daily IV snapshots going forward |
-| OI is T-1 | Reconstructed GEX blind to same-day 0DTE positioning | Unavoidable without intraday OI; state it on every GEX output |
-| No social sentiment | Brief §10 unsupported by any API here | Web research, or UW |
-| FMP 402 tier ceiling | No ETF holdings / institutional ownership / bulk surprises | Tier upgrade if they become load-bearing |
+| No intraday VWAP from any vendor | A level the playbook trades against must be computed by us from FMP bars | Compute and label it as ours |
+| No VIX term structure | `^VIX9D`/`^VVIX` are FMP-402; UW has no VIX complex | Use UW `interpolated-iv` on SPY instead — it answers the same question better, per-DTE |
+| UW `iv-rank` is off-whitelist | Working but undocumented; may disappear | Handle absence as expected, not exceptional |
+| UW empty-array-on-bad-param | Fabricated absences | §3d handling is mandatory |
+| FMP 402 tier ceiling | No ETF holdings / institutional ownership / bulk surprises / ^NDX | Tier upgrade if load-bearing |
+| No social sentiment on FMP | Brief §10 unsupported | UW news, or web research |
+| Rate limits unmeasured | Unknown ceiling on a fan-out scan | Fetch the UW usage-monitor skill and instrument before scaling |
+
+## 6. Handling rules that follow from all this
+
+1. **Read the timestamp, never assume freshness.** Every payload here carries
+   one (`updated_at`, `time`, `tape_time`, `executed_at`, `date`). FMP and UW
+   are both real-time *when the market is open*; they are not when it is closed,
+   and the field is the only way to tell.
+2. **`data: []` is not a negative result.** §3d.
+3. **Absent stays absent.** No source's missing number is ever replaced by
+   zero or by a proxy from another source without relabelling it.
+4. **Label the provenance of every greek.** Robinhood greeks, UW greeks and any
+   value we compute are three different things and must not be mixed in one
+   column without a `source` field.
+5. **Never place, modify, or cancel an order.** Robinhood access is read-only
+   and stays that way regardless of what any downstream process concludes.
