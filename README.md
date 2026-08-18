@@ -21,3 +21,9 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   in this repo. The spec references them by variable name only.
 - Changes to the spec are commits — the process has a history, like the
   governance lesson that birthed it: a rule with no durable home is not a rule.
+
+- `playbook/PLAYBOOK.md` — the discretionary trading playbook: philosophy,
+  the 20-minute pre-market ritual, the four-step trade hierarchy
+  (environment → location → confirmation → execution), event protocol,
+  dated validated market behaviors, monitoring infrastructure, session
+  grading, and the trading journal. Journal entries append HERE now.
