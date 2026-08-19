@@ -125,3 +125,61 @@ were appends). This entry was written after that merge, hence its position
 after the addendum.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-19 — Brief archive verified; live session support; 8/19 journal entry
+
+**What changed:** Appended the 2026-08-19 trading journal entry to
+`playbook/PLAYBOOK.md` §6 — full fill-level ledger (10 closes reconstructed from
+Robinhood order history), grade **C**, and the decision notes. Written and
+committed **before** the 2:00 PM FOMC minutes released, so the record predates
+the outcome per §9 pre-registration.
+
+**Verification performed (no changes made):**
+
+- `briefs/2026-08-19.md` confirmed to carry all 16 spec sections including §0,
+  §6A, §8A, Gamma Regime and Watchlist Alert — i.e. the run used the current
+  `daily-market-brief/SKILL.md`, not a stale copy. Secret scan clean.
+- Live-session data support: UW flow, GEX levels, market tide, IV rank, options
+  volume; Robinhood chains, quotes, positions and orders. Read-only throughout;
+  **no order was placed, modified or cancelled** (§2).
+
+**Findings the owner should act on:**
+
+1. **Cross-contamination is NOT resolved.** Today's brief run
+   (`session_01GeR1MYALYndaTFJsBRDdyZ`, 8:57 AM ET) has source repo
+   `jjsaw5/aggressive-trading-bot`. The brief output now lands here, but the run
+   still starts in another repository, so that repo's `CLAUDE.md` auto-loads as
+   standing instruction — the exact §0 mechanism. Fix is the run's working
+   directory, not the output path.
+2. **A second, stale brief producer is still firing.** Cloud Routine
+   `trig_01Gsa2Gqt93asMAbVdPeRwnt` (`0 12 * * 1-5`, 8:00 AM ET) embeds ~4,000
+   words of spec inline, frozen 2026-08-13, missing §0 / §6A / §8A / the UW-FMP
+   data source. It fired today at 8:07 AM ET. The 8/18 session-log claim that
+   "the runtime task copy was already a thin loader" is true of the 9:05 local
+   run but not of this one.
+
+**Corrections made in-session:** two of my own aggregation errors were caught
+and fixed before anything was reported — UW `oi_change` is a ratio (use
+`oi_diff_plain` or `curr_oi − last_oi`), and flow-alert `volume` is a running
+contract total that must be taken as MAX, not summed across alerts (summing
+inflated the 8/21 350C to 90,070 against Robinhood's 32,441). Also corrected a
+wrong claim to the owner that he had "missed the opening runs" — the order
+history shows trading from 9:36 AM.
+
+### DEVIATIONS
+
+**1. A credential was pasted into the session transcript — second occurrence.**
+The owner sent the Unusual Whales API key in chat. Per §6 that key is
+compromised regardless of who saw it, and rotation was advised. It was written
+only to a scratchpad file outside the repo tree, mode 600, never committed,
+never echoed in output; every staged diff was secret-scanned before commit. The
+§6 standing exception from 2026-08-18 now covers a second exposure of the same
+credential. **Still unrotated at the time of writing.**
+
+**2. Data sources reported as unavailable rather than assumed:** UW
+variance-risk-premium is stale (last row 2026-07-22, ~4 weeks old) and was not
+used; `flow-alerts` `limit` caps at 200 (250/300 return 422), so only the oldest
+day in that window is truncated; `oi-change` reflects UW's top-200 ranking, not
+the whole chain. Each stated at point of use.
