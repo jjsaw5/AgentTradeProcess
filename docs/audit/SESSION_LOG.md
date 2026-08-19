@@ -290,3 +290,50 @@ placed, modified or cancelled** (§2). §5 breaches were reported as found, not
 softened. Data sources that failed were named at point of use rather than assumed
 (FMP sector snapshot all-zero, UW variance-risk-premium stale, UW flow-alerts limit
 cap, QQQ put_wall implausible on two consecutive pulls).
+
+---
+
+## 2026-08-19 (evening) — stale cloud brief routine deleted
+
+**What changed (by the owner, not by this session):** Routine
+`trig_01Gsa2Gqt93asMAbVdPeRwnt` — "Daily Pre-Market Research Brief", `0 12 * * 1-5`
+(8:00 AM ET) — was **deleted**. Verified absent from `list_triggers` afterwards.
+
+**Why:** it carried the brief spec pasted inline, frozen 2026-08-13, and had drifted
+badly from `daily-market-brief/SKILL.md` (now 1,118 lines / 5,414 words). Missing:
+the entire `OPTIONS FLOW & MACRO — UNUSUAL WHALES + FMP` data source, `§0`,
+`§6A`, `§8A`, the `§8` gamma-regime block, the dashboard's `Gamma Regime` and
+`Watchlist Alert` rows, and `OUTPUT DELIVERY` — plus everything added 2026-08-19.
+
+It was also **structurally orphaned**: no `environment_id`, no
+`session_context.allowed_tools`, no `persist_session`, where every other routine in
+the account has all three. With no environment it had no repo clone, so it could not
+have written to `briefs/` even with the delivery section pasted in, and connector
+availability was unverified while its prompt asserted Robinhood data was
+authoritative. Net effect: a degraded brief pushed to the phone at 8:07 AM each
+weekday, an hour before the real one.
+
+**Consequence to watch:** the ~9:05 AM local run is now the **sole producer** of the
+daily brief. There is no cloud fallback. If the desktop is asleep, there is no brief
+that day. A replacement — environment attached, connectors granted, and a thin
+loader reading `daily-market-brief/SKILL.md` at run time rather than a pasted copy —
+would restore redundancy without reintroducing the drift. Not built; recorded as an
+open option.
+
+**Related observation, unverified:** of the eleven remaining routines, only
+"AI-Trade-Agent premarket watch" (`trig_012frXueorsqZeGC7CuTXtpZ`) shows
+`enabled: true` with a future `next_run_at`. The rest carry `next_run_at` values in
+the past (2026-07-13 through 2026-08-13) and no `enabled` flag, which reads as
+paused. Worth confirming in the Routines UI — this was inferred from the API
+listing, not from the UI itself.
+
+**Still open from earlier today:** the brief run's working directory is still
+`aggressive-trading-bot`, so the `CLAUDE.md` §0 instruction-level contamination is
+unresolved. Deleting the cloud routine does not touch it, and now that the local run
+is the only producer, that run's governance context matters more, not less.
+
+### DEVIATIONS
+
+**None** beyond the two already recorded today: both API keys remain compromised by
+owner decision, and trading support was read-only throughout (no order placed,
+modified or cancelled).
