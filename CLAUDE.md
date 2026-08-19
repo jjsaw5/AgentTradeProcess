@@ -93,33 +93,31 @@ they are the product's actual value.
 
 ---
 
-## 4. PENDING RATIFICATION — the sentinel vocabulary
+## 4. Sentinel vocabulary
 
-**Status: proposed, not adopted. Decide before relying on it.**
+**Ratified 2026-08-18 by the account owner.** These are this repository's own
+rules now. They originated in `Aggressive-Trading-Bot` and arrived here by the
+accident described in §0; they were kept by an explicit decision, not by
+inertia.
 
-`options-expert/` currently uses `NA_no_data` and `NA_unresolved`. These came
-from `Aggressive-Trading-Bot`, not from here — the import described in §0. They
-are listed as a proposal rather than a rule because they arrived by accident.
-
-The proposal: adopt them as this repository's own, because they draw a
-distinction the brief's vocabulary lacks —
+Exports and reports distinguish three kinds of missing:
 
 | Sentinel | Meaning |
 |---|---|
 | `NA_no_data` | The concept applies; this row has no value for it. |
 | `NA_unresolved` | A value should exist and could not be resolved. |
+| `UNVERIFIED` | A value exists but no primary source confirmed it. |
 
-The difference matters: the first is a fact about the world, the second is a
-fact about our pipeline, and collapsing them hides failures.
+The first two must not be collapsed. `NA_no_data` is a fact about the world;
+`NA_unresolved` is a fact about our pipeline. Merging them hides our own
+failures inside the market's silences, which is the one substitution that
+makes a data quality problem invisible.
 
-**Either ratify these here and delete this section, or strike them from
-`options-expert/` and use `UNVERIFIED` alone.** Do not leave them in limbo — an
-unratified rule in active use is how §0 happened.
+`UNVERIFIED` and `NO CLEAR DRIVER FOUND` are native to
+`daily-market-brief/SKILL.md` and keep their meanings there unchanged.
 
-Whichever way it goes, one rule already applies and is not in question:
-**never substitute `0.0` for a missing measurement.**
-
----
+**Never substitute `0.0` for a missing measurement**, under any sentinel, for
+any reason.
 
 ## 5. Risk limits
 

@@ -88,3 +88,17 @@ commit.
 **4. `__pycache__` was committed and removed in a follow-up.**
 Created by an import-based unit check of the stream script. Removed, and a
 `.gitignore` added.
+
+---
+
+## 2026-08-18 (addendum) — Sentinel vocabulary ratified
+
+**Decision:** the account owner ratified `NA_no_data` and `NA_unresolved` as
+this repository's own rules. `CLAUDE.md` §4 changed from PENDING RATIFICATION to
+adopted, and now records that they originated elsewhere and were kept by an
+explicit decision rather than by inertia.
+
+This closes deviation 1 from the entry above. The vocabulary in
+`options-expert/` is no longer an unratified import in active use.
+
+**DEVIATIONS:** None.
