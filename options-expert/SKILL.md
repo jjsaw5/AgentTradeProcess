@@ -252,7 +252,15 @@ delivering (favours selling/spreads); negative = the opposite (favours buying).
 Prefer it over `interpolated-iv`, which interpolates to fixed DTEs that may not
 be tradable dates.
 
-Then judge:
+**Then judge — but pick the right mode first. The card must name which.**
+
+`implied_move_perc` is an **expiry** statistic. It answers "will the underlying
+finish past the strike." An intraday trade never asks that question, and
+applying the expiry test to it kills good trades. This is not hypothetical: on
+2026-08-18 it would have killed a **+45.5% (2.9R)** QQQ put — see
+`log/2026-08-18-REPLAY-TEST.md`.
+
+**Mode A — hold to expiry.** The distance question is the right one:
 
 - Thesis needs a move **larger** than `implied_move_perc` at the expiry you
   would actually trade → the market is underpricing your scenario →
@@ -262,8 +270,47 @@ Then judge:
 - Thesis needs **more than ~1.5×** the implied move → **kill it.** You are not
   being paid for a tail; you are buying a lottery ticket.
 
+**Mode B — intraday, which is this playbook's normal case.** You harvest the
+**mark**, not the settlement. P&L is:
+
+```
+Δ x move x 100   +   vega x ΔIV x 100   −   θ x (hours_held / 6.5) x 100
+```
+
+The test is therefore **speed against theta**, not distance against implied
+move. Require the delta term to clear the theta term by a stated multiple over
+the *expected holding period*, and write both numbers on the card.
+
+Worked, from the replay: QQQ travelled only 0.49% against a 0.63% implied move —
+Mode A says kill. But a 0.45-delta put, held ~90 minutes, with vol expanding,
+returned 45%. Direction, speed and IV all paid. Only the
+distance-to-expiry question said no, and nobody was asking it.
+
+**IV direction is part of the thesis, not a footnote.** Buying premium into an
+expanding-vol break is a different trade from buying it into a quiet drift.
+`RV > IV` from `volatility/stats` is evidence the expansion is real and the
+options are cheap against actual movement — QQQ was realizing 24.0% against
+19.8% implied that morning, and that was the tell.
+
 Combine with `iv_rank`: low rank + directional = buy premium; high rank +
 directional = structure it as a spread so you are not paying the crush.
+
+#### E1b — Vehicle selection (required when two instruments express one thesis)
+
+Do not trade the index you happened to think of first. When SPY and QQQ — or a
+sector ETF and its biggest constituent — express the same thesis, compare
+before choosing, and **state the comparison on the card**:
+
+| Compare | Prefer |
+|---|---|
+| Gap / move size vs its own recent range | the one moving harder — the leader, per the playbook's RS filter |
+| `RV` vs `IV` (`volatility/stats`) | the one realizing **more** than implied — its options are cheap against actual movement |
+| `iv_rank` | context, not a tiebreak on its own |
+| Spread and OI at the strike you would trade | never take the worse fill for a marginally better thesis |
+
+This step earned **17 percentage points** on 2026-08-18 (QQQ +45.5% vs SPY
++28.8% on the identical signal, identical trigger, identical hour). It is cheap
+to run and it is not optional.
 
 #### E2 — Aggressor-side flow divergence
 
