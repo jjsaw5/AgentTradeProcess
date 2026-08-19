@@ -314,6 +314,19 @@ Open the report with this section, before everything else. It is my morning ritu
 
 First, print my routine reminder (adapt only if the day demands it):
 
+**Tape participation (added 2026-08-19).** From the same FMP 5-min bars, report:
+
+```
+participation ratio = (latest completed 5-min bar volume)
+                    / (mean volume of the six 09:30-10:00 bars)
+```
+
+Playbook §1c treats **ratio < 0.40 as dead tape — no NEW entries** (stops and
+exits always stay active; scheduled events re-open the tape). This is the
+feed-independent form of the volume floor; prefer it over the Robinhood
+share-count thresholds, which are in a feed that undercounts the consolidated
+tape.
+
 > **Your 20-minute setup:** 1) Read this brief. 2) Write down today's event times. 3) Draw the lines below on SPY + QQQ (and flagged watchlist names). 4) Write your two triggers + invalidations BEFORE 9:30. 5) Re-read time & loss rules (playbook §1d). 6) First 10–15 min: watch, don't trade — volume floor arms off the first completed bars.
 
 Then a **LINES TO DRAW** table for SPY and QQQ (add any §6A-flagged liquid name if relevant), with exact numbers:
@@ -656,6 +669,16 @@ Check:
 - XLRE — real estate
 - XLC — communication services
 
+**Breadth source (added 2026-08-19).** Pull
+`industry-performance-snapshot?date=<today>` from FMP alongside the ETF quotes
+and report the 3 strongest and 3 weakest industries.
+
+**Do NOT use `sector-performance-snapshot`.** It returns `HTTP 200` with every
+`averageChange` set to `0.0` — a structurally valid, fabricated payload. Before
+drawing any breadth conclusion, assert at least one non-zero value; an all-zero
+payload is `NA_unresolved`, never "sectors are flat." See
+`options-expert/DATA_LAYER.md` §1c.
+
 Explain which are strongest and weakest.
 
 Supplement with UW market tide and sector-ETF flow, and FMP sector-performance-snapshot (see DATA SOURCES).
@@ -691,6 +714,21 @@ Identify important nearby:
 - previous highs/lows
 - record highs
 - major gaps
+
+### SESSION VWAP (added 2026-08-19 — computed, not quoted)
+
+No vendor supplies intraday VWAP, so compute it from FMP
+`historical-chart/5min?symbol=&from=<today>&to=<today>`:
+
+```
+typical price per bar = (high + low + close) / 3
+VWAP = Σ(typical × volume) / Σ(volume)      # session = from the 09:30 bar
+```
+
+Report session VWAP and the 30-minute VWAP (last six bars) for SPY and QQQ,
+plus whether price sits above or below, and by how much. **Label it
+"VWAP (computed)"** — it is our number, not a vendor's. Recipe and a worked
+example live in `options-expert/DATA_LAYER.md` §1c-2.
 
 Do NOT invent technical levels.
 

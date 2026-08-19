@@ -115,6 +115,61 @@ Sector snapshot returns `{date, sector, exchange, averageChange}` across 11
 sectors — enough to answer the playbook's "broad or narrow?" breadth question
 without scraping anything.
 
+**REGRESSION, verified live 2026-08-19 — `sector-performance-snapshot` is dead
+both ways. Do not use it.**
+
+| Call | Result |
+|---|---|
+| `sector-performance-snapshot?` (no date) | `400` — "Invalid or missing query parameter - date" |
+| `sector-performance-snapshot?date=2026-08-19` | **`200`, 11 rows, every `averageChange` exactly `0.0`** |
+
+The second is the dangerous one: a `200` with a structurally valid, entirely
+fabricated payload. On 2026-08-18 this endpoint returned a hard `400` and the
+brief correctly reported `UNVERIFIED`; it now fails **silently**, and an
+unguarded reader would publish "all sectors flat" as a market fact. This is the
+`CLAUDE.md` §3 rule ("a `200` is not a success") firing on a second vendor.
+
+**Substitute: `industry-performance-snapshot?date=` — verified working**, 124
+industries with real, non-zero `averageChange`, same `{date, industry, exchange,
+averageChange}` shape. Aggregate by `industry` across exchanges (a name appears
+once per exchange). It is strictly more granular than the sector call it
+replaces: on 2026-08-19 it separated Financial-Mortgages `+5.02%` from
+Computer Hardware `-5.64%` — a 10.7-point spread the 11-sector view flattens.
+
+**Guard both:** assert at least one non-zero value before drawing any breadth
+conclusion. An all-zero breadth payload is `NA_unresolved`, never "flat."
+
+### 1c-2. Intraday VWAP and the participation floor — computed by us
+
+No vendor supplies intraday VWAP (§5). It is computed from
+`historical-chart/5min?symbol=&from=&to=`, which returns the consolidated tape
+and is current to the bar in progress (§1a):
+
+```
+typical price per bar = (high + low + close) / 3
+VWAP                  = Σ(typical × volume) / Σ(volume)
+```
+
+Session VWAP runs from the 09:30 bar; a rolling 30-minute VWAP is the last six
+bars. **Label it as ours in any output** — it is a computed level, not a vendor
+quote.
+
+The same bars settle the playbook §1c volume floor without the feed-specific
+calibration hazard. The Robinhood thresholds (~100K SPY / ~60K QQQ) are in
+Robinhood chart-feed units, which undercount the consolidated tape; FMP bars
+give the portable form directly:
+
+```
+participation ratio = (latest completed 5-min bar volume)
+                    / (mean volume of the six 09:30-10:00 bars)
+dead tape when ratio < 0.40
+```
+
+Worked example, SPY 2026-08-19 13:00 ET (43 bars): session VWAP `770.40`,
+30-min VWAP `770.13`, last close `769.97` (below VWAP by `0.43`); last bar
+`255,127` against a 09:30-10:00 mean of `604,111` → ratio `0.42`, just above the
+floor. Both numbers were actionable inputs to that session's FOMC-minutes plan.
+
 ### 1d. Calendars and macro
 
 `economic-calendar?from=&to=`, `earnings-calendar?from=&to=`,
@@ -510,7 +565,8 @@ of the column marked authoritative.
 
 | Gap | Consequence | Fix |
 |---|---|---|
-| No intraday VWAP from any vendor | A level the playbook trades against must be computed by us from FMP bars | Compute and label it as ours |
+| ~~No intraday VWAP from any vendor~~ **CLOSED 2026-08-19** | A level the playbook trades against had no source | Computed from FMP 5-min bars; recipe in §1c-2, label it as ours |
+| `sector-performance-snapshot` returns `200` with all-zero rows | Silent fabrication of a breadth reading | Use `industry-performance-snapshot?date=`; assert a non-zero value first (§1c) |
 | No VIX term structure | `^VIX9D`/`^VVIX` are FMP-402; UW has no VIX complex | Use UW `interpolated-iv` on SPY instead — it answers the same question better, per-DTE |
 | UW `iv-rank` is off-whitelist | Working but undocumented; may disappear | Handle absence as expected, not exceptional |
 | UW empty-array-on-bad-param | Fabricated absences | §3d handling is mandatory |

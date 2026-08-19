@@ -183,3 +183,55 @@ variance-risk-premium is stale (last row 2026-07-22, ~4 weeks old) and was not
 used; `flow-alerts` `limit` caps at 200 (250/300 return 422), so only the oldest
 day in that window is truncated; `oi-change` reflects UW's top-200 ranking, not
 the whole chain. Each stated at point of use.
+
+---
+
+## 2026-08-19 (afternoon) — FMP data-layer repair: sector regression, VWAP closed
+
+**What changed:**
+
+- `options-expert/DATA_LAYER.md` §1c: recorded that
+  `sector-performance-snapshot` is dead in both modes — `400` without `date`,
+  and `200` with **all-zero rows** when given one. On 2026-08-18 it failed
+  loudly (`400`); it now fails silently, which is worse. Documented
+  `industry-performance-snapshot?date=` as the verified substitute (124
+  industries, real values) and required a non-zero assertion before any breadth
+  claim.
+- `options-expert/DATA_LAYER.md` §1c-2 (new): the intraday VWAP and
+  participation-ratio recipe, with a worked SPY example from this session.
+- §5 gaps table: "No intraday VWAP from any vendor" marked **CLOSED**; the
+  sector regression added as a new gap.
+- `daily-market-brief/SKILL.md` §0, §7, §8: participation ratio into the setup
+  block, industry-snapshot substitution + all-zero guard into breadth, and
+  computed session/30-min VWAP into the levels section.
+
+**Why:** the owner supplied an FMP key mid-session, so the FMP layer could be
+probed live for the first time since 2026-08-18. Thirteen endpoints were
+probed; twelve returned usable data, one regressed.
+
+**Decision:** VWAP is labelled "VWAP (computed)" wherever it appears. It is our
+number, not a vendor quote, and §3's fact/interpretation separation applies to
+its provenance as much as its value.
+
+**Note on the §1c finding:** this is the third distinct instance in this
+repository of a `200` carrying a false payload (UW bad-parameter empty array,
+UW default page-size truncation, now FMP all-zero sectors). The pattern is not
+vendor-specific and the guard belongs at every read site, not in a vendor
+adapter.
+
+### DEVIATIONS
+
+**1. A second credential was pasted into the session transcript, and the owner
+declined rotation of both.** The FMP key was sent in chat; the owner stated
+explicitly that neither it nor the Unusual Whales key will be rotated for now.
+Per §6 both are compromised from the moment they were written down, and both
+are now known exposures until rotated. Handling matched the UW precedent: each
+key written only to a scratchpad file outside the repo tree, mode 600, never
+echoed to output, never committed; every staged diff secret-scanned. This
+extends the §6 standing exception to a second credential — recorded, per that
+section's own reasoning, because a rule quietly broken is worse than one that
+names its violation.
+
+**2. Trading support continued alongside spec work.** Read-only throughout; no
+order placed, modified or cancelled (§2). Position and sizing analysis reported
+§5 breaches as found rather than softening them.
