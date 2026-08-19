@@ -102,3 +102,26 @@ This closes deviation 1 from the entry above. The vocabulary in
 `options-expert/` is no longer an unratified import in active use.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-18 (evening) — briefs/ archive added; scheduled runs now publish here
+
+**What changed:** The daily brief spec (`daily-market-brief/SKILL.md`) gained an
+OUTPUT DELIVERY section: each scheduled run now writes its full brief to
+`briefs/YYYY-MM-DD.md`, commits ("Brief YYYY-MM-DD"), and pushes. Chat output
+stays the primary copy; delivery failures are reported in one line and never
+block or truncate the brief. Automated runs may touch only `briefs/`.
+`briefs/2026-08-18.md` was seeded retroactively with today's brief. README
+updated. Requested by the owner ("the brief also placed in AgentTradeProcess").
+
+**Decisions:** Runtime task copy needed no change — it was already a thin
+loader deferring to this repo's spec, so the edit lands here per the
+edit-HERE convention. One file per trading day; same-day re-runs overwrite.
+
+**Merge note:** This session's commit raced the options-expert session's push;
+resolved with a plain merge (no conflicts — their changes were new files, ours
+were appends). This entry was written after that merge, hence its position
+after the addendum.
+
+**DEVIATIONS:** None.
