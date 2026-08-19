@@ -235,3 +235,58 @@ names its violation.
 **2. Trading support continued alongside spec work.** Read-only throughout; no
 order placed, modified or cancelled (§2). Position and sizing analysis reported
 §5 breaches as found rather than softening them.
+
+---
+
+## 2026-08-19 (close) — journal amended with the settled ledger
+
+**What changed:** The 2026-08-19 row in `playbook/PLAYBOOK.md` §6 was amended with
+the settled close. The grade (**C**) and the decision notes were written before the
+2:00 PM FOMC minutes and are unchanged — only the ledger moved.
+
+**Settled ledger (fill-level, from Robinhood order history — 20 fills):**
+
+- 8 intraday round trips: **-$147** (QQQ 720P -$1, SPY 769C -$65, QQQ 716P +$88,
+  QQQ 711P -$134, TSLA 345C x2 +$100, QQQ 717C +$21, TSLA 345C +$16,
+  MRNA 115P **-$172**)
+- 3 carry closes: **+$132** (SLS $0, CVX +$60, USO +$72)
+- **Net realized: -$15.** Flat at the close: $1,239.76, all cash, zero heat.
+
+The intraday count went from 7 to 8 because MRNA was opened *and* closed on the same
+session; the earlier +$157 figure was correct as of 12:21 ET and became -$15 once
+MRNA was booked.
+
+**Closing prints:** SPY 769.10 (+0.21%) below settled VWAP 770.01 (computed);
+QQQ 716.08 (-0.20%); TSLA 351.12 (+4.23%) above its 350 call wall; MRNA 174.38
+(**+176.97%**); TLT 83.01 (+1.65%); GLD 413.83 (+3.83%).
+
+**Added to §6:** a "Monitoring and confirmation" note carrying four failures from
+the live afternoon — tick-vs-close, the in-progress-bar trap (twice), stale alert
+text asserting a closed position was open, and a "breakdown confirmed" call made on
+one of §1c pattern 3's three conditions. All four are marked **REASONED, not
+validated** per §7, with the proposed two-close-plus-volume fix flagged untested.
+
+**Decision:** the proposed fix was retro-checked against this session and would have
+suppressed the false call while still catching the real late break — but one session
+is not calibration, so it enters as a hypothesis and not a rule.
+
+**Recorded against the assistant:** the monitor was stood down at 15:34 reasoning
+that a flat account had "nothing left to signal on." That conflated position state
+with signal occurrence; the genuine break fired ~13 minutes later. No cost here, but
+the reasoning was wrong and is logged rather than omitted.
+
+### DEVIATIONS
+
+**1. Both API keys remain compromised by owner decision.** The Unusual Whales key
+(2026-08-18, again this session) and the FMP key (this session) were pasted into the
+transcript; the owner explicitly declined to rotate either. Per §6 both are known
+exposures until rotated. Handling: each written only to a scratchpad file outside the
+repo tree, mode 600, never echoed, never committed; every staged diff secret-scanned.
+Already recorded in the two entries above — restated here because the exposure is
+still live at session end.
+
+**2. No other deviations.** Trading support was read-only throughout; **no order was
+placed, modified or cancelled** (§2). §5 breaches were reported as found, not
+softened. Data sources that failed were named at point of use rather than assumed
+(FMP sector snapshot all-zero, UW variance-risk-premium stale, UW flow-alerts limit
+cap, QQQ put_wall implausible on two consecutive pulls).
