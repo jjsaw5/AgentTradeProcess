@@ -1044,3 +1044,38 @@ The objective is NOT to create the longest market report.
 The objective is:
 
 > **Help me understand what is happening, what might happen next, why it matters, and where unusual opportunities may be developing before the market opens.**
+
+---
+
+# OUTPUT DELIVERY (added 2026-08-18)
+
+The brief has two destinations, in this order:
+
+1. **Chat** — the full brief is the final chat message of the run, exactly as
+   before. This remains the primary copy; delivery problems below never
+   truncate or delay it.
+2. **The AgentTradeProcess repo** — after composing the brief, write the SAME
+   full markdown to `C:\Users\jpats\AgentTradeProcess\briefs\YYYY-MM-DD.md`
+   (today's date, ET). One file per trading day; a re-run the same day
+   overwrites that day's file. Start the file with a one-line HTML comment
+   noting the run timestamp (ET) so re-runs are distinguishable.
+
+Then publish it:
+
+```
+git -C C:\Users\jpats\AgentTradeProcess pull --ff-only
+git -C C:\Users\jpats\AgentTradeProcess add briefs/
+git -C C:\Users\jpats\AgentTradeProcess commit -m "Brief YYYY-MM-DD"
+git -C C:\Users\jpats\AgentTradeProcess push origin main
+```
+
+Rules:
+
+- **Never let delivery break the brief.** If pull/commit/push fails (offline,
+  conflict, auth), say so in a one-line note at the end of the chat output,
+  leave the commit local if it was made, and move on. Do not retry-loop.
+- **Secret scan before committing.** The brief must never contain an API key,
+  account number, or credential; briefs quote data, never headers or URLs
+  with keys. If in doubt, don't push.
+- **Only `briefs/` is touched by an automated run.** Spec/playbook edits are
+  human-initiated commits, never part of a scheduled run.

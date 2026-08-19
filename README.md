@@ -27,3 +27,8 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   (environment → location → confirmation → execution), event protocol,
   dated validated market behaviors, monitoring infrastructure, session
   grading, and the trading journal. Journal entries append HERE now.
+
+- `briefs/YYYY-MM-DD.md` — the archived output of each day's brief run
+  (added 2026-08-18). Each scheduled run writes its full brief here, commits,
+  and pushes (see the spec's OUTPUT DELIVERY section). One file per trading
+  day; automated runs touch only this directory.
