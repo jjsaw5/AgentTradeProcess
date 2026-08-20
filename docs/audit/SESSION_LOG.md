@@ -125,3 +125,53 @@ were appends). This entry was written after that merge, hence its position
 after the addendum.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-20 — brief-review process built; first two briefs graded
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7` (remote session,
+requested by the owner: "review the daily briefs for accuracy and performance
+… continuous improvement of the options investing process").
+
+### What changed
+
+- `brief-review/SKILL.md` — the review rubric: seven fixed categories
+  (facts, open read, mood, regime, radar-by-its-own-triggers, watchlist
+  precision/recall, hindsight-gap analysis), anti-hindsight rules, T+1
+  cadence, sentinel vocabulary per §4. **Committed before any grading was
+  written**, so the rubric is on record ahead of the grades it produced.
+- `brief-review/reviews/2026-08-18.md`, `2026-08-19.md` — first two graded
+  reviews, against Robinhood daily + 10/30-minute bars pulled this session.
+- `brief-review/SCORECARD.md` — cumulative record, seeded at n=2 of 20,
+  displayed UNCALIBRATED.
+- `brief-review/IMPROVEMENTS.md` — the PROPOSED→RATIFIED ledger. I-1 logs the
+  §4A FDA watch retroactively (the loop ran once before this ledger existed);
+  I-2 through I-5 are new PROPOSED items awaiting the owner's decision.
+- `CLAUDE.md` §1 — one table row for the new module.
+
+### Decisions
+
+- **Radar items are graded on the brief's own written triggers, never on
+  hindsight-optimal ones**, and a clean invalidation counts as a process hit.
+  This is what keeps the review from being a stick to beat the brief with.
+- **The 2026-08-20 brief is PENDING**, not partially graded — its session was
+  in progress at review time (data pulled ~15:05 ET). Reviews run at T+1.
+- **Two intraday drivers (HIMS, TSLA 8/19) were researched via web** to
+  classify gaps honestly (both were intraday headlines, largely unknowable at
+  9:25); sources cited in the 8/19 review.
+
+### DEVIATIONS
+
+**1. The first two reviews are retrospective seeding, not clean
+pre-registration.** The rubric was committed before the grades were written,
+but partial outcome knowledge existed while the rubric was drafted (the 8/19
+and 8/20 briefs report prior-day outcomes, and the grader read all three
+briefs before writing the rubric). Each review carries this note inline. The
+first cleanly pre-registered review will be of the 2026-08-20 brief, graded
+2026-08-21 under a rubric that predates its outcomes.
+
+**2. Session ran from a remote environment, not the local machine.** Working
+directory was a fresh clone of this repository (this repo's governance was in
+force — the §0 failure mode does not apply), stated here per §0's
+say-so-out-loud rule.

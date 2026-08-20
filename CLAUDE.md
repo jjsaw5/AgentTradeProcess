@@ -40,6 +40,7 @@ are working from elsewhere, say so out loud before writing anything here.
 | `playbook/PLAYBOOK.md` | The human's discretionary trading playbook — philosophy, the four-step hierarchy, event protocol, dated validated behaviours, session grading, journal. |
 | `options-expert/` | Takes the brief and looks for mispricing. `SKILL.md` is the process, `DATA_LAYER.md` the verified data inventory, `tools/` the probes and live monitor, `log/` the run record. |
 | `options-expert/reference/` | Vendored third-party docs, with a README recording where they are wrong. Do not edit the vendored bodies; re-fetch to update. |
+| `brief-review/` | Grades each archived brief against the realized market at T+1. `SKILL.md` the rubric, `reviews/` per-day grades, `SCORECARD.md` the cumulative accuracy record, `IMPROVEMENTS.md` the PROPOSED→RATIFIED ledger for brief-spec changes. Reviews never edit briefs. |
 
 Changes to a spec are commits. The process has a history on purpose.
 
