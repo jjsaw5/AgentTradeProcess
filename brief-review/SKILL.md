@@ -151,7 +151,13 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    cumulative rates. The scorecard is the calibration record; it displays
    `UNCALIBRATED (n=X of 20)` until 20 trading days are graded.
 3. `brief-review/IMPROVEMENTS.md` — append any new PROPOSED items.
-4. Session log entry per `CLAUDE.md` §8 when a review session touches the
+4. **Database sync** (added 2026-08-20; see `DATA_STORE.md`): upsert the
+   review's `brief_reviews` row, its `radar_items` and `watchlist_events`,
+   ledger/open-item changes, and resolve any OPEN items that closed. The
+   markdown review is the evidence record; the DB is the queryable index —
+   on disagreement the markdown wins and the row gets corrected. Credentials
+   for the sync come from the environment/`.env` by variable name only.
+5. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
 
 ## What this process does not do

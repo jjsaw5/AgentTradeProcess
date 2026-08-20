@@ -175,3 +175,45 @@ first cleanly pre-registered review will be of the 2026-08-20 brief, graded
 directory was a fresh clone of this repository (this repo's governance was in
 force — the §0 failure mode does not apply), stated here per §0's
 say-so-out-loud rule.
+
+---
+
+## 2026-08-20 (later) — scoring database added (Turso)
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7` (same session,
+continued). Owner asked for a database to store API keys, brief scores, and
+process history.
+
+### What changed
+
+- Created schema v1 in the owner's Turso db `briefscoring-jjsaw5` (6 tables:
+  `brief_reviews`, `radar_items`, `watchlist_events`, `improvements`,
+  `open_items`, `credentials_registry`) and seeded it with both graded
+  reviews, all 10 radar grades, 24 watchlist outcomes, the I-1..I-5 ledger,
+  3 open items, and credential *metadata*. Verified by query: confs paid 3/3,
+  precision 13/15, recall 13/20 — matches `SCORECARD.md`.
+- `brief-review/DATA_STORE.md` — schema, workflow, and the two governance
+  decisions below. `brief-review/tools/scoredb.sh` — committed helper; reads
+  `TURSO_URL`/`TURSO_TOKEN` from env/gitignored `.env`, contains no secrets.
+- `brief-review/SKILL.md` Output gained step 4: DB sync each review; markdown
+  reviews remain the evidence record, the DB is the queryable index.
+
+### Decisions
+
+- **Declined to store raw API keys in the database**, though the owner's
+  request named that use. §6 (owner-ratified) confines key values to
+  `.env`/secret managers, and a bearer-token-reachable cloud DB is the
+  "anywhere else" §6 defines as compromised. Stored instead: a
+  `credentials_registry` of key metadata (name, location, exposure status) —
+  the queryable part of the request. If the owner wants raw values stored
+  anyway, that is an explicit §6 amendment in `CLAUDE.md`, not a quiet
+  insert. Decision surfaced to the owner in-session.
+
+### DEVIATIONS
+
+**1. The Turso auth token was pasted into the session transcript** by the
+owner during setup. Per §6's own rule it is a known exposure until rotated —
+recorded in `credentials_registry` as `KNOWN EXPOSURE — ROTATE RECOMMENDED`,
+and the owner was advised to rotate and then keep the new token only in
+`.env`. The token was not written into the repo; the runtime copy lives in
+the session scratchpad (mode 600) and dies with the container.
