@@ -391,3 +391,49 @@ the pattern's cost made visible.
 
 **3. Read-only throughout** — no order placed, modified or cancelled (§2). Both
 API keys remain unrotated by owner decision (recorded 8/19; unchanged).
+
+---
+
+## 2026-08-21 — OPEX Friday: overnight book unwound, TSLA squeeze ridden and re-chased, charm feed discovered
+
+**Session:** claude.ai/code remote session (continuation), working directory this repo. Read-only brokerage throughout (§2).
+
+### What changed and why
+
+1. **`options-expert/DATA_LAYER.md`** — two commits:
+   - oi-change roll time measured: window advanced ~9:30 ET (not premarket); detect the roll semantically, never by file hash ("file changed ≠ data advanced", after a cosmetic-churn false positive at 9:14).
+   - Three endpoints verified and documented: `greek-exposure`, `greek-exposure/strike`, `spot-exposures` — vendor-computed dealer charm/vanna, including a per-minute intraday charm gauge. First-day measurement: TSLA charm_oi −597B → −1,213B, doubling into the 4 PM expiry. **Sign convention UNVERIFIED**; `_dir` and `_oi` variants disagreed on sign. Candidate interpretation (deepening negative + drift toward dominant strike = decay flow feeding the pin) logged for validation next OPEX (2026-09-18).
+2. **`options-expert/log/2026-08-24-WATCHLIST.md`** (new) — pre-registered card W1: TSLA 9/18 400C, watch-only, entry conditions (pullback-hold at 358–360 or gap-and-base above 362, flow gate as veto), invalidation (daily close <355 or 5 sessions no follow-through), alternative structure (380/400 spread). Priced 8/21 12:35 PM: $5.78, OI 19,481, IV rank 17.8.
+3. **`playbook/PLAYBOOK.md` §6** — 8/21 journal row from reconciled brokerage fills (+$184 realized, 20 trades, grade C+). Includes the §9 grade of the pre-registered 1:05 PM charm prediction (wrong 1:15–2:00, confirming 2:00–3:30, pin call true for the 3:00–3:50 hour and false for the 362.78 closing print).
+
+### Decisions taken
+
+- T+1 OI confirmation ran at the 9:30 roll: Thursday's put buyers held overnight (TSLA 342.5P +3,604; QQQ 706P +3,895; SPCX 133P +1,088; NVDA 220C +9,451 making 220 a 75.7k-OI pin strike). Verdict delivered pre-open with the three exit cards.
+- Two-close + participation standard applied all day at TSLA 360/364.42/365: 7-for-7 (five fake pokes rejected, two real breaks confirmed). The morning 350C exit and the 362.5C scratch were both taken by the owner at/near written lines.
+- Monday plan pre-registered before any weekend narrative could form (W1 card).
+
+### DEVIATIONS
+
+**1. Stated plan vs executed book — the 8/20 pattern, repeated at larger scale.**
+The brokerage shows 20 realizing trades today; the session process saw 2 of them
+in real time (the 350C and the 362.5C). Fifteen TSLA 0DTE round trips between
+10:54 and 15:09 — netting +$34 — were never surfaced, including three executed
+after "will hold our playbook now" (1:05 PM). A second SPCX put (−$88, exit 10:14)
+was never mentioned at all; its strike is `NA_unresolved`. Recorded per §8 because
+cards, monitors and risk reads act on the book the assistant is told about.
+
+**2. The 362.5C entry (12:57 PM)** was a box-top chase placed three minutes after
+the owner asked to file the same thesis as a Monday-only card (W1). Corrected by
+the owner with a scratch exit (+$9). Recorded as plan-vs-book divergence with a
+same-hour correction.
+
+**3. §5 risk limits remain set aside by owner instruction (8/20), unamended in
+CLAUDE.md.** Dollar risk was reported factually without cap-gating.
+
+**4. Read-only throughout — no order placed, modified or cancelled (§2). Both API
+keys remain unrotated by owner decision (8/19; unchanged).**
+
+**5. Assistant's own record:** the 3:53 PM close-capture called the day "pin won at
+365"; the official close printed 362.78 after a late-auction fade. The premature
+verdict is left standing in the transcript and corrected in the journal, not
+rewritten (§9).
