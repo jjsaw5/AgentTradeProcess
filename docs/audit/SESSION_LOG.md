@@ -248,3 +248,39 @@ overdue 2026-08-20 review (complete data), plus interim notes only.
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-08-21 (post-close) — brief 2026-08-21 graded; n=4
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Triggered by the
+scheduled post-close check-in set earlier today; first review fully clean on
+pre-registration (rubric predates the session; graded after the close).
+
+### What changed
+
+- `brief-review/reviews/2026-08-21.md` — F 7/7, O HIT (range-day call
+  textbook; QQQ gap-fill answered in 10 min), M HIT (mood now 4/4),
+  G MIXED (OPEX trap/765-magnet half right, gasoline half wrong again —
+  G lifetime 0/3/1), radar: TLT NO-TRIGGER, CRWV UNGRADEABLE (second I-3
+  instance), NVDA OPEN, MSTR OPEN with confirmation fired at the close
+  (119.24 > 115). Watchlist precision 6/10, recall 3/7 — ARCT +22.4% and
+  SLS +15.4% one-liner'd mid-mRNA-halo.
+- `IMPROVEMENTS.md`: new **I-7** (active-complex rule). I-2 gains a fourth
+  HIMS instance; I-4 a fourth (ARCT).
+- `SCORECARD.md` recomputed at n=4; Turso DB synced (review row, 4 radar
+  items, 14 watchlist events, I-7, open-items updates).
+- PMI actuals verified by web (Mfg 53.2, Services 56.8 vs 54.0, Composite
+  56) and labeled as web-sourced — FMP keys are not present in this
+  environment.
+
+### Notes
+
+- Closes used are 4:00 PM closing prints (~4:27 pull); the daily-bar feed
+  had not settled (returned interpolated bars, which were discarded per
+  their flag). Official settles could differ by cents; rows will be
+  corrected if a material difference surfaces.
+
+### DEVIATIONS
+
+None.
