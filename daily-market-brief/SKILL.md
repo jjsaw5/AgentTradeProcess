@@ -205,7 +205,11 @@ Additional endpoints (entitlement verified 2026-08-17 — all live on our key):
 - `GET /api/stock/{ticker}/options-volume?limit=1` — today's call/put volume WITH 3/7/30-day baselines. Use to quantify "unusual options volume" claims: state today vs. its own average, never just "seems high."
 - `GET /api/stock/{ticker}/net-prem-ticks` — per-minute call/put net premium and volume, ask/bid-side split. Intraday direction lean for a single ticker; mostly for intraday sessions, but in the brief use it to characterize how the prior day's lean finished (last hour).
 - `GET /api/option-trades/multi-leg?ticker_symbol={t}&limit=10` — detected spreads/condors/etc. Before calling a flow alert "aggressive naked buying," check whether it was one leg of a spread; a spread leg is a much weaker directional signal. Say when this check was done.
-- `GET /api/market/fda-calendar` — dated FDA/biotech catalysts. Check when any watchlist or radar name is a biotech.
+- `GET /api/market/fda-calendar?target_date_min={today}&target_date_max={today+14d}` — dated
+  FDA/biotech catalysts (PDUFA decisions, AdComm meetings). **The date params are MANDATORY** —
+  called bare, this endpoint returns a stale multi-year dump (2021 rows) that reads as "no
+  data" (failure mode discovered 2026-08-19). Per-ticker history: `?ticker=X`, filtered to
+  recent `start_date`. Feeds §4A.
 
 Gated (do NOT call; they 403 on our tier): `options-pulse/*`, `market/movers`, futures/FX/commodities, `stock/{t}/ownership`.
 
@@ -517,6 +521,36 @@ For the largest 1–3 companies calculate:
 **Options Expected Move: ±X%**
 
 Explain what that means.
+
+---
+
+# 4A. DRUG & FDA CATALYST WATCH (added 2026-08-19)
+
+THIS SECTION IS MANDATORY. It exists because of 2026-08-19: Moderna +87% premarket on a
+Phase 3 mRNA cancer-vaccine win. The brief caught it only after the news broke; this section
+is the before-the-news layer.
+
+Two layers, both required:
+
+1. **Dated catalysts** — pull the UW FDA calendar for the next 14 days (date params
+   mandatory, see DATA SOURCES). List every PDUFA/AdComm inside 7 days: ticker, drug,
+   plain-English indication, decision date. Explain once: *PDUFA date = the FDA's legal
+   deadline to approve or reject a drug — a scheduled binary event; the stock can gap
+   violently either way.* Flag LOUDLY any name that is (a) on my watchlist, (b) large-cap,
+   or (c) already showing unusual options flow. On quiet weeks, one line: "No dated FDA
+   catalysts inside 7 days."
+
+2. **Undated-readout tell** — Phase 3 topline results are usually released "when ready,"
+   NOT on a calendar (the MRNA melanoma readout was exactly this). The only advance signal
+   is positioning: when the §8A discovery scan or watchlist flow check surfaces one-sided
+   call accumulation in a biotech/pharma name, cross-reference the company's pending
+   trials/decisions (`fda-calendar?ticker=X` + quick web check) and say what known catalyst
+   the buyer might be front-running. (Precedent: a $169k MRNA Dec 75C ask-side sweep printed
+   the afternoon BEFORE the melanoma news.)
+
+Honesty rules: never present a PDUFA date as a guaranteed mover; approval ≠ stock-goes-up
+(sell-the-news is common); options on names with dated catalysts carry inflated IV — quote
+the expected move, and label the direction unknowable.
 
 ---
 
