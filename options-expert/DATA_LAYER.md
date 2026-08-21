@@ -343,7 +343,7 @@ Verified working beyond the whitelist (2026-08-18):
 | `/api/stock/{t}/ohlc/{candle_size}` | **UW does have intraday bars** — 2,500 5-min rows on SPY |
 | `/api/stock/{t}/flow-per-strike-intraday` | intraday flow by strike, 2,338 rows |
 | `/api/stock/{t}/greek-flow` | greek flow through the session, 405 rows |
-| `/api/stock/{t}/oi-change` | per-contract OI change with `curr_oi` |
+| `/api/stock/{t}/oi-change` | per-contract OI change with `curr_oi`. **T+1, and late:** measured 2026-08-21, the window still showed the *prior* day at 9:14 ET and advanced at ~9:30 ET — after the open, not before it. Overnight positioning questions stay `NA_unresolved` until the open. Use `curr_oi − last_oi`, not `oi_change` (a ratio). **Detect the roll semantically** (`curr_date` advanced, or a tracked delta changed), never by file hash — on 2026-08-21 cosmetic field churn changed the hash while the window was identical, producing a false "data advanced" alert. File changed ≠ data advanced. |
 | `/api/stock/{t}/nope` | Net Options Pricing Effect, per-minute |
 | `/api/market/{sector}/sector-tide` | **sector-level tide** — energy vs tech rotation, directly |
 | `/api/market/top-net-impact` | biggest net-premium names market-wide |
