@@ -217,3 +217,34 @@ recorded in `credentials_registry` as `KNOWN EXPOSURE — ROTATE RECOMMENDED`,
 and the owner was advised to rotate and then keep the new token only in
 `.env`. The token was not written into the repo; the runtime copy lives in
 the session scratchpad (mode 600) and dies with the container.
+
+---
+
+## 2026-08-21 — 8/20 brief graded; 8/19 open items resolved; 8/21 queued
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7` (continued session).
+Owner delivered the 8/21 brief and asked for its review; the 8/21 session was
+still open at review time (~2 PM ET), so per the rubric's T+1 rule the final
+8/21 grade is scheduled for after today's close. Graded now instead: the
+overdue 2026-08-20 review (complete data), plus interim notes only.
+
+### What changed
+
+- `brief-review/reviews/2026-08-20.md` — first review under a rubric that
+  predates the graded session. F 4/6 (first factual errors: two secondhand
+  %-figures), O MIXED (SPY PDL-resistance hit within 4 cents; QQQ
+  first-15-min tell fired false), M HIT, G MIXED, radar 3 paid / 3 fired
+  with 2 OPEN into 8/26, W precision 4/9, recall 1/6.
+- Resolved 8/19 carried items: RKT **CONF-FAILED** (-4.6% from trigger — the
+  first failed confirmation on the books), CORZ **INVALIDATED** (<$18 kill).
+- `IMPROVEMENTS.md`: I-4 gains a third instance (ARCT +6.9% one-liner'd the
+  day after +25.2%); new **I-6** — %-change claims must be computed from the
+  primary record, not quoted from coverage.
+- `SCORECARD.md` recomputed at n=3; Turso DB synced (brief_reviews,
+  radar_items ×5 new + 2 resolved, watchlist_events ×15, open_items,
+  improvements; 8/21 row PENDING).
+- Merged `origin/main` to pick up `briefs/2026-08-21.md`.
+
+### DEVIATIONS
+
+None.
