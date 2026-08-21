@@ -337,3 +337,57 @@ is the only producer, that run's governance context matters more, not less.
 **None** beyond the two already recorded today: both API keys remain compromised by
 owner decision, and trading support was read-only throughout (no order placed,
 modified or cancelled).
+
+---
+
+## 2026-08-20 (evening) — live session support, day 2; journal written pre-outcome
+
+**What changed:** The 2026-08-20 journal row appended to `playbook/PLAYBOOK.md` §6,
+written ~8:45 PM with three positions still open into Friday OPEX — the grade and
+notes predate the outcome (§9). Merged main's `briefs/2026-08-20.md` commit
+(d6b8df5) into the working branch.
+
+**Session summary:** Full-day live support — opening-bar reads on TSLA/SPY/QQQ/NVDA,
+pre-registered trigger cards, five monitor re-arms (30-min harness cap), TIPS
+auction §2 protocol (pre-event card at 12:46, verdict read off TLT's 13:02 volume
+spike — in-line, non-event), an AMZN scanner-signal refutation via UW side
+attribution, and a five-name 8/21 positioning sweep.
+
+**Findings recorded for the process:**
+
+1. **Side-blind scanners:** the owner's external scanner flagged AMZN puts on what
+   UW attribution shows was ~$1M of 8/21 262.5 puts SOLD at 3% ask. Volume-only
+   readers invert the signal; signed flow is load-bearing. (Candidate addition to
+   DATA_LAYER as a named failure mode.)
+2. **Monitor engineering lessons** (extending yesterday's): tick-based level alerts
+   fire on noise (rebuilt to two-consecutive-close + participation gate);
+   resistance levels need crossing logic, not side logic (false "2 closes below"
+   on an unreached wall); hardcoded VWAP snapshots go stale (compute per pass);
+   the harness caps Monitor at ~30 min regardless of requested timeout — re-arm
+   on timeout notices, with a file-based dedup state surviving re-arms; a
+   send_later wake is the reliable backstop for scheduled moments.
+3. **UW gex-levels drift intraday** (TSLA put wall 345→342.5 mid-morning) — levels
+   must be re-pulled before each card, not carried.
+4. **QQQ put_wall remained implausible** (584.78 on a ~711 index) across pulls —
+   standing data-quality flag.
+
+### DEVIATIONS
+
+**1. §5 risk limits set aside by owner instruction ("Ignore my cap", ~10:30 AM).**
+Recorded as an explicit owner decision, not silent drift. Dollar exposure was
+reported factually thereafter without cap-gating. Under the written §5 the day's
+book breached per-trade and heat limits multiple times; at the close ~$473 of
+premium (~48% of equity) is held overnight into Friday expiry across three
+correlated-to-market positions. §5 remains in CLAUDE.md unamended — the owner has
+not ratified a replacement; this log entry is the §6-style record that names the
+violation rather than hiding it.
+
+**2. Stated plan and executed book diverged three times** (entries against
+just-written cards at 10:39–10:42; fired stop lines at 11:05/11:20 not acted on;
+a QQQ 706P added at 3:53 PM one minute after "we will just keep the SPCX").
+Recorded because the assistant's cards and monitors act on the book it is told
+about; the 12:46 flat-check that found two supposedly-closed positions open is
+the pattern's cost made visible.
+
+**3. Read-only throughout** — no order placed, modified or cancelled (§2). Both
+API keys remain unrotated by owner decision (recorded 8/19; unchanged).
