@@ -125,3 +125,117 @@ were appends). This entry was written after that merge, hence its position
 after the addendum.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-22 — TSLA 0–5DTE module: project setup
+
+**Branch:** `claude/tesla-options-trading-setup-aoqwsr`
+
+Working directory was **this repository**, so `CLAUDE.md` governed from the first
+turn (cf. §0 and the 2026-08-18 deviation).
+
+### What changed
+
+Step one of a TSLA-focused options process, requested by the owner: "TSLA stock
+in the options market, 0–5DTE, main focus 0DTE, run in Claude Code and not a
+separate application."
+
+- `tesla/CHARTER.md` — scope, the expiration-calendar constraint, the risk
+  configuration, what transfers from the playbook and what does not, the UW gap,
+  calibration status.
+- `tesla/DATA_LAYER-TSLA.md` — TSLA-specific verified inventory, probed today.
+- `tesla/tools/probe_tsla.sh` — re-verifier; run end-to-end before committing.
+- `tesla/log/` — the card record, empty.
+- `.claude/skills/tsla-{open,scan,watch,close}/SKILL.md` — the four session
+  commands the owner selected.
+- `CLAUDE.md` §1, §5a, §7 and `README.md` — governance and index.
+
+Existing modules untouched: `daily-market-brief/`, `options-expert/`,
+`playbook/` all run as before. The owner chose a new module over a full pivot
+specifically so the SPY/QQQ-validated record is not retargeted on assumption.
+
+### Findings from the probes — each one changed the design
+
+1. **TSLA has no daily expirations.** The live chain is Mon/Wed/Fri
+   (`08-24, 08-26, 08-28, 08-31, 09-02, 09-04`, then weeklies). 0DTE is a
+   three-day-a-week strategy; Tue/Thu the floor is 1DTE. A process assuming
+   daily expiries would have traded 1DTE twice a week and mislabelled its log.
+2. **Force-close is 15:30 ET, not 15:45.** `sellout_time_to_expiration: 1800`,
+   confirmed per-contract as `sellout_datetime 2026-08-24T19:30:00Z`. The
+   playbook's 3:30 "decision bell" is TSLA's *liquidation* moment, so the
+   charter moves the bell to 15:00 and the hard exit to 15:25.
+3. **The OI liquidity gate does not transfer.** Near-dated TSLA OI is tiny
+   against same-day volume — the 8/24 365P showed OI 63 against volume 22,541.
+   A `< 250 OI` gate would reject the most-traded contracts on the chain.
+   Same-day volume is the liquidity test on TSLA; OI is context.
+4. **The 5% spread gate is near-binding, not generous.** At Friday's close only
+   two of six near-money contracts passed (4.8%); ITM ran 11–15%. SPY near-money
+   runs ~0.6%. Recorded with the caveat that these are *closing* spreads and
+   need an RTH re-probe before any threshold is changed.
+5. **Theta is worse than the SPY precedent.** 2DTE ATM call −32.6%/day, 2DTE OTM
+   call −66.8%/day, against the ~55%/day that `options-expert/SKILL.md` already
+   calls brutal.
+6. **No UW key in this environment.** `UNUSUAL_WHALES_API_KEY` unset; probe
+   returned `authentication_required`. Edge tests E2 and E3 cannot run and the
+   regime gate has no input. The specs report `NA_unresolved` and declare the
+   degraded state at the top of every scan — **not** "neutral", which would be a
+   fabricated reading.
+7. **Next TSLA earnings 2026-10-28**, outside every 0–5DTE window, so E4 is
+   dormant for earnings and re-arms the week of 2026-10-19.
+8. Strike spacing is $2.50 near the money and the option tick is $0.05 at/above
+   $3.00 — so the playbook's 15-cent stop buffer is exactly 3 ticks and
+   transfers, but as a tick-aware rule rather than a fixed number.
+
+### Decisions
+
+- **Probe TSLA before specifying anything**, per the 2026-08-18 precedent. Six
+  of the eight findings above would have been wrong assumptions otherwise.
+- **`MAX_TRADE_RISK_USD = 450`, ratified by the owner.** Recorded in `CLAUDE.md`
+  §5a with the number it replaced ($50.79 at the live equity read) so the size of
+  the change stays visible. The owner was shown the arithmetic — 35.4% of equity
+  on one trade, three max losses exceeding the account — and set the number
+  anyway; that is their call and it is theirs on the record.
+- **`MAX_CONCURRENT = 1` is derived, not chosen.** §5's correlation rule
+  collapses to one bet in a single-name universe.
+- **The resting-stop requirement is restated as an independent hard rule.**
+  Raising per-trade risk to $450 above a $400 premium cap means unstopped
+  premium now clears the risk cap, so §5's arithmetic no longer forces a stop.
+  `CHARTER.md` §3c preserves the intent explicitly. Flagged to the owner rather
+  than changed silently.
+- **Volume floor is provisional and labelled as such.** Measured from 780 FMP
+  5-min bars over ten sessions; the playbook's portable "40% of the opening
+  half-hour" form gives a threshold that swings 4× on TSLA (72,544 to 304,124)
+  and pointed the wrong way on 2026-08-14. Provisional floor ~185,000, re-arm
+  ~237,000, `UNCALIBRATED`, FMP feed units only.
+
+### DEVIATIONS
+
+**1. Every liquidity and greek figure recorded today is a closing snapshot, not
+a live reading.** The session ran on a Saturday with the market shut; the
+Robinhood quotes carry `updated_at 2026-08-21T19:59:59Z`. `DATA_LAYER-TSLA.md`
+states this at the top and repeats it against each affected number, and no
+threshold was changed on the basis of them. It is recorded as a deviation
+because a data layer verified out-of-hours is weaker evidence than one verified
+during RTH, and the file's own standard is verification by probe.
+*Resolution:* re-run `tesla/tools/probe_tsla.sh` and the Robinhood calls in §2
+during regular trading hours before the spread gate is trusted or tuned.
+
+**2. Two of five edge tests are unavailable and the module was still built.**
+E2 and E3 depend on Unusual Whales and no key exists in this environment.
+Shipping a scan process that cannot run 40% of its own tests is a real
+limitation, not a formality.
+*Resolution:* not concealed — `CHARTER.md` §5 and `/tsla-scan` §0 declare it at
+the top of every run, the regime reports `NA_unresolved` rather than a value,
+and the fix is one environment variable.
+
+**3. A ratified risk limit was raised 8.9× and this session wrote it down
+rather than resisting it.** $50.79 → $450. The arithmetic was put to the owner
+before they answered, and again after, including the collateral effect on the
+stop rule. They confirmed the number.
+*Resolution:* recorded in `CLAUDE.md` §5a with both numbers, the live percentage,
+the fall-in-equity table, and a $1,000 floor at which sizing stops.
+
+**4. Nothing in this module has been validated.** Stated in `CLAUDE.md` §7 and
+`CHARTER.md` §6 rather than left implicit. No card has been written, no session
+graded, and `tesla/log/` is empty.

@@ -28,6 +28,15 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   dated validated market behaviors, monitoring infrastructure, session
   grading, and the trading journal. Journal entries append HERE now.
 
+- `tesla/` — the TSLA 0–5DTE options process (added 2026-08-22). One name,
+  one bet, 0DTE primary. `CHARTER.md` sets the scope and the risk configuration;
+  `DATA_LAYER-TSLA.md` is the TSLA-verified data inventory;
+  `tools/probe_tsla.sh` re-verifies it; `log/` holds the cards and their grades.
+  Driven from Claude Code by four session commands in `.claude/skills/`:
+  `/tsla-open` (pre-market prep), `/tsla-scan` (find or kill the trade),
+  `/tsla-watch` (live monitor), `/tsla-close` (grade and log). Read-only
+  throughout — the human places every order.
+
 - `briefs/YYYY-MM-DD.md` — the archived output of each day's brief run
   (added 2026-08-18). Each scheduled run writes its full brief here, commits,
   and pushes (see the spec's OUTPUT DELIVERY section). One file per trading

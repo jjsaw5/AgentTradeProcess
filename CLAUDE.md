@@ -40,6 +40,8 @@ are working from elsewhere, say so out loud before writing anything here.
 | `playbook/PLAYBOOK.md` | The human's discretionary trading playbook — philosophy, the four-step hierarchy, event protocol, dated validated behaviours, session grading, journal. |
 | `options-expert/` | Takes the brief and looks for mispricing. `SKILL.md` is the process, `DATA_LAYER.md` the verified data inventory, `tools/` the probes and live monitor, `log/` the run record. |
 | `options-expert/reference/` | Vendored third-party docs, with a README recording where they are wrong. Do not edit the vendored bodies; re-fetch to update. |
+| `tesla/` | The TSLA 0–5DTE options process (added 2026-08-22). `CHARTER.md` is the scope document, `DATA_LAYER-TSLA.md` the TSLA-verified inventory, `tools/probe_tsla.sh` the re-verifier, `log/` the card record. |
+| `.claude/skills/tsla-*/` | The four session commands — `/tsla-open`, `/tsla-scan`, `/tsla-watch`, `/tsla-close`. They read `tesla/`; they do not restate it. |
 
 Changes to a spec are commits. The process has a history on purpose.
 
@@ -147,6 +149,42 @@ skip it.
 **Correlated positions are one bet.** Two names driven by the same thing count
 once against `MAX_CONCURRENT` and combine against the per-trade risk limit.
 
+### 5a. TSLA module — ratified 2026-08-22
+
+The account owner set a **separate, higher** per-trade limit for the `tesla/`
+module. It applies to TSLA 0–5DTE trades only; §5 above continues to govern
+`options-expert/` unchanged.
+
+```
+MAX_TRADE_RISK_USD    = 450     # max LOSS on the one open bet — a DOLLAR figure
+MAX_TRADE_PREMIUM_USD = 400     # unchanged
+MAX_OPEN_HEAT_USD     = 450     # equals per-trade risk: there is only one bet
+MAX_CONCURRENT        = 1       # derived, not chosen — see below
+```
+
+**It replaces `MAX_TRADE_RISK_PCT = 0.04` for TSLA.** At the equity read on the
+day it was set (`$1,269.86`) the old rule allowed **$50.79** and the new one
+allows **$450 — 35.4% of the account on one trade.** Three consecutive maximum
+losses exceed the account as it then stood. Both numbers are recorded so the
+size of the change stays visible.
+
+Three consequences, written down because each one is easy to lose:
+
+1. **A dollar figure does not scale, and it fails in the dangerous direction.**
+   As equity falls, $450 becomes a larger share of what remains — 45% at $1,000,
+   50% at $900. `tesla/` therefore prints the live percentage on every card and
+   **stops sizing below $1,000 equity.** Re-ratification is the owner's.
+2. **`MAX_CONCURRENT = 1` is derived from this file, not chosen.** §5 says
+   correlated positions are one bet; in a single-name process every position
+   shares one underlying, so a second TSLA contract is *adding to a position*.
+3. **It dissolves the mechanism that forced a resting stop.** §5 makes the
+   premium cap conditional on a stop by arithmetic: unstopped premium counts as
+   full risk and breaks the 4% cap. With risk capped at $450 and premium at
+   $400, every affordable contract now clears the risk cap unstopped, and the
+   arithmetic stops forcing anything. `tesla/CHARTER.md` §3c therefore restates
+   **"no card ships without a resting stop"** as an independent hard rule. This
+   preserves what §5 intended; it is not a new restriction.
+
 ---
 
 ## 6. Secrets
@@ -187,8 +225,17 @@ contains **no** position-sizing rules, no liquidity thresholds and no
 selection framework; that entire layer was invented on 2026-08-18. It is
 plausible. It is not evidence.
 
-**Therefore every score and edge call from `options-expert/` displays
-`UNCALIBRATED`** until `options-expert/log/` holds enough graded outcomes to
+**Reasoned, unvalidated, and starting from further back — everything in
+`tesla/` (added 2026-08-22):** none of the edge tests has ever been run on TSLA.
+The `options-expert/` tests were at least exercised once on SPY/QQQ; TSLA's
+three-day expiry cycle, $2.50 strike spacing, 4.8–15% spreads and 3.26% average
+daily range mean that exercise transfers nothing quantitative. The TSLA-specific
+numbers in `tesla/DATA_LAYER-TSLA.md` — the volume floor above all — are
+**measured from ten sessions of price data**, which makes them factual about the
+past and silent about whether trading on them works.
+
+**Therefore every score and edge call from `options-expert/` and `tesla/`
+displays `UNCALIBRATED`** until `options-expert/log/` holds enough graded outcomes to
 say otherwise. One replay of one session is not that — see
 `log/2026-08-18-REPLAY-TEST.md`, which found a real defect in E1 on its first
 run and states its own limits.
