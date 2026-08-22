@@ -204,6 +204,22 @@ about who might have seen it.**
 > than one that names its own violation: the Unusual Whales key was pasted into
 > a session transcript on 2026-08-18 and the owner declined to rotate it. That
 > key is a known exposure until rotated.
+>
+> **Second exposure, 2026-08-22.** A Unusual Whales key was pasted into the
+> session transcript again, this time to configure the `tesla/` module. Under
+> the rule above it is compromised from the moment it was typed, independently
+> of who saw it. It was written to the gitignored `.env` (mode 600), never to a
+> tracked file, and every staged diff was scanned before commit — but the
+> transcript exposure is the exposure. **Rotation was recommended and is
+> outstanding.** Two exposures of the same credential class in five days is a
+> process problem, not an accident: the fix is to set the variable in the
+> environment directly and tell Claude it is there, never to paste the value.
+
+**How a key should reach this repository:** `.env` (gitignored) or the
+deployment's secret manager, read into the environment. `.env.example` documents
+the variable **names** and never a value. `tesla/tools/probe_tsla.sh` sources
+`.env` and prints only variable names. No spec, log, card, or commit ever
+contains a credential.
 
 ---
 

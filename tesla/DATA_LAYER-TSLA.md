@@ -6,7 +6,8 @@ superseded; this file records what is different, what is measured, and what is
 currently unavailable. **If a capability is not listed here as verified for
 TSLA, this module may not assume it exists.**
 
-**Verified:** 2026-08-22, ~20:10 UTC — **Saturday, market CLOSED.**
+**Verified:** 2026-08-22, ~20:10 UTC (Robinhood + FMP) and ~20:40 UTC
+(Unusual Whales, added later the same session) — **Saturday, market CLOSED.**
 FMP `exchange-market-hours?exchange=NASDAQ` returned `isMarketOpen: false`.
 
 **What that means for every number below:** all quote-derived figures are the
@@ -27,11 +28,23 @@ MCP calls listed in §2.
 |---|---|---|
 | **Robinhood** (MCP) | ✅ working, read-only | the contract layer — chain, strikes, greeks, IV, OI, marks, account |
 | **FMP** (`stable/*`) | ✅ working, key present | the context layer — bars, quotes, daily OHLC, calendars, earnings |
-| **Unusual Whales** | ❌ **NO KEY IN THIS ENVIRONMENT** | the edge layer — **currently unavailable** |
+| **Unusual Whales** | ✅ working, key added 2026-08-22 | the edge layer — dealer gamma, signed flow, tide, IV rank |
 
-The UW probe returned `{"code":"authentication_required"}`;
-`UNUSUAL_WHALES_API_KEY` is unset. See CHARTER §5 for what this disables.
-Nothing below assumes UW.
+**All three legs are connected.** UW was added mid-session; §7 is its
+TSLA-specific inventory. 20 of 20 probed endpoints returned `200` with data.
+
+**Rate limits are not a constraint.** UW returns them as response headers —
+there is no usage endpoint (`/api-usage` 404s; the vendored
+`options-expert/reference/uw-api-usage-skill.md` reads `x-uw-*` headers off any
+response, which is the correct method). Measured 2026-08-22:
+
+```
+x-uw-daily-req-count: 67          x-uw-req-per-minute-remaining: 1000000
+x-uw-token-req-limit: 100000000   x-uw-req-per-minute-reset: 60000
+```
+
+A fan-out scan on one ticker is nowhere near any ceiling. This closes the
+"rate limits unmeasured" gap carried in `options-expert/DATA_LAYER.md` §5.
 
 ---
 
@@ -241,16 +254,232 @@ two are not comparable, and this floor may only be applied to FMP 5-min bars.
 
 | Gap | Consequence | Fix |
 |---|---|---|
-| **No UW key in this environment** | E2 (flow) and E3 (dealer mechanics) cannot run; no GEX regime read, no tide, no vendor IV rank. Regime reports `NA_unresolved`, never "neutral". | Set `UNUSUAL_WHALES_API_KEY` in the environment |
+| **`historical-risk-reversal-skew` printed an anomaly on 2026-08-21** | E5's level is untrustworthy on that date — see §7f. Trajectory only, and verify before use. | Confirm against a second session before reading any level |
+| `volatility/realized` returns `realized_volatility: null` for recent TSLA rows | The paired IV/RV series is unusable at the short end | Take IV-vs-RV from `volatility/stats`, which does carry `rv` |
+| `variance-risk-premium` lags ~28 days on TSLA | Never a live reading — a statement about the recent regime | Use `volatility/stats` for today |
 | No intraday VWAP from any vendor | Must be computed from FMP bars and labelled as ours | Compute, label |
 | Liquidity figures are a **closing** snapshot | Spread gate untested against live intraday quotes | Re-probe during RTH; §2 caveat stands until then |
 | OI gate does not transfer | Near-dated TSLA OI is tiny against same-day volume | Use volume as the liquidity test |
 | Volume floor unvalidated | A threshold measured, not proven | `tesla/log/` |
-| No TSLA GEX history in this repo | Regime behaviour on TSLA is entirely unproven | Log it before trusting it |
+| TSLA GEX is measurable but its *behaviour* is unproven here | `gex-levels` works; no TSLA regime read in this repository has ever been checked against an outcome | Log the read and the outcome, every session |
 
 ---
 
-## 7. Handling rules that carry over unchanged
+## 7. Unusual Whales — TSLA inventory, verified 2026-08-22
+
+Base `https://api.unusualwhales.com`. **Both** headers required on every call:
+`Authorization: Bearer $UNUSUAL_WHALES_API_KEY` and `UW-CLIENT-API-ID: 100001`.
+All GET. No `apiKey=` query parameter exists.
+
+The key reaches code through the environment only, from the gitignored `.env`
+(`CLAUDE.md` §6). `.env.example` documents the variable names.
+
+**Read `options-expert/reference/README.md` before trusting the vendored
+`uw-api-skill.md`.** Its "if a URL is not on this list it does not exist" line
+is an anti-hallucination guardrail, not an inventory — it covers 26 endpoints
+against the API's 207. Six of the endpoints this module depends on
+(`gex-levels`, `volatility/stats`, `iv-rank`, `term-structure`, `max-pain`,
+`historical-risk-reversal-skew`) are absent from that whitelist and all work.
+The authority is `GET /api/openapi`.
+
+**20 of 20 probed endpoints returned 200 with data for TSLA:**
+
+| Purpose | Endpoint | Rows | Note |
+|---|---|---|---|
+| Regime | `/stock/TSLA/gex-levels` | obj | the regime read — one call |
+| Regime | `/stock/TSLA/max-pain` | 23 | per expiry |
+| Regime | `/stock/TSLA/spot-exposures/strike?limit=500` | 202 | live, timestamped |
+| E1 | `/stock/TSLA/volatility/stats` | obj | `iv`, `rv`, `iv_rank` together |
+| E1 | `/stock/TSLA/iv-rank` | 5 | daily `iv_rank_1y` series |
+| E1 | `/stock/TSLA/interpolated-iv` | 9 | per horizon — **field is `days`** |
+| E1 | `/stock/TSLA/volatility/term-structure` | 23 | **per real expiry** — prefer this |
+| E1 | `/stock/TSLA/volatility/variance-risk-premium` | 231 | ~28-day lag, see §7e |
+| E2 | `/stock/TSLA/net-prem-ticks` | 391 | per-minute, carries `net_delta` |
+| E2 | `/stock/TSLA/options-volume` | 1 | daily aggregate + 3/7/30d averages |
+| E2 | `/option-trades/flow-alerts?ticker_symbol=TSLA` | 20 | aggregated unusual activity |
+| E2 | `/screener/option-contracts?ticker_symbol=TSLA` | 20 | per-contract, widest net |
+| E2 | `/stock/TSLA/flow-recent` | 50 | recent tape |
+| E5 | `/stock/TSLA/historical-risk-reversal-skew` | 250 | **anomaly present — §7f** |
+| Env | `/market/market-tide` | 81 | 5-min market-wide bars |
+| Ctx | `/news/headlines?ticker=TSLA` | 5 | `sentiment`, `is_major` |
+| Ctx | `/stock/TSLA/ohlc/5m` | 2,500 | UW does have intraday bars |
+| Ctx | `/darkpool/TSLA` | 500 | prints with NBBO at execution |
+| Ctx | `/stock/TSLA/greek-flow` | 391 | greek flow through the session |
+| Ctx | `/stock/TSLA/oi-change` | 50 | per-contract OI change |
+
+All readings below are the **2026-08-21 close** (Saturday probe). Re-pull
+pre-open; a regime read is never carried overnight.
+
+### 7a. Regime — the first TSLA GEX read in this repository
+
+`/stock/TSLA/gex-levels`, spot 362.86:
+
+```
+call_wall     400        put_wall      350
+gamma_magnet  350        gamma_flip    351.08
+```
+
+Spot sat **above `gamma_flip`** → positive gamma, **GLUE**, as of Friday's
+close. The magnet (350) is $12.86 *below* spot and coincides with the put wall.
+
+**Cross-check disagrees, and that is reportable rather than resolvable.**
+`max-pain` for the near expiries reads **337.5–340**, not 350:
+
+| Expiry | max pain | vs `gamma_magnet` 350 |
+|---|---|---|
+| 2026-08-24 | 340.0 | −10 |
+| 2026-08-26 | 340.0 | −10 |
+| 2026-08-28 | 332.5 | −17.5 |
+
+`options-expert/SKILL.md` Stage 1: when the magnet and max pain agree it is a
+genuine pin read; when they disagree, **say so rather than picking the one that
+suits the thesis.** They disagree here. Both nonetheless sit well below spot,
+so the shared signal is downward pull — the level is unsettled, the direction
+of the pull is not.
+
+**The `options-expert/DATA_LAYER.md` §3e bracket assertion — PASSES for TSLA.** `spot-exposures/strike?limit=500`
+returned 202 rows spanning strikes 5 → 990, with **113 above spot and 89
+below**, `time 2026-08-21T19:59:44Z`, `price 362.94`. The window brackets spot,
+so the profile is interpretable rather than a paging artifact. **Run this
+assertion every time** — it is the check that caught a wrong SPY regime read on
+2026-08-18.
+
+### 7b. Vol — cheap in its own range, but richer than TSLA is delivering
+
+`/stock/TSLA/volatility/stats` (2026-08-21):
+
+```
+iv 0.408   rv 0.373046   iv_rank 14.187
+iv_low 0.369  iv_high 0.648     rv_low 0.285  rv_high 0.776
+```
+
+`/stock/TSLA/iv-rank` agrees independently: `iv_rank_1y 14.187`, `volatility
+0.408`. Two sources, same number — a real cross-check, worth keeping.
+
+Read it honestly, because the two halves point opposite ways:
+
+- **`iv_rank` 14.2 is low** — IV sits near the bottom of its own 1-year range.
+  The structure matrix says low rank + directional → long premium.
+- **But IV 0.408 > RV 0.373** — options are charging ~3.5 vol points *more* than
+  TSLA has actually been delivering. E1b's tell ("prefer the one realizing more
+  than implied") points the other way, toward spreads.
+
+Cheap in absolute terms, still not free against recent realized. **Say both.**
+
+### 7c. Implied move per horizon — use `term-structure`, and mind the field name
+
+`/stock/TSLA/interpolated-iv` carries **`days`**, not `dte`, and **`volatility`**,
+not `iv`. Asking for `dte` returns nothing and reads exactly like a null field.
+Rows (2026-08-21):
+
+| days | volatility | percentile | implied_move_perc |
+|---|---|---|---|
+| 1 | 0.315 | 0.053 | **1.7%** |
+| 5 | 0.395 | 0.329 | 3.1% |
+| 7 | 0.416 | 0.429 | 3.9% |
+| 30 | 0.408 | 0.091 | 7.9% |
+| 365 | 0.482 | 0.111 | 32.3% |
+
+**Prefer `/stock/TSLA/volatility/term-structure`** — it keys on *real tradable
+expiries*, which matters more on TSLA than on SPY because the chain is
+Mon/Wed/Fri and an interpolated "1-day" horizon is frequently not a tradable
+date at all:
+
+| expiry | dte (calendar) | implied_move | implied_move_perc |
+|---|---|---|---|
+| 2026-08-24 | 3 | **$6.95** | **1.91%** |
+| 2026-08-26 | 5 | $11.13 | 3.07% |
+| 2026-08-28 | 7 | $14.09 | 3.88% |
+| 2026-08-31 | 10 | $15.71 | 4.33% |
+
+Note `dte` here is **calendar** days from the data date, and `iv` comes back
+`null` — only `implied_move` and `implied_move_perc` are populated.
+
+**Do not compare implied move to the daily range directly.** §4's $11.82 mean
+range is a high-to-low measure; `implied_move` is a ±1σ close-to-close move.
+Range typically runs well above it. Comparing the two as if they were the same
+statistic would kill sound trades — the same category error the E1 defect in
+`options-expert/log/2026-08-18-REPLAY-TEST.md` was made of.
+
+### 7d. Flow — TSLA was heavily call-side on 2026-08-21
+
+`/stock/TSLA/options-volume`:
+
+```
+call_volume 3,014,679   put_volume 1,758,875
+call ask-side 1,430,044 vs bid-side 1,312,835
+net_call_premium +$59,556,905     net_put_premium −$9,895,095
+bullish_premium $841.7M           bearish_premium $785.1M
+avg_30_day_call_volume 1,330,312  -> relative volume 2.27x
+```
+
+Call volume at **2.27× its own 30-day average** on a +5.14% day. The 3/7/30-day
+averages are the relative-volume denominator; use them rather than eyeballing.
+
+`/stock/TSLA/net-prem-ticks` gives the per-minute version and **carries
+`net_delta`** — the directional-exposure measure the market-wide tide lacks —
+plus per-side volume splits and `tape_time`. 391 ticks for the session.
+
+`/option-trades/flow-alerts?ticker_symbol=TSLA` returns `alert_rule`,
+`has_sweep`, `has_floor`, `has_multileg`, `all_opening_trades`,
+`volume_oi_ratio`, `total_ask_side_prem` vs `total_bid_side_prem`, `iv_end`.
+
+**Market-wide tide, last bar (16:10 ET):** `net_call_premium −$17.0M`,
+`net_put_premium −$130.0M`, `net_volume 614,183`. **Both negative** — the
+expiration-day signature the playbook logged on 2026-08-14: premium
+liquidation, not direction. 2026-08-21 was an OPEX Friday. Read it as
+pin/decay, not as a directional signal.
+
+### 7e. VRP is lagged ~28 days on TSLA — never a live reading
+
+`/stock/TSLA/volatility/variance-risk-premium` newest row is dated
+**2026-07-24** with `created_at 2026-08-21`. That is a ~28-day structural lag,
+because realized vol needs its forward window to have happened.
+
+Worse for TSLA: `/stock/TSLA/volatility/realized` returns
+`realized_volatility: null` **and** `unshifted_rv_date: null` on the recent
+rows, so the paired series gives nothing at the short end.
+
+**Consequence:** the IV-vs-RV comparison comes from `volatility/stats` (§7b),
+which carries `rv` directly. VRP is regime context, never today.
+
+### 7f. The skew anomaly — do not trade this number
+
+`/stock/TSLA/historical-risk-reversal-skew`, 250 rows, **ascending by date**
+(the newest row is last — reading `[0]` gives you a year-old value).
+
+Last six sessions of 25-delta `risk_reversal`:
+
+| date | value |
+|---|---|
+| 2026-08-14 | −0.0299 |
+| 2026-08-17 | −0.0283 |
+| 2026-08-18 | −0.0203 |
+| 2026-08-19 | −0.0244 |
+| 2026-08-20 | −0.0101 |
+| **2026-08-21** | **−0.6636** |
+
+**A 60× jump in one session.** The five prior sessions sit in a −0.010 to −0.030
+band, and `options-expert/DATA_LAYER.md` records SPY in the same order of
+magnitude (−0.0277 on 2026-08-18). A move of that size in one day, on an OPEX
+Friday, is far more likely a data artifact or an expiration-mechanics effect
+than a genuine repricing of protection.
+
+**Standing rule for E5 on TSLA:**
+
+1. Read the **trajectory** of the stable series, never a single level — which is
+   what E5 already says, and this is why.
+2. Treat an order-of-magnitude single-session jump as **suspect until a second
+   session confirms it.** Report it as an anomaly, not as a reading.
+3. Never let one such print change a structure decision on its own.
+
+Trajectory through 2026-08-20, ignoring the outlier: skew drifting **toward
+zero** (−0.030 → −0.010 over five sessions) — puts getting *less* bid relative
+to calls, consistent with the week's rally.
+
+---
+
+## 8. Handling rules that carry over unchanged
 
 From `options-expert/DATA_LAYER.md` §6 — these are not TSLA-specific and are not
 restated in full:

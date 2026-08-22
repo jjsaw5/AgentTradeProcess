@@ -10,6 +10,12 @@ re-fetch to update, and record corrections in this file rather than in the copy.
 | `uw-websocket-skill.md` | https://unusualwhales.com/skills/websocket.md | 2026-08-18 |
 | `uw-api-usage-skill.md` | https://unusualwhales.com/skills/uw-api-usage-monitor-skill.md | 2026-08-18 |
 
+`uw-api-skill.md` was re-checked against a copy supplied by the account owner on
+**2026-08-22** and is unchanged — same frontmatter, same whitelist, same
+examples (`include_agg_trades`, `min_ask_perc`, `max_multileg_volume_ratio`,
+`RepeatedHits` all present in both). The corrections below therefore still
+apply, and no second copy was vendored.
+
 The full machine-readable spec is `GET https://api.unusualwhales.com/api/openapi`
 (~957 KB YAML, 207 paths). It is the authority. Fetch it rather than guessing.
 

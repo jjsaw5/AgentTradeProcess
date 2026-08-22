@@ -9,6 +9,13 @@
 # (see DATA_LAYER-TSLA.md §1-§3) because it has no HTTP surface here.
 
 set -uo pipefail
+
+# Secrets reach this script through the environment only (CLAUDE.md §6).
+# Load the gitignored .env if present; never echo a value.
+if [ -f "$(dirname "$0")/../../.env" ]; then
+  set -a; . "$(dirname "$0")/../../.env"; set +a
+fi
+
 T=TSLA
 FMP=https://financialmodelingprep.com/stable
 UW=https://api.unusualwhales.com/api
@@ -63,17 +70,65 @@ print(fut[0] if fut else "no future earnings row")'
 
 hr "unusual whales"
 if [ -z "${UNUSUAL_WHALES_API_KEY:-}" ]; then
-  echo "UNUSUAL_WHALES_API_KEY unset — edge layer UNAVAILABLE."
+  echo "UNUSUAL_WHALES_API_KEY unset — edge layer unavailable."
   echo "E2 (flow) and E3 (dealer mechanics) cannot run. Regime = NA_unresolved."
 else
-  for p in "stock/$T/gex-levels" "stock/$T/volatility/stats" "stock/$T/net-prem-ticks"; do
-    st=$(curl -sS --max-time 25 -o /tmp/uw_probe.json -w '%{http_code}' \
+  echo "rate limits (headers — there is no /api-usage endpoint):"
+  curl -sS --max-time 25 -D - -o /dev/null \
+    -H "Authorization: Bearer $UNUSUAL_WHALES_API_KEY" -H "UW-CLIENT-API-ID: 100001" \
+    "$UW/stock/$T/gex-levels" | grep -i '^x-uw' | sed 's/^/  /'
+  echo
+  for p in \
+    "stock/$T/gex-levels" \
+    "stock/$T/max-pain" \
+    "stock/$T/spot-exposures/strike?limit=500" \
+    "stock/$T/volatility/stats" \
+    "stock/$T/iv-rank" \
+    "stock/$T/volatility/term-structure" \
+    "stock/$T/net-prem-ticks" \
+    "stock/$T/options-volume" \
+    "option-trades/flow-alerts?ticker_symbol=$T&limit=20" \
+    "screener/option-contracts?ticker_symbol=$T&limit=20" \
+    "stock/$T/historical-risk-reversal-skew" \
+    "market/market-tide" ; do
+    st=$(curl -sS --max-time 30 -o /tmp/uw_probe.json -w '%{http_code}' \
       -H "Authorization: Bearer $UNUSUAL_WHALES_API_KEY" \
       -H "UW-CLIENT-API-ID: 100001" "$UW/$p")
-    rows=$(python3 -c 'import json;d=json.load(open("/tmp/uw_probe.json"));x=d.get("data",d);print(len(x) if isinstance(x,list) else "obj")' 2>/dev/null || echo "?")
-    printf '  %-34s http=%s rows=%s\n' "$p" "$st" "$rows"
-    [ "$st" = "200" ] && [ "$rows" = "0" ] && echo "    ^ data:[] is NOT a negative result — re-request with known-good params"
+    rows=$(python3 -c 'import json;d=json.load(open("/tmp/uw_probe.json"));x=d.get("data",d) if isinstance(d,dict) else d;print(len(x) if isinstance(x,list) else "obj")' 2>/dev/null || echo "?")
+    printf '  %-52s http=%s rows=%s\n' "${p%%\?*}" "$st" "$rows"
+    if [ "$st" = "200" ] && [ "$rows" = "0" ]; then
+      echo "    ^ data:[] is NOT a validated negative — re-request with known-good params (DATA_LAYER §3d)"
+    fi
   done
+  echo
+  echo "  §3e bracket assertion (spot-exposures must straddle spot):"
+  curl -sS --max-time 30 -H "Authorization: Bearer $UNUSUAL_WHALES_API_KEY" \
+    -H "UW-CLIENT-API-ID: 100001" "$UW/stock/$T/spot-exposures/strike?limit=500" \
+    -o /tmp/uw_se.json
+  python3 -c '
+import json
+d=json.load(open("/tmp/uw_se.json")).get("data",[])
+if not d: print("    no rows — cannot assert"); raise SystemExit
+ks=sorted(float(r["strike"]) for r in d); spot=float(d[0].get("price") or 0)
+above=[k for k in ks if k>spot]; below=[k for k in ks if k<spot]
+ok=bool(above and below)
+print("    rows %d  strikes %g -> %g  spot %g" % (len(d),ks[0],ks[-1],spot))
+print("    above %d  below %d  BRACKETS SPOT: %s" % (len(above),len(below),ok))
+print("    " + ("ok" if ok else "!! ONE-SIDED WINDOW — paging artifact, DISCARD, do not interpret"))
+print("    as of:", d[0].get("time"))'
+  echo
+  echo "  E5 skew — series is ASCENDING, newest row is last:"
+  curl -sS --max-time 30 -H "Authorization: Bearer $UNUSUAL_WHALES_API_KEY" \
+    -H "UW-CLIENT-API-ID: 100001" "$UW/stock/$T/historical-risk-reversal-skew" \
+    -o /tmp/uw_rr.json
+  python3 -c '
+import json
+d=json.load(open("/tmp/uw_rr.json")).get("data",[])
+last=d[-6:]
+for r in last: print("    %s  %s" % (r["date"], r["risk_reversal"]))
+vals=[abs(float(r["risk_reversal"])) for r in last]
+if len(vals)>1 and vals[-1] > 5*max(vals[:-1]):
+    print("    !! newest print is an order-of-magnitude outlier — anomaly, not a reading (DATA_LAYER-TSLA §7f)")'
 fi
 
 hr "robinhood"

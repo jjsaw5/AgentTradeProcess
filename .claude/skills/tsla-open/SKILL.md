@@ -54,7 +54,7 @@ From `FMP quote?symbol=TSLA` and `historical-price-eod/full?symbol=TSLA`:
 | 50-day / 200-day average | `quote` (`priceAvg50`, `priceAvg200`) |
 | 52-week high / low | `quote` (`yearHigh`, `yearLow`) — only if within ~5% |
 | Round numbers | TSLA strikes step $2.50; the levels that matter are the $5 and $10 handles |
-| Gamma walls | UW `gex-levels` — **`NA_unresolved` while no UW key exists** (CHARTER §5) |
+| Gamma walls | UW `/api/stock/TSLA/gex-levels` — `call_wall`, `put_wall`, `gamma_magnet`, `gamma_flip`. Cross-check `max-pain` on the 0–5DTE expiries and **report a disagreement rather than picking one.** |
 
 State the **gap**: today's premarket price against PDC, in dollars and percent,
 and which of the three open scripts (inside range / above PDH / below PDL) the
@@ -79,20 +79,25 @@ are different propositions on the same chart.
 
 ## 5. The vol read
 
-Without UW there is no vendor `iv_rank`, no variance risk premium and no term
-structure (CHARTER §5). What is still available:
-
-- **Implied:** pull the ATM contract for today's shortest expiry via
+- **IV rank and IV-vs-RV:** `/api/stock/TSLA/volatility/stats` — `iv`, `rv`,
+  `iv_rank` in one call. `/api/stock/TSLA/iv-rank` is an independent
+  cross-check; a disagreement between them means something is wrong.
+- **Implied move for today's expiries:**
+  `/api/stock/TSLA/volatility/term-structure` — real expiry dates, so it maps
+  onto the DTE table in §1. Prefer it over `interpolated-iv` (whose field is
+  `days`, not `dte`). **Implied move is ±1σ close-to-close — do not compare it
+  to the daily high-low range.**
+- **Contract theta:** pull the ATM contract for today's shortest expiry via
   `get_option_chains` → `get_option_instruments(strike_price=<nearest 2.50>)` →
-  `get_option_quotes`, and read `implied_volatility` off it.
-- **Realized:** compute from FMP daily bars — the 10-session mean range in §3
-  is the honest comparator available today.
-- **Theta:** read it off the same quote and state it as **percent of mark per
-  day**. On 2026-08-21 the 2DTE ATM call bled 32.6%/day and the OTM call 66.8%.
-  This number decides how long a thesis is allowed to take.
+  `get_option_quotes`, and state theta as **percent of mark per day.** On
+  2026-08-21 the 2DTE ATM call bled 32.6%/day and the OTM call 66.8%. This
+  number decides how long a thesis is allowed to take.
+- **Overnight flow:** `/api/stock/TSLA/options-volume` for yesterday's
+  aggressor-side split and the 3/7/30-day averages that give relative volume.
 
-Label every greek `source: robinhood`. Say `NA_unresolved` for anything UW would
-have supplied. **Do not describe the regime as "neutral" when it is unmeasured.**
+Label every greek `source: robinhood` and every vol stat `source: uw`. Never
+mix them in a column. **`data: []` is not a negative result** — report the row
+count and re-request before concluding anything.
 
 ## 6. Write the two triggers — the actual deliverable
 
@@ -117,8 +122,10 @@ TSLA PRE-MARKET — <weekday YYYY-MM-DD>            0DTE: <date | NONE (1DTE day
 
 GAP           <±$x.xx (±x.xx%) vs PDC $xxx.xx>  → <open script>
 LEVELS        PDH xxx.xx  PDL xxx.xx  PDC xxx.xx  PMH xxx.xx  PML xxx.xx
-              50d xxx.xx  200d xxx.xx   walls NA_unresolved (no UW key)
-VOL           ATM IV x.xxx [robinhood]  Θ -x.xx (-xx%/day)  10d mean range $11.82
+              50d xxx.xx  200d xxx.xx   call_wall xxx  put_wall xxx
+              flip xxx.xx  magnet xxx  max-pain xxx  <agree|DISAGREE>
+VOL           iv x.xxx / rv x.xxx  iv_rank xx.x [uw]   ATM Θ -x.xx (-xx%/day) [rh]
+              implied move to <expiry>: $x.xx (x.xx%)   10d mean range $11.82
 CATALYSTS     <time — event>  ...   earnings: 2026-10-28 (E4 dormant)
 BRIEF         <one line: the day's mood and the counter-case>
 

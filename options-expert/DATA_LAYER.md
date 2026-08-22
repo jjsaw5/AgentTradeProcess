@@ -516,7 +516,7 @@ of the column marked authoritative.
 | UW empty-array-on-bad-param | Fabricated absences | §3d handling is mandatory |
 | FMP 402 tier ceiling | No ETF holdings / institutional ownership / bulk surprises / ^NDX | Tier upgrade if load-bearing |
 | No social sentiment on FMP | Brief §10 unsupported | UW news, or web research |
-| Rate limits unmeasured | Unknown ceiling on a fan-out scan | Fetch the UW usage-monitor skill and instrument before scaling |
+| ~~Rate limits unmeasured~~ **measured 2026-08-22** | Not a constraint: `x-uw-req-per-minute-remaining` 1,000,000 and `x-uw-token-req-limit` 100,000,000 against a daily count of 67. There is no `/api-usage` endpoint (404) — limits come back as `x-uw-*` **response headers**, which is what the vendored usage skill reads. | none needed; re-check the headers if a fan-out ever slows |
 
 ## 6. Handling rules that follow from all this
 

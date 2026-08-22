@@ -204,40 +204,56 @@ until live sessions confirm it:**
 
 **Does not transfer — do not assume:**
 
-- **GEX regime behaviour.** The playbook's glue/gasoline read is dated on SPY.
-  TSLA is a mega-chain name where GEX is meaningful in principle, but no TSLA
-  regime read in this repository has ever been checked against an outcome.
+- **GEX regime behaviour.** TSLA GEX is now *measurable* (`gex-levels`), and
+  the first read is recorded in `DATA_LAYER-TSLA.md` §7a. Measurable is not
+  proven: the playbook's glue/gasoline behaviour is dated on SPY, and **no TSLA
+  regime read in this repository has ever been checked against an outcome.**
+  Note also that the first read already produced a disagreement — `gamma_magnet`
+  350 against `max-pain` 337.5–340 — which is reported, not resolved.
 - **Time-of-day statistics.** "All wins entered 9:49–12:31" is a SPY sample of
   one session. TSLA's own intraday shape is unmeasured here.
 - **Tide tripwires.** Thresholds (±$40M) are market-wide UW numbers, not
-  per-ticker. A TSLA `net-prem-ticks` equivalent needs its own calibration, and
-  currently cannot even be pulled — see §5.
+  per-ticker. `net-prem-ticks` now pulls for TSLA and carries `net_delta`, so
+  the data exists — **the thresholds do not.** A TSLA-specific tripwire level
+  must be calibrated from logged sessions before it fires anything.
 
 ---
 
-## 5. The Unusual Whales layer is dark
+## 5. The Unusual Whales layer is live
 
-**As of 2026-08-22, no UW API key is present in this environment.**
-`UNUSUAL_WHALES_API_KEY` is unset; a probe returned `authentication_required`.
+**A UW key was added to the environment on 2026-08-22.** All five edge tests can
+run. `DATA_LAYER-TSLA.md` §7 is the TSLA-specific inventory — 20 of 20 probed
+endpoints returned data, and rate limits are nowhere near binding.
 
-UW is the sole source for dealer gamma (`gex-levels`), signed aggressor-side
-flow, the tide, and vendor IV rank. Without it:
+What this turns on:
 
-- **Edge test E3 (dealer mechanics) cannot run at all.**
-- **E2 (flow divergence) cannot run at all.**
-- E1 (vol mispricing) runs in degraded form: Robinhood gives per-contract IV,
-  but `iv_rank`, `variance-risk-premium` and the term structure are UW's.
-- The regime gate has no input. It reports `NA_unresolved` — **not "neutral"**,
-  which would be a fabricated reading.
+| Test | Source | Status |
+|---|---|---|
+| E1 vol mispricing | `volatility/stats`, `volatility/term-structure`, `iv-rank` | full |
+| E2 aggressor-side flow | `net-prem-ticks`, `options-volume`, `flow-alerts`, `screener/option-contracts` | full |
+| E3 dealer mechanics | `gex-levels`, `spot-exposures/strike`, `max-pain` | full |
+| E4 event vol structure | `term-structure` across the event date | full |
+| E5 skew and structure | `historical-risk-reversal-skew` | **degraded — see below** |
 
-`/tsla-scan` must state this at the top of every run while it holds. A process
-that quietly drops two of its five edge tests and still prints a score is
-exactly the failure `CLAUDE.md` §3 exists to prevent.
+Three cautions carried over from the probe, each of which would produce a
+confident wrong answer if ignored:
 
-Restoring it is a key in the environment, nothing more. Until then this module
-is running on two of three data legs.
+1. **Assert the window brackets spot** on any `spot-exposures/strike` pull, and
+   pass `limit=500`. This is the check that caught a wrong SPY regime read on
+   2026-08-18. It passes on TSLA (113 strikes above spot, 89 below) — but it is
+   an assertion to run, not a fact to remember.
+2. **`data: []` is never a validated negative.** A wrong parameter value returns
+   `HTTP 200` with an empty array. Row count is part of the health check.
+3. **E5 is degraded by a bad print, not by access.** The 25-delta risk reversal
+   jumped 60× in one session on 2026-08-21 (−0.010 → −0.664) against a stable
+   −0.010/−0.030 band. Until a second session confirms it, that is an anomaly,
+   not a reading. `DATA_LAYER-TSLA.md` §7f has the standing rule.
 
----
+**The key is a compromised credential.** It was pasted into a session transcript
+on 2026-08-22, which `CLAUDE.md` §6 defines as compromised regardless of who saw
+it. It lives in the gitignored `.env` and reaches code through the environment;
+`.env.example` documents the variable names only. It is the second such exposure
+in this repository and both are recorded in `CLAUDE.md` §6.
 
 ## 6. Calibration status
 

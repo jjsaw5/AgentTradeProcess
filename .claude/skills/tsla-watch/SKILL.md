@@ -61,10 +61,23 @@ with no working order is the failure that rule exists to prevent.
 | Bar volume vs the floor | on each completed bar | same |
 | Contract mark and greeks | ~60s | `get_option_quotes` |
 | Position and orders | ~5 min, and on any alert | `get_option_positions`, `get_option_orders` |
-| Tide / flow tripwires | — | **UNAVAILABLE, no UW key** (CHARTER §5) |
+| Per-ticker flow | ~5 min, completed bars | UW `/api/stock/TSLA/net-prem-ticks` — `net_delta` and per-side premium |
+| Market-wide tide | ~5 min | UW `/api/market/market-tide` |
+| Regime drift | ~15 min | UW `/api/stock/TSLA/gex-levels` — walls move intraday |
+| News and halts | continuous | UW `/api/news/headlines`, or the stream below |
 
 Use `sleep` only inside a monitoring loop the user has asked for; never to wait
 on an external event. Completed bars only — a bar in progress is not a signal.
+
+**Prefer the websocket over polling when a position is open.**
+`options-expert/tools/uw_stream.py --tickers TSLA` streams the tide, per-ticker
+GEX, net flow, news (Truth Social posts included, flagged `is_trump_ts`) and
+**trading halts** on live data instead of 5-minute REST polls. A halt on an open
+position is never a low-priority event. The token rides in the socket URL query
+string, so **never log the URL.**
+
+Rate limits are not a constraint (`x-uw-req-per-minute-remaining` 1,000,000
+against a daily count of 67) — poll at the cadence the trade needs.
 
 ## 4. Alerts that fire
 
@@ -81,6 +94,13 @@ mark per day (32.6%/day ATM at 2DTE, 66.8% OTM). Each cycle, state the dollars
 of decay already spent against the delta gain earned. When decay exceeds the
 delta term for the expected hold, the E1 premise has failed even if direction is
 still right. Say so.
+
+**Flow tripwires** — the playbook §4 signatures, adapted. The market-wide
+thresholds (±$40M) are **not** TSLA numbers and no TSLA level has been
+calibrated (CHARTER §4), so report the *shape* — call premium draining while put
+premium wakes up, `net_delta` reversing against the position — and say plainly
+that the trigger level is uncalibrated. **Flow is a veto and confirmation layer,
+never a reason to enter, and price action overrules it when they disagree.**
 
 **Volume floor** — the entry filter is off once a position is open (stops and
 exits always stay active, playbook §1c). Report a dead tape as context, never as
@@ -122,7 +142,7 @@ STOP      resting @ x.xx  ✓        TARGET  resting @ x.xx  ✓
 LEVELS    invalidation xxx.xx (-x.xx away) · target xxx.xx (+x.xx away)
 THETA     -$xx spent of $xx planned over the hold
 BAR       5-min close xxx.xx  vol xxx,xxx  <above|below floor>
-FLOW      NA_unresolved (no UW key)
+FLOW      net_delta ±x,xxx  net call prem ±$x.xM  regime <GLUE|GASOLINE> (flip xxx.xx)
 ```
 
 Escalate to a full paragraph only when an alert fires.

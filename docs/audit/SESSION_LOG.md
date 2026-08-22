@@ -239,3 +239,111 @@ the fall-in-equity table, and a $1,000 floor at which sizing stops.
 **4. Nothing in this module has been validated.** Stated in `CLAUDE.md` §7 and
 `CHARTER.md` §6 rather than left implicit. No card has been written, no session
 graded, and `tesla/log/` is empty.
+
+---
+
+## 2026-08-22 (later) — Unusual Whales key added; the edge layer goes live
+
+**Branch:** `claude/tesla-options-trading-setup-aoqwsr`
+
+### What changed
+
+The owner supplied a UW API key. The `tesla/` module was built hours earlier
+around the *absence* of one, so this reverses the largest limitation in it.
+
+- `.env` (gitignored, mode 600) holds the key; `.env.example` (committed)
+  documents variable **names** only. `tesla/tools/probe_tsla.sh` sources `.env`.
+- `tesla/DATA_LAYER-TSLA.md` — new §7, the TSLA UW inventory: 20 of 20 probed
+  endpoints returned 200 with data. §0 status table, gaps table and section
+  numbering updated.
+- `tesla/CHARTER.md` §5 rewritten from "the layer is dark" to what each of the
+  five edge tests now runs on, plus the three cautions the probe surfaced.
+- `.claude/skills/tsla-scan/SKILL.md` — preflight, Stage 1 regime, E1, E2, E3,
+  E4, E5, the structure matrix and the card format all rewritten against live
+  endpoints. E2 and E3 go from "cannot run" to full procedures.
+- `.claude/skills/tsla-open/SKILL.md` — gamma walls and the vol read are live.
+- `.claude/skills/tsla-watch/SKILL.md` — flow tripwires and the websocket
+  monitor (`options-expert/tools/uw_stream.py --tickers TSLA`) replace polling.
+- `tesla/tools/probe_tsla.sh` — probes 12 TSLA endpoints, prints the rate-limit
+  headers, runs the §3e bracket assertion, and **auto-flags the E5 outlier**.
+- `options-expert/DATA_LAYER.md` §5 — the "rate limits unmeasured" gap is now
+  measured and closed.
+- `options-expert/reference/README.md` — records that the upstream skill doc is
+  unchanged as of 2026-08-22, so no second copy was vendored.
+- `CLAUDE.md` §6 — the second credential exposure, and how a key *should* reach
+  this repository.
+
+### Findings
+
+1. **All 20 probed TSLA endpoints return data**, including six absent from UW's
+   published whitelist (`gex-levels`, `volatility/stats`, `iv-rank`,
+   `term-structure`, `max-pain`, `historical-risk-reversal-skew`). This is the
+   third confirmation that the whitelist is a guardrail, not an inventory.
+2. **First TSLA regime read in this repository.** `gamma_flip` 351.08 against
+   spot 362.86 → positive gamma, GLUE, at Friday's close. `call_wall` 400,
+   `put_wall` 350, `gamma_magnet` 350.
+3. **The magnet and max pain disagree** — 350 vs 337.5–340 on the near
+   expiries. Reported as a disagreement rather than resolved, per Stage 1.
+4. **The §3e bracket assertion passes on TSLA** — 202 rows, 113 strikes above
+   spot and 89 below. Wired into the probe so it is checked, not remembered.
+5. **`historical-risk-reversal-skew` printed a 60× outlier on 2026-08-21**
+   (−0.0101 → −0.6636 against a stable −0.010/−0.030 band, on an OPEX Friday).
+   Treated as an anomaly requiring a second session to confirm, not a reading.
+   E5 is therefore degraded by data quality rather than by access.
+6. **`variance-risk-premium` lags ~28 days on TSLA** (newest row 2026-07-24),
+   and `volatility/realized` returns `realized_volatility: null` on recent rows.
+   The IV-vs-RV comparison must come from `volatility/stats`, which carries both.
+7. **`interpolated-iv` uses `days`, not `dte`, and `volatility`, not `iv`.**
+   My first probe asked for `dte`, got nulls, and I nearly recorded an API
+   defect that did not exist — see DEVIATIONS.
+8. **Rate limits are not a constraint** and there is no `/api-usage` endpoint;
+   limits arrive as `x-uw-*` response headers.
+9. **IV is cheap in its own range but rich against realized** — `iv_rank` 14.19
+   with IV 0.408 over RV 0.373. The two halves point opposite ways and the spec
+   now requires both to be stated.
+
+### Decisions
+
+- **Did not vendor a second copy of the UW skill doc.** The pasted text is
+  byte-identical to `options-expert/reference/uw-api-skill.md` (fetched
+  2026-08-18) across every marker checked. A duplicate would have two copies of
+  a document whose known errors are recorded once. Re-confirmation noted in the
+  reference README instead.
+- **The pasted doc's "strict whitelist" instruction was not adopted.** Following
+  it would forbid six endpoints this module depends on and which demonstrably
+  work. The repository's existing correction stands.
+- **E5 degraded rather than disabled.** The trajectory through 2026-08-20 is
+  usable; the single outlier is not. Encoded as a rule and an automatic check in
+  the probe rather than a note someone has to remember.
+
+### DEVIATIONS
+
+**1. A credential was pasted into the session transcript — the second time in
+five days.** Under `CLAUDE.md` §6 the key is compromised from the moment it was
+typed, regardless of who saw it. Rotation was recommended immediately and again
+in this entry; it is outstanding. The value was written only to the gitignored
+`.env` (mode 600), never to a tracked file, and the staged diff was scanned for
+both the literal value and key-shaped strings before commit.
+*Resolution:* `CLAUDE.md` §6 now carries both exposures and states the correct
+channel — set the variable in the environment and say it is there, never paste
+the value. This remains an open exposure until the key is rotated.
+
+**2. I nearly recorded a defect that was my own bug.** The first probe requested
+`dte` from `interpolated-iv`, received nulls, and I began writing it up as "the
+DTE field is null for TSLA — the endpoint is unusable." The real field is
+`days`. Caught by re-reading the raw payload keys before publishing. It is
+logged because the honesty rules cut both ways: inventing a vendor failure is
+the same class of error as inventing a driver, and a wrong entry in a data layer
+that other specs treat as ground truth would have propagated silently.
+*Resolution:* the correct field names are recorded in §7c, and the raw key list
+is checked before any "field is missing" claim.
+
+**3. Two data-quality findings are stated on a single observation each.** The
+E5 outlier and the VRP lag are each one probe on one Saturday. They are written
+as "verify before use" rather than as established behaviour.
+*Resolution:* the probe re-checks both on every run and flags the outlier
+automatically; a second session either confirms or clears them.
+
+**4. All UW readings recorded today remain a Friday-close snapshot.** The
+market was shut. Deviation 1 of the earlier entry still stands unresolved for
+the same reason, and now covers the UW numbers too.
