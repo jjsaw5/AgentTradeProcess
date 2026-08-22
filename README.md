@@ -32,3 +32,13 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   (added 2026-08-18). Each scheduled run writes its full brief here, commits,
   and pushes (see the spec's OUTPUT DELIVERY section). One file per trading
   day; automated runs touch only this directory.
+
+- `uw-earnings-vol-scan/SKILL.md` — a **third-party** skill (Unusual Whales /
+  Volatility Vibes), vendored verbatim on 2026-08-22: scans the earnings
+  calendar for IV-crush setups and scores each name Recommended / Consider /
+  Avoid for a long call calendar spread. `uw-earnings-vol-scan/README.md` is
+  ours and records the provenance, the import-time verification (the skill's
+  own selftest, 124/124), and how it sits under `CLAUDE.md` — its verdicts are
+  `UNCALIBRATED` here, and this repo's §5 risk limits override its sizing prose.
+  `.claude/skills/uw-earnings-vol-scan` symlinks to it so sessions started from
+  this repo load it. Edit the vendored SKILL.md only to re-import upstream.

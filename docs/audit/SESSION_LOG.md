@@ -125,3 +125,48 @@ were appends). This entry was written after that merge, hence its position
 after the addendum.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-22 — uw-earnings-vol-scan vendored in as a skill
+
+**What changed:** Added `uw-earnings-vol-scan/`, holding a third-party skill
+supplied by the owner: an Unusual Whales earnings-volatility scanner that scores
+upcoming earnings names for long call calendar spreads (Volatility Vibes
+strategy) and walks the human through execution. `SKILL.md` is the supplied
+document, byte-for-byte. `uw-earnings-vol-scan/README.md` is ours and is the
+governance wrapper. `.claude/skills/uw-earnings-vol-scan` is a symlink to the
+module directory so a session started from this repo loads the skill without a
+second copy existing. Root README updated.
+
+**Verification:** The skill embeds its own scanner script and requires
+`--selftest` before any scan. The Python block was extracted from the committed
+`SKILL.md` and run: **124/124 checks passed, zero API calls** — the count the
+skill documents, so the ~1,000-line script transcribed faithfully. No live scan
+was run; every live figure cited inside the skill is the vendor's, not ours.
+
+**Decisions:**
+
+1. *Vendored verbatim, not adapted.* Same treatment as
+   `options-expert/reference/`: the body is untouched and every correction of
+   ours lives in a sibling README. The skill's constants are calibrated as a
+   set and its script is the specification for its own numbers, so a local
+   "improvement" would silently invalidate the figures it publishes.
+2. *Verdicts are `UNCALIBRATED` here (§7).* The backtest behind it (2007–2024,
+   7,313 trades) is real but external; this process has neither reproduced nor
+   graded it. That is reasoned, not proven, and gets labelled as such.
+3. *§5 overrides the skill's sizing prose.* The skill relays a ≈6%-of-bankroll
+   Kelly recommendation, which exceeds `MAX_TRADE_RISK_PCT = 0.04`. Recorded in
+   the module README along with the rest: a calendar is a debit with no resting
+   stop, so its risk is the full premium and it must also fit
+   `MAX_TRADE_PREMIUM_USD`; the skill's own 5–10% open-exposure cap is tighter
+   than `MAX_OPEN_HEAT_PCT` and the tighter number stands; an earnings night's
+   Recommended list clusters by sector, which is §5's correlation rule.
+4. *§2 unaffected.* The skill's "Executing a Recommended trade" section
+   instructs the human. Claude scans, frames and checks structure; the human
+   places every order.
+
+**DEVIATIONS:** None. Worked from this repository's own directory, so §0's
+contamination case does not apply. No credential was written, printed or
+committed — `UW_API_KEY` appears by name only, `.env` was already gitignored,
+and the staged diff was scanned before commit.
