@@ -347,3 +347,76 @@ automatically; a second session either confirms or clears them.
 **4. All UW readings recorded today remain a Friday-close snapshot.** The
 market was shut. Deviation 1 of the earlier entry still stands unresolved for
 the same reason, and now covers the UW numbers too.
+
+---
+
+## 2026-08-22 (late) — RTH probe built, pre-registered, and scheduled
+
+**Branch:** `claude/tesla-options-trading-setup-aoqwsr`
+
+### What changed
+
+The owner asked to run the RTH probe now and put it on a schedule. **It could
+not be run now: the session was Saturday 17:20 ET and regular trading hours do
+not exist until Monday.** Running `probe_tsla.sh` returned the identical
+Friday-close snapshot already recorded — which is the deviation, not a fix for
+it. Built the probe and scheduled it instead.
+
+- `tesla/tools/probe_rth.sh` — measures what a closed-market probe cannot:
+  per-feed freshness lag in seconds, the live regime, the volume floor checked
+  against the last two *completed* 5-min bars, the E5 skew series, and flow.
+  It reads the session gate first and says plainly when the market is shut.
+- `tesla/log/rth/PREREGISTRATION.md` — six falsifiable predictions (P1–P6),
+  each naming what would change the spec, written **before** the first sample
+  per `CLAUDE.md` §9.
+- `tesla/log/rth/SCHEDULE.md` — the three Routines, the DST correction due
+  2026-11-01, and the two blockers below.
+- Three Routines created, weekdays, fresh session per fire, pushing only to
+  `tesla/log/rth/`.
+
+### Decisions
+
+- **Routines, not `CronCreate`.** Session-cron jobs die with the session and
+  this container is ephemeral; a weekday schedule needs account-level Routines.
+- **Three samples, chosen for the windows that matter** rather than evenly
+  spaced: 09:47 (entry window), 13:33 (doldrums — the volume-floor test),
+  15:03 (exit liquidity). Sample C is the one nobody takes and the one a 0DTE
+  process most needs: a contract you cannot exit at 15:03 is one the broker
+  exits for you at 15:30.
+- **Predictions state their own falsifiers.** P1 predicts the 5% spread gate is
+  generous intraday and names >4% median as the falsifier; P4 predicts the
+  −0.6636 skew print was an OPEX artifact and names two distinct ways to be
+  wrong. Written so a bad design is caught rather than explained away.
+
+### DEVIATIONS
+
+**1. The requested action could not be performed and was not simulated.** "Run
+the RTH probe now" has no valid execution on a Saturday. The probe was run to
+confirm it works, its output labelled a closed-market baseline, and the schedule
+built for when RTH exists. No reading from that run was recorded as an RTH
+measurement.
+
+**2. The schedule cannot currently measure its two most important predictions.**
+`create_trigger` rejected the `connectors` parameter — "not available for this
+organization" — so the Routines fire without `mcp__*` tools. Robinhood is the
+only option-chain source (FMP serves none), so **P1 (the spread gate) and P6
+(theta burn) will record `NA_unresolved` on every firing** until the Routines
+are recreated from the claude.ai UI with the connector, or the chain is sampled
+interactively via `/tsla-scan`.
+*Resolution:* recorded in `SCHEDULE.md` with both remedies. The probe degrades
+to `NA_unresolved` rather than substituting a price from a source that does not
+have one.
+
+**3. `UNUSUAL_WHALES_API_KEY` is not in the environment configuration.** It was
+written to a gitignored `.env` in an ephemeral container. Scheduled runs start
+fresh and will not see it, so the UW half — the regime read, the P4 skew
+follow-up, flow — reports `NA_unresolved` until the variable is set in the
+environment settings alongside `FMP_API_KEY`.
+*Resolution:* `SCHEDULE.md` names the fix. This is also the channel `CLAUDE.md`
+§6 asks for, and adopting it retires the paste-into-chat habit that produced
+two credential exposures in five days.
+
+**4. The Routine crons are UTC and will be an hour wrong from 2026-11-01.**
+Set during EDT. After the switch to EST, Sample A fires pre-market and Sample C
+fires before the decision bell. The correction is written into `SCHEDULE.md`
+with the exact replacement crons rather than left to be discovered.
