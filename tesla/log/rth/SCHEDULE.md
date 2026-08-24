@@ -45,10 +45,34 @@ will not have it.** `FMP_API_KEY` *is* in the environment config, so the FMP
 half runs; the UW half will report `NA_unresolved` on every firing until this
 is fixed.
 
-**Fix:** set `UNUSUAL_WHALES_API_KEY` as an environment variable in the Claude
-Code environment settings (the same place `FMP_API_KEY` is set), not in a file.
-That is also the channel `CLAUDE.md` §6 asks for — the variable set directly,
-never the value pasted into a session.
+**This cannot be fixed from inside a session.** There is no tool that writes
+environment configuration, and `FMP_API_KEY` is not set by any file in the repo
+or by a dotfile — the platform injects it directly into the container's process
+environment. The only two in-session alternatives are both wrong: committing the
+value to `.claude/settings.json` would put a credential in git history
+permanently, and writing another container-local file recreates the same problem.
+
+**Fix — owner action, in the claude.ai web UI:**
+
+> claude.ai/code → Environments → **Default**
+> (`env_01Vboeyh6hiThjfupiAj2yWG`, `anthropic_cloud`) → environment variables
+>
+> ```
+> UNUSUAL_WHALES_API_KEY = <the rotated key>
+> ```
+
+Same place `FMP_API_KEY` already lives. This is also the channel `CLAUDE.md` §6
+asks for: the variable set directly, never the value pasted into a session.
+
+**Rotate before setting, not after.** The key in circulation was pasted into a
+session transcript on 2026-08-22 and is compromised from that moment under §6.
+Writing that same value into the environment config makes a known exposure
+durable. Generate a new key, put the new one straight into the environment
+field, and the old one dies with the rotation.
+
+**Verify after setting:** `bash tesla/tools/probe_rth.sh` — the "unusual whales"
+section reports live rows instead of the unset-key message, and the freshness
+table gains the two UW feeds.
 
 Blocked while this holds: the live regime read, the E5 skew follow-up (**P4**),
 the flow section, and the freshness measurements for the two UW feeds in **P3**.
