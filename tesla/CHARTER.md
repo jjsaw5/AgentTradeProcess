@@ -276,6 +276,9 @@ than `options-expert/` does, because:
    sessions of price data**, which makes them factual about the past and
    silent about whether trading on them works.
 
+**Graded sessions: 1** (2026-08-24, grade C). One session is a data point, not
+calibration.
+
 The path off `UNCALIBRATED` is `tesla/log/`: every card records its inputs
 **before** the outcome is known, and Robinhood `get_option_historicals` returns
 real OHLC on the contract, so a card can later be graded against the actual

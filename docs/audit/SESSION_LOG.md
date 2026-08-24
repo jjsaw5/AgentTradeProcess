@@ -569,3 +569,87 @@ recreating all three.
 same conversation on every firing, three times a weekday.
 *Resolution:* recorded, with the note that `tesla/log/rth/` is the durable
 record and the host can be replaced whenever it gets unwieldy.
+
+---
+
+## 2026-08-24 (session close) — first live TSLA session; two spec bugs found
+
+**Branch:** `claude/tesla-options-trading-setup-aoqwsr`
+
+### What changed
+
+The `tesla/` module ran live for the first time. Three scheduled RTH samples,
+two `/tsla-scan` runs, one `/tsla-watch`, one retroactive card, one `/tsla-close`.
+
+- `tesla/log/2026-08-24.md` — two scan records, the retroactive card, the graded
+  OUTCOME block.
+- `tesla/log/2026-08-24-POSITIONING.md` — pre-open positioning, written before
+  the session traded.
+- `tesla/log/rth/2026-08-24.md` — Sample A, from the scheduled host.
+- `playbook/PLAYBOOK.md` §6 — journal row, grade **C**.
+- `tesla/CHARTER.md` §6 — graded-session count now 1; §6a added (below).
+
+### Spec bugs found and fixed
+
+1. **`gex-levels` takes an undocumented `source` parameter, and its default
+   changed between 2026-08-22 and 2026-08-24.** `oi` and `vol` gave *opposite*
+   regime reads on the same timestamp (flip 342.30 vs 364.14 at spot 362.86).
+   A spec calling it bare had a regime gate that could invert with no edit.
+   Fixed: both sources pinned and reported, `source=both` documented as the
+   §3d empty-payload trap.
+2. **The `historical-risk-reversal-skew` current-session row is live.** The
+   "60× outlier" recorded on 2026-08-22 never existed — the 2026-08-24 row read
+   −0.01643, −0.00722 and −0.03778 within seventy minutes, and the 2026-08-21
+   value now settles at −0.01008. E5 now reads completed prior sessions only.
+   **This was my error, caught by the scheduled Sample A, not by me.**
+
+### Pre-registration outcomes
+
+**P5 (regime drift < $5) is FALSIFIED.** The `oi` flip ranged 351.97–357.94
+across the session, $6.42. P1 supported (median near-money spread 1.908% vs a 5%
+gate). P3 confirmed. P2 and P6 inconclusive — the tape never went quiet enough
+to arm the volume floor, and TSLA moved 3.14% when P6 required ±0.5%.
+
+### Decisions
+
+- **`CHARTER.md` §6a — price and flow are reported together.** Ratified by the
+  owner. Encodes `playbook` §0 into the output format so a divergence cannot be
+  hidden by reporting one side. Today was the case in point: flow was net
+  bearish all session while the morning's tradeable move was a bounce.
+- **Graded C on a green day.** +$20 realized against four rule breaks. The
+  playbook's standard is explicit that this is the correct grade.
+- **The stop-buffer rule is left unresolved rather than patched mid-session.**
+  §1d's "3 ticks" is $0.03 on a sub-$3 contract against the playbook's original
+  15 cents; today gave one data point each way. It needs a rule that scales with
+  contract price, decided cold.
+
+### DEVIATIONS
+
+**1. A card was written retroactively, after the position was open.** `/tsla-watch`
+§0 permits this only if marked, and it is marked in the log and excluded from
+being graded as a pre-entry invalidation. It still means the session's only card
+had no trigger and no invalidation at the moment of entry, which is the thing
+`playbook` §0 exists to prevent.
+
+**2. `/tsla-scan` never functioned as a pre-trade gate.** Both runs were killed
+at Stage 0 because a position was already open — the second by 36 seconds. The
+command can only report when it runs after entry. Recorded as a process fact,
+not a judgement on any trade.
+
+**3. Three ratified caps were breached in the morning and this process only
+reported them.** Premium 2.04× cap, risk 1.30× cap, 44.1% of equity, no resting
+stop for 34 minutes. Read-only is the correct posture and the caps are the
+owner's to keep — but a limit that is only ever observed after the fact is doing
+less work than the ratification implied.
+
+**4. Seven positions were opened after the 15:00 decision bell.** The spec calls
+15:00 a decision point, not an entry window. Reported at the close, not while it
+was happening — `/tsla-watch` was not running through the afternoon.
+
+**5. The end-of-day move has NO CONFIRMED DRIVER.** Ruled out market-wide
+(TSLA −1.36% vs SPY −0.14%, QQQ −0.26% in the window) and sector (EV peers
+−0.67%). No TSLA headline lands between 14:30 and 15:10 ET in either UW or FMP.
+Dark pool is `NA_unresolved` — the 500-row response covered only 19:12–19:29
+UTC and does not reach the window. A mechanism is documented (negative gamma
+plus three net_delta spikes of −165k/−166k/−173k) but a mechanism is not a
+cause, and no cause is claimed.
