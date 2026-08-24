@@ -249,11 +249,18 @@ confident wrong answer if ignored:
    −0.010/−0.030 band. Until a second session confirms it, that is an anomaly,
    not a reading. `DATA_LAYER-TSLA.md` §7f has the standing rule.
 
-**The key is a compromised credential.** It was pasted into a session transcript
-on 2026-08-22, which `CLAUDE.md` §6 defines as compromised regardless of who saw
-it. It lives in the gitignored `.env` and reaches code through the environment;
-`.env.example` documents the variable names only. It is the second such exposure
-in this repository and both are recorded in `CLAUDE.md` §6.
+**The key reaches code through the environment config** (`Default`
+environment), set by the owner on 2026-08-24 and verified live from a fresh
+container the same day. `.env.example` documents the variable names only; a
+gitignored `.env` is a local fallback that fills unset variables and **never
+overrides** the environment — inverting that would let a stale local value mask
+a rotated one and report a false pass.
+
+**The credential class remains exposed.** A UW key was pasted into a session
+transcript on 2026-08-22, which `CLAUDE.md` §6 defines as compromised regardless
+of who saw it, and whether the value now in the environment is the rotated key
+is not observable from this repository. It is the second such exposure here and
+both are recorded in `CLAUDE.md` §6.
 
 ## 6. Calibration status
 

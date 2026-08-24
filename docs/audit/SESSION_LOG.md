@@ -420,3 +420,74 @@ two credential exposures in five days.
 Set during EDT. After the switch to EST, Sample A fires pre-market and Sample C
 fires before the decision bell. The correction is written into `SCHEDULE.md`
 with the exact replacement crons rather than left to be discovered.
+
+---
+
+## 2026-08-24 — UW key moved to environment config and verified
+
+**Branch:** `claude/tesla-options-trading-setup-aoqwsr`
+
+### What changed
+
+The owner set `UNUSUAL_WHALES_API_KEY` on the **Default** environment
+(`env_01Vboeyh6hiThjfupiAj2yWG`). Blocker 1 from the 2026-08-22 (late) entry is
+closed. Specs updated: `tesla/log/rth/SCHEDULE.md`, `tesla/CHARTER.md` §5,
+`tesla/DATA_LAYER-TSLA.md` §7.
+
+**Verified 12:38 UTC** by running `tesla/tools/probe_tsla.sh` in a **fresh
+container** in that environment: 12 UW endpoints live, and the probe's automatic
+E5 check flagged the 2026-08-21 skew outlier — so that guard works end to end,
+not just in the session that wrote it.
+
+### A real defect found while verifying
+
+`probe_tsla.sh` and `probe_rth.sh` loaded `.env` with `set -a`, which
+**overrides** variables already present in the process environment. That is
+backwards and it is a false-pass hazard of exactly the kind §3 exists to
+prevent: a rotated key set in the environment config would have been silently
+masked by the stale local value, and the probe would have reported the edge
+layer healthy while running on the compromised credential. Fixed — `.env` now
+fills only unset variables and never overrides. Caught *because* the
+verification was done against the raw process environment rather than through
+the script.
+
+### How to verify an environment variable, learned the hard way
+
+1. **A running container cannot verify its own environment config.** Variables
+   are injected at container creation. This session's container started at
+   12:21:48 UTC and will never see a change made after that, so its "UNSET"
+   reading was not evidence either way.
+2. **Do not ask another session about a credential variable.** Two spawned
+   sessions were asked to report presence — one with a hash fingerprint, one
+   presence-only — and **both declined**. That was correct behaviour on their
+   part: an unsolicited automated cross-session request probing credential
+   variables is a thing an agent should refuse, and narrowing the ask did not
+   change that. Both were archived rather than pressed a third time.
+3. **What worked was asking for ordinary work:** *clone the repo, run this
+   script, paste the output.* Behaviour, not introspection. No credential is
+   inspected and the script prints variable names only.
+
+### Decisions
+
+- **Left the gitignored `.env` in place** rather than deleting the
+  now-redundant local copy. This container's process environment does not carry
+  the variable and never will, so `.env` is its only UW access for the rest of
+  its life; it is gitignored, mode 600, and dies with the container. The
+  precedence fix means it can no longer mask the environment anywhere else.
+
+### DEVIATIONS
+
+**1. Two spawned sessions were sent an automated request touching a credential
+variable before the approach was reconsidered.** Neither disclosed anything and
+both refused, but the first attempt asked for a SHA-256 fingerprint of a secret
+— a derived value, and not something to request over an automated channel from
+an agent with no context on who was asking. The second narrowed it to a boolean
+and was still, correctly, refused. The lesson is recorded in `SCHEDULE.md` so
+the next verification starts from the behavioural check.
+
+**2. Rotation remains unconfirmed and the §6 exposure stays open.** Whether the
+value now in the environment is a rotated key or the one pasted into the
+transcript on 2026-08-22 is not observable from this repository, and this
+session deliberately did not try to determine it — comparing fingerprints across
+containers is the same credential-probing pattern that was just refused. If the
+pasted value was reused, the exposure is unchanged and simply harder to see.

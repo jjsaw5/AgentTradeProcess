@@ -271,8 +271,11 @@ Base `https://api.unusualwhales.com`. **Both** headers required on every call:
 `Authorization: Bearer $UNUSUAL_WHALES_API_KEY` and `UW-CLIENT-API-ID: 100001`.
 All GET. No `apiKey=` query parameter exists.
 
-The key reaches code through the environment only, from the gitignored `.env`
-(`CLAUDE.md` §6). `.env.example` documents the variable names.
+The key reaches code through the **environment configuration** (`Default`
+environment), set 2026-08-24 and verified from a fresh container the same day —
+12 endpoints live. `.env.example` documents variable names only; a gitignored
+`.env` is a fallback for unset variables and never overrides the environment
+(`CLAUDE.md` §6).
 
 **Read `options-expert/reference/README.md` before trusting the vendored
 `uw-api-skill.md`.** Its "if a URL is not on this list it does not exist" line

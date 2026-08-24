@@ -37,7 +37,7 @@ the window it exists to measure. **On 2026-11-01, add one hour to each cron:**
 
 ---
 
-## Blocker 1 — the UW key is not in the environment
+## ~~Blocker 1 — the UW key is not in the environment~~ — RESOLVED 2026-08-24
 
 `UNUSUAL_WHALES_API_KEY` currently lives only in the gitignored `.env` of one
 ephemeral container. **A scheduled session starts from a fresh container and
@@ -73,6 +73,30 @@ field, and the old one dies with the rotation.
 **Verify after setting:** `bash tesla/tools/probe_rth.sh` — the "unusual whales"
 section reports live rows instead of the unset-key message, and the freshness
 table gains the two UW feeds.
+
+### Resolved — verified 2026-08-24 12:38 UTC
+
+The owner set `UNUSUAL_WHALES_API_KEY` on the **Default** environment. Verified
+by running `tesla/tools/probe_tsla.sh` in a **fresh container** in that
+environment: **12 UW endpoints returned live**, and the probe's automatic E5
+check flagged the 2026-08-21 skew outlier, so that guard works end to end.
+
+Two things this verification had to work around, both worth remembering:
+
+1. **A running container cannot verify its own environment config.** Variables
+   are injected at container creation, so a container started before the change
+   never sees it. The check must run in a container created afterwards.
+2. **Do not verify by asking another session about a credential variable.** Two
+   attempts to have a spawned session report presence were refused — correctly:
+   an unsolicited cross-session request probing credential variables is exactly
+   what an agent should decline, and presence-only framing did not help. The
+   check that worked asked for ordinary repo work instead: *run this script and
+   paste its output.* Behaviour, not introspection.
+
+**Rotation is still unconfirmed.** Whether the value now in the environment is
+the rotated key or the one pasted into the transcript on 2026-08-22 is not
+something this repository can observe. If it is the pasted value, the exposure
+in `CLAUDE.md` §6 remains open.
 
 Blocked while this holds: the live regime read, the E5 skew follow-up (**P4**),
 the flow section, and the freshness measurements for the two UW feeds in **P3**.
