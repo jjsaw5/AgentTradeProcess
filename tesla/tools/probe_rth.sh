@@ -16,7 +16,22 @@
 # runs from the scheduled Claude session, not from bash.
 
 set -uo pipefail
-if [ -f "$(dirname "$0")/../../.env" ]; then set -a; . "$(dirname "$0")/../../.env"; set +a; fi
+# Secrets reach this script through the environment (CLAUDE.md §6).
+# A gitignored .env is a LOCAL FALLBACK ONLY: it fills variables that are not
+# already set, and must never override the environment. Overriding would mask a
+# rotated key set in the environment config with a stale local value — and the
+# probe would report a false pass. Never echo a value.
+_envfile="$(dirname "$0")/../../.env"
+if [ -f "$_envfile" ]; then
+  while IFS= read -r _line; do
+    case "$_line" in ''|\#*) continue;; esac
+    _k=${_line%%=*}
+    [ "$_k" = "$_line" ] && continue
+    if [ -z "$(eval "printf '%s' \"\${$_k:-}\"")" ]; then
+      export "$_k=${_line#*=}"
+    fi
+  done < "$_envfile"
+fi
 
 T=TSLA
 FMP=https://financialmodelingprep.com/stable
