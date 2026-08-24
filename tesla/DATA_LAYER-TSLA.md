@@ -313,17 +313,49 @@ The authority is `GET /api/openapi`.
 All readings below are the **2026-08-21 close** (Saturday probe). Re-pull
 pre-open; a regime read is never carried overnight.
 
-### 7a. Regime — the first TSLA GEX read in this repository
+### 7a. Regime — and the `source` parameter that decides it
 
-`/stock/TSLA/gex-levels`, spot 362.86:
+**CORRECTION, 2026-08-24.** The reading first recorded here on 2026-08-22
+(`call_wall 400, put_wall 350, gamma_magnet 350, gamma_flip 351.08`, read as
+positive gamma / GLUE) is **superseded and must not be cited.** The endpoint
+changed underneath it.
 
-```
-call_wall     400        put_wall      350
-gamma_magnet  350        gamma_flip    351.08
-```
+`/stock/TSLA/gex-levels` takes an **undocumented `source` parameter** and the
+response shape and default both changed between 2026-08-22 and 2026-08-24. The
+2026-08-22 response carried only four fields and no `source`; today's carries
+`date`, `time`, `source` and `nearby_flips`, and defaults to `source=vol`.
 
-Spot sat **above `gamma_flip`** → positive gamma, **GLUE**, as of Friday's
-close. The magnet (350) is $12.86 *below* spot and coincides with the put wall.
+Both sources, same payload timestamp `2026-08-21T19:59:44Z`, spot 362.86:
+
+| `source` | gamma_flip | gamma_magnet | call_wall | put_wall | regime at spot |
+|---|---|---|---|---|---|
+| `oi` | **342.30** | 362.5 | 365.0 | 362.5 | spot **above** flip → positive, GLUE |
+| `vol` (default) | **364.14** | 362.5 | 377.5 | 362.5 | spot **below** flip → negative, GASOLINE |
+| `both` | — | — | — | — | **empty payload** — the §3d trap |
+
+**The two sources give opposite regime reads on the same day.** This is not
+noise: five consecutive bare calls returned identical values, so the endpoint is
+deterministic — the divergence is real and structural.
+
+Which to use: `oi` is the standing book as it settled overnight; `vol` is what
+actually traded. On an expiration day the difference is the whole story, and
+TSLA has three expiration days a week. **A card must name which source it used**
+and report the other when they disagree.
+
+`vol` also returns `nearby_flips` — on 2026-08-21: `364.14, 360.58, 357.99,
+372.20, 373.09`. Four of those five sit within $6 of spot, which says the flip
+zone is a band rather than a line and that the regime here is genuinely
+unstable, not merely ambiguous.
+
+**Standing rule: never call `gex-levels` bare.** Pin `source` explicitly. A
+default that moves is a regime read that can invert without anyone touching the
+spec. `tesla/tools/probe_rth.sh` now pulls both and prints them side by side.
+
+**Independent cross-check.** Summing `greek-exposure/strike` (which is OI-based)
+over ±40 of spot gives net **+452,932** — positive — turning negative below 340
+(340: −32,823; 330: −24,974). That agrees with `source=oi`'s flip at 342.30 and
+is a genuine consistency check on the vendor's OI computation, not a
+confirmation of the `vol` read.
 
 **Cross-check disagrees, and that is reportable rather than resolvable.**
 `max-pain` for the near expiries reads **337.5–340**, not 350:

@@ -58,9 +58,26 @@ Kill the run outright and say why if any of these fail:
 
 ## 2. Stage 1 — regime. This runs first and it can veto everything.
 
-**Primary source: `/api/stock/TSLA/gex-levels`.** One call, vendor-computed
-across the whole chain: `call_wall`, `put_wall`, `gamma_magnet`, `gamma_flip`.
-Spot above `gamma_flip` = positive gamma; below = negative.
+**Primary source: `/api/stock/TSLA/gex-levels` — and you must pin `source`.**
+The endpoint takes an undocumented `source` parameter (`oi` | `vol`), it
+defaults to `vol`, and **the default changed on 2026-08-24.** The two sources
+gave *opposite* regime reads that day: `oi` flip 342.30 (spot above → GLUE) vs
+`vol` flip 364.14 (spot below → GASOLINE), same timestamp, spot 362.86.
+
+**Pull both, every run. Never call it bare.** `source=both` returns an empty
+payload, which is the §3d trap, not a combined answer.
+
+- `oi` = the standing book as it settled overnight.
+- `vol` = what actually traded today. On an expiration day this is the live one,
+  and TSLA has three expiration days a week.
+
+The card names **which source it used** and reports the other when they
+disagree. When the two straddle spot, the regime is `NA_unresolved` for
+gating purposes — say so and take the conservative branch (demand full retest
+confirmation) rather than picking the source that suits the thesis.
+
+`vol` also returns `nearby_flips`. When several cluster within a few dollars of
+spot, the flip is a band and not a line — smallest size or no trade.
 
 **Do not derive the regime by summing strikes.** That produced a wrong answer on
 SPY on 2026-08-18 (`options-expert/DATA_LAYER.md` §3e). If you pull

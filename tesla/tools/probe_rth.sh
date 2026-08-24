@@ -105,16 +105,27 @@ print("gex-levels carries NO timestamp — its freshness cannot be read off the 
 PY
 endblk
 
-hr "live regime"
-uw "stock/$T/gex-levels" | python3 -c '
+hr "live regime — BOTH sources, pinned explicitly"
+# gex-levels takes an undocumented `source` param (oi | vol). The DEFAULT CHANGED
+# between 2026-08-22 and 2026-08-24 and the two sources can give OPPOSITE regime
+# reads (2026-08-21: oi flip 342.30 vs vol flip 364.14, spot 362.86). Never call
+# it bare. source=both returns an empty payload — the §3d trap.
+for _src in oi vol; do
+  uw "stock/$T/gex-levels?source=$_src" | python3 -c '
 import json,sys
 d=json.load(sys.stdin).get("data",{})
-print("call_wall %s  put_wall %s  gamma_magnet %s  gamma_flip %s" % (
-  d.get("call_wall"),d.get("put_wall"),d.get("gamma_magnet"),d.get("gamma_flip")))'
+if not d:
+    print("  '"$_src"': data:[] — NOT a validated negative (DATA_LAYER §3d)"); raise SystemExit
+print("  %-3s flip %-8s magnet %-8s call_wall %-8s put_wall %-8s (as of %s)" % (
+  d.get("source") or "'"$_src"'", d.get("gamma_flip"), d.get("gamma_magnet"),
+  d.get("call_wall"), d.get("put_wall"), d.get("time")))'
+done
+echo "  -> if the two sources straddle spot they DISAGREE on the regime. Report both."
 curl -sS --max-time 25 "$FMP/quote-short?symbol=$T&apikey=$FMP_API_KEY" \
  | python3 -c '
 import json,sys;d=json.load(sys.stdin)[0];print("spot %s  vol %s" % (d["price"],format(d["volume"],",")))'
 echo "-> spot above gamma_flip = positive gamma (GLUE); below = negative (GASOLINE)"
+echo "-> oi = the standing book (yesterday). vol = today's trading. On an expiry day vol is the live one; state WHICH you used."
 uw "stock/$T/max-pain" | python3 -c '
 import json,sys
 for r in json.load(sys.stdin).get("data",[])[:3]:
