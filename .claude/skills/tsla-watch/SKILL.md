@@ -133,6 +133,13 @@ risk toolkit.
 
 ## 6. Cycle output
 
+**Answering "what is TSLA doing" follows `tesla/CHARTER.md` §6a** — price and
+flow paired in the same response, price leading, with an explicit AGREE/DIVERGE
+line. That applies to ad-hoc questions as well as to monitor cycles.
+
+The monitor's own per-cycle block:
+
+
 Keep it short enough to read at a glance:
 
 ```

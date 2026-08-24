@@ -288,6 +288,47 @@ reconstructed afterwards.
 
 ---
 
+## 6a. Reporting convention — price and flow are always read together
+
+**Ratified by the account owner 2026-08-24.** Whenever the question is "what is
+TSLA doing", the answer pairs **price action and options flow in the same
+response**. Never one without the other.
+
+The order is not cosmetic — it encodes `playbook/PLAYBOOK.md` §0:
+
+> Price action overrules flow when they disagree. Flow (UW) is a
+> confirmation/veto layer, never the trigger.
+
+So **price leads and flow follows**, and the most useful line in the answer is
+whether they **agree or diverge**. A divergence is information; suppressing it by
+reporting only one side is what the rule exists to prevent.
+
+Standing format:
+
+```
+TSLA <HH:MM ET>   spot xxx.xx (±x.xx%)   <position in the session range>
+PRICE   structure, the level being tested, last completed 5-min close, volume
+FLOW    call/put volume + aggressor split, net premium, per-ticker and tide
+READ    AGREE <direction>  |  DIVERGE — price says X, flow says Y; price leads
+LEVELS  nearest above / nearest below, and what each one is
+```
+
+Rules that bind the FLOW line:
+
+- Report the **aggressor split**, never raw volume alone. Call volume exceeding
+  put volume is not bullish if the calls are trading on the bid.
+- Report **net premium** alongside volume. They routinely disagree, and when
+  they do the premium is the better read of intent.
+- Both tide legs negative is **premium liquidation, not direction**.
+- Say when a relative-volume figure is not yet meaningful because too little of
+  the session has elapsed.
+
+Rules that bind the READ line:
+
+- Never present flow as a directional call. It confirms, vetoes, or diverges.
+- On a divergence, state plainly that price governs and flow is a reason to
+  size down or tighten — not a reason to trade the other way.
+
 ## 7. Session shape
 
 | Command | When | What it does |
