@@ -39,6 +39,10 @@ uw screener         "/api/screener/option-contracts?limit=5"
 uw flow_recent      "/api/stock/$T/flow-recent"
 uw darkpool_ticker  "/api/darkpool/$T"
 uw darkpool_recent  "/api/darkpool/recent?limit=5"
+# Paging check for E2b: same route, explicit limit. Compare the two byte
+# counts -- if they match, `limit` is being ignored on the ticker route and the
+# window is whatever the default cap is. Record the answer in DATA_LAYER.md.
+uw darkpool_tkr_lim "/api/darkpool/$T?limit=200"
 uw market_tide      "/api/market/market-tide"
 uw market_tide_5m   "/api/market/market-tide?interval_5m=true"
 uw net_prem_ticks   "/api/stock/$T/net-prem-ticks"

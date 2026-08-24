@@ -333,6 +333,38 @@ receive loop must do nothing but enqueue, and any persistence must be batched.
 exponential-backoff reconnect, and a heartbeat printing queue depth and drops so
 "the server dropped it" stays distinguishable from "we fell behind."
 
+**`off_lit_trades` is wired, behind a flag.** `tools/uw_stream.py --dark` joins
+it and aggregates per ticker for `SKILL.md` E2b: clusters only, filtered to the
+watch list, with the above/below-mid split inferred from the NBBO in the payload
+and labelled as inference on every line. It is deliberately not in the default
+channel list — it is the whole off-exchange tape, and joining it market-wide is
+a good way to fall behind the socket and take server-side drops on `market_tide`
+and `gex`, which are the channels that actually decide things.
+
+Two things about it are **UNVERIFIED**, and the code says so rather than
+pretending otherwise:
+
+- **The payload schema.** The REST route's fields are known; the socket
+  payload's are assumed to resemble them and have never been seen. The parser
+  tries a short list of candidate keys, counts what it cannot parse, and dumps
+  the first payload's keys to the console on connect. **Record those keys here
+  when someone runs it live**, and pin the parser to them.
+- **Whether the channel takes a `:TICKER` suffix.** `gex` and `net_flow` do;
+  this one is documented bare. `--dark-ticker-channels` joins the suffixed form
+  for whoever wants to find out — watch for the join acknowledgement.
+
+`tools/test_uw_stream.py` covers the aggregation offline (31 checks, no key, no
+network). It proves the parser handles the shape we guessed, not that the guess
+is right.
+
+**The REST payload schema is confirmed** (2026-08-24): `ticker`, `price`,
+`size`, `premium`, `executed_at`, `nbbo_bid`, `nbbo_ask`, `nbbo_bid_quantity`,
+`nbbo_ask_quantity`, `market_center`, `volume`, `canceled`, `sale_cond_codes`,
+`ext_hour_sold_codes`, `trade_code`, `trade_settlement`, `trf_executed_at`,
+`tracking_id`. Every one of `uw_stream.py`'s `_dp_fields` candidate keys hit on
+its first choice. That is **evidence for the socket parser, not proof** — the
+`off_lit_trades` payload itself has still never been seen.
+
 Historic tape: `/api/option-trades/full-tape/{date}`.
 
 ### 3e. GEX — use the vendor's levels, do not sum strikes yourself
@@ -440,6 +472,42 @@ with `price`, `size`, `premium`, `market_center`, `executed_at`, and the NBBO on
 both sides at execution — so a print can be classified above/below/at mid rather
 than just logged.
 
+**That classification is ours, not the vendor's.** An off-exchange print reports
+price and size; the tape does not mark which side initiated it. Above/below-mid
+is a heuristic we compute from the NBBO snapshot, and it is weaker evidence than
+the *options* aggressor-side fields, which UW derives from the trade itself. Do
+not let the two travel in one column — that is the greek-provenance rule applied
+to flow.
+
+**Paging on the ticker endpoint: MEASURED 2026-08-24.** Probed live against
+TSLA; full transcript in `log/2026-08-24-DARKPOOL-PAGING.md`.
+
+- `limit` is honoured and **capped at 500**. Above that the request is rejected
+  with a `422` naming the cap, not silently clamped.
+- **`page` is accepted and ignored.** `page=1` returns the identical window.
+- **`date` is accepted and ignored.** It cannot be used to reach a prior day or
+  to walk back through today.
+
+So the route returns **the most recent ≤500 prints and nothing else**, and the
+window length is a property of how fast the name trades rather than of the
+request. On TSLA those 500 rows spanned **27 minutes**. The response never
+states its own span — you compute it from `executed_at` or you do not know it.
+
+Note what 2 and 3 are: the §3d silent-failure pattern in a new costume. Not an
+empty array, but a plausible, full-looking response to a parameter that did
+nothing. **Exactly 500 rows means the window was cut by the endpoint, not by the
+market.**
+
+This is a hard constraint on any consumer: `/api/darkpool/{ticker}` cannot
+describe a session on a liquid name. `SKILL.md` E2b was written assuming it
+could, which cost that layer its ADV denominator — see the log entry.
+
+**Consumers.** `daily-market-brief/SKILL.md` §8A uses `/recent` market-wide to
+nominate candidates. `options-expert/SKILL.md` E2b uses `/{ticker}` to
+corroborate a name that already passed an edge test — it can never nominate one,
+and it requires the 30-day average share volume from `/api/stock/{t}/ohlc/1d` as
+a size denominator.
+
 **News.** `/api/news/headlines` carries `headline`, `tickers`, `sentiment`,
 `is_major`, `source`, and a `meta` block with current and prior close per ticker.
 Lower latency and more structure than FMP's news, and `is_major` is a usable
@@ -496,7 +564,8 @@ of the column marked authoritative.
 | Need | Source | Note |
 |---|---|---|
 | Option chain, strikes, contract greeks/IV/OI | **Robinhood** | tradable marks + the account's real fill context |
-| Signed flow, sweeps, dark pool, tide | **UW** | nothing else has aggressor side |
+| Signed flow, sweeps, tide | **UW** | nothing else has aggressor side |
+| Off-exchange block prints | **UW** `darkpool/{t}` | price, size, NBBO at execution — but **no aggressor side**; above/below-mid is our inference |
 | Dealer gamma/vanna/charm by strike | **UW** `spot-exposures/strike` | live; `_vol` split solves T-1 |
 | IV rank, IV percentile, implied move by DTE | **UW** | `iv-rank` + `interpolated-iv` |
 | Intraday bars, VWAP inputs, intraday technicals | **FMP** | UW has no intraday; RH bars are secondary |

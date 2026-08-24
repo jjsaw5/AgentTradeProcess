@@ -158,6 +158,11 @@ intraday. Re-pull anything you are about to trade on.
    - UW `/api/screener/option-contracts` filtered to the name, or
      `/api/option-trades` for the raw tape.
    - FMP `historical-chart/5min` — the decision chart; also the volume floor.
+   - UW `/api/darkpool/{t}` — off-exchange block prints, for **E2b only**. Pull
+     this *after* a name has passed an edge test, never before: it corroborates,
+     it never nominates, so a call spent on a candidate that dies at Stage 3 is
+     wasted quota. Requires `/api/stock/{t}/ohlc/1d` alongside it for the
+     30-day average-volume denominator — the print size means nothing without it.
 3. **Contract selection** (only for survivors)
    - Robinhood `get_option_chains` → crafted-cursor `get_option_instruments`
      (`base64("p=<strike>")`, see `DATA_LAYER.md` §2a) → `get_option_quotes`.
@@ -222,6 +227,10 @@ independently. Do not filter yet. Write them down so the kill count is visible.
 **Every candidate must pass at least one named test below, and the card must
 name which.** "It looks bullish" is not an edge. If you cannot name the test,
 the candidate dies here — and most do.
+
+**E2b does not count.** It is a corroboration layer, not a test: it runs only
+after something else has already passed, and it can never be the named test that
+keeps a candidate alive. E1b likewise decides *which* instrument, not *whether*.
 
 #### E1 — Vol mispricing (the primary test)
 
@@ -329,6 +338,115 @@ prints deserve extra weight; retail does not trade on the floor.
 **Flow is a confirmation and veto layer, never a trigger.** The playbook proved
 this on 2026-08-13: tide at day highs while SPY broke down. Price action
 overrules flow when they disagree.
+
+#### E2b — Off-exchange print corroboration (never a trigger, never a nomination)
+
+**This layer cannot create a trade.** It attaches to a candidate that has
+already passed E1, E1b, E2, E3, E4 or E5, and at most it moves conviction one
+notch. A card whose only support is dark pool prints has no named edge test, and
+Stage 3's rule kills it. Dark pool sits one rung *below* options flow, and the
+playbook already ranks options flow below price action — so this is the weakest
+evidence in the process, and it is wired in accordingly.
+
+**Source:** UW `/api/darkpool/{t}`, per-ticker. `/api/darkpool/recent` is a
+different job: that is the brief's market-wide discovery feed (§8A), which
+*nominates* names into the candidate pool. This one only speaks about a name
+already in it.
+
+**What this endpoint has that a plain block feed does not:** the NBBO on both
+sides at execution, so a print can be placed against the spread that existed
+when it printed rather than against a later quote.
+
+**Compute all three, or do not cite the layer at all:**
+
+1. **Mid-relative classification.** Midpoint = (NBBO bid + NBBO ask) / 2 *at
+   execution*. Classify each print above / at / below mid and report the split
+   as counts: "14 prints — 9 above mid, 2 at, 3 below."
+2. **Size against a RATE-MATCHED denominator.** Aggregate premium alone is
+   meaningless: $5M is noise in AAPL and control in a $300M name. But the
+   obvious denominator is wrong here, and the measurement below is why.
+
+   The endpoint returns only the most recent **≤500 prints, with no paging**
+   (measured 2026-08-24 — see `log/2026-08-24-DARKPOOL-PAGING.md`). On a liquid
+   name that is *minutes*, not a session: TSLA's 500 rows spanned **27
+   minutes**. Dividing a 27-minute numerator by a one-day ADV denominator is
+   exactly the apples-to-oranges ratio this rule exists to prevent — it read
+   0.82% and meant nothing.
+
+   So match the rate to the window:
+
+   ```
+   window_min = span of executed_at across the returned rows
+   normal_rate = ADV30 / 390                     # shares per regular-session minute
+   off_lit_rate = dark_shares / (normal_rate * window_min)
+   ```
+
+   `ADV30` is 30-day average share volume from `/api/stock/{t}/ohlc/1d`. Report
+   `off_lit_rate` as a percent and **name it precisely**: off-exchange prints in
+   this window as a fraction of the name's *normal total* volume over an equal
+   span. It is not dark-versus-dark — the denominator includes lit volume, and
+   UW's feed may not be every off-exchange print.
+
+   **Report the number, do not threshold it.** No baseline exists for what is
+   normal for a given name, so a single reading cannot be called high or low.
+   TSLA on 2026-08-24 read **11.7%**; that is one observation, not a reference
+   level. Building that baseline is future work, and until it exists this figure
+   is context on the card, never a pass/fail.
+3. **Repetition, span, and saturation.** The brief's rule is *repeated* prints
+   in one name, not one large one. Count distinct prints and span them across
+   `executed_at`.
+
+   **Check the row count against the cap.** Exactly 500 rows means the window
+   was cut by the endpoint, not by the market — there were more prints and you
+   cannot see them. Fewer than 500 means you have everything the route holds,
+   which is still not necessarily a session. Either way the card states the
+   window in wall-clock terms ("27 min to 12:34 ET"), never "today's dark
+   pool". This endpoint cannot describe a session on a liquid name, and asking
+   it to is how a truncated window becomes a confident sentence.
+
+**Reading it:**
+
+| Pattern | What it corroborates | What it does NOT mean |
+|---|---|---|
+| Repeated above-mid prints, long thesis, underlying flat on the day | someone taking size while price has not moved — the E2 story showing up in the shares | not "institutions are bullish"; intent is not observable here |
+| Repeated below-mid prints against a long thesis | conviction down one notch, stated on the card | not a kill, and not a short signal |
+| One large print, no repetition | nothing. Log it, cite nothing | a lone block is as likely to be a hedge leg, an ETF create/redeem, an index rebalance, or a portfolio trade |
+| Prints straddling mid with no skew | `NA_no_data` for this layer | not "no institutional interest" |
+
+**The classification is an inference, not a signed field, and that admission
+ships on the card.** An off-exchange print reports price and size; the tape does
+not mark which side initiated it. Placing it against the NBBO mid is a
+heuristic, and it is materially weaker than UW's *options* aggressor-side data,
+which is derived from the trade itself. Never write "institutional buying" on a
+card. Write "9 of 14 prints above mid", which is what was actually measured.
+
+**Timestamp discipline (§2).** Off-exchange prints reach the tape after
+execution, so a print is evidence about a past minute, not this one. State the
+age of the newest print cited. Never present dark pool as live confirmation that
+a trigger is firing right now.
+
+**Paging: measured 2026-08-24, and the answer constrains this layer.** `limit`
+is honoured up to 500 and rejected above it (`422`); `page` and `date` are both
+accepted and **silently ignored** — same rows either way. The route returns the
+most recent ≤500 prints and nothing else, so there is no way to walk back
+through a session with it. Full detail and the probe transcript are in
+`log/2026-08-24-DARKPOOL-PAGING.md`.
+
+This is why E2b is scoped the way it is. It was written expecting a session's
+worth of prints; it gets a recent window, and on the most liquid names that
+window is under half an hour. A layer that can only see the last N minutes is
+a corroboration layer whether or not anyone intended it to be — which is what
+it already was, so the remit does not change. What changes is that the card
+must say which minutes it saw.
+
+**Empty is not zero.** No prints returned is `NA_unresolved` until a re-request
+with known-good parameters confirms it. "No dark pool interest" is a claim this
+layer is not entitled to make.
+
+**Pre-registered expectation (2026-08-22, before any live run — `CLAUDE.md` §9).**
+This layer is expected to change conviction on a minority of cards and to change
+the *decision* on none. If the log ever shows a card whose entry turned on E2b,
+the layer exceeded its remit; the fix is this section, not that card.
 
 #### E3 — Dealer mechanics
 
@@ -466,7 +584,14 @@ For 0DTE: the real bell is **3:30 PM ET**, not 4:00. Robinhood force-closes at
 **Once a card is live, run the monitor:** `tools/uw_stream.py --tickers SPY,QQQ`
 streams the tide, per-ticker GEX and net flow, news (including Truth Social
 posts) and trading halts, and fires the playbook §4 tripwires on live data
-instead of 5-minute polls. Halts are always surfaced — a halt on an open
+instead of 5-minute polls.
+
+Add `--dark` to also stream off-exchange prints for the watch list — the live
+form of E2b, emitting on clusters rather than on prints. It stays opt-in
+because it is the whole tape and can starve the channels that decide things.
+**Its output is subject to every E2b rule**: the mid split is inference, a lone
+block means nothing, and the stream has no ADV denominator, so a cluster line is
+a prompt to run E2b properly on the REST route, not a substitute for it. Halts are always surfaced — a halt on an open
 position is not a low-priority event.
 
 ---
@@ -511,6 +636,12 @@ SIZE          n contract(s) = $xxx premium (cap $400) · risk $xx (x.x% of equit
               stop RESTING at $x.xx — required to claim the premium allowance
 EDGE TEST     E1 vol mispricing — implied move x.x% vs thesis needs x.x%
               E2 flow — ask-side x:1, vol/OI x.x, n days OI increase
+CORROBORATION E2b dark pool — n prints over <window> to hh:mm ET, x above /
+              y at / z below mid, agg $x.xM, off-lit rate x.x% of normal total
+              volume for an equal span  [window SATURATED at 500 rows | complete]
+              [mid-relative is inference, not a signed side; rate has no baseline]
+              — omit this line entirely when the layer was not run, returned
+                NA_no_data, or the three required computations were not all made
 TRIGGER       5-min close above/below <level>
 INVALIDATION  underlying <price>  → exit, no exceptions
 STOP          $x.xx (stop-limit, 15c buffer) = -$xx
@@ -546,7 +677,9 @@ survive into the answer:
 
 Every run appends to `options-expert/log/YYYY-MM-DD.md`: the candidates, the
 kills with reasons, the cards with **every input value at decision time**
-(IV, implied move, regime, flow readings, greeks, spot).
+(IV, implied move, regime, flow readings, greeks, spot, and — when E2b ran —
+the print count, the above/at/below-mid split, the off-lit rate with its window
+span, whether the window was saturated, and the newest `executed_at`).
 
 This is not bookkeeping. Robinhood `get_option_historicals` returns OHLC on the
 contract itself, so a card logged with its inputs can later be graded against
@@ -570,5 +703,12 @@ State these every run; they do not go away with more data:
   from "bad parameter."
 - **Robinhood greeks are the vendor's**, not ours, and not independently checked
   against a second source.
+- **Dark pool prints carry no aggressor side.** E2b's above/below-mid split is
+  our inference from the NBBO at execution, not a field the tape provides.
+- **E2b sees minutes, not sessions.** `/api/darkpool/{t}` returns the most
+  recent ≤500 prints with no paging (measured 2026-08-24), which on a liquid
+  name is under half an hour. It cannot answer "what did institutions do today".
+- **The off-lit rate has no baseline.** We can compute it; we cannot yet say
+  what a normal reading is for any given name.
 - **No out-of-sample validation exists for any of this.** Every edge test here is
   a reasoned hypothesis about where mispricing lives. Reasoned is not proven.
