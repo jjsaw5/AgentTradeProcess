@@ -357,6 +357,14 @@ pretending otherwise:
 network). It proves the parser handles the shape we guessed, not that the guess
 is right.
 
+**The REST payload schema is confirmed** (2026-08-24): `ticker`, `price`,
+`size`, `premium`, `executed_at`, `nbbo_bid`, `nbbo_ask`, `nbbo_bid_quantity`,
+`nbbo_ask_quantity`, `market_center`, `volume`, `canceled`, `sale_cond_codes`,
+`ext_hour_sold_codes`, `trade_code`, `trade_settlement`, `trf_executed_at`,
+`tracking_id`. Every one of `uw_stream.py`'s `_dp_fields` candidate keys hit on
+its first choice. That is **evidence for the socket parser, not proof** — the
+`off_lit_trades` payload itself has still never been seen.
+
 Historic tape: `/api/option-trades/full-tape/{date}`.
 
 ### 3e. GEX — use the vendor's levels, do not sum strikes yourself
@@ -471,14 +479,28 @@ the *options* aggressor-side fields, which UW derives from the trade itself. Do
 not let the two travel in one column — that is the greek-provenance rule applied
 to flow.
 
-**Paging on the ticker endpoint is UNVERIFIED.** The 2026-08-18 probe confirmed
-the route and the fields; it did not establish the default row cap or the paging
-parameters. `/api/darkpool/recent?limit=5` accepts `limit`; whether
-`/api/darkpool/{ticker}` does is untested, and §3d means a wrong parameter
-returns `HTTP 200` with `{"data": []}` rather than an error. Before drawing any
-conclusion from a window: pass an explicit limit, count the rows, and assert
-`executed_at` spans the period being described. Record the result here when
-someone verifies it.
+**Paging on the ticker endpoint: MEASURED 2026-08-24.** Probed live against
+TSLA; full transcript in `log/2026-08-24-DARKPOOL-PAGING.md`.
+
+- `limit` is honoured and **capped at 500**. Above that the request is rejected
+  with a `422` naming the cap, not silently clamped.
+- **`page` is accepted and ignored.** `page=1` returns the identical window.
+- **`date` is accepted and ignored.** It cannot be used to reach a prior day or
+  to walk back through today.
+
+So the route returns **the most recent ≤500 prints and nothing else**, and the
+window length is a property of how fast the name trades rather than of the
+request. On TSLA those 500 rows spanned **27 minutes**. The response never
+states its own span — you compute it from `executed_at` or you do not know it.
+
+Note what 2 and 3 are: the §3d silent-failure pattern in a new costume. Not an
+empty array, but a plausible, full-looking response to a parameter that did
+nothing. **Exactly 500 rows means the window was cut by the endpoint, not by the
+market.**
+
+This is a hard constraint on any consumer: `/api/darkpool/{ticker}` cannot
+describe a session on a liquid name. `SKILL.md` E2b was written assuming it
+could, which cost that layer its ADV denominator — see the log entry.
 
 **Consumers.** `daily-market-brief/SKILL.md` §8A uses `/recent` market-wide to
 nominate candidates. `options-expert/SKILL.md` E2b uses `/{ticker}` to

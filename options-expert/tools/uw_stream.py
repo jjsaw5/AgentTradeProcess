@@ -84,10 +84,11 @@ def money(v) -> str:
 #     gex and net_flow do; option_trades is documented as option_trades[:TICKER];
 #     this one is written bare in DATA_LAYER §3f. --dark-ticker-channels tries
 #     the suffixed form for anyone who wants to find out.
-#   - the payload field names. The REST route returns price/size/premium/
-#     market_center/executed_at plus NBBO both sides; the socket payload is
-#     assumed to be similar and is NOT confirmed. _dp_fields tries a short list
-#     of candidate keys and gives up honestly rather than inventing a number.
+#   - the payload field names. The REST route's schema was confirmed live on
+#     2026-08-24 and every candidate key below hit on its first choice, which is
+#     evidence but NOT proof: that is the REST route, and this socket payload has
+#     still never been observed. _dp_fields tries a short list of candidate keys
+#     and gives up honestly rather than inventing a number.
 #
 # Thresholds are operator ergonomics, not calibrated edge. They exist to keep the
 # console readable, and nothing downstream should treat them as meaningful.

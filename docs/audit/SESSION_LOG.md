@@ -291,3 +291,73 @@ the schema, and no live run was made — no key is present in this repo and none
 was requested.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-24 — dark pool paging measured; E2b's denominator was broken and is fixed
+
+**What happened:** The owner asked how the UW data looked on TSLA. Answering it
+meant a live pull, which was the first time E2b met real data — two days after
+it shipped. It failed on first contact.
+
+**The measurement.** `/api/darkpool/{ticker}` honours `limit` up to 500 and
+rejects more with a `422` naming the cap; **`page` and `date` are both accepted
+and silently ignored**. The route returns the most recent ≤500 prints and offers
+no way back through a session. On TSLA at 12:36 ET those 500 rows spanned
+**27 minutes**. Full transcript, including the pre-registration that got it
+wrong, in `options-expert/log/2026-08-24-DARKPOOL-PAGING.md`.
+
+**The defect.** E2b required aggregate block size as a **percent of 30-day
+ADV** — a one-day denominator against a 27-minute numerator. On live TSLA it
+produced "0.82% of 30d ADV": specific, plausible, and meaningless. Same class of
+error as the 2026-08-18 GEX incident, and it survived review that morning
+because the spec was written against an endpoint nobody had called yet.
+
+**The fix.** The denominator is now rate-matched to the window actually
+returned:
+
+```
+normal_rate  = ADV30 / 390
+off_lit_rate = dark_shares / (normal_rate * window_min)
+```
+
+TSLA read 11.7%. E2b now also requires the row count to be checked against the
+500 cap (exactly 500 = truncated by the endpoint, not by the market) and the
+card to state the window in wall-clock terms rather than saying "today's dark
+pool". §9 gained three new entries: E2b sees minutes not sessions, and the
+off-lit rate has no baseline.
+
+**Decisions:**
+
+1. *Report the rate, never threshold it.* One name on one day is not a baseline.
+   Nothing here establishes a normal off-lit reading for any ticker, so the
+   figure is context on a card and never a pass/fail. Building the baseline is
+   named as future work rather than quietly invented.
+2. *Name the denominator precisely.* It includes lit volume, and UW's feed may
+   not carry every off-exchange print, so it is "off-exchange prints as a
+   fraction of normal TOTAL volume for an equal span" — not dark-versus-dark.
+   The shorter phrasing would have been wrong in a way nobody would catch.
+3. *The log entry keeps its failed pre-registration.* Per §9 and the E1
+   precedent, the entry records what was expected before the calls, states
+   plainly that both expectations were wrong, and was not rewritten to look
+   prescient.
+4. *Mid-split base rate recorded, not used.* TSLA's window was 219 above / 83 at
+   / 198 below — near balanced, which is `NA_no_data` under E2b's own table. It
+   is in the log as a first data point for a baseline that does not yet exist,
+   flagged as unusable as a reference level.
+
+**Incidental:** the dark pool **REST** payload schema is now confirmed and
+recorded in `DATA_LAYER.md`, and every `_dp_fields` candidate key in
+`uw_stream.py` hit on its first choice. That is evidence for the socket parser,
+not proof — the `off_lit_trades` websocket payload has still never been observed,
+and the code and docs both continue to say so.
+
+**Verification:** `test_uw_stream.py` 31/31, `py_compile` clean. No code path
+changed — this commit is a spec fix plus recorded measurement.
+
+**Credential handling:** `UNUSUAL_WHALES_API_KEY` was read from the environment
+and never printed, never written to a file, and never passed on argv. The probe
+helper lives in the session scratchpad outside the repo tree. The staged diff
+was scanned before commit.
+
+**DEVIATIONS:** None.

@@ -362,14 +362,47 @@ when it printed rather than against a later quote.
 1. **Mid-relative classification.** Midpoint = (NBBO bid + NBBO ask) / 2 *at
    execution*. Classify each print above / at / below mid and report the split
    as counts: "14 prints — 9 above mid, 2 at, 3 below."
-2. **Size against a denominator.** Aggregate premium alone is meaningless: $5M
-   is noise in AAPL and control in a $300M name. Express aggregate block size as
-   a percent of 30-day average share volume from `/api/stock/{t}/ohlc/1d`. No
-   denominator, no citation — this is the same discipline `CLAUDE.md` §3 imposes
-   on any window claim.
-3. **Repetition and span.** The brief's rule is *repeated* prints in one name,
-   not one large one. Count distinct prints and span them across `executed_at`:
-   say whether they cluster in a window or spread across the session.
+2. **Size against a RATE-MATCHED denominator.** Aggregate premium alone is
+   meaningless: $5M is noise in AAPL and control in a $300M name. But the
+   obvious denominator is wrong here, and the measurement below is why.
+
+   The endpoint returns only the most recent **≤500 prints, with no paging**
+   (measured 2026-08-24 — see `log/2026-08-24-DARKPOOL-PAGING.md`). On a liquid
+   name that is *minutes*, not a session: TSLA's 500 rows spanned **27
+   minutes**. Dividing a 27-minute numerator by a one-day ADV denominator is
+   exactly the apples-to-oranges ratio this rule exists to prevent — it read
+   0.82% and meant nothing.
+
+   So match the rate to the window:
+
+   ```
+   window_min = span of executed_at across the returned rows
+   normal_rate = ADV30 / 390                     # shares per regular-session minute
+   off_lit_rate = dark_shares / (normal_rate * window_min)
+   ```
+
+   `ADV30` is 30-day average share volume from `/api/stock/{t}/ohlc/1d`. Report
+   `off_lit_rate` as a percent and **name it precisely**: off-exchange prints in
+   this window as a fraction of the name's *normal total* volume over an equal
+   span. It is not dark-versus-dark — the denominator includes lit volume, and
+   UW's feed may not be every off-exchange print.
+
+   **Report the number, do not threshold it.** No baseline exists for what is
+   normal for a given name, so a single reading cannot be called high or low.
+   TSLA on 2026-08-24 read **11.7%**; that is one observation, not a reference
+   level. Building that baseline is future work, and until it exists this figure
+   is context on the card, never a pass/fail.
+3. **Repetition, span, and saturation.** The brief's rule is *repeated* prints
+   in one name, not one large one. Count distinct prints and span them across
+   `executed_at`.
+
+   **Check the row count against the cap.** Exactly 500 rows means the window
+   was cut by the endpoint, not by the market — there were more prints and you
+   cannot see them. Fewer than 500 means you have everything the route holds,
+   which is still not necessarily a session. Either way the card states the
+   window in wall-clock terms ("27 min to 12:34 ET"), never "today's dark
+   pool". This endpoint cannot describe a session on a liquid name, and asking
+   it to is how a truncated window becomes a confident sentence.
 
 **Reading it:**
 
@@ -392,15 +425,19 @@ execution, so a print is evidence about a past minute, not this one. State the
 age of the newest print cited. Never present dark pool as live confirmation that
 a trigger is firing right now.
 
-**Unverified: this endpoint's paging.** `DATA_LAYER.md` records the ticker
-endpoint's *fields* but not its default row cap or its paging parameters, and
-§3d means a wrong parameter returns `HTTP 200` with `{"data": []}` instead of an
-error. Before this layer is cited for the first time: request with an explicit
-limit, count the rows, and confirm `executed_at` actually spans the window you
-are about to describe. A truncated window presented as a session is the same
-failure as the 2026-08-18 GEX incident — a fact about the response dressed up as
-a fact about the market. Until that check is recorded in `DATA_LAYER.md`, the
-card says the window is unverified.
+**Paging: measured 2026-08-24, and the answer constrains this layer.** `limit`
+is honoured up to 500 and rejected above it (`422`); `page` and `date` are both
+accepted and **silently ignored** — same rows either way. The route returns the
+most recent ≤500 prints and nothing else, so there is no way to walk back
+through a session with it. Full detail and the probe transcript are in
+`log/2026-08-24-DARKPOOL-PAGING.md`.
+
+This is why E2b is scoped the way it is. It was written expecting a session's
+worth of prints; it gets a recent window, and on the most liquid names that
+window is under half an hour. A layer that can only see the last N minutes is
+a corroboration layer whether or not anyone intended it to be — which is what
+it already was, so the remit does not change. What changes is that the card
+must say which minutes it saw.
 
 **Empty is not zero.** No prints returned is `NA_unresolved` until a re-request
 with known-good parameters confirms it. "No dark pool interest" is a claim this
@@ -599,9 +636,10 @@ SIZE          n contract(s) = $xxx premium (cap $400) · risk $xx (x.x% of equit
               stop RESTING at $x.xx — required to claim the premium allowance
 EDGE TEST     E1 vol mispricing — implied move x.x% vs thesis needs x.x%
               E2 flow — ask-side x:1, vol/OI x.x, n days OI increase
-CORROBORATION E2b dark pool — n prints, x above / y at / z below mid,
-              agg $x.xM = x.x% of 30d ADV, newest hh:mm ET
-              [mid-relative is inference, not a signed side]
+CORROBORATION E2b dark pool — n prints over <window> to hh:mm ET, x above /
+              y at / z below mid, agg $x.xM, off-lit rate x.x% of normal total
+              volume for an equal span  [window SATURATED at 500 rows | complete]
+              [mid-relative is inference, not a signed side; rate has no baseline]
               — omit this line entirely when the layer was not run, returned
                 NA_no_data, or the three required computations were not all made
 TRIGGER       5-min close above/below <level>
@@ -640,8 +678,8 @@ survive into the answer:
 Every run appends to `options-expert/log/YYYY-MM-DD.md`: the candidates, the
 kills with reasons, the cards with **every input value at decision time**
 (IV, implied move, regime, flow readings, greeks, spot, and — when E2b ran —
-the print count, the above/at/below-mid split, the ADV percentage and the newest
-`executed_at`).
+the print count, the above/at/below-mid split, the off-lit rate with its window
+span, whether the window was saturated, and the newest `executed_at`).
 
 This is not bookkeeping. Robinhood `get_option_historicals` returns OHLC on the
 contract itself, so a card logged with its inputs can later be graded against
@@ -666,7 +704,11 @@ State these every run; they do not go away with more data:
 - **Robinhood greeks are the vendor's**, not ours, and not independently checked
   against a second source.
 - **Dark pool prints carry no aggressor side.** E2b's above/below-mid split is
-  our inference from the NBBO at execution, not a field the tape provides. The
-  ticker endpoint's paging behaviour is also unverified — see E2b.
+  our inference from the NBBO at execution, not a field the tape provides.
+- **E2b sees minutes, not sessions.** `/api/darkpool/{t}` returns the most
+  recent ≤500 prints with no paging (measured 2026-08-24), which on a liquid
+  name is under half an hour. It cannot answer "what did institutions do today".
+- **The off-lit rate has no baseline.** We can compute it; we cannot yet say
+  what a normal reading is for any given name.
 - **No out-of-sample validation exists for any of this.** Every edge test here is
   a reasoned hypothesis about where mispricing lives. Reasoned is not proven.
