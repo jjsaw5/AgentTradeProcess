@@ -170,3 +170,67 @@ was run; every live figure cited inside the skill is the vendor's, not ours.
 contamination case does not apply. No credential was written, printed or
 committed — `UW_API_KEY` appears by name only, `.env` was already gitignored,
 and the staged diff was scanned before commit.
+
+---
+
+## 2026-08-22 (cont.) — dark pool wired into options-expert as E2b
+
+**Context:** A repo audit for dark pool usage found `/api/darkpool/recent` in
+active use by the brief's §8A discovery scan, `/api/darkpool/{ticker}` verified
+and probed but read by nothing, and the websocket `off_lit_trades` channel
+documented in `DATA_LAYER.md` §3f but absent from `tools/uw_stream.py`'s handler.
+The owner asked for the per-ticker endpoint to be wired into `options-expert/`.
+
+**What changed:**
+
+- `options-expert/SKILL.md` — new **E2b, Off-exchange print corroboration**,
+  placed after E2. Requires three computations before the layer may be cited:
+  above/at/below-mid classification against the NBBO at execution, aggregate
+  size as a percent of 30-day ADV, and print count with `executed_at` span.
+  Adds a `CORROBORATION` line to the output card, the E2b inputs to §8 logging,
+  the per-candidate pull to §3b, and the aggressor-inference caveat to §9.
+- `options-expert/DATA_LAYER.md` — records that the above/below-mid split is
+  **ours, not the vendor's**; flags the ticker endpoint's paging as UNVERIFIED;
+  names both consumers. Split the §4 division-of-labour row that had dark pool
+  sharing a line with signed flow under "nothing else has aggressor side" —
+  true of options flow, not of block prints.
+- `options-expert/tools/probe_uw.sh` — added `darkpool_tkr_lim` requesting the
+  ticker route with an explicit `limit=200`, so the byte count can be compared
+  against the unlimited call and the paging question settled by measurement.
+
+**Decisions:**
+
+1. *A corroboration layer that can nominate is not a corroboration layer.* E2b
+   runs only on names that already passed a test, cannot be the named test
+   Stage 3 requires (Stage 3's rule was amended to say so explicitly, since E2b
+   is literally "a named test below"), and moves conviction at most one notch.
+   It cannot kill and it cannot promote.
+2. *The mid-relative split is labelled as inference everywhere it appears.* The
+   tape does not mark which side initiated an off-exchange print. Calling this
+   "aggressor side" would have imported the credibility of UW's options flow
+   fields onto a heuristic of ours — the greek-provenance rule (§2) applied to
+   flow. Cards must write "9 of 14 prints above mid", never "institutional
+   buying".
+3. *A size denominator is mandatory.* Aggregate premium with no ADV comparison
+   is the same defect as the 2026-08-18 GEX window: a number that looks like a
+   market fact and is really a fact about what was measured.
+4. *Paging flagged rather than assumed.* `limit` is verified on `/recent` and
+   untested on `/{ticker}`, and §3d means a bad parameter returns `200` with an
+   empty array. E2b requires a row count and an `executed_at` span assertion
+   before first citation, and the card says "window unverified" until
+   `DATA_LAYER.md` records the check.
+
+**Pre-registration (§9), stated before any live run:** E2b is expected to change
+conviction on a minority of cards and to change the entry decision on none. A
+logged card whose entry turned on E2b means the layer exceeded its remit; the
+fix would be the spec, not the card.
+
+**Not done, and deliberately:** `off_lit_trades` is still unwired —
+`uw_stream.py` would join the channel and print nothing, since `handle()` has no
+branch for it. Out of scope for this request; recorded here so it stays visible.
+
+**Status:** UNCALIBRATED per `CLAUDE.md` §7, like everything else in
+`options-expert/`. This is reasoned, not evidenced — no live dark pool pull was
+made this session, and no card has yet cited the layer.
+
+**DEVIATIONS:** None.

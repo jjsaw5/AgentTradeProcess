@@ -440,6 +440,28 @@ with `price`, `size`, `premium`, `market_center`, `executed_at`, and the NBBO on
 both sides at execution — so a print can be classified above/below/at mid rather
 than just logged.
 
+**That classification is ours, not the vendor's.** An off-exchange print reports
+price and size; the tape does not mark which side initiated it. Above/below-mid
+is a heuristic we compute from the NBBO snapshot, and it is weaker evidence than
+the *options* aggressor-side fields, which UW derives from the trade itself. Do
+not let the two travel in one column — that is the greek-provenance rule applied
+to flow.
+
+**Paging on the ticker endpoint is UNVERIFIED.** The 2026-08-18 probe confirmed
+the route and the fields; it did not establish the default row cap or the paging
+parameters. `/api/darkpool/recent?limit=5` accepts `limit`; whether
+`/api/darkpool/{ticker}` does is untested, and §3d means a wrong parameter
+returns `HTTP 200` with `{"data": []}` rather than an error. Before drawing any
+conclusion from a window: pass an explicit limit, count the rows, and assert
+`executed_at` spans the period being described. Record the result here when
+someone verifies it.
+
+**Consumers.** `daily-market-brief/SKILL.md` §8A uses `/recent` market-wide to
+nominate candidates. `options-expert/SKILL.md` E2b uses `/{ticker}` to
+corroborate a name that already passed an edge test — it can never nominate one,
+and it requires the 30-day average share volume from `/api/stock/{t}/ohlc/1d` as
+a size denominator.
+
 **News.** `/api/news/headlines` carries `headline`, `tickers`, `sentiment`,
 `is_major`, `source`, and a `meta` block with current and prior close per ticker.
 Lower latency and more structure than FMP's news, and `is_major` is a usable
@@ -496,7 +518,8 @@ of the column marked authoritative.
 | Need | Source | Note |
 |---|---|---|
 | Option chain, strikes, contract greeks/IV/OI | **Robinhood** | tradable marks + the account's real fill context |
-| Signed flow, sweeps, dark pool, tide | **UW** | nothing else has aggressor side |
+| Signed flow, sweeps, tide | **UW** | nothing else has aggressor side |
+| Off-exchange block prints | **UW** `darkpool/{t}` | price, size, NBBO at execution — but **no aggressor side**; above/below-mid is our inference |
 | Dealer gamma/vanna/charm by strike | **UW** `spot-exposures/strike` | live; `_vol` split solves T-1 |
 | IV rank, IV percentile, implied move by DTE | **UW** | `iv-rank` + `interpolated-iv` |
 | Intraday bars, VWAP inputs, intraday technicals | **FMP** | UW has no intraday; RH bars are secondary |

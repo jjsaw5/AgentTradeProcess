@@ -158,6 +158,11 @@ intraday. Re-pull anything you are about to trade on.
    - UW `/api/screener/option-contracts` filtered to the name, or
      `/api/option-trades` for the raw tape.
    - FMP `historical-chart/5min` — the decision chart; also the volume floor.
+   - UW `/api/darkpool/{t}` — off-exchange block prints, for **E2b only**. Pull
+     this *after* a name has passed an edge test, never before: it corroborates,
+     it never nominates, so a call spent on a candidate that dies at Stage 3 is
+     wasted quota. Requires `/api/stock/{t}/ohlc/1d` alongside it for the
+     30-day average-volume denominator — the print size means nothing without it.
 3. **Contract selection** (only for survivors)
    - Robinhood `get_option_chains` → crafted-cursor `get_option_instruments`
      (`base64("p=<strike>")`, see `DATA_LAYER.md` §2a) → `get_option_quotes`.
@@ -222,6 +227,10 @@ independently. Do not filter yet. Write them down so the kill count is visible.
 **Every candidate must pass at least one named test below, and the card must
 name which.** "It looks bullish" is not an edge. If you cannot name the test,
 the candidate dies here — and most do.
+
+**E2b does not count.** It is a corroboration layer, not a test: it runs only
+after something else has already passed, and it can never be the named test that
+keeps a candidate alive. E1b likewise decides *which* instrument, not *whether*.
 
 #### E1 — Vol mispricing (the primary test)
 
@@ -329,6 +338,78 @@ prints deserve extra weight; retail does not trade on the floor.
 **Flow is a confirmation and veto layer, never a trigger.** The playbook proved
 this on 2026-08-13: tide at day highs while SPY broke down. Price action
 overrules flow when they disagree.
+
+#### E2b — Off-exchange print corroboration (never a trigger, never a nomination)
+
+**This layer cannot create a trade.** It attaches to a candidate that has
+already passed E1, E1b, E2, E3, E4 or E5, and at most it moves conviction one
+notch. A card whose only support is dark pool prints has no named edge test, and
+Stage 3's rule kills it. Dark pool sits one rung *below* options flow, and the
+playbook already ranks options flow below price action — so this is the weakest
+evidence in the process, and it is wired in accordingly.
+
+**Source:** UW `/api/darkpool/{t}`, per-ticker. `/api/darkpool/recent` is a
+different job: that is the brief's market-wide discovery feed (§8A), which
+*nominates* names into the candidate pool. This one only speaks about a name
+already in it.
+
+**What this endpoint has that a plain block feed does not:** the NBBO on both
+sides at execution, so a print can be placed against the spread that existed
+when it printed rather than against a later quote.
+
+**Compute all three, or do not cite the layer at all:**
+
+1. **Mid-relative classification.** Midpoint = (NBBO bid + NBBO ask) / 2 *at
+   execution*. Classify each print above / at / below mid and report the split
+   as counts: "14 prints — 9 above mid, 2 at, 3 below."
+2. **Size against a denominator.** Aggregate premium alone is meaningless: $5M
+   is noise in AAPL and control in a $300M name. Express aggregate block size as
+   a percent of 30-day average share volume from `/api/stock/{t}/ohlc/1d`. No
+   denominator, no citation — this is the same discipline `CLAUDE.md` §3 imposes
+   on any window claim.
+3. **Repetition and span.** The brief's rule is *repeated* prints in one name,
+   not one large one. Count distinct prints and span them across `executed_at`:
+   say whether they cluster in a window or spread across the session.
+
+**Reading it:**
+
+| Pattern | What it corroborates | What it does NOT mean |
+|---|---|---|
+| Repeated above-mid prints, long thesis, underlying flat on the day | someone taking size while price has not moved — the E2 story showing up in the shares | not "institutions are bullish"; intent is not observable here |
+| Repeated below-mid prints against a long thesis | conviction down one notch, stated on the card | not a kill, and not a short signal |
+| One large print, no repetition | nothing. Log it, cite nothing | a lone block is as likely to be a hedge leg, an ETF create/redeem, an index rebalance, or a portfolio trade |
+| Prints straddling mid with no skew | `NA_no_data` for this layer | not "no institutional interest" |
+
+**The classification is an inference, not a signed field, and that admission
+ships on the card.** An off-exchange print reports price and size; the tape does
+not mark which side initiated it. Placing it against the NBBO mid is a
+heuristic, and it is materially weaker than UW's *options* aggressor-side data,
+which is derived from the trade itself. Never write "institutional buying" on a
+card. Write "9 of 14 prints above mid", which is what was actually measured.
+
+**Timestamp discipline (§2).** Off-exchange prints reach the tape after
+execution, so a print is evidence about a past minute, not this one. State the
+age of the newest print cited. Never present dark pool as live confirmation that
+a trigger is firing right now.
+
+**Unverified: this endpoint's paging.** `DATA_LAYER.md` records the ticker
+endpoint's *fields* but not its default row cap or its paging parameters, and
+§3d means a wrong parameter returns `HTTP 200` with `{"data": []}` instead of an
+error. Before this layer is cited for the first time: request with an explicit
+limit, count the rows, and confirm `executed_at` actually spans the window you
+are about to describe. A truncated window presented as a session is the same
+failure as the 2026-08-18 GEX incident — a fact about the response dressed up as
+a fact about the market. Until that check is recorded in `DATA_LAYER.md`, the
+card says the window is unverified.
+
+**Empty is not zero.** No prints returned is `NA_unresolved` until a re-request
+with known-good parameters confirms it. "No dark pool interest" is a claim this
+layer is not entitled to make.
+
+**Pre-registered expectation (2026-08-22, before any live run — `CLAUDE.md` §9).**
+This layer is expected to change conviction on a minority of cards and to change
+the *decision* on none. If the log ever shows a card whose entry turned on E2b,
+the layer exceeded its remit; the fix is this section, not that card.
 
 #### E3 — Dealer mechanics
 
@@ -511,6 +592,11 @@ SIZE          n contract(s) = $xxx premium (cap $400) · risk $xx (x.x% of equit
               stop RESTING at $x.xx — required to claim the premium allowance
 EDGE TEST     E1 vol mispricing — implied move x.x% vs thesis needs x.x%
               E2 flow — ask-side x:1, vol/OI x.x, n days OI increase
+CORROBORATION E2b dark pool — n prints, x above / y at / z below mid,
+              agg $x.xM = x.x% of 30d ADV, newest hh:mm ET
+              [mid-relative is inference, not a signed side]
+              — omit this line entirely when the layer was not run, returned
+                NA_no_data, or the three required computations were not all made
 TRIGGER       5-min close above/below <level>
 INVALIDATION  underlying <price>  → exit, no exceptions
 STOP          $x.xx (stop-limit, 15c buffer) = -$xx
@@ -546,7 +632,9 @@ survive into the answer:
 
 Every run appends to `options-expert/log/YYYY-MM-DD.md`: the candidates, the
 kills with reasons, the cards with **every input value at decision time**
-(IV, implied move, regime, flow readings, greeks, spot).
+(IV, implied move, regime, flow readings, greeks, spot, and — when E2b ran —
+the print count, the above/at/below-mid split, the ADV percentage and the newest
+`executed_at`).
 
 This is not bookkeeping. Robinhood `get_option_historicals` returns OHLC on the
 contract itself, so a card logged with its inputs can later be graded against
@@ -570,5 +658,8 @@ State these every run; they do not go away with more data:
   from "bad parameter."
 - **Robinhood greeks are the vendor's**, not ours, and not independently checked
   against a second source.
+- **Dark pool prints carry no aggressor side.** E2b's above/below-mid split is
+  our inference from the NBBO at execution, not a field the tape provides. The
+  ticker endpoint's paging behaviour is also unverified — see E2b.
 - **No out-of-sample validation exists for any of this.** Every edge test here is
   a reasoned hypothesis about where mispricing lives. Reasoned is not proven.
