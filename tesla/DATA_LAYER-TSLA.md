@@ -478,7 +478,35 @@ rows, so the paired series gives nothing at the short end.
 **Consequence:** the IV-vs-RV comparison comes from `volatility/stats` (§7b),
 which carries `rv` directly. VRP is regime context, never today.
 
-### 7f. The skew anomaly — do not trade this number
+### 7f. The skew series' newest row is LIVE — resolved 2026-08-24
+
+**The 2026-08-21 "60× outlier" (−0.6636) was not a market event and not an
+upstream revision. It was an unsettled intraday value**, read while that session
+was still trading. The row for the current session updates continuously and is
+not final until the session closes.
+
+Proof, all for the row dated **2026-08-24**, from the same endpoint on the same
+day:
+
+| read at | value |
+|---|---|
+| 13:49 UTC (RTH Sample A) | −0.01643 |
+| 13:54 UTC | −0.00722 |
+| 14:57 UTC | −0.03778 |
+
+Three different values for one date inside 70 minutes, a 5× spread. The
+2026-08-21 read of −0.6636 was taken the same way and now settles at −0.01008,
+squarely in band. Nothing anomalous ever happened to TSLA's skew.
+
+**Standing rule: drop the current session's row.** E5 reads only rows from
+**completed prior sessions**. The newest row is live and must never be used as
+a level, a trajectory endpoint, or an outlier trigger.
+
+This also retires the automatic outlier check in `probe_rth.sh` as a market
+signal — it was correctly detecting instability, but the instability is in the
+vendor's intraday computation, not in the option market.
+
+### 7f-old. Superseded — the original anomaly write-up
 
 `/stock/TSLA/historical-risk-reversal-skew`, 250 rows, **ascending by date**
 (the newest row is last — reading `[0]` gives you a year-old value).

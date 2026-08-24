@@ -23,8 +23,8 @@ so **all five edge tests can run.** Two standing conditions still get declared:
 
 ```
 DATA        robinhood ✓  fmp ✓  unusual whales ✓
-E5 SKEW     DEGRADED — 2026-08-21 print is a 60x outlier (DATA_LAYER-TSLA §7f).
-            Trajectory only; a single level does not change a structure.
+E5 SKEW     Current-session row is LIVE and moves intraday (DATA_LAYER-TSLA
+            §7f). Read only COMPLETED prior sessions. Trajectory only.
 STATUS      UNCALIBRATED — no TSLA card in this repository has been graded.
 ```
 
@@ -240,9 +240,10 @@ week of 2026-10-19 — **re-read the date; do not trust this line after October.
 25-delta `risk_reversal`, **ascending — the newest row is last.** Reading `[0]`
 gives a year-old value.
 
-**The 2026-08-21 print is −0.6636 against a five-session band of −0.010 to
-−0.030 — a 60× jump.** Until a second session confirms it, treat it as an
-anomaly, not a reading (`DATA_LAYER-TSLA.md` §7f).
+**Drop the newest row — it is the current session and it is still moving.**
+On 2026-08-24 that row read −0.01643, −0.00722 and −0.03778 within 70 minutes.
+The 2026-08-21 "−0.6636 outlier" was the same artifact and now settles at
+−0.01008. Read only completed prior sessions (`DATA_LAYER-TSLA.md` §7f).
 
 So: read the **trajectory** of the stable series, never a single level. Negative
 = puts bid over calls, so a put *spread* finances better than a naked put.
