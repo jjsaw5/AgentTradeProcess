@@ -333,6 +333,30 @@ receive loop must do nothing but enqueue, and any persistence must be batched.
 exponential-backoff reconnect, and a heartbeat printing queue depth and drops so
 "the server dropped it" stays distinguishable from "we fell behind."
 
+**`off_lit_trades` is wired, behind a flag.** `tools/uw_stream.py --dark` joins
+it and aggregates per ticker for `SKILL.md` E2b: clusters only, filtered to the
+watch list, with the above/below-mid split inferred from the NBBO in the payload
+and labelled as inference on every line. It is deliberately not in the default
+channel list — it is the whole off-exchange tape, and joining it market-wide is
+a good way to fall behind the socket and take server-side drops on `market_tide`
+and `gex`, which are the channels that actually decide things.
+
+Two things about it are **UNVERIFIED**, and the code says so rather than
+pretending otherwise:
+
+- **The payload schema.** The REST route's fields are known; the socket
+  payload's are assumed to resemble them and have never been seen. The parser
+  tries a short list of candidate keys, counts what it cannot parse, and dumps
+  the first payload's keys to the console on connect. **Record those keys here
+  when someone runs it live**, and pin the parser to them.
+- **Whether the channel takes a `:TICKER` suffix.** `gex` and `net_flow` do;
+  this one is documented bare. `--dark-ticker-channels` joins the suffixed form
+  for whoever wants to find out — watch for the join acknowledgement.
+
+`tools/test_uw_stream.py` covers the aggregation offline (31 checks, no key, no
+network). It proves the parser handles the shape we guessed, not that the guess
+is right.
+
 Historic tape: `/api/option-trades/full-tape/{date}`.
 
 ### 3e. GEX — use the vendor's levels, do not sum strikes yourself

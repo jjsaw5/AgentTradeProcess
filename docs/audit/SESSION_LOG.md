@@ -234,3 +234,60 @@ branch for it. Out of scope for this request; recorded here so it stays visible.
 made this session, and no card has yet cited the layer.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-22 (cont.) — off_lit_trades wired into uw_stream.py
+
+**What changed:** `tools/uw_stream.py` gained a dark pool layer behind `--dark`,
+closing the gap the previous entry recorded as deliberately left open. New:
+`DarkPool` accumulator, `_dp_fields` parser, a handler branch, CLI flags, and an
+unparsed counter surfaced in the heartbeat. `tools/test_uw_stream.py` is new —
+31 offline checks, no key, no network. `DATA_LAYER.md` §3f and `SKILL.md`
+Stage 7 record the wiring and its limits.
+
+**Decisions:**
+
+1. *Opt-in, never default.* `off_lit_trades` is the whole off-exchange print
+   tape, and off-exchange is a large share of consolidated volume. Joining it
+   market-wide pushes every print through `json.loads` in the processor, which
+   is exactly how the client falls behind and starts taking server-side drops on
+   `market_tide` and `gex` — the channels that decide things. It is absent from
+   the default channel list, requires a non-empty watch list (the tool exits
+   rather than firehosing), and is filtered to that list before anything prints.
+2. *Emits on clusters, not prints.* Mirrors E2b's reading rule that a lone block
+   means nothing and repetition is the pattern. Default gate: ≥4 prints and
+   ≥$5M inside 15 minutes, with a cooldown. A single print above $25M surfaces
+   separately and is labelled `not citable on its own (E2b)` so the two cannot
+   be confused. The thresholds are console ergonomics, not calibrated edge, and
+   say so in the code.
+3. *Unclassifiable prints stay `NA_unresolved`.* When the payload carries no
+   NBBO the side is `None` and is reported as its own bucket in the split. It is
+   never folded into `at mid` to make the counts add up — that is precisely the
+   `NA_no_data` / `NA_unresolved` collapse `CLAUDE.md` §4 forbids, and it would
+   hide a parser failure inside a plausible-looking result.
+4. *The schema is guessed, and the code says so out loud.* The socket payload
+   for this channel has never been observed. The parser tries a short list of
+   candidate keys, counts what it cannot parse, prints that count in every
+   heartbeat, and dumps the first payload's keys to the console on connect so
+   the real schema can be recorded in `DATA_LAYER.md` rather than inferred
+   forever. A rising `dark_unparsed` with a silent console is the failure this
+   guards: it would otherwise be indistinguishable from "no prints today."
+5. *Per-ticker subscription left as an experiment.* `gex` and `net_flow` take a
+   `:TICKER` suffix; this channel is documented bare. `--dark-ticker-channels`
+   joins the suffixed form for whoever wants to establish the answer.
+
+**Verification:** `python3 test_uw_stream.py` — **31/31 passed**, zero network,
+zero credentials. Covers mid classification in both directions and at the
+midpoint, the float-noise tolerance, missing-NBBO handling, notional from
+`price × size` versus an explicit premium field, cluster gating on both count
+and notional, the watch filter, window eviction, cooldown, the single-print
+path, the `NA_unresolved` bucket, the unparsed counter, and handler routing for
+both the bare and suffixed channel names. `py_compile` clean.
+
+**What this does NOT establish:** that the live payload resembles the fixtures.
+The tests prove the parser handles the shape we guessed. Only a live run settles
+the schema, and no live run was made — no key is present in this repo and none
+was requested.
+
+**DEVIATIONS:** None.

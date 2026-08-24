@@ -8,6 +8,7 @@ completed-bar polls.
 
     python uw_stream.py --tickers SPY,QQQ
     python uw_stream.py --tickers SPY --channels market_tide,news,trading_halts
+    python uw_stream.py --tickers SPY,NVDA --dark      # + off-exchange prints
 
 Requires:  pip install websockets
 Auth:      UNUSUAL_WHALES_API_KEY in the environment. Never passed on argv,
@@ -16,6 +17,11 @@ Auth:      UNUSUAL_WHALES_API_KEY in the environment. Never passed on argv,
 
 Verified against wss://api.unusualwhales.com/socket on 2026-08-18: all of
 market_tide, gex:TICKER, news and trading_halts joined with status ok.
+
+off_lit_trades was NOT part of that verification. It is opt-in behind --dark,
+its payload schema is unconfirmed, and the first payload received is dumped to
+the console so the real field names can be recorded in DATA_LAYER.md §3a
+instead of guessed. See the DARK POOL section below before relying on it.
 
 Windows note (learned the hard way, PLAYBOOK.md §4): the console defaults to
 cp1252 and will raise UnicodeEncodeError on the alert glyphs at exactly the
@@ -61,6 +67,180 @@ def money(v) -> str:
         if abs(v) >= div:
             return f"{v/div:+.2f}{unit}"
     return f"{v:+.0f}"
+
+
+# --- DARK POOL (off_lit_trades) --------------------------------------------
+# WHY THIS IS OPT-IN. off_lit_trades is the whole off-exchange print tape, not a
+# per-ticker feed, and off-exchange is a large fraction of US consolidated share
+# volume. Joining it market-wide pushes every one of those prints through
+# json.loads in the processor, which is precisely how a client falls behind and
+# starts taking SERVER-SIDE drops on market_tide and gex -- the channels that
+# actually drive decisions (DATA_LAYER.md §3f). So: never in the default channel
+# list, requires a non-empty watch list, and everything under the floors is
+# counted rather than printed.
+#
+# UNVERIFIED, and deliberately not papered over:
+#   - whether the channel accepts a per-ticker suffix (off_lit_trades:TICKER).
+#     gex and net_flow do; option_trades is documented as option_trades[:TICKER];
+#     this one is written bare in DATA_LAYER §3f. --dark-ticker-channels tries
+#     the suffixed form for anyone who wants to find out.
+#   - the payload field names. The REST route returns price/size/premium/
+#     market_center/executed_at plus NBBO both sides; the socket payload is
+#     assumed to be similar and is NOT confirmed. _dp_fields tries a short list
+#     of candidate keys and gives up honestly rather than inventing a number.
+#
+# Thresholds are operator ergonomics, not calibrated edge. They exist to keep the
+# console readable, and nothing downstream should treat them as meaningful.
+DARK_WINDOW_SEC = 900                      # cluster lookback (15 minutes)
+DARK_CLUSTER_MIN_PRINTS = 4                # E2b reads repetition, not one print
+DARK_CLUSTER_MIN_NOTIONAL = 5_000_000
+DARK_SINGLE_PRINT_NOTIONAL = 25_000_000    # one print worth seeing on its own
+
+_DP_PRICE_KEYS = ("price", "trade_price", "px")
+_DP_SIZE_KEYS = ("size", "quantity", "volume")
+_DP_PREM_KEYS = ("premium", "notional", "value")
+_DP_BID_KEYS = ("nbbo_bid", "nbbo_bid_price", "bid")
+_DP_ASK_KEYS = ("nbbo_ask", "nbbo_ask_price", "ask")
+
+
+def _first_float(payload, keys):
+    """First key present with a numeric value, else None. None means unknown."""
+    for k in keys:
+        v = payload.get(k)
+        if v is None:
+            continue
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def _dp_fields(payload):
+    """(ticker, notional, side) from an off_lit_trades payload.
+
+    `side` is "above" / "at" / "below" the NBBO midpoint at execution, or None
+    when the NBBO is absent. None stays None: an unclassifiable print is
+    NA_unresolved and is NEVER bucketed into "at" to keep the arithmetic tidy
+    (CLAUDE.md §4 -- the two kinds of missing do not collapse).
+
+    Returns None when the print cannot be measured at all, which the caller
+    counts rather than discards silently.
+    """
+    t = payload.get("ticker") or payload.get("symbol")
+    if not t:
+        return None
+    price = _first_float(payload, _DP_PRICE_KEYS)
+    size = _first_float(payload, _DP_SIZE_KEYS)
+    notional = _first_float(payload, _DP_PREM_KEYS)
+    if notional is None and price is not None and size is not None:
+        notional = price * size
+    if notional is None:
+        return None
+
+    side = None
+    bid = _first_float(payload, _DP_BID_KEYS)
+    ask = _first_float(payload, _DP_ASK_KEYS)
+    if price is not None and bid is not None and ask is not None and ask >= bid:
+        mid = (bid + ask) / 2.0
+        # Mid-crossed prints are common and land exactly on the midpoint, so
+        # compare with a tolerance scaled to the spread rather than with ==.
+        tol = max((ask - bid) * 0.01, 1e-6)
+        side = "above" if price > mid + tol else "below" if price < mid - tol else "at"
+    return str(t).upper(), notional, side
+
+
+def _dp_money(v):
+    """Unsigned money. money() prints a leading + which reads oddly on size."""
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return "NA"
+    for unit, div in (("B", 1e9), ("M", 1e6), ("K", 1e3)):
+        if abs(v) >= div:
+            return f"${v/div:.1f}{unit}"
+    return f"${v:.0f}"
+
+
+class DarkPool:
+    """Per-ticker off-exchange print accumulator, mirroring SKILL.md E2b.
+
+    E2b's reading rule is that a lone block means nothing and REPETITION is the
+    pattern worth naming, so this emits on clusters, not on prints. A single
+    print surfaces only when it is large enough that an operator holding the
+    name would want to see it, and that line is marked `not citable` so it
+    cannot be mistaken for the cluster signal.
+
+    The above/below-mid split is INFERRED. The tape does not mark which side
+    initiated an off-exchange print; placing it against the NBBO midpoint is a
+    heuristic, and it is weaker than UW's options aggressor-side fields. Every
+    line this class emits carries that caveat, because a console line gets
+    pasted into a log entry with none of its context.
+    """
+
+    def __init__(self):
+        self.prints = defaultdict(deque)   # ticker -> deque[(t, notional, side)]
+        self.fired = defaultdict(float)
+        self.unparsed = 0
+        self.schema_dumped = False
+
+    def _once(self, key, cooldown=DARK_WINDOW_SEC):
+        now = time.time()
+        if now - self.fired[key] < cooldown:
+            return False
+        self.fired[key] = now
+        return True
+
+    def add(self, payload, watch):
+        """Return lines to print. Cheap by design -- this runs per message."""
+        out = []
+
+        if not self.schema_dumped and isinstance(payload, dict):
+            self.schema_dumped = True
+            # One-shot. The point is to END the guessing in _dp_fields: record
+            # these keys in DATA_LAYER.md §3a and pin the parser to them.
+            out.append(
+                f"[{ts()}] DARK  schema (first payload, record in DATA_LAYER §3a): "
+                f"{sorted(payload.keys())}"
+            )
+
+        parsed = _dp_fields(payload) if isinstance(payload, dict) else None
+        if parsed is None:
+            self.unparsed += 1
+            return out
+        t, notional, side = parsed
+        if t not in watch:
+            return out
+
+        now = time.time()
+        q = self.prints[t]
+        q.append((now, notional, side))
+        cutoff = now - DARK_WINDOW_SEC
+        while q and q[0][0] < cutoff:
+            q.popleft()
+
+        if notional >= DARK_SINGLE_PRINT_NOTIONAL and self._once(f"single:{t}", 60):
+            out.append(
+                f"[{ts()}] dark  {t}  single print {_dp_money(notional)} "
+                f"{side or 'side NA_unresolved'} — not citable on its own (E2b)"
+            )
+
+        total = sum(n for _, n, _ in q)
+        if len(q) >= DARK_CLUSTER_MIN_PRINTS and total >= DARK_CLUSTER_MIN_NOTIONAL \
+                and self._once(f"cluster:{t}"):
+            above = sum(1 for _, _, sd in q if sd == "above")
+            at = sum(1 for _, _, sd in q if sd == "at")
+            below = sum(1 for _, _, sd in q if sd == "below")
+            unres = sum(1 for _, _, sd in q if sd is None)
+            split = f"{above} above / {at} at / {below} below mid"
+            if unres:
+                split += f" / {unres} NA_unresolved"
+            out.append(
+                f"[{ts()}] DARK  {t}  {len(q)} prints in "
+                f"{DARK_WINDOW_SEC // 60}m, {_dp_money(total)} — {split} "
+                f"[inferred from NBBO, not a signed side; no ADV denominator here]"
+            )
+        return out
 
 
 class Tripwires:
@@ -124,9 +304,15 @@ class Tripwires:
         return alerts
 
 
-def handle(channel: str, payload, tw: Tripwires, watch: set):
+def handle(channel: str, payload, tw: Tripwires, watch: set, dp=None):
     """Return a list of lines to print. Keep this cheap — see drop policy."""
     out = []
+
+    if channel.startswith("off_lit_trades"):
+        # First branch on purpose: when --dark is on this is by far the highest
+        # message rate on the socket, so it should not fall through every other
+        # comparison first.
+        return dp.add(payload, watch) if dp is not None else out
 
     if channel == "market_tide" and isinstance(payload, dict):
         nc = payload.get("net_call_premium")
@@ -206,7 +392,7 @@ async def consumer(url, queue, channels, stats):
             backoff = min(backoff * 2, 60)
 
 
-async def processor(queue, tw, watch, stats):
+async def processor(queue, tw, watch, stats, dp=None):
     while True:
         raw = await queue.get()
         try:
@@ -216,7 +402,7 @@ async def processor(queue, tw, watch, stats):
             channel, payload = msg
             if isinstance(payload, dict) and "status" in payload and "response" in payload:
                 continue                      # join acknowledgement
-            for line in handle(channel, payload, tw, watch):
+            for line in handle(channel, payload, tw, watch, dp):
                 print(line, flush=True)
         except Exception as e:
             stats["errors"] += 1
@@ -226,22 +412,33 @@ async def processor(queue, tw, watch, stats):
             queue.task_done()
 
 
-async def heartbeat(stats, queue):
+async def heartbeat(stats, queue, dp=None):
     """Queue depth and drop counter. Without these, 'the server dropped it'
     and 'I fell behind' are indistinguishable."""
     while True:
         await asyncio.sleep(300)
-        print(
-            f"[{ts()}] -- rx {stats['rx']}  dropped {stats['dropped']}  "
-            f"errors {stats['errors']}  queue {queue.qsize()}",
-            flush=True,
-        )
+        line = (f"[{ts()}] -- rx {stats['rx']}  dropped {stats['dropped']}  "
+                f"errors {stats['errors']}  queue {queue.qsize()}")
+        if dp is not None:
+            # A climbing unparsed count means the payload schema is not what
+            # _dp_fields guesses, and every dark line is therefore suspect.
+            # Silence here would look identical to "no prints today".
+            line += f"  dark_unparsed {dp.unparsed}"
+        print(line, flush=True)
 
 
 async def main():
     ap = argparse.ArgumentParser(description="UW websocket monitor")
     ap.add_argument("--tickers", default="SPY,QQQ", help="comma-separated watch list")
     ap.add_argument("--channels", default="", help="override channel list")
+    ap.add_argument("--dark", action="store_true",
+                    help="also join off_lit_trades (off-exchange prints). Opt-in: "
+                         "it is the whole tape and can starve the channels that "
+                         "drive decisions. Requires --tickers.")
+    ap.add_argument("--dark-ticker-channels", action="store_true",
+                    help="join off_lit_trades:TICKER instead of the bare channel. "
+                         "UNVERIFIED — the suffix form may not be supported; watch "
+                         "for a join acknowledgement before trusting it.")
     ap.add_argument("--queue-size", type=int, default=50_000)
     args = ap.parse_args()
 
@@ -257,16 +454,32 @@ async def main():
         for t in sorted(watch):
             channels += [f"gex:{t}", f"net_flow:{t}"]
 
+    want_dark = args.dark or any(c.startswith("off_lit_trades") for c in channels)
+    if want_dark and not watch:
+        # Without a watch list every print in the market prints to the console,
+        # which is useless and also the fastest way to fall behind the socket.
+        sys.exit("--dark requires a non-empty --tickers watch list")
+    if args.dark:
+        channels += ([f"off_lit_trades:{t}" for t in sorted(watch)]
+                     if args.dark_ticker_channels else ["off_lit_trades"])
+    dp = DarkPool() if want_dark else None
+
     url = f"{WS_BASE}?token={token}"      # never print this
     queue = asyncio.Queue(maxsize=args.queue_size)
     stats = defaultdict(int)
     tw = Tripwires()
 
     print(f"[{ts()}] watching {', '.join(sorted(watch))}", flush=True)
+    if dp is not None:
+        print(f"[{ts()}] dark pool ON — clusters only "
+              f"(>={DARK_CLUSTER_MIN_PRINTS} prints and "
+              f"{_dp_money(DARK_CLUSTER_MIN_NOTIONAL)} per "
+              f"{DARK_WINDOW_SEC // 60}m, filtered to the watch list). "
+              f"Mid-relative side is INFERRED, never a signed side.", flush=True)
     await asyncio.gather(
         consumer(url, queue, channels, stats),
-        processor(queue, tw, watch, stats),
-        heartbeat(stats, queue),
+        processor(queue, tw, watch, stats, dp),
+        heartbeat(stats, queue, dp),
     )
 
 

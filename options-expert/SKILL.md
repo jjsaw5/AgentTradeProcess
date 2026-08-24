@@ -547,7 +547,14 @@ For 0DTE: the real bell is **3:30 PM ET**, not 4:00. Robinhood force-closes at
 **Once a card is live, run the monitor:** `tools/uw_stream.py --tickers SPY,QQQ`
 streams the tide, per-ticker GEX and net flow, news (including Truth Social
 posts) and trading halts, and fires the playbook §4 tripwires on live data
-instead of 5-minute polls. Halts are always surfaced — a halt on an open
+instead of 5-minute polls.
+
+Add `--dark` to also stream off-exchange prints for the watch list — the live
+form of E2b, emitting on clusters rather than on prints. It stays opt-in
+because it is the whole tape and can starve the channels that decide things.
+**Its output is subject to every E2b rule**: the mid split is inference, a lone
+block means nothing, and the stream has no ADV denominator, so a cluster line is
+a prompt to run E2b properly on the REST route, not a substitute for it. Halts are always surfaced — a halt on an open
 position is not a low-priority event.
 
 ---
