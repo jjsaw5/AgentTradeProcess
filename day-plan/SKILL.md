@@ -1,6 +1,6 @@
 # DAY PLAN — the morning strategy card
 
-**Created 2026-08-26 (phase 6 of the owner's improvement program). Status:
+**Created 2026-08-25 (phase 6 of the owner's improvement program). Status:
 UNCALIBRATED** until `brief-review` has graded 20 day cards. This module
 turns the brief's *validated* structure into a written, pre-open plan. It
 invents nothing: selection rules come from the scorecard's evidence, trade

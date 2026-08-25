@@ -435,7 +435,7 @@ All rules bind the live brief on merge to main.
 
 ---
 
-## 2026-08-26 — Day Plan module built (phase 6, final phase of the program)
+## 2026-08-25 (later) — Day Plan module built (phase 6, final phase of the program)
 
 **Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Owner: "do both" —
 build the Day Card and open the merge PR.
@@ -450,7 +450,7 @@ build the Day Card and open the merge PR.
   with three added fields (WINDOW / DO NOTHING IF / RE-ARM). Pre-open file
   is append-only after 9:30 — the pre-registration is the product. Zero
   cards is a correct output. UNCALIBRATED until 20 graded cards.
-- `brief-review/SKILL.md` Output step 6: reviews now grade day cards on
+- `brief-review/SKILL.md` Output step 6 (added 2026-08-25): reviews now grade day cards on
   their own triggers plus contract-mark payoff and adverse excursion; new
   `day_cards` table created in the scoring DB.
 - `CLAUDE.md` §1: rows updated for `day-plan/` and MUST_MENTION.md.
