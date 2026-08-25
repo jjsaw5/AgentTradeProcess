@@ -171,7 +171,14 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    writes `brief-review/MUST_MENTION.md`) and commit the refreshed file with
    the review. The morning brief reads that file as its coverage floor per
    `daily-market-brief/SKILL.md` §6A.
-6. Session log entry per `CLAUDE.md` §8 when a review session touches the
+6. **Grade the day plan (added 2026-08-26):** if `day-plan/cards/D.md`
+   exists, grade each of its cards under the same rules as §R — on the
+   card's own written triggers — plus the fill-relevant extras: payoff on
+   the contract mark (`get_option_historicals`) where liquidity allows, and
+   the adverse excursion between trigger and resolution. Record to the
+   `day_cards` DB table and note the roll-up in the review file and
+   `SCORECARD.md`. Day cards are UNCALIBRATED until 20 are graded.
+7. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
 
 ## What this process does not do

@@ -432,3 +432,35 @@ Day Card spec (brief → options-expert intake → pre-open conditional plans).
 All rules bind the live brief on merge to main.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-26 — Day Plan module built (phase 6, final phase of the program)
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Owner: "do both" —
+build the Day Card and open the merge PR.
+
+### What changed
+
+- `day-plan/SKILL.md` — the ~9:20 strategy layer. Selects the brief's §9
+  cards through five evidence-cited filters (trigger-complete only; intraday
+  structure over gap momentum; price outranks flow; live regime gate; event
+  gate), runs survivors through options-expert Stages 3–7 unchanged, and
+  writes 0–3 pre-open conditional plans to `day-plan/cards/YYYY-MM-DD.md`
+  with three added fields (WINDOW / DO NOTHING IF / RE-ARM). Pre-open file
+  is append-only after 9:30 — the pre-registration is the product. Zero
+  cards is a correct output. UNCALIBRATED until 20 graded cards.
+- `brief-review/SKILL.md` Output step 6: reviews now grade day cards on
+  their own triggers plus contract-mark payoff and adverse excursion; new
+  `day_cards` table created in the scoring DB.
+- `CLAUDE.md` §1: rows updated for `day-plan/` and MUST_MENTION.md.
+
+### Decisions
+
+- The Day Plan is deliberately a THIN layer: no new edge tests, no new risk
+  math — options-expert and the playbook already own those. Its value is
+  selection (what the scorecard validated) and pre-registration (what makes
+  it gradeable). First live run: the first trading morning after this
+  branch merges.
+
+**DEVIATIONS:** None.
