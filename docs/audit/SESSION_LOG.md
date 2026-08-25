@@ -388,3 +388,27 @@ Binds on merge to main, as with I-4/I-7. Next phases queued: I-3/I-6, I-5,
 Day Card.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-25 (later) — I-3 and I-6 ratified (phase 4)
+
+**Decision:** owner ratified both discipline rules.
+
+- **I-3 (no card without triggers)** → `daily-market-brief/SKILL.md` §9:
+  every radar card carries a written confirmation AND invalidation with level
+  and deadline; levels name their reference; two-sided cards arm both
+  directions; pricing/volatility cards state a falsifiable test; same-morning
+  whipsaw precedence stated when plausible. Evidence: TOL and CRWV
+  ungradeable; the energy 8/24 sell-the-news branch described-but-unarmed;
+  TLT "new lows" without a reference. The rule encodes the process's most
+  validated finding (confirmations 8/9, invalidations 9/9).
+- **I-6 (compute, don't quote, %-changes)** → DATA FAILURE RULE section:
+  %-changes computed from the primary record; coverage-only figures carry
+  source + UNVERIFIED; trailing-window claims name endpoints. Evidence: the
+  only 2 factual errors in 31 checks were both quoted secondhand figures.
+
+Ledger + Turso flipped both to RATIFIED 2026-08-25. Six of seven ledger items
+are now ratified; I-5 and the Day Card remain queued. Binds on merge to main.
+
+**DEVIATIONS:** None.

@@ -284,6 +284,18 @@ If you cannot determine why something moved:
 
 Never invent a reason.
 
+**COMPUTE, DON'T QUOTE, %-CHANGES (ratified 2026-08-25 — brief-review ledger
+I-6).** Any prior-session or trailing-window %-change stated in the brief must
+be **computed from the primary price record** (Robinhood closes — data the
+brief has already fetched), never copied from news coverage. A %-figure that
+can only be sourced from coverage carries the source name inline and
+`UNVERIFIED`. Trailing-window claims ("down on the week") also name the
+window's endpoints. This exists because the only factual errors in the first
+five graded reviews (2 of 31 checks) were both secondhand web figures stated
+as fact — COIN "+12% yesterday" (actual +9.55%) and HIMS "down ~7% on the
+week" (actual +8.7% from Monday's close) — while every computed number was
+correct.
+
 ---
 
 # INVESTMENT-OPPORTUNITY RULE
@@ -836,6 +848,30 @@ worse than a short list.
 Identify the **3–5 most interesting situations to investigate today**.
 
 These are NOT automatic trades.
+
+**NO CARD WITHOUT TRIGGERS (ratified 2026-08-25 — brief-review ledger I-3).**
+Every card — event, volatility, and pricing cards included — must carry a
+written **confirmation AND invalidation, each with a level (or measurable
+condition) and a deadline**. Specifics that graded reviews have shown matter:
+
+- **Reference every level.** "New lows" or "reclaims the zone" names the
+  number and the lookback ("below 81.17, the 8/18 low"), never a bare phrase.
+- **Two-sided cards arm BOTH directions.** If the card describes a bearish
+  branch, it states the bearish trigger — a branch without a trigger is
+  commentary, not a plan (energy 8/24: the sell-the-news branch was described,
+  realized, and untradeable as written).
+- **Pricing/volatility cards state a falsifiable test** (e.g., "N-day realized
+  move exceeds the straddle by X") even when direction is deliberately absent
+  (CRWV 8/21 and TOL 8/18 were ungradeable — and unactionable — without one).
+- **Say which side wins a same-morning whipsaw** when both triggers could
+  plausibly fire in the first hour.
+
+A card that can't be written this way isn't an opportunity yet — it goes to
+§10/§13 as an observation. Track record behind the rule: across the first
+five graded reviews, fired confirmations paid 8/9 and fired invalidations
+were correct kills 9/9 — the written trigger pair is the single most
+validated structure this process produces, and a card without one discards
+exactly the part that works.
 
 These can include:
 
