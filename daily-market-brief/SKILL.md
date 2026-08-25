@@ -670,6 +670,22 @@ Format:
 
 Flag criteria: premarket move >2%, earnings within 7 days, unusual options flow, or meaningful news. If UW flow is one-sided on a name (like heavy ask-side call sweeps), say so explicitly — that pattern has proven meaningful.
 
+**FRAGILITY FLOOR (ratified 2026-08-25 — brief-review ledger I-4).** A
+watchlist name that moved **≥15% over the trailing 3 sessions** or **≥5% in
+the prior session** (either direction, close-to-close, from the primary price
+record) may NOT receive a bare "nothing notable" one-liner, no matter how calm
+its premarket print looks. It gets one sentence naming the trailing move and
+the level that matters, e.g.:
+
+`ARCT $13.26 (−1.4%) — third day of the mRNA-halo run (+31%/3d); holding $13 keeps the run alive.`
+
+This does not force a full flag block — one honest sentence is enough. It
+exists because in the first five graded reviews, five quiet-list misses
+(NBIS −7.6%, RDDT −3.8%, ARCT +6.9%, TSLA −3.8%, MRNA −4.3%) all followed the
+same shape: a violent trailing session, a calm premarket print, a "nothing
+notable" line, and a ≥3% move that day. A flat premarket is not evidence a
+fresh mover has finished moving.
+
 Do not skip this section even on quiet days — the one-liners are the confirmation that I don't need to look at those names today.
 
 ---

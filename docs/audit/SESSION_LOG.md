@@ -318,3 +318,21 @@ yesterday's brief graded against the realized market; standard T+1 review.
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-08-25 (later) — I-4 ratified: fragility floor written into the brief spec
+
+**Decision:** the account owner ratified I-4 ("fix number 1 first" — phase 1
+of adopting the review process's proposals). `daily-market-brief/SKILL.md` §6A
+now carries the FRAGILITY FLOOR: a watchlist name ±15% over 3 sessions or ±5%
+the prior session cannot get a bare "nothing notable" one-liner — it gets one
+sentence naming the trailing move and the level that matters. Evidence: five
+quiet-list misses in five graded reviews, all this exact shape.
+
+`IMPROVEMENTS.md` and the Turso ledger flipped I-4 to RATIFIED 2026-08-25.
+First brief this binds: 2026-08-26 (tomorrow); the 8/26 review grades against
+it. Remaining phases queued per the owner's prioritization: I-7, I-2 (+ the
+must-mention automation), I-3/I-6, I-5, then the Day Card spec.
+
+**DEVIATIONS:** None.
