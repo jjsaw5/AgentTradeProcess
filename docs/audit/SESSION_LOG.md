@@ -336,3 +336,21 @@ it. Remaining phases queued per the owner's prioritization: I-7, I-2 (+ the
 must-mention automation), I-3/I-6, I-5, then the Day Card spec.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-25 (later) — I-7 ratified: active-complex rule (phase 2)
+
+**Decision:** owner ratified I-7. `daily-market-brief/SKILL.md` §6A now
+requires: when a MATERIAL CATALYST is classified, the brief names its
+watchlist complex, and while any member is ±5% within the trailing 2 sessions
+every member gets a one-line complex-status note instead of "nothing
+notable." Deactivates after two quiet sessions. Evidence: ARCT +22.4% / SLS
++15.4% (8/21) and ARCT +6.6% / MRNA −4.3% (8/24) one-liner'd while the
+mRNA-halo complex the briefs themselves named was still paying.
+
+Ledger + Turso flipped to RATIFIED 2026-08-25. Binds on merge to main, same
+as I-4. Next phase: I-2 (accumulation escalation) plus the must-mention
+automation.
+
+**DEVIATIONS:** None.

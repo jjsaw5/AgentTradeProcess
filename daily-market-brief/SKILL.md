@@ -686,6 +686,23 @@ same shape: a violent trailing session, a calm premarket print, a "nothing
 notable" line, and a ≥3% move that day. A flat premarket is not evidence a
 fresh mover has finished moving.
 
+**ACTIVE-COMPLEX RULE (ratified 2026-08-25 — brief-review ledger I-7).** When
+the brief classifies a story as a MATERIAL CATALYST, it names the complex —
+the set of watchlist tickers tied to that catalyst (e.g., the 2026-08-19 mRNA
+readout ⇒ MRNA, MRK, ARCT, SLS). While the complex is ACTIVE — **any member
+±5% close-to-close within the last 2 sessions** — every watchlist member of
+it gets a one-line complex-status note instead of a bare "nothing notable":
+
+`ARCT $13.26 (−1.4%) — mRNA-halo member, complex still active (MRNA ±9% Fri); rides the theme both ways.`
+
+The complex deactivates, and members return to normal one-liner rules, after
+two consecutive sessions with no member moving ±5%. This exists because the
+8/19 readout was correctly grouped as a trio that morning — and then the
+satellites decayed to "nothing notable" while the theme was still paying:
+ARCT +22.4% and SLS +15.4% on 8/21, ARCT +6.6% and MRNA −4.3% on 8/24, all
+one-liner'd. A complex the brief itself called the week's defining story
+stays covered until it stops moving.
+
 Do not skip this section even on quiet days — the one-liners are the confirmation that I don't need to look at those names today.
 
 ---
