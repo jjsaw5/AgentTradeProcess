@@ -412,3 +412,23 @@ Ledger + Turso flipped both to RATIFIED 2026-08-25. Six of seven ledger items
 are now ratified; I-5 and the Day Card remain queued. Binds on merge to main.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-25 (later) — I-5 ratified (phase 5); ledger complete
+
+**Decision:** owner ratified I-5 into `daily-market-brief/SKILL.md` §6A: a
+carry-over flag whose written price trigger has CONFIRMED must be restated
+with its status, and may not be softened on flow evidence alone — only a
+price development changes the call (playbook §0 applied to the brief's own
+follow-through). Evidence: WDC "cooling" on 8/19 one session after its
+loses-$500 trigger confirmed, followed by a −6.9% day off an exact $500.00
+rejection; plus three flow-lean-vs-price flag misses (NVDA 8/19, MRK 8/20,
+PLTR 8/24).
+
+**All seven ledger items are now RATIFIED** (I-1 retroactive; I-2 through
+I-7 owner-ratified 2026-08-25). Ledger + Turso in sync. Remaining queue: the
+Day Card spec (brief → options-expert intake → pre-open conditional plans).
+All rules bind the live brief on merge to main.
+
+**DEVIATIONS:** None.
