@@ -437,3 +437,34 @@ keys remain unrotated by owner decision (8/19; unchanged).**
 365"; the official close printed 362.78 after a late-auction fade. The premature
 verdict is left standing in the transcript and corrected in the journal, not
 rewritten (§9).
+
+---
+
+## 2026-08-25 — Tuesday: whipsaw day, instrument-selection finding, one assistant call wrong
+
+**Session:** claude.ai/code remote (continuation). Read-only brokerage throughout (§2).
+
+### What changed and why
+
+1. **`playbook/PLAYBOOK.md` §6** — two journal rows added:
+   - **2026-08-24** (+$20, 21 trades, grade C) — never filed on the day; recorded as the gap it is. Both pre-registered cards (W1, R1) resolved correctly without an entry: W1 hit its written invalidation (daily close below 355), R1 never printed its two-close trigger and expired at its 2:00 PM stale-cutoff.
+   - **2026-08-25** (−$280, 10 trades, grade C) — reconciled from brokerage fills.
+2. No spec changes. `options-expert/log/2026-08-24-WATCHLIST.md` (W1) and `2026-08-24-CARD-R1.md` (R1) are now closed history — both invalidated/expired unentered, at zero cost. That is the pre-registration mechanism working as designed and is the strongest evidence the log has produced so far.
+
+### The finding
+
+Week-to-date by instrument (68 trades): **index ETFs (QQQ+SPY) −$760 on 10 trades; everything else +$518; TSLA alone +$833 on 50 trades.** The eight QQQ trades average −$78.50. Proposed rule — **NOT ratified, recorded for the owner's decision**: no index-ETF options trades until QQQ/SPY carry the same pre-written card standard as single names. Stated mechanism is interpretation, not fact: TSLA receives a full daily research stack (gex-levels, net-prem-ticks, oi-change roll, participation vs the opening mean); the index trades receive none of it.
+
+### DEVIATIONS
+
+**1. Assistant analytical error (§9).** At 10:33 the read delivered was that TSLA's long case had "deteriorated on every axis." TSLA then rallied 351.57 → **356.90 by 12:57**, and the owner's two best trades of the day landed inside that window. The mechanical trigger (two 5-min closes above 353.43, participation ≥0.40) fired in the 11:00 hour and would have caught the move — **the rule was sound; the narrative layered over it was wrong.** Left standing in the transcript, corrected here, not rewritten.
+
+**2. `gex-levels` intraday drift caused a retracted call.** TSLA's call wall read **387.5 at 10:14** ("nothing overhead") and **352.5 at 10:33**, with the gamma flip moving 346.03 → 353.65 across the same 19 minutes. The 10:14 read was built on a thin-data snapshot. Operational rule for DATA_LAYER consideration: **treat any `gex-levels` pull before ~10:30 ET as provisional** and re-pull before acting.
+
+**3. Flow-alert single-print vs chain aggregate.** A TSLA 8/26 352.5P alert showed 32× OI at "100% ask side" — read alone, a large bearish bet. The full 8/26 chain showed every strike trading 14–49× OI at **48–53% ask**: even two-sided churn, no directional signal. Recorded as a deeper version of the 8/20 AMZN side-attribution lesson — *correct side data on one print can still mislead when the aggregate is balanced.*
+
+**4. `flow-alerts` window is minutes, not a day.** A `limit=200` market-wide pull returned only **11 minutes** of alerts (13:35–13:46 ET) on a busy tape. Any "cluster scan" from that endpoint is a snapshot and must be labelled as one.
+
+**5. Plan-vs-book divergence, continuing.** 10 trades today and 21 on 8/24; the written process saw and graded none of them in real time. Owner traded discretionary throughout, which is his call; recorded per §8 because cards, monitors and risk reads act on the book the assistant is told about.
+
+**6. Read-only throughout — no order placed, modified or cancelled (§2). Both API keys remain unrotated by owner decision (8/19; unchanged).**
