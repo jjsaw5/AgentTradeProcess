@@ -284,3 +284,37 @@ pre-registration (rubric predates the session; graded after the close).
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-08-25 — brief 2026-08-24 graded; NVDA/MSTR items resolved; n=5
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Owner asked for
+yesterday's brief graded against the realized market; standard T+1 review.
+
+### What changed
+
+- `brief-review/reviews/2026-08-24.md` — best graded day yet: F 7/7, O HIT,
+  M HIT (5/5 lifetime), **G HIT (the first)** — QQQ's PDL break traveled to
+  the written targets and died at the called 710 wall; SPY capped at the
+  called 765/766 band. Radar: five cards, five clean resolutions (QQQ
+  breakdown CONF-PAID with both targets hit in 25 minutes; NVDA, energy-long,
+  PDD all INVALIDATED by their own written triggers; SLS NO-TRIGGER).
+  Watchlist precision 6/9, recall 5/9.
+- Resolved carried items: NVDA 8/20 and 8/21 cards both INVALIDATED ($210
+  broke pre-print — all three NVDA bullish structures killed by their own
+  invalidations before Wednesday's earnings); MSTR CONF-PAID (+2.83% from
+  trigger, peak +7.3%); MRK stays OPEN to the 8/26 window end.
+- `IMPROVEMENTS.md` / `SCORECARD.md` / Turso DB updated (n=5). Key finding:
+  **all four 8/24 recall misses (HIMS -8.0%, TSLA -3.8%, MRNA -4.3%,
+  ARCT +6.6%) are covered by pending I-2/I-4/I-7** — ratification is now the
+  bottleneck; the review process has nothing further to add on recall until
+  those are decided.
+- Bessent presser outcome (symbolic; oil sold the news) verified via web,
+  cited in the review. Friday's official settles confirmed the 8/21 review's
+  near-settled prints within 3–4¢; no grade changes.
+- Merged `origin/main` for `briefs/2026-08-24.md`.
+
+### DEVIATIONS
+
+None.
