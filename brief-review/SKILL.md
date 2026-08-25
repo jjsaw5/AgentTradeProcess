@@ -157,7 +157,21 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    markdown review is the evidence record; the DB is the queryable index —
    on disagreement the markdown wins and the row gets corrected. Credentials
    for the sync come from the environment/`.env` by variable name only.
-5. Session log entry per `CLAUDE.md` §8 when a review session touches the
+   **Coverage additions (2026-08-25, for the must-mention automation):**
+   (a) record a `watchlist_events` row with `move_pct` for EVERY watchlist
+   name each graded day — quiet names that stayed quiet get outcome
+   `QUIET-OK` — so the I-4 trailing-move math never has silent gaps;
+   (b) record each name's flow lean as stated by the graded brief into
+   `flow_observations` (`bull` / `bear` / `mixed` / `none`, with the brief's
+   own wording as the note) — this is what powers I-2's streak detection;
+   (c) maintain the `complexes` table when a MATERIAL CATALYST names or
+   deactivates a complex (deactivation is a deliberate edit, prompted by the
+   generator's "deactivation due" note, never automatic).
+5. **Regenerate the checklist:** run `tools/must_mention.py` (reads the DB,
+   writes `brief-review/MUST_MENTION.md`) and commit the refreshed file with
+   the review. The morning brief reads that file as its coverage floor per
+   `daily-market-brief/SKILL.md` §6A.
+6. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
 
 ## What this process does not do

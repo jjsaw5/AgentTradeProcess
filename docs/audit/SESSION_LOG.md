@@ -354,3 +354,37 @@ as I-4. Next phase: I-2 (accumulation escalation) plus the must-mention
 automation.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-25 (later) — I-2 ratified + must-mention automation (phase 3)
+
+**Decision:** owner ratified I-2 (accumulation escalation: same flow lean in
+≥3 consecutive briefs ⇒ FLAGGED with the cumulative build quantified) into
+`daily-market-brief/SKILL.md` §6A, alongside a new MUST-MENTION CHECKLIST
+instruction: each brief run reads `brief-review/MUST_MENTION.md` as its §6A
+coverage floor, with a staleness fallback.
+
+**Infrastructure:** the rule needs cross-brief memory, so the memory is now
+mechanical rather than judgment:
+- Two new Turso tables — `flow_observations` (per-brief per-name flow lean,
+  seeded honestly from the archived briefs' own wording for HIMS/NVDA/SLS/
+  PLTR) and `complexes` (mrna-halo seeded, activated 2026-08-19).
+- `brief-review/tools/must_mention.py` — queries the DB and regenerates
+  `MUST_MENTION.md` with every name tripping I-2/I-4/I-7 and the exact
+  reason. Missing coverage is NA_no_data, never treated as cleared.
+- `brief-review/SKILL.md` Output now requires: move_pct rows for ALL
+  watchlist names daily (QUIET-OK for non-events), flow-lean recording, and
+  regenerating the checklist as part of each review.
+
+**First generated checklist** (data through 2026-08-24): ARCT (all three
+rules), MRNA, SLS, MRK (complex), HIMS, SOXL, WDC (fragility), NVDA (I-2:
+bull lean 4 consecutive briefs). Honest seeding note: HIMS's current streak
+reads bull-bull-mixed-none per the briefs' own words, so I-2 alone would not
+fire on it today — it makes the list via I-4. The rules complement rather
+than overlap.
+
+Binds on merge to main, as with I-4/I-7. Next phases queued: I-3/I-6, I-5,
+Day Card.
+
+**DEVIATIONS:** None.
