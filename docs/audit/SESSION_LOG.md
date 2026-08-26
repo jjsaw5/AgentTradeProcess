@@ -791,3 +791,51 @@ are assumption-dependent. Stated in the amendment §A6.
 **9. Entry-time attribution is verified for 2026-08-26 only.** Every prior
 session in both runs uses exit timestamps as a proxy. Measured error at the 60m
 and 90m cutoffs on the one verified day is **zero**; unquantified elsewhere.
+
+### Close-out — `/tsla-close`, 15:15 ET
+
+The session finished **+$56 realized** across 11 round trips (7/4, profit factor
+1.18) after a late 342.5C that made +$90. Graded and logged:
+`tesla/log/2026-08-26.md` **OUTCOME**, and one row appended to
+`playbook/PLAYBOOK.md` §6.
+
+**Grade: C.** Green and still C — `playbook` §5, a rule-bending win is a bad
+win. Same standard as 2026-08-24, also green, also C. `tesla/log/` now holds
+**2 graded sessions. Status: UNCALIBRATED.**
+
+Account closed at **$1,061.16**, back above the §5a $1,000 sizing floor it
+crossed below at 14:30 ($971.18). Recorded as a live question for the owner:
+a floor crossed twice in ninety minutes may not be doing the work its
+ratification implied. Not changed here — that is his call.
+
+**Spec impact recorded, one change owed:**
+
+| Threshold | Result |
+|---|---|
+| Volume floor ~185,000 | **ARMED at 12:33 — first arming in 8 samples across 4 sessions.** Disarmed by 12:45. A P2 data point; no change owed yet. |
+| 15:00 bell / 15:25 hard exit | Held. Last exit 15:05:44, nothing open into 15:30. |
+| E1 theta arithmetic | Held on trade 11 by ~18×. Deep-ITM 0DTE carries near-zero extrinsic, which makes θ nearly irrelevant there — a structural fact, not a general validation of E1. |
+| 5% spread gate | 340C at 3.89% — inside, consistent with P1. |
+| 3-tick buffer vs the playbook's 15 cents | **Still unresolved.** $0.20 used all day; today does not settle it. |
+| **`spot-exposures/strike` ignores `expiry`** | **A DATA_LAYER-TSLA.md edit is OWED and not made today.** |
+
+**P8 / P9 — first live data point, recorded on the least convenient day.**
+Green at 11:00 by **+$230**, finished **+$56**; P&L from post-11:00 entries was
+**−$174**. Both predictions point the right way, on the session where the owner
+caught a late winner and it felt like staying was vindicated. Warning-only, one
+session, nothing moves off `UNCALIBRATED`.
+
+**DEVIATIONS (close-out)**
+
+**10. Eleven trades, no card for any of them** — restated at close because the
+grade rests on it. `/tsla-watch` covered one position of eleven.
+
+**11. A `DATA_LAYER-TSLA.md` correction is owed and unwritten.** The
+`spot-exposures/strike` `expiry` defect was found at 11:20, recorded twice in
+the log, and the spec is still wrong. Per the `2026-08-18-REPLAY-TEST.md` model
+the fix belongs in a separate commit; it has not been made, and naming it here
+is not the same as fixing it.
+
+**12. The §5a equity floor was breached intraday and is not currently binding.**
+No sizing decision was blocked by it because the account recovered before the
+next entry. The rule was never actually tested.
