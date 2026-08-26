@@ -146,6 +146,53 @@ total. In either case the window extends rather than the prediction changing.
 
 **Nothing above may be revised once the first session is recorded.**
 
+## P9 — the unconditional stop, **account-wide**. **Expected: afternoon trading is net negative.**
+
+Registered **2026-08-26**, hours after P8 and before any session has been traded
+under either. Evidence: `tesla/PROPOSED-GREEN-STOP.md` **AMENDMENT**.
+**Warning-only** — it kills nothing during the test.
+
+**Scope: the whole brokerage account, all symbols.** This is the first
+prediction in this file that is not TSLA-only, and it is here because this is
+the repository's only pre-registration ledger. It is flagged rather than filed
+elsewhere so the scope difference stays visible.
+
+*Note on P8, which is NOT amended:* P8 was registered without an explicit scope
+line and is read as **TSLA-scoped** by the location of its evidence. That
+ambiguity is disclosed here rather than fixed by editing a registered
+prediction (§9).
+
+Why a second prediction rather than a correction to the first: across **153
+closes over 16 sessions** the *conditional* (green) stop **loses $246** while
+the *unconditional* stop **saves $638**. The seven-day TSLA sample behind P8
+showed the reverse. Rule A is positive at 8 of 9 cutoffs with a monotonically
+decaying edge, and its leave-one-day-out edge (+$193 to +$1,324) never changes
+sign; Rule B's does.
+
+**Predict:** across the next **ten** trading sessions, aggregate realized P&L
+from positions **entered after 11:00 ET, all symbols**, will be **negative**.
+
+**Falsified if:** that aggregate is **positive**, or negative by less than
+**$100** in total — an effect that small does not justify closing the book
+before noon.
+
+**Inconclusive if:** fewer than ten sessions contain a post-11:00 entry, or if a
+single session contributes more than **70%** of the absolute total. The window
+extends; the prediction does not change.
+
+**Measurement, fixed now:**
+
+- Attribution is by **entry** time, from `get_option_orders` /
+  `get_equity_orders` — not by exit time. A position opened before 11:00 and
+  closed after belongs to the pre-11:00 bucket and is excluded.
+- Expirations (closes timestamped at 16:00 ET with price 0) are **excluded**;
+  they have no entry decision on the day they settle.
+- Sessions with zero post-11:00 entries count as **$0** and are included in the
+  count of ten.
+- All symbols, all asset classes the account trades.
+
+**Nothing above may be revised once the first session is recorded.**
+
 ---
 
 ## Sampling

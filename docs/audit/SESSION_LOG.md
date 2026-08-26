@@ -736,3 +736,58 @@ when reported, not smoothed, not resolved.
 **6. The `UNUSUAL_WHALES_API_KEY` rotation remains outstanding** (§6, two
 exposures). Unchanged today; no credential was printed, pasted or committed, and
 the staged diff was scanned before commit.
+
+### Addendum, same session — the month-wide run reverses the recommendation
+
+The owner asked the same question of the **whole account for August** rather
+than TSLA alone. Re-run on **153 realized closes across 16 sessions** (all
+symbols) instead of 62 TSLA closes across 7.
+
+| | August realized | Ending value |
+|---|---|---|
+| actual | −$704 | **$971.18** (broker-read) |
+| hard 11:00 stop, unconditional | −$66 | **$1,609.18** |
+| 11:00 stop only when green | −$950 | $725.18 |
+
+**The conditional rule recommended earlier this session is wrong for this
+account.** The two sessions that punish an early stop (08-04 +$686 after 11:00,
+08-13 +$216) are **non-TSLA** and were invisible in the narrower sample. The
+unconditional stop is positive at 8 of 9 cutoffs with a monotonically decaying
+edge and a leave-one-day-out range of +$193 to +$1,324 that never changes sign;
+the conditional one flips sign depending on which days are included.
+
+Larger than either rule: **TSLA +$888 across 62 trades (56.5% win, +$14.32
+avg); everything else −$1,592 across 91 trades (31.9% win, −$17.49 avg)**, with
+QQQ alone at −$941. Cumulative P&L across the month peaks at +$332 in the first
+thirty minutes and never returns above zero after 10:00.
+
+**Decisions:**
+
+1. **`tesla/PROPOSED-GREEN-STOP.md` amended, not rewritten.** The original
+   §1–§6 stand as written with §5's recommendation explicitly superseded. The
+   error is the record — the analysis was correct for its sample and the sample
+   was too narrow.
+2. **P8 stands unamended and P9 registered separately.** Rewriting a registered
+   prediction because better data arrived is the §9 failure even when the new
+   data is better. P9 is account-wide and says so; P8's missing scope line is
+   disclosed inside P9 rather than edited into P8.
+3. **P9 attributes by entry time, not exit time**, and excludes expirations —
+   both fixed before any session is recorded so neither can be chosen later.
+4. **No new rule proposed from §A4.** "Trade TSLA only" is `CHARTER.md` §1
+   already; the month is evidence for an existing decision, not a new one.
+
+**DEVIATIONS (addendum)**
+
+**7. A recommendation made earlier in this same session was wrong and is
+superseded within it.** `PROPOSED-GREEN-STOP.md` §5 recommended the conditional
+rule on a 7-session TSLA-only sample. It does not survive 16 sessions
+account-wide. Recorded as an amendment with both results intact rather than a
+silent edit.
+
+**8. Account value figures assume no deposits or withdrawals in August**, which
+this repository cannot verify. Scenario *differences* are exact; absolute levels
+are assumption-dependent. Stated in the amendment §A6.
+
+**9. Entry-time attribution is verified for 2026-08-26 only.** Every prior
+session in both runs uses exit timestamps as a proxy. Measured error at the 60m
+and 90m cutoffs on the one verified day is **zero**; unquantified elsewhere.
