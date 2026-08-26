@@ -839,3 +839,65 @@ is not the same as fixing it.
 **12. The §5a equity floor was breached intraday and is not currently binding.**
 No sizing decision was blocked by it because the account recovered before the
 next entry. The rule was never actually tested.
+
+### Amendment — two more trades after the close-out, and the spec fix
+
+**`tesla/DATA_LAYER-TSLA.md` §7a corrected in its own commit** (`6476431`), per
+the `2026-08-18-REPLAY-TEST.md` model: the failure stayed in the log, the fix
+went to the spec, and neither was rewritten to look prescient. Deviation 11 from
+the close-out is **closed**.
+
+`spot-exposures/strike` accepts `expiry` and discards it. Re-verified after the
+close with the tape frozen so values cannot drift: six queries — no filter,
+three different valid expiries, `1999-01-01`, and the literal `notadate` — all
+returned byte-identical payloads at the same `time`. The spec now says the
+endpoint is all-expiry always, forbids labelling its output "0DTE gamma", and
+points at `greek-exposure/expiry` (22 rows, one per expiry, with `dte`) as the
+correct per-expiry source. Units between the two are **not** reconciled and that
+is recorded as open work rather than assumed.
+
+Two method rules came out of it and are in the spec: run parameter-honoured
+checks against a **frozen** tape, and test **magnitude against the unfiltered
+total** rather than two payloads for equality — a filter returning 100% of the
+total is broken even when the bytes differ. During RTH this defect read as a
+live feed refreshing and nearly escaped.
+
+**Session totals superseded.** Two further trades at 15:13 and 15:16 take the
+day to **+$102** on 13 round trips (9/4, profit factor 1.32); account closed
+**$1,106.84**. `tesla/log/2026-08-26.md` carries an AMENDED OUTCOME block
+appended beneath the original, which was not edited.
+
+**Grade unchanged at C**, and more clearly earned: both late trades were
+unstopped, both 1.6–1.7× the premium cap, both opened past the 15:00 bell, the
+last exiting 66 seconds before the 15:25 hard exit.
+
+**The finding worth keeping.** The same error occurred twice in one session:
+exit a winner, re-buy the identical contract inside two minutes at a worse
+price, with no 5-minute bar closing in between. 340C 13:25→13:27 cost **$30**;
+352.5P 15:14→15:16 cost **$34**. Held straight through, the second pair was
++$80; split it was +$46. **$64 of one habit on a $102 day.** That is
+`PROPOSED-RANGE-GATE.md` Rule 2, now the best-evidenced unratified rule here —
+two clean, quantified instances on the same pattern, both of which finished
+green, which is why it survives.
+
+**P8 / P9 after the amendment: green at 11:00 by +$230, finished +$102,
+post-11:00 entries −$128.** The owner added +$146 across two winners between the
+close-out and this amendment and the figure stayed negative. Recorded on the
+more inconvenient version of the day.
+
+**DEVIATIONS (amendment)**
+
+**13. Two trades were taken after the session was declared closed**, neither
+with a resting stop, both over the premium cap, both after the decision bell.
+Reported after the fact; `/tsla-watch` was not running.
+
+**14. Deviation 11 is closed.** The `DATA_LAYER` correction is written and
+committed separately.
+
+**15. Deviation 12 stands** — the §5a floor was crossed and recovered without
+ever blocking a sizing decision, so it remains untested. Account closed
+$1,106.84, comfortably above it.
+
+**16. The `UNUSUAL_WHALES_API_KEY` rotation remains outstanding** (§6, two
+exposures). No credential was printed, pasted or committed today; every staged
+diff was scanned.
