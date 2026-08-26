@@ -497,3 +497,34 @@ the seven ratified rules merged to main).
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-08-26 (post-close) — brief 2026-08-26 graded; first day under the full ruleset: recall 7/7
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Triggered by the
+scheduled post-close check-in (interim grading was delivered to the owner at
+3:55 PM; this entry finalizes with settled closes and the NVDA print).
+
+### What changed
+
+- `brief-review/reviews/2026-08-26.md` — includes the first RULE COMPLIANCE
+  section: all seven ratified rules executed on their first live run,
+  including the staleness fallback (checklist one day behind → rules
+  hand-applied). F 7/7 (with a chart-feed vs consolidated-low provenance
+  note), O HIT, M HIT (7/7 lifetime; first neutral call, on a +0.005% day),
+  G HIT (second ever — SPY lived in the called 764–767 box; QQQ closed ON
+  the called 711 magnet). Radar: MRNA CONF-PAID to its written 145.50
+  target; QQQ card correctly stood itself down; USO bear thesis wrong but
+  the I-3 armed bull trigger caught the reversal (OPEN); NVDA OPEN — the
+  print beat everything (EPS $2.22, rev $96.22B, Q3 guide $108B, per CNBC)
+  and slipped AH anyway; vol test resolves at Thursday's open.
+- **Watchlist recall 7/7 — first review with an empty recall-gap section.**
+  Precision 9/11. The five-day ARCT/HIMS leak produced zero misses.
+- Scorecard n=7; DB synced (review row, 4 radar items, 23 watchlist rows,
+  8/26 flow leans); MUST_MENTION regenerated (5 names, data through 8/26 —
+  current for tomorrow's brief IF this branch's refresh reaches main).
+
+### DEVIATIONS
+
+None.
