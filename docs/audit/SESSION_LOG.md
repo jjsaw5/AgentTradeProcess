@@ -464,3 +464,36 @@ build the Day Card and open the merge PR.
   branch merges.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-26 — brief 2026-08-25 graded; n=6; checklist refreshed
+
+**Branch:** `claude/stock-brief-accuracy-review-z3m0v7`. Standard T+1 review,
+owner-requested. Last brief graded under the old spec (it ran ~25 min before
+the seven ratified rules merged to main).
+
+### What changed
+
+- `brief-review/reviews/2026-08-25.md` — F 7/7 (third clean run), O MIXED
+  (gap classification right; PDH support broke intraday and recovered; the
+  766 call-wall observation capped the day to the penny), M HIT (6/6),
+  G MIXED (fuzzy-zone framing apt; CC 89.4 landed in the scripted in-line
+  band and the market shrugged as written). Radar: DKS washout CONF-PAID
+  (-9.7% from the VWAP trigger) and energy unwind CONF-PAID (USO -4.58%);
+  NVDA conf fired and held into tonight's print; MRK interim +3.84% the day
+  after its 165C build was surfaced; BABA no-trigger. Watchlist precision
+  8/9 (best on record); recall 7/10 — ARCT +7.7% missed for the fifth time
+  (it was on that morning's generated checklist, which the pre-merge brief
+  couldn't read); RDDT +6.4% was an afternoon headline (unknowable); OPEN
+  +5.0% uncovered by any rule.
+- Resolved: MRK 8/20 card closed NO-TRIGGER at window end.
+- Scorecard n=6; DB synced (incl. first QUIET-OK full-coverage rows and 8/25
+  flow leans per the new spec); MUST_MENTION.md regenerated — 7 names, data
+  through 8/25.
+- Today (8/26) is the first brief under all seven rules + the checklist —
+  tomorrow's review is the test of whether the recall leak closes.
+
+### DEVIATIONS
+
+None.
