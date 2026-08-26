@@ -104,6 +104,48 @@ between 09:47 and 15:03 on a session where TSLA finishes within ±0.5% of its
 a losing trade" rule in `/tsla-scan` E1 would then be overstated, and the
 required delta-to-theta multiple comes down.
 
+## P7 — reserved
+
+Not yet written. `tesla/PROPOSED-RANGE-GATE.md` names P7 as the slot for the
+range gate's forward test; it is recorded here so the numbering does not
+collide, and stays empty until that proposal is ratified or withdrawn.
+
+## P8 — the green stop. **Expected: stopping while green beats continuing.**
+
+Registered **2026-08-26**, before any session has been traded under it.
+Proposal and evidence: `tesla/PROPOSED-GREEN-STOP.md`. **Warning-only** — it
+kills nothing during the test.
+
+Backtest across 62 realized closes over 7 sessions (2026-08-14 → 2026-08-26):
+stopping at the 90-minute mark when green turns **+$888 into +$1,245**. It beats
+the actual result at **11 of 11** cutoffs from 45m to 240m; the unconditional
+version beats it at **1 of 11**. The effect is concentrated in two sessions
+(08-24 +$113, 08-26 +$264) which are the two that prompted the analysis.
+
+**Predict:** across the next **five** sessions in which the mark-inclusive
+session P&L is **positive at 11:00 ET**, the P&L accumulated **after** 11:00 is
+**negative in aggregate**.
+
+**Falsified if:** that post-11:00 aggregate is **positive**, or if it is
+negative by less than **$50** in total — an effect that small is
+indistinguishable from commission-scale noise at this sample size and would not
+justify a gate that ends the session before noon.
+
+**Inconclusive if:** fewer than five green-at-11:00 sessions occur in the test
+window, or if a single session contributes more than 70% of the post-11:00
+total. In either case the window extends rather than the prediction changing.
+
+**Measurement, fixed now so it cannot be chosen later:**
+
+- "Green at 11:00" means **realized P&L plus the mark of any open position** at
+  11:00:00 ET, read from `get_pnl_trade_history` and `get_option_positions` /
+  `get_option_quotes`. Not realized-only — §5 of the proposal explains why.
+- Post-11:00 P&L is attributed by **entry** time, not exit time. Positions
+  opened before 11:00 and closed after belong to the pre-11:00 bucket.
+- Sessions with **zero** trades after 11:00 count as $0 and are included.
+
+**Nothing above may be revised once the first session is recorded.**
+
 ---
 
 ## Sampling

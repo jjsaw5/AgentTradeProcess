@@ -653,3 +653,86 @@ Dark pool is `NA_unresolved` — the 500-row response covered only 19:12–19:29
 UTC and does not reach the window. A mechanism is documented (negative gamma
 plus three net_delta spikes of −165k/−166k/−173k) but a mechanism is not a
 cause, and no cause is claimed.
+
+---
+
+## 2026-08-26 — live session support, and the green stop
+
+Worked from **this** repository's directory (`CLAUDE.md` §0 satisfied).
+
+### What changed
+
+| File | Change |
+|---|---|
+| `tesla/PROPOSED-GREEN-STOP.md` | **new** — the green stop, pending ratification, not in force |
+| `tesla/log/2026-08-26.md` | **new** — the session record, written 14:44 ET before the close |
+| `tesla/log/rth/PREREGISTRATION.md` | **P8** added (green stop, warning-only, five sessions); **P7** reserved for the range gate so numbering does not collide |
+
+### The session itself
+
+Ten round trips, **realized −$34**, no card written before any of them. Green by
+**+$230** at 11:00; best three +$256, other seven −$290 — the 2026-08-24
+distribution reproduced. `/tsla-watch` covered one position of ten, from 13:32.
+
+Account value **$1,004.16 → $971.18**, crossing **below the `CHARTER.md` §5a
+$1,000 sizing floor**. The module is hard-stopped for new sizing until the owner
+re-ratifies. Equity was $1,269.86 on 2026-08-22.
+
+### Decisions taken, with reasoning
+
+**1. The owner's rule was separated into two and tested independently.** He
+proposed "stop after 90 minutes, especially if green." Those are different
+rules. The unconditional stop beats the actual result at **1 of 11** cutoffs
+(45m–240m); the conditional one at **11 of 11**. The clock is not the mechanism
+— the green condition is. Proposing it by its clock would have encoded the wrong
+rule and invited the negotiation the rule exists to prevent.
+
+**2. The "keep trading when red" half was deliberately NOT proposed.** It rests
+on n = 1 (2026-08-25) and is structurally a licence to trade while losing. A red
+session gains nothing from the proposal.
+
+**3. Warning-only for five sessions, pre-registered as P8.** The effect is
+concentrated in the two sessions that prompted the analysis. Same discipline as
+`PROPOSED-RANGE-GATE.md`; adopting it today would be the §9 failure.
+
+**4. The proxy error was measured, not assumed.** The P&L feed timestamps
+closes, the rule gates entries. On 2026-08-26 both are known: at the 60m and 90m
+cutoffs entry-time and exit-time give **identical** results; divergence starts
+at 120m (+$41). Prior sessions are not entry-verified and that is stated in the
+proposal.
+
+**5. A wrong call by this process was recorded rather than quietly dropped.** At
+13:37 `/tsla-watch` called the owner's 6.35 stop too tight against measured
+noise (median adverse excursion $0.27, p90 $0.64, largest in-leg pullback $0.77,
+against $0.21 of room) and pointed at 5.68. The move was real, not noise; the
+tighter stop saved roughly **$80**. The advice is **not revised** on one
+outcome — §9 — and both facts are in `tesla/log/2026-08-26.md` §3a.
+
+### DEVIATIONS
+
+**1. Ten trades were taken with no card.** Nine of ten entries had no written
+invalidation at the moment of entry (`playbook` §0). `/tsla-watch` correctly
+refused to invent levels and reported the blocker on every cycle, but the
+positions were live regardless.
+
+**2. `/tsla-scan` was never run as a pre-trade gate** — same finding as
+2026-08-24, now twice in a row. Every entry was discretionary and unscanned.
+
+**3. The premium cap was breached and only reported.** Trade 9 was $665 against
+`MAX_TRADE_PREMIUM_USD = 400` — 1.66×, and 66.2% of equity. Read-only is the
+correct posture; a cap that is only ever observed after the fact is doing less
+work than the ratification implied. Second session running with this finding.
+
+**4. `spot-exposures/strike` silently ignores `expiry`.** `expiry=1999-01-01`
+returns byte-identical data to no filter. Every gamma figure quoted today is
+all-expiry; 0DTE-isolated gamma is `NA_unresolved`. A new instance of the §3
+"a `200` is not a success" class. **Recorded, not fixed** —
+`DATA_LAYER-TSLA.md` is not amended by this commit and the correction is owed.
+
+**5. `gex-levels` vol flip printed 351.16 at 13:37**, $4.03 above its 347.13
+reading five minutes earlier, reverting to 347.27 by 14:30. Flagged as suspect
+when reported, not smoothed, not resolved.
+
+**6. The `UNUSUAL_WHALES_API_KEY` rotation remains outstanding** (§6, two
+exposures). Unchanged today; no credential was printed, pasted or committed, and
+the staged diff was scanned before commit.
