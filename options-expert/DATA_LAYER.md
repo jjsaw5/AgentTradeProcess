@@ -399,6 +399,32 @@ More generally: **a default response length is a silent filter.** Alongside the
 wrong answer without ever returning an error.
 
 
+### 3e-2. `gex-levels` moves intraday — measured 2026-08-26
+
+The `source: "vol"` frame recomputes as session volume arrives, so it is a
+**moving** number. Four TSLA observations over 65 minutes on 2026-08-26:
+
+| level | 09:36 | 09:44 | 10:05 | 10:41 | range |
+|---|---|---|---|---|---|
+| `call_wall` | 345.00 | 357.50 | 352.50 | 352.50 | 12.50 |
+| `gamma_flip` | 341.50 | 348.70 | 351.59 | 347.28 | 10.09 |
+| `gamma_magnet` | 340.00 | 350.00 | 350.00 | 345.00 | 10.00 |
+| `put_wall` | 342.50 | 347.50 | 340.00 | 335.00 | 12.50 |
+
+The underlying's own range over the same window was 9.40 points, so the levels
+moved about as far as the stock did. `gamma_magnet` held for 21 minutes and then
+moved 5 points; nothing was stable.
+
+**This is not vendor error** — a volume-weighted frame rebuilding on volume is
+the endpoint working. It is a constraint on *use*: never treat one of these as a
+fixed coordinate, never hang a trigger or stop on it, re-pull anything older than
+~15 minutes, and prefer `greek-exposure/strike` (static, OI-based) as the slower
+cross-check. `SKILL.md` Stage 1 carries the operating rules; the measurement and
+its failed pre-registration are in `log/2026-08-26-GEX-FRAME-INSTABILITY.md`.
+
+**One session, and an expiry day**, when 0DTE churns hardest — plausibly the
+worst case. An ordinary-session sample is the open experiment.
+
 ### 3a. The edge layer — what only UW has
 
 **Signed trade-level tape.** `/api/option-trades` returns individual prints with

@@ -213,6 +213,37 @@ so rather than picking the one that suits the thesis.
 concentration on an expiry date is mostly contracts that cease to exist at the
 bell. Re-pull `gex-levels` pre-open; never carry a regime read overnight.
 
+**A gamma level is a character read, not a coordinate — and never a trigger.**
+Measured 2026-08-26 on TSLA across four observations in 65 minutes:
+`call_wall` and `put_wall` each ranged **12.50 points**, `gamma_flip` **10.09**,
+`gamma_magnet` **10.00** — about as much as the underlying moved in the same
+window. `source: "vol"` frames rebuild continuously as session volume arrives,
+so the early-session frame is not a noisy version of the right answer, it is a
+different answer: the 09:36 frame sat 5–12.5 points from the 09:44 one.
+
+The operative danger is subtle. At 09:44 price was 0.45 *above* the flip; at
+10:05 it was 3.18 *below* it — but price fell only 0.75 while the flip rose 2.89.
+**Four-fifths of that regime change came from the model moving, not the market.**
+A trigger written as "close below the flip" would have fired on a recalculation.
+
+So:
+
+- **Triggers, stops and invalidations live on price structure that does not move
+  underneath you** — PDH/PDL/PDC, opening range, VWAP, prior-session levels.
+  Never on a gamma level.
+- **Use gamma for *which regime am I in* and *is continuation licensed*.** That
+  read survives the level wobbling a couple of points. Do not use it for *what
+  price will act as resistance*.
+- **Any gamma level older than ~15 minutes is void.** Re-pull before citing one.
+- **Cross-check against `/api/stock/{t}/greek-exposure/strike`**, the static
+  OI-based frame, which does not rebuild intraday. Where the two disagree
+  sharply, the vol frame is the one moving.
+
+One session of evidence, and an **expiry day** at that, so plausibly the worst
+case rather than the typical one. Full measurement and its failed pre-registration
+in `log/2026-08-26-GEX-FRAME-INSTABILITY.md`. Do not generalise it into "GEX is
+useless" — the claim is exactly as narrow as it is written.
+
 **The regime decides which edge tests you are permitted to act on.** A
 continuation setup in strong positive gamma is not a setup, it is a fade
 waiting to happen.

@@ -361,3 +361,67 @@ helper lives in the session scratchpad outside the repo tree. The staged diff
 was scanned before commit.
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-26 — `gex-levels` measured moving intraday; Stage 1 amended
+
+**What happened:** The owner asked for live TSLA levels to trade against. Serving
+that meant four `gex-levels` pulls across 65 minutes, which turned into a
+measurement nobody set out to make.
+
+**The measurement.** All four frames `source: "vol"`, same session:
+
+| level | 09:36 | 09:44 | 10:05 | 10:41 | range |
+|---|---|---|---|---|---|
+| `call_wall` | 345.00 | 357.50 | 352.50 | 352.50 | 12.50 |
+| `gamma_flip` | 341.50 | 348.70 | 351.59 | 347.28 | 10.09 |
+| `gamma_magnet` | 340.00 | 350.00 | 350.00 | 345.00 | 10.00 |
+| `put_wall` | 342.50 | 347.50 | 340.00 | 335.00 | 12.50 |
+
+TSLA's own range over the window was 9.40 points. **The levels moved about as far
+as the underlying did.** `gamma_magnet` held 21 minutes, looked like the one
+reliable number, then moved 5 points.
+
+**The finding that drove the amendment.** At 09:44 price sat 0.45 above the flip;
+at 10:05, 3.18 below it. Price fell 0.75 while the flip rose 2.89 — about
+four-fifths of the regime change came from the model moving, not the market. A
+trigger reading "5-min close below the flip" would have fired on a recalculation
+while price stood still.
+
+**What changed:**
+
+- `options-expert/SKILL.md` Stage 1 — gamma is a **character read, not a
+  coordinate, and never a trigger**. Triggers, stops and invalidations stay on
+  price structure that does not move underneath you. Any gamma level older than
+  ~15 minutes is void. Cross-check against the static OI-based
+  `greek-exposure/strike`.
+- `options-expert/DATA_LAYER.md` — new §3e-2 with the table and the constraint.
+- `options-expert/log/2026-08-26-GEX-FRAME-INSTABILITY.md` — the measurement, the
+  failed pre-registration, and the open experiment.
+
+**Decisions:**
+
+1. *Pre-registration kept verbatim, and it was wrong.* At 09:36 the prediction
+   was that the frame would firm up by 10:00 with ~30 minutes of volume behind
+   it. It did not, and it was still moving at 10:41. Recorded as written, per §9
+   and the E1 precedent, rather than quietly reframed as caution.
+2. *Not called vendor error.* A volume-weighted frame rebuilding on volume is the
+   endpoint working correctly. The claim is about usability as a static level,
+   and the §3e rule (use vendor levels, never sum strikes) is untouched.
+3. *Scope held to one expiry day.* 0DTE churns hardest into expiry, so this is
+   plausibly the worst case, not the typical one. The spec says so, and the
+   ordinary-session comparison is named as the next experiment instead of the
+   conclusion being widened to fit.
+4. *No trade card was produced all session.* Every exchange was levels and
+   regime; execution stayed with the human per §2.
+
+**Also recorded in the log entry:** `NO CLEAR DRIVER FOUND` across four news
+checks between 09:36 and 10:41, spanning a 2% gap down, a 6.6-point recovery and
+a 3.5-point fade. Stated as a limit of one feed rather than as an absence of news.
+
+**Verification:** No code changed — spec and log only. Live API reads only; the
+key was read from the environment, never printed, never written to a file, never
+passed on argv. Probe helper lives in the session scratchpad outside the repo.
+
+**DEVIATIONS:** None.
