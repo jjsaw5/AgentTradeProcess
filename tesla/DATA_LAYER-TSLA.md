@@ -291,7 +291,8 @@ The authority is `GET /api/openapi`.
 |---|---|---|---|
 | Regime | `/stock/TSLA/gex-levels` | obj | the regime read — one call |
 | Regime | `/stock/TSLA/max-pain` | 23 | per expiry |
-| Regime | `/stock/TSLA/spot-exposures/strike?limit=500` | 202 | live, timestamped |
+| Regime | `/stock/TSLA/spot-exposures/strike?limit=500` | 202 | live, timestamped — **all-expiry; `expiry` is silently ignored, see §7a** |
+| Regime | `/stock/TSLA/greek-exposure/expiry` | 22 | per-expiry gex with `dte` — the 0DTE slice, §7a |
 | E1 | `/stock/TSLA/volatility/stats` | obj | `iv`, `rv`, `iv_rank` together |
 | E1 | `/stock/TSLA/iv-rank` | 5 | daily `iv_rank_1y` series |
 | E1 | `/stock/TSLA/interpolated-iv` | 9 | per horizon — **field is `days`** |
@@ -378,6 +379,77 @@ below**, `time 2026-08-21T19:59:44Z`, `price 362.94`. The window brackets spot,
 so the profile is interpretable rather than a paging artifact. **Run this
 assertion every time** — it is the check that caught a wrong SPY regime read on
 2026-08-18.
+
+#### `spot-exposures/strike` SILENTLY IGNORES `expiry` — verified 2026-08-26
+
+**This endpoint is all-expiry, always. Passing `expiry` changes nothing and
+returns HTTP 200.** There is no error, no empty result, and no warning — the
+parameter is accepted and discarded.
+
+Verified with the tape frozen after the close, so every response carries the
+same `time` stamp and the values cannot drift between calls:
+
+| Query | rows | `call_gamma_oi` @ 350 | `put_gamma_oi` @ 350 | `time` |
+|---|---|---|---|---|
+| `?limit=500` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+| `&expiry=2026-08-26` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+| `&expiry=2026-08-28` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+| `&expiry=2027-01-15` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+| `&expiry=1999-01-01` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+| `&expiry=notadate` | 201 | 91,299,895.83 | −108,246,725.1 | 19:46:32 |
+
+A date before the ticker's options existed, and a string that is not a date at
+all, return the identical payload. **A real single-expiry slice would be a
+fraction of the all-expiry total, not equal to it.**
+
+**Consequence for every reader of this endpoint:** a gamma number taken from
+`spot-exposures/strike` is the sum over **all 22 listed expiries**. On a 0DTE
+day the near-dated contracts carrying the day's actual dealer risk are pooled
+with LEAPS. **Never label such a figure "0DTE gamma."** If a per-expiry figure
+is what the analysis needs and this endpoint is the source, the honest answer is
+`NA_unresolved`.
+
+**Methodological note, because it nearly hid the defect.** During RTH the same
+comparison was ambiguous: consecutive calls returned slightly different numbers
+and it read as a live feed refreshing, not as a filter being ignored. **The
+defect is only cleanly provable when the data is static.** Two rules follow: run
+parameter-honoured checks against a frozen tape, and compare *magnitude* against
+the unfiltered total rather than testing two payloads for equality — a filter
+that returns 100% of the total is broken even when the bytes differ.
+
+**This is `CLAUDE.md` §3 exactly: a `200` is not a success.** It sits beside the
+two already recorded there — `{"data": []}` on a bad parameter, and a default
+page size acting as a silent filter. This is the third form: **a parameter
+accepted and discarded.** Assume no query parameter is honoured until a control
+value proves it — the cheapest control is an absurd one.
+
+#### Use `greek-exposure/expiry` when the split by expiry is the point
+
+`/stock/TSLA/greek-exposure/expiry` **does** return one row per expiry, with
+`dte`, and it is the correct source for a 0DTE-isolated read. Verified
+2026-08-26, 22 rows:
+
+| expiry | dte | `call_gex` | `put_gex` |
+|---|---|---|---|
+| 2026-08-26 | **0** | 80,013.54 | **−135,746.78** |
+| 2026-08-28 | 2 | 159,656.50 | −111,517.91 |
+| 2026-08-31 | 5 | 29,618.09 | −21,295.69 |
+| 2026-09-02 | 7 | 12,938.13 | −8,940.35 |
+| 2026-09-04 | 9 | 47,467.77 | −29,772.21 |
+
+The 0DTE row nets **−55,733** — negative, consistent with the GASOLINE read the
+`gex-levels` flips gave the same session, and now sourced rather than inferred.
+
+**Caveat, untested:** these are the vendor's `gex` units and have **not** been
+reconciled against the `gamma_oi` units in `spot-exposures/strike`. Do not mix
+them in one calculation or compare their magnitudes. Use `greek-exposure/expiry`
+for the **shape across expiries** and the **sign**; use
+`spot-exposures/strike` for the **shape across strikes**. That reconciliation is
+open work.
+
+**This endpoint takes no useful `expiry` filter either** — passing one returns
+all 22 rows unchanged, which is correct behaviour for an expiry-keyed endpoint
+and is recorded so nobody logs it as a second defect.
 
 ### 7b. Vol — cheap in its own range, but richer than TSLA is delivering
 
