@@ -528,3 +528,19 @@ scheduled post-close check-in (interim grading was delivered to the owner at
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-08-26 (evening) — branch merged to main; review pushes now publish to main
+
+**Decision (owner):** "merge it and make review pushes go to main
+automatically." The working branch (review system + 7 graded reviews +
+ratified spec + day-plan + tonight's current checklist) is merged into
+`main`, and `brief-review/SKILL.md` Output gains step 8: review sessions
+push their own output (brief-review/**, day-plan/cards/** grading,
+SESSION_LOG) directly to `main`. Spec changes (SKILL.md/CLAUDE.md/playbook
+edits) remain outside the authorization and still require the owner's
+explicit go-ahead. This closes the daily checklist-staleness gap: tomorrow's
+brief reads tonight's MUST_MENTION (5 names, data through 8/26).
+
+**DEVIATIONS:** None.

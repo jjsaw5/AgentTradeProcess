@@ -180,6 +180,16 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    `SCORECARD.md`. Day cards are UNCALIBRATED until 20 are graded.
 7. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
+8. **Publish to `main` (owner-authorized 2026-08-26):** review sessions
+   commit and push their output directly to `main`, so the next morning's
+   brief always reads a current `MUST_MENTION.md` without waiting on a
+   merge. Scope of this authorization: `brief-review/**` (reviews,
+   scorecard, ledger evidence appends, checklist), `day-plan/cards/**`
+   grading annotations, and `docs/audit/SESSION_LOG.md` — the review's own
+   output. **Spec changes remain outside it**: edits to any `SKILL.md`,
+   `CLAUDE.md`, or the playbook still require the owner's explicit go-ahead
+   (ratification or review), exactly as before. Secret-scan every push, as
+   always.
 
 ## What this process does not do
 
