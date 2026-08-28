@@ -1,6 +1,6 @@
 # Brief accuracy scorecard
 
-**Status: UNCALIBRATED (n=7 of 20 graded trading days).** Nothing here is
+**Status: UNCALIBRATED (n=8 of 20 graded trading days).** Nothing here is
 evidence of skill or its absence yet — the scorecard exists so that at n=20
 nobody has to argue from anecdotes. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`.
@@ -13,38 +13,50 @@ per reviewed brief; full evidence in `reviews/`.
 | 2026-08-21 | 7/7 | HIT | HIT | MIXED | 1 no-trig · 1 ungradeable · resolved: MSTR CONF-PAID (+2.8%), NVDA INVALIDATED | 6/10 | 3/7 | ARCT +22.4% and SLS +15.4% one-liner'd mid-halo (→ I-7) |
 | 2026-08-24 | 7/7 | HIT | HIT | HIT (first) | 1 paid / 1 fired · 3 inv · 1 no-trig — five cards, five clean resolutions | 6/9 | 5/9 | All four recall misses covered by pending I-2/I-4/I-7 |
 | 2026-08-25 | 7/7 | MIXED | HIT | MIXED | 2 paid / 2 fired · 3 OPEN | 8/9 | 7/10 | ARCT +7.7% — on the generated checklist, brief ran 25 min pre-merge |
-| **2026-08-26** | 7/7 | HIT | HIT | **HIT** | 1 paid · 1 inv (correct stand-down) · 2 OPEN (NVDA vol test → 8/27 open) | 9/11 | **7/7** | **None — first review with an empty recall-gap section. First brief under the full ruleset.** |
+| 2026-08-26 | 7/7 | HIT | HIT | HIT | 1 paid · 1 inv (correct stand-down) · 2 OPEN | 9/11 | 7/7 | None — first review with an empty recall-gap section |
+| **2026-08-27** | 6/6 | HIT | HIT | **HIT (3rd straight)** | 2 paid / 3 fired · **1 CONF-FAILED (MRNA trap)** · 1 OPEN (MRVL → 8/28 close) | 7/10 | 6/7 | MRNA failed breakdown — trigger fired, reversed +2.9%; recall's only miss a 7¢ sub-$5 artifact |
 
-## Cumulative (n=7)
+## Cumulative (n=8)
 
-- **Facts: 43/45.** Four consecutive clean runs since I-6; the only errors
+- **Facts: 49/51.** Five consecutive clean runs since I-6; the only errors
   remain 8/20's two quoted figures.
-- **Mood: 7/7** — including the first "neutral/mixed" call, on a +0.005% day.
-- **Open read: 4 HIT / 3 MIXED.** Gap/range classification 7/7.
-- **Regime: 2 HIT / 4 MIXED / 1 MISS.** Both HITs share a shape: specific
-  walls/zones + pin-or-travel framing, called in advance (8/24 travel,
-  8/26 pin at the 711 magnet on a +0.005% day).
-- **Radar: fired-and-resolved confirmations paid 11/12** (adds MRNA 8/26,
-  −3.2% trigger-to-target in four hours). **Invalidations 10/10** — 8/26's
-  QQQ card stood itself down mid-whipsaw by its own written rule.
-  NO-TRIGGER 4, ungradeable 2. OPEN: NVDA vol test (Thursday's open vs
-  $200.5–$225.6), USO bull leg, MRK Sep 165C, BABA.
-- **Watchlist: precision 46/63 (73%) vs recall 36/59 (61%) — and 7/7 recall
-  on the first day the ratified rules ran.** The five-day ARCT/HIMS leak
-  produced zero misses under the new spec.
+- **Mood: 8/8** — including the first "neutral/mixed" call, on a +0.005% day,
+  and a "mildly bullish — narrowly" call on a narrow-breadth +0.65% trend day.
+- **Open read: 5 HIT / 3 MIXED.** Gap/range classification 8/8.
+- **Regime: 3 HIT / 4 MIXED / 1 MISS.** All three HITs share a shape:
+  specific walls/zones + behavior framing, called in advance (8/24 travel,
+  8/26 pin at the 711 magnet, 8/27 trend-day-live with 770/720 substitute
+  friction after the gap staled the walls).
+- **Radar: fired-and-resolved confirmations paid 15/17** (adds NVDA
+  hold-or-fade to the called $230 magnet, QQQ gap-and-go, USO's armed bull
+  leg, and the late-resolved 8/25 NVDA into-the-print card — its up-branch
+  realized and paid +4.6% at Thursday's open; MRNA 8/27 is the second
+  lifetime CONF-FAILED — a playbook pattern-2 failed breakdown).
+  **Invalidations 11/11** (adds BABA through its written kill). NO-TRIGGER 5
+  (adds NVDA 8/26 — vol test resolved neither-branch), ungradeable 2.
+  OPEN: MRVL vol card (8/28 close), MRK Sep 165C.
+- **Watchlist: precision 53/73 (73%) vs recall 42/66 (64%) — recall 13/14
+  across the two days under the full ruleset** vs 56% lifetime coming in.
+  The only post-ruleset miss is HTZ −3.32% = seven cents on a $2 stock
+  (4th marginal sub-$5 trip; rubric floor proposal pending owner).
 
 ## Standing observations (hypotheses, not conclusions)
 
-1. **The trigger discipline is the product** — 11/12 paid, 10/10 correct
-   kills — and I-3 made it universal: 8/26 was the second straight day every
-   card resolved on its own written terms.
-2. **The ruleset's first live test passed.** One day is one day (n=1 under
-   the new spec), but the mechanism is no longer hypothetical: the checklist
-   was read, the staleness fallback executed, and every ≥3% mover was
-   covered pre-open.
-3. **"Priced for perfection" keeps compounding:** INTU and KSS beats sold in
-   the morning, then NVDA beat every line ($96.2B/$2.22, $108B guide) and
-   slipped after hours. The playbook's 2026-08-13 lesson, now at index scale.
-4. **Flow-lean ≠ next-day price (4 instances) and gap-pre-paid triggers**
-   (COIN, MSTR, USO 8/26's gapped-past bear level) remain the live
-   calibration counts.
+1. **The trigger discipline is the product** — 15/17 paid, 11/11 correct
+   kills — but 8/27 delivered the second CONF-FAILED, and both lifetime
+   failures are the same shape: a bearish breakdown trigger that fired on
+   volume and immediately reversed (RKT 8/19, MRNA 8/27). The playbook's
+   pattern-2 failed-breakdown trap is the live counter-pattern to breakdown
+   confirmations; watch whether a third instance makes this a spec question.
+2. **The ruleset works: recall 13/14 over two days** vs 56% lifetime before
+   it. The mechanism is real — checklist read current, escalations firing
+   (PLTR's I-2 flag paid +4.75% same day).
+3. **"Priced for perfection" now spans four days and both directions:**
+   INTU/KSS beats sold, NVDA's beat *bought* (+8.7% — the brief refused to
+   predict which way, correctly), MRVL's beat sold 7.6% AH. The briefs'
+   check-the-reaction framing (FINAL RULES #10) is the right posture; no
+   spec change.
+4. **Flow-lean ≠ next-day price is now 5 instances** (adds HIMS +6.13%
+   against the put-flip lean — though the flag's own price level said
+   no-short before the rip, which is I-5/price-over-flow working). Gap
+   pre-paid triggers remain the other live calibration count.

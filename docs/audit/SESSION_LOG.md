@@ -544,3 +544,50 @@ explicit go-ahead. This closes the daily checklist-staleness gap: tomorrow's
 brief reads tonight's MUST_MENTION (5 names, data through 8/26).
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-08-28 (morning) — review of brief 2026-08-27 (T+1, settled data)
+
+**Trigger:** owner pasted the 8/27 brief and asked for the review.
+Graded at ~9:10–9:40 AM ET 8/28 against settled 8/27 closes, 10-minute
+bars (NVDA/QQQ/MRNA), and this morning's labeled premarket quotes.
+
+### What changed
+
+- `brief-review/reviews/2026-08-27.md` — RULE COMPLIANCE day two (all
+  seven rules ran, checklist read current). F 6/6 (fifth straight clean).
+  O HIT (gap-and-go answered emphatically). M HIT (8/8 lifetime).
+  **G HIT — third straight** — the "walls stale after the gap, use 770/720
+  rounds" substitution called the trend day's actual friction. Radar:
+  NVDA hold-or-fade CONF-PAID to the called $230 magnet (high 230.47);
+  QQQ gap-and-go CONF-PAID (714.53 held over PDH → 721.11);
+  **MRNA CONF-FAILED — second lifetime** (bear break of 138.89 fired
+  ~11:40 on volume and reversed +2.9%, a textbook playbook pattern-2
+  failed breakdown); MRVL vol card OPEN to today's close (beat sold −7.6%
+  AH; premarket −6.8% vs ±10.5% straddle = overpriced branch leading).
+  Carried resolutions: NVDA 8/26 vol test neither-branch (open +4.6%,
+  inside ±5.9%; footnote: close +7.0% outside it); USO 8/26 bull leg
+  CONF-PAID (+1.5%); BABA 8/25 INVALIDATED through its written kill;
+  **late carry fixed** — the 8/25 NVDA into-the-print card, dropped by the
+  8/26 review's table, resolved CONF-PAID (up-branch realized, +4.6% at
+  Thursday's open).
+- W: precision 7/10; recall 6/7 — 13/14 across the two days under the
+  full ruleset. PLTR's I-2 escalation paid +4.75% same day; HIMS +6.13%
+  against the put-flip lean is flow-lean-vs-price instance #5 (its written
+  29.62 level said no-short — I-5 working). Only recall miss: HTZ −3.32%
+  = 7¢ on a $2.11 stock → **R-1 PROPOSED** in IMPROVEMENTS.md (recall
+  floor ≥3% AND ≥$0.25, future reviews only) — a rubric change, left for
+  the owner; outside the direct-to-main scope.
+- Scorecard n=8 (facts 49/51, mood 8/8, radar paid 15/17, invalidations
+  11/11, precision 53/73, recall 42/66). DB synced (review row, 4 radar
+  items, 22 watchlist rows, 11 flow leans, R-1; stale open_items states
+  flipped to RESOLVED to match their recorded resolutions).
+  MUST_MENTION regenerated: 7 names, data through 8/27 — current for
+  tomorrow. Pushed to the working branch and to `main` per the 8/26
+  standing authorization (all files in scope: brief-review/**,
+  SESSION_LOG).
+
+### DEVIATIONS
+
+None.
