@@ -153,20 +153,76 @@ FOMC, CPI). Never trade the headline candle; read candles 2 and 3.
 
 ---
 
-## 6. Frequency and loss limits
+## 6. Frequency and loss limits — the circuit breakers
+
+These exist because willpower is weakest immediately after a loss, which is
+exactly when it is needed. **These rules stop the session so the trader does
+not have to.** They are not guidance; they are switches.
+
+### 6a. The two-loss session stop — HARD. [EVIDENCE]
+
+**Two losing trades in a session and the day is over.** No "one more," no
+recovery trade, no exceptions. Close the platform.
+
+Applied retroactively to the two worst sessions in this account:
+
+| | Actual | With 2-loss stop | Saved |
+|---|---|---|---|
+| 2026-08-27 | −$666 (27 trades) | **−$112** (stop after 09:49) | **$554** |
+| 2026-08-28 | −$582 (15 trades) | **−$193** (stop after 10:18) | **$389** |
+
+**One rule recovers $943 of the $1,248 those two days cost.** Both sessions were
+decided inside the first 40 minutes; everything after was the recovery loop.
+
+### 6b. The give-back rule — HARD. [EVIDENCE]
+
+**A position that has been up 50% or more on premium may never be closed red.**
+Once +50% prints, the stop moves to entry — permanently, and it never moves
+back down. At **+50%, half the position comes off**, no discretion.
+
+Origin: 2026-08-28, SPY 8/28 771C ×2, in $1.87 at 10:34, peaked near $3.90
+(≈ +$400 open), exited $2.88 at 11:39 on a trailing stop for **+$202** — roughly
+half the peak surrendered. The owner's own read, recorded in his words:
+*"was showing signs of slowing down. I should have cashed out there and been
+done for the day."* He was right.
+
+### 6c. The best-trade stop. [REASONED]
+
+**Any single trade closing at +$150 or better ends the session.** On 2026-08-28
+that trade (+$202, 11:39) was the best of the week and the last winner of the
+day; nine trades followed for −$393. Take the win and leave.
+
+### 6d. Position and direction limits — HARD.
 
 | Limit | Value | Basis |
 |---|---|---|
-| Entries per day | **2 maximum** | [REASONED] — playbook: "most days need 0–2 trades"; actual was 119 trades in 9 sessions |
-| Concurrent positions | **1** | [REASONED] |
-| **Daily stop** | **2 losing trades → done for the session** | [EVIDENCE-adjacent] — the −$666 day took 24 trades; the −$630 day took 14 |
+| Entries per day | **2 maximum** | Playbook: "most days need 0–2 trades"; actual was 119 in 9 sessions |
+| Concurrent positions | **1** | [EVIDENCE] — 2026-08-27 13:08–13:18: three SPY 771C plus a QQQ 720C opened at once, all closed −$186 together. One conviction expressed four times is how a normal loss becomes a large one |
+| **Direction flips** | **None within the same session in the same underlying** | [EVIDENCE] — 2026-08-27 TSLA: 347.5C 10:35 → 355P 10:47 → 350C 10:58 → 345P 11:25. Five flips in one day. Flipping is not a thesis; it is chasing candles |
 | Correlated names | Count as one position | CLAUDE.md §5 |
 
-The daily stop is not a suggestion. Both catastrophic days were compounding
-sessions: the loss was made, then chased. **A session that has produced two
-losses has already told you what kind of day it is.**
+### 6e. The re-entry cooldown. [REASONED]
 
----
+**After any losing trade, no new entry for 15 minutes.** The next trade after a
+loss is the most dangerous one in the book — it is the one the "make it back"
+impulse writes. Fifteen minutes is enough for the impulse to pass and for a
+genuine setup to still be there when it does.
+
+### 6f. Named failure modes this section fences
+
+Recorded from the owner's own account, 2026-08-31, because a failure mode with a
+name is one you can build against:
+
+| Failure mode | Fence |
+|---|---|
+| "I need to make this money back" | §6a two-loss stop, §6e cooldown |
+| Letting a winner round-trip (greed) | §6b give-back rule |
+| Not stopping while ahead | §6c best-trade stop |
+| FOMO / chasing candles | §6d direction-flip ban, §4 requires a mapped level |
+| Trying to hit it big quickly | §3 structure rules, §6d size and count caps |
+
+**None of these require the trader to feel differently in the moment.** That is
+the point.
 
 ## 7. Funding gate — why this is shadow mode
 
