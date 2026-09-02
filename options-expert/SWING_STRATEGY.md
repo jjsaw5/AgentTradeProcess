@@ -237,13 +237,36 @@ recovery trade, no exceptions. Close the platform.
 
 Applied retroactively to the two worst sessions in this account:
 
-| | Actual | With 2-loss stop | Saved |
+| | Actual | With 2-loss stop | Effect |
 |---|---|---|---|
-| 2026-08-27 | −$666 (27 trades) | **−$112** (stop after 09:49) | **$554** |
-| 2026-08-28 | −$582 (15 trades) | **−$193** (stop after 10:18) | **$389** |
+| 2026-08-27 | −$666 (24 trades) | **−$112** (stop after 09:49) | **+$554** |
+| 2026-08-28 | −$582 (13 trades) | **−$193** (stop after 10:18) | **+$389** |
+| 2026-09-02 | **+$38** (13 trades) | **+$6** (stop after 09:59) | **−$32** |
 
-**One rule recovers $943 of the $1,248 those two days cost.** Both sessions were
-decided inside the first 40 minutes; everything after was the recovery loop.
+Trade counts on the 8/27 and 8/28 rows were corrected 2026-09-02 against
+reconciled brokerage fills (were 27 and 15). The 8/28 figure excludes a −$48 GLD
+expiration event at 16:00 ET, which is not a trade.
+
+**Across three graded sessions the rule recovers $943 and gives back $32.**
+8/27 and 8/28 were both decided inside the first 40 minutes and everything after
+was the recovery loop. **9/2 is the counter-case and it is kept deliberately:**
+the day was green, the two losses were −$37 and −$62 rather than −$99 and −$141,
+and the breaker would have closed a session that went on to make money.
+
+Two things that honesty requires stating about this evidence:
+
+- **The rule is not free even where it wins.** On 8/28 the day's single best
+  trade (SPY +$202, 11:39 ET) lands *after* the stop line. The $389 "saved" is
+  net of surrendering that winner, not on top of it.
+- **The rule cannot distinguish a bad day from a slow start.** It fires on the
+  count of losses, not their size, so a session of two small scratches stops
+  identically to a session of two −$140 holes. A size-aware variant (stop on two
+  losses **or** a −4% equity drawdown, whichever comes first) is the obvious
+  next thing to test. **It has not been tested. Do not trade it yet.**
+
+The rule stands as HARD on the evidence to date: the losses it prevents are
+several times the gains it forfeits. Revisit at ten graded sessions, not before —
+one green morning is not a refutation any more than one red one was a proof.
 
 ### 6b. The give-back rule — HARD. [EVIDENCE]
 

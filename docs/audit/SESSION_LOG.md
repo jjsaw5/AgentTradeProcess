@@ -468,3 +468,119 @@ Week-to-date by instrument (68 trades): **index ETFs (QQQ+SPY) −$760 on 10 tra
 **5. Plan-vs-book divergence, continuing.** 10 trades today and 21 on 8/24; the written process saw and graded none of them in real time. Owner traded discretionary throughout, which is his call; recorded per §8 because cards, monitors and risk reads act on the book the assistant is told about.
 
 **6. Read-only throughout — no order placed, modified or cancelled (§2). Both API keys remain unrotated by owner decision (8/19; unchanged).**
+
+---
+
+## 2026-09-02 — Trade logging: the week's ledger gap closed, two tickets graded, §6a's first negative datapoint
+
+Written 15:25 ET, **35 minutes before the close** — every intraday figure in
+today's artefacts is a live mark, not a close, and is labelled that way in each
+file. Recorded per §9 rather than waiting for the bell so that the day's grades
+are on record before the closing print is known.
+
+### What changed and why
+
+1. **`playbook/PLAYBOOK.md` §6 — five journal rows added**, closing the ledger
+   gap that had stood since 8/25:
+   - **2026-08-27** (−$666, 24 trades) and **2026-08-28** (−$630, 14 closing
+     events) filed as **ledger-only rows with grade `NA_unresolved`**. No
+     session record exists for either day, so no execution grade can honestly be
+     assigned. Per §4 that is `NA_unresolved` — a value that should exist and
+     could not be resolved — and explicitly **not** a blank, a guess, or a
+     reconstruction from the fills. What the fills cannot tell us (entry
+     reasoning, whether stops rested, whether any card was written) is the
+     finding.
+   - **2026-08-31** (−$45, 12 trades, **C**) and **2026-09-01** (+$98, 8 trades,
+     **B−**) filed with real grades — both days have session records.
+   - **2026-09-02** (+$38, 13 trades, **C+**) — today, in full.
+2. **`options-expert/log/2026-09-02-GRADES.md`** (new) — Tickets 1 and 4 graded
+   against their pre-registered text, plus a running pre-registration table.
+3. **`options-expert/SWING_STRATEGY.md` §6a** — the two-loss stop's evidence
+   table now carries today's **negative** datapoint, and two limitations of the
+   rule that the original table did not state.
+
+### Findings
+
+**§6a took its first loss, and it is kept.** The two-loss session stop was built
+on 8/27–8/28, where it recovers $943 of $1,248. Today it would have closed the
+session at 09:59 with **+$6** banked against an actual **+$38** — a **−$32**
+result. The table now reads +$554 / +$389 / **−$32** across three graded
+sessions. The rule stands as HARD (the losses it prevents are several times the
+gains it forfeits) but two things it was quietly claiming have been corrected in
+the spec: the 8/28 "$389 saved" is **net of surrendering that day's single best
+trade** (SPY +$202 at 11:39, which lands after the stop line), and the rule
+**fires on the count of losses, not their size**, so two small scratches stop a
+session identically to two −$140 holes. A size-aware variant is named as the
+next thing to test and marked explicitly as **untested — do not trade it**.
+
+**Two rules were broken today and both breaks made money.** §4 bars entry before
+10:00; the 09:40 trade was the day's best at **+$105**. §2 bars index ETFs;
+**SPY was the day's best instrument at +$88 across 4 trades**, against a
+week-to-date SPY record of −$376. Neither overturns its rule at n=1 and neither
+is explained away — both are logged as counter-evidence so the rules stay
+falsifiable rather than becoming articles of faith. This is the same standard
+applied when the evidence ran the other way.
+
+**Ticket 1's grade is split and uncomfortable.** The XLE signal was correct — the
+8/31 zone held, XLE is now 65.31, roughly +3.9R above the zone low — and it was
+declined. The ticket grades **A**; the execution is **`NA_no_data`**, because
+declining a trigger is a legitimate decision and there is no position to grade.
+The defect is that **no reason was written at the time**, so two days later the
+only honest statement available is "the signal was correct and we do not know
+why it was passed." A reason invented now would be a fabrication. Proposed and
+**not ratified**: when a written trigger prints and is not taken, log one line
+saying why, at the time.
+
+**Ticket 4 graded A by not trading.** Pre-registered expectation: "I expect no
+trade." Trigger: a 5-min close below the 351.61 flip after 14:30. **Zero** such
+closes; the post-14:30 low was 351.80. Stated in the grade file and repeated
+here because it matters: "price stays above a level" is a low-bar prediction on
+a day price held a $1.29 band, and one bar 20 cents lower flips the outcome
+without the analysis being any different. n=1, **UNCALIBRATED**.
+
+**The pre-registration record is now five-for-five and that number is
+misleading on its own.** Four of the five were refusals. The written process has
+avoided six bad or absent trades and has entered **zero**. It has demonstrated a
+working veto and demonstrated nothing whatsoever about entry or management. The
+§7 funding gate needs 10 graded tickets, and the next ones need to include a
+*taken* trade before the table means anything.
+
+### DEVIATIONS
+
+**1. Trade count against §6d.** 13 trades today against a cap of 2 entries;
+12 on 8/31 and 8 on 9/1 against the same cap. Recorded per §8. Plan-vs-book
+divergence is now in its ninth consecutive session.
+
+**2. Universe breaches against §2.** SPY (×4), NVDA and GPRO traded today;
+PLTR and SOXL on 9/1. SPY's result was the day's best and is recorded as
+counter-evidence above rather than suppressed or rationalised.
+
+**3. Trade direction is `NA_unresolved`.** The brokerage `get_pnl_trade_history`
+feed returns an empty `side` field on every row, so the §6d no-direction-flips
+check **could not be run** for any day in this log. This is a gap in our
+pipeline, not in the market, and is sentinelled accordingly (§4). Resolving it
+means matching against `get_option_orders`, which exceeded the tool's token
+limit on 8/25 and needs the file-and-parse path.
+
+**4. Assistant error, corrected in session (§9).** The first data pull today
+requested `from=2026-09-01&to=2026-09-01` and Tuesday's full session was
+presented as today's crawl. Caught via the date field on the `gex-levels`
+response and corrected immediately and explicitly in the transcript. No
+downstream artefact carries the bad data; today's marks were re-pulled.
+
+**5. Trade counts in `SWING_STRATEGY.md` §6a were wrong and are fixed.** The
+8/27 and 8/28 rows read 27 and 15 trades; reconciled fills give **24 and 13**.
+The 8/28 figure additionally excludes a **−$48 GLD event at 16:00 ET priced at
+$0** — an expiration or assignment, not an execution. Grading an expiry as a
+trade would credit or blame the session for something nobody decided that day.
+
+**6. Read-only throughout — no order placed, modified or cancelled (§2).**
+All brokerage calls were `get_*`. Both API keys remain unrotated by owner
+decision (8/19; unchanged, and the Unusual Whales key remains a known exposure
+per §6).
+
+**7. Still open from prior sessions:** the 2026-08-26 journal row remains
+unfiled and is now **outside the brokerage `span=week` window**, so it cannot be
+reconstructed from this data path; the daily brief's scheduled task still runs
+from the `aggressive-trading-bot` working directory (§0 contamination,
+unresolved since 8/18).
