@@ -71,6 +71,48 @@ Reinstating index trading requires a written case and owner ratification.
 that get prepared. Index trades were taken on feel, in products that whipsaw
 inside a two-dollar range.
 
+### 2a. PG — the designated practice vehicle (shares only)
+
+**Adopted 2026-09-01 on the owner's observation** that PG's candles lack the
+violent swings of TSLA and that its price suits a small account. Measured
+against one year of daily bars, that observation is correct:
+
+| | **PG** | TSLA | XLE |
+|---|---|---|---|
+| Avg daily range | **1.68%** | 3.69% | 1.81% |
+| Median daily range, dollars | **$2.33** | $13.73 | $0.86 |
+| Avg open→close move | **0.82%** | 1.92% | 0.85% |
+| Days moving >2% | **5%** | 41% | 6% |
+| Annualised volatility | **19.5%** | 46.8% | 21.8% |
+
+TSLA's typical daily dollar range is **six times** PG's.
+
+**The nuance that matters — PG does not trend better, it moves less:**
+
+| | Mean run length | Direction flips |
+|---|---|---|
+| PG | 2.07 days | 48% of days |
+| TSLA | 1.96 days | 51% |
+| XLE | 2.02 days | 49% |
+
+Statistically identical. A level-based system does **not** earn a higher hit rate
+on PG — it earns the same hit rate with proportionally smaller wins and losses.
+**"Slow" is not "more predictable."** Do not size up on the belief that PG is
+easier to read.
+
+**Why it is nonetheless the right practice vehicle:** identical decision
+frequency, identical odds, roughly one-sixth the dollar consequence per mistake.
+Every mechanic in §5 and §6 — the 30-minute rule, the give-back rule, resting
+stops, the two-loss session stop — is practiced for real money at a size where
+being wrong does not end the practice.
+
+**Shares only. PG options are excluded by §3a.**
+
+Sizing note: at ~$150/share PG affords **one** share on a $200 account, so
+scaling out of half a position is impossible. XLE at ~$64 permits two shares and
+therefore allows the give-back rule to be practiced properly. Prefer XLE when the
+exercise is scaling; PG when the exercise is patience.
+
 ---
 
 ## 3. Structure
@@ -87,6 +129,35 @@ inside a two-dollar range.
 reason; it is the trap that produced the losing structure five times. If the
 correct contract costs more than the account can carry, **the trade does not
 exist** — see §7.
+
+### 3a. The liquidity gate — HARD. [EVIDENCE, measured 2026-09-01]
+
+**Reject any contract whose bid-ask spread exceeds 2% of mid at entry.** The
+spread is paid twice — once in, once out — and it is the most reliably
+underestimated cost in the book.
+
+Measured live, spot ~$148 for PG and ~$367 for TSLA:
+
+| Contract | Bid × Ask | Spread | Verdict |
+|---|---|---|---|
+| PG 9/4 147C | 0.64 × 0.93 | **36.9%** | reject |
+| PG 9/4 150C | 0.14 × 0.18 | **25.0%** | reject |
+| PG 9/4 148C | 0.49 × 0.60 | **20.2%** | reject |
+| PG 9/11 148C | 1.05 × 1.24 | 16.6% | reject |
+| PG 9/18 148C | 1.60 × 1.77 | 10.1% | reject |
+| PG 9/18 147C | 2.08 × 2.19 | **5.2%** | still reject (>2%) |
+| TSLA 9/4 360C | 11.85 × 12.00 | **1.3%** | pass |
+| XLE 9/4 63C | ~2–3% | borderline | case by case |
+
+**A short-dated PG option starts roughly 20% down before the stock moves.** PG
+exceeds 1% on only 33% of days, so two-thirds of the time the move never covers
+the friction. **Low volatility is not the disqualifier — illiquid strikes are.**
+A cheap contract with a 25% spread is more expensive than a costly one with a
+1.3% spread.
+
+**Corollary:** the fix for a wide spread is never a cheaper strike — cheaper
+strikes are wider. It is either a more liquid underlying, a longer expiry, or no
+trade.
 
 ---
 
