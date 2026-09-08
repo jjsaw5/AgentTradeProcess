@@ -642,3 +642,29 @@ None — with one boundary note: grading six days in one sitting is batch
 work the cadence rules allow (each day graded no earlier than T+1, all
 data settled), but it is exactly the failure mode the scheduled
 post-close review would prevent; the offer to automate stands.
+
+---
+
+## 2026-09-08 (evening, ET 9/7) — scheduled post-close review stood up
+
+**Decision (owner):** "set up the scheduled post-close." Two changes:
+
+1. `brief-review/SKILL.md` Cadence gains the **evening-cadence amendment**
+   (owner-directed): the scheduled run grades day D on the evening of D
+   from settled closing data; claims needing the overnight UW/OI update
+   carry OPEN to the next evening. Spec change made on the owner's direct
+   instruction — outside the auto-push scope, authorized by this request.
+2. A weekday Routine now fires at **6:00 PM ET (22:00 UTC)** into the
+   standing review session (`trig_01Cwd7hmgvqH1pWXJejtRMor`), which holds
+   the Robinhood connector and the DB credentials. A fresh-session-per-run
+   design was tried first and abandoned: routines created from this
+   surface cannot carry the Robinhood connector, and the environment has
+   no TURSO_URL/TURSO_TOKEN variables (UW/FMP keys only). If the owner
+   adds those two variables to the environment and recreates the routine
+   from the claude.ai UI with the Robinhood connector attached, the
+   fresh-session design becomes viable; until then, self-bind is the
+   working configuration.
+
+First fire: Tuesday 2026-09-08 ~6 PM ET (grades the 9/8 brief).
+
+**DEVIATIONS:** None.

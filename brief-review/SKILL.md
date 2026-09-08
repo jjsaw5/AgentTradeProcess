@@ -25,6 +25,15 @@ documents; the brief archive is the immutable record being graded.
 - Review day **D** no earlier than **D+1** (the full session plus the overnight
   UW/OI update must exist). Multi-day theses stay OPEN in the ledger and are
   re-graded on D+2…D+5 until resolved.
+  **Evening-cadence amendment (owner-directed 2026-09-08):** the scheduled
+  post-close run grades day **D on the evening of D** using settled closing
+  data. Constraints that make this honest: pull data only after the close;
+  label the final regular-session print near-settled where the official
+  close may still differ by cents (known closing-auction lag); any claim
+  that needs the overnight UW/OI update or next-day data is carried OPEN to
+  the next evening, never guessed. This trades the D+1 buffer for a
+  checklist that is current at every next open — the 8/28–9/4 gap showed
+  the staleness cost exceeds the settlement cost.
 - Inputs: `briefs/D.md` (the claim source), Robinhood historicals (primary
   price record — same authority ranking as the brief itself), UW/FMP where a
   claim needs them. All honesty rules from `CLAUDE.md` §3 apply: timestamps
