@@ -591,3 +591,54 @@ bars (NVDA/QQQ/MRNA), and this morning's labeled premarket quotes.
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-09-07 (Labor Day evening) — catch-up: six reviews, 8/28 through 9/4
+
+**Trigger:** owner asked to "pull and get caught up and give me a read out."
+The review process had not run since the morning of 8/28 (six unreviewed
+briefs); every brief in the gap correctly executed the stale-checklist
+fallback, but the checklist itself sat at data-through-8/27 for five
+sessions — a review-process failure, logged here as such.
+
+### What changed
+
+- `brief-review/reviews/2026-08-28.md … 2026-09-04.md` — six T+N reviews
+  graded against settled Robinhood data (daily bars all names; 5- or
+  10-minute bars where card triggers needed timing; VIX via the index
+  feed; earnings via the Robinhood record). Highlights: Warsh-day card
+  CONF-FAILED after confirming at the session top; 8/31 the best radar
+  day on the books (3/3 paid) alongside the worst recall day under the
+  ruleset (1/4 — TSLA's dated Cybercab event and RDDT quiet-lined);
+  9/1 USO card +5.0% above trigger; 9/2 first mood MISS, DELL's clean
+  kill at −6% before a +15.8% close, HIMS's I-2 call build invalidated
+  (calls expired worthless); 9/3 TSLA card the biggest single-name payoff
+  (+5.4% event day) and LULU's straddle demolished (−19.4% vs ±9.3%);
+  9/4 TSLA fade card paid both targets, WDC's $4.2M put buyer
+  wrong-footed same day, GPRO +22.3% quiet-lined (execution gap).
+- `SCORECARD.md` → n=14: facts 100/104, mood 12/14, radar 28/34 paid +
+  15/15 invalidations, precision 80/113, recall 79/113; vol-card series
+  summarized (3 dead-heats, AVGO rich, LULU cheap).
+- `IMPROVEMENTS.md` — **I-8 (gap rule for triggers)** and **I-9 (dated
+  corporate events)** PROPOSED with evidence trails; both await the
+  owner. R-1 (recall floor) gained three more sub-$5 artifacts.
+- DB synced in one 228-statement batch: 6 review rows, 28 radar items +
+  2 lineage resolutions (MRVL 8/27 vol test — corrected to its written
+  open-to-open basis; MRNA 8/28 lineage closed CONF-PAID via the late
+  bull leg), 143 watchlist rows, 49 flow leans, open-items updates
+  (NVDA Sep-9 240C now the only radar OPEN besides MRK Sep 165C).
+- `MUST_MENTION.md` regenerated: **12 names, data through 9/4, current
+  for Tuesday's open** — including two automated I-2 escalations (WDC
+  bear-flow streak, XLE bull-flow streak) and GPRO forced into coverage.
+  Note: the 9/7 evening brief (prepped for Tuesday) ran at 7:25 PM with
+  the stale file; Tuesday's scheduled 9:05 run will read the fresh one.
+- Pushed to the working branch and `main` per the 8/26 standing
+  authorization (scope: brief-review/**, SESSION_LOG).
+
+### DEVIATIONS
+
+None — with one boundary note: grading six days in one sitting is batch
+work the cadence rules allow (each day graded no earlier than T+1, all
+data settled), but it is exactly the failure mode the scheduled
+post-close review would prevent; the offer to automate stands.

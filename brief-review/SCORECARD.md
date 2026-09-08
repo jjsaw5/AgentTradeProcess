@@ -1,9 +1,11 @@
 # Brief accuracy scorecard
 
-**Status: UNCALIBRATED (n=8 of 20 graded trading days).** Nothing here is
+**Status: UNCALIBRATED (n=14 of 20 graded trading days).** Nothing here is
 evidence of skill or its absence yet — the scorecard exists so that at n=20
 nobody has to argue from anecdotes. Rubric: `brief-review/SKILL.md`. One row
-per reviewed brief; full evidence in `reviews/`.
+per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
+2026-09-07 in a catch-up batch (settled data; the delay was the review
+process's, not the briefs').
 
 | Date | F (facts) | O (open read) | M (mood) | G (regime) | R (radar) | W precision | W recall | Top gap |
 |---|---|---|---|---|---|---|---|---|
@@ -12,51 +14,71 @@ per reviewed brief; full evidence in `reviews/`.
 | 2026-08-20 | 4/6 | MIXED | HIT | MIXED | 3 paid / 3 fired · resolved: MRK NO-TRIGGER (window end) | 4/9 | 1/6 | ARCT +6.9% one-liner'd the day after +25% |
 | 2026-08-21 | 7/7 | HIT | HIT | MIXED | 1 no-trig · 1 ungradeable · resolved: MSTR CONF-PAID (+2.8%), NVDA INVALIDATED | 6/10 | 3/7 | ARCT +22.4% and SLS +15.4% one-liner'd mid-halo (→ I-7) |
 | 2026-08-24 | 7/7 | HIT | HIT | HIT (first) | 1 paid / 1 fired · 3 inv · 1 no-trig — five cards, five clean resolutions | 6/9 | 5/9 | All four recall misses covered by pending I-2/I-4/I-7 |
-| 2026-08-25 | 7/7 | MIXED | HIT | MIXED | 2 paid / 2 fired · 3 OPEN | 8/9 | 7/10 | ARCT +7.7% — on the generated checklist, brief ran 25 min pre-merge |
-| 2026-08-26 | 7/7 | HIT | HIT | HIT | 1 paid · 1 inv (correct stand-down) · 2 OPEN | 9/11 | 7/7 | None — first review with an empty recall-gap section |
-| **2026-08-27** | 6/6 | HIT | HIT | **HIT (3rd straight)** | 2 paid / 3 fired · **1 CONF-FAILED (MRNA trap)** · 1 OPEN (MRVL → 8/28 close) | 7/10 | 6/7 | MRNA failed breakdown — trigger fired, reversed +2.9%; recall's only miss a 7¢ sub-$5 artifact |
+| 2026-08-25 | 7/7 | MIXED | HIT | MIXED | 2 paid / 2 fired · 3 OPEN (all since resolved: NVDA paid, BABA inv, MRK open) | 8/9 | 7/10 | ARCT +7.7% — brief ran 25 min pre-merge |
+| 2026-08-26 | 7/7 | HIT | HIT | HIT | 1 paid · 1 inv (correct stand-down) · resolved: NVDA vol test neither-branch, USO CONF-PAID | 9/11 | 7/7 | None — first empty recall-gap section |
+| 2026-08-27 | 6/6 | HIT | HIT | HIT | 2 paid / 3 fired · 1 CONF-FAILED (MRNA trap) · resolved: MRVL vol test ≈ fair | 7/10 | 6/7 | MRNA failed breakdown; HTZ 7¢ artifact |
+| 2026-08-28 | 7/8 | HIT | HIT | MIXED | 1 paid / 2 fired · 1 CONF-FAILED (Warsh — confirmed at the top) · 2 no-trig | 8/11 | 7/8 | MRVL revenue quoted from the prior-year quarter; HTZ 10¢ artifact |
+| 2026-08-31 | 8/8 | MIXED | HIT | HIT | **3 paid / 3 fired** · 1 no-trig (VIX test neither-branch) | 3/5 | **1/4** | **TSLA +5.5% (dated Cybercab event — knowable, → I-9) and RDDT −3.4% quiet-lined** |
+| 2026-09-01 | 9/10 | HIT | HIT | HIT | 2 paid / 3 fired · 1 CONF-FAILED (GPRO) · 2 no-trig (own rules working) | 5/7 | 9/11 | MRNA +9.9% mentioned with the WRONG lean (put flow) |
+| 2026-09-02 | 8/8 | MIXED | **MISS (first)** | MIXED | 2 paid / 2 fired · 2 inv (DELL kill at −6% → stock closed +15.8%; HIMS I-2 build died) · AVGO vol test → RICH | 2/5 | 7/8 | Mood called bearish on a +0.44% day — the brief's own counter-case named the realized path |
+| 2026-09-03 | 10/10 | HIT | HIT | HIT | 2 paid / 3 fired · 1 CONF-FAILED (USO, −9¢) · LULU vol test → **UNDERPRICED (−19.4% vs ±9.3%)** | 5/7 | 8/10 | SPCX +6.4% against a put-lean mention; SLS lean-free again |
+| 2026-09-04 | 9/9 | MIXED | MISS | HIT | 2 paid / 3 fired · 1 CONF-FAILED (QQQ — fired at the top again) · 2 inv (clean, same-day) | 4/5 | 5/6 | **GPRO +22.3% quiet-lined ("penny-land drift") after 3 days of squeeze coverage** |
 
-## Cumulative (n=8)
+## Cumulative (n=14)
 
-- **Facts: 49/51.** Five consecutive clean runs since I-6; the only errors
-  remain 8/20's two quoted figures.
-- **Mood: 8/8** — including the first "neutral/mixed" call, on a +0.005% day,
-  and a "mildly bullish — narrowly" call on a narrow-breadth +0.65% trend day.
-- **Open read: 5 HIT / 3 MIXED.** Gap/range classification 8/8.
-- **Regime: 3 HIT / 4 MIXED / 1 MISS.** All three HITs share a shape:
-  specific walls/zones + behavior framing, called in advance (8/24 travel,
-  8/26 pin at the 711 magnet, 8/27 trend-day-live with 770/720 substitute
-  friction after the gap staled the walls).
-- **Radar: fired-and-resolved confirmations paid 15/17** (adds NVDA
-  hold-or-fade to the called $230 magnet, QQQ gap-and-go, USO's armed bull
-  leg, and the late-resolved 8/25 NVDA into-the-print card — its up-branch
-  realized and paid +4.6% at Thursday's open; MRNA 8/27 is the second
-  lifetime CONF-FAILED — a playbook pattern-2 failed breakdown).
-  **Invalidations 11/11** (adds BABA through its written kill). NO-TRIGGER 5
-  (adds NVDA 8/26 — vol test resolved neither-branch), ungradeable 2.
-  OPEN: MRVL vol card (8/28 close), MRK Sep 165C.
-- **Watchlist: precision 53/73 (73%) vs recall 42/66 (64%) — recall 13/14
-  across the two days under the full ruleset** vs 56% lifetime coming in.
-  The only post-ruleset miss is HTZ −3.32% = seven cents on a $2 stock
-  (4th marginal sub-$5 trip; rubric floor proposal pending owner).
+- **Facts: 100/104 (96%).** New-era errors: 8/20's two quoted figures, the
+  8/28 MRVL prior-year-revenue mislabel, 9/1's USO +2.9%-that-was-+3.08%.
+  All four are sourcing/labeling failures, not price-record failures — I-6
+  fixed the class it targeted; the residue is quarter-labels and
+  arithmetic checks.
+- **Mood: 12/14.** Both misses (9/2, 9/4) came in the last three sessions,
+  both band-marginal, both on split tapes. Watch whether "neutral/mixed"
+  and "mildly bearish" are being over-used on genuinely directional
+  mornings.
+- **Open read: 8 HIT / 6 MIXED.** Gap/range classification 14/14 at the
+  index level; every MIXED is one index behaving and the other poking
+  through its script.
+- **Regime: 7 HIT / 6 MIXED / 1 MISS — and 4 HITs in the last 5 days.**
+  The named walls/magnets keep outperforming the amplification narrative
+  (765 magnet within 29¢, QQQ expiry pin within 5¢, 9/3's thin-air trend
+  day the first HIT earned by the gasoline half).
+- **Radar: fired-and-resolved confirmations paid 28/34 (82%).**
+  CONF-FAILED lifetime 6 — and a shape is emerging: both index event-day
+  cards (Warsh 8/28, jobs 9/4) confirmed within 25 minutes of the session
+  top; the other failures were marginal (USO −9¢) or meme-mechanical
+  (GPRO). **Invalidations 15/15** — including DELL 9/2, the most
+  expensive correct kill on the books (killed at −6%, stock closed
+  +15.8%). NO-TRIGGER 13, ungradeable 2.
+- **Vol-card series (5 resolved):** NVDA ≈fair, MRVL ≈fair (−11.1% vs
+  11%), PANW ≈fair (−9.28% vs 9.3%), AVGO **rich**, LULU **cheap**
+  (−19.4% vs ±9.3%). Three dead-heats, one rich, one cheap — the straddle
+  is mostly the right price; the edge, when it exists, is large.
+- **Watchlist: precision 80/113 (71%) · recall 79/113 (70%).** Recall
+  under the full ruleset: 13/14 in its first two days, then **36/47 across
+  the six catch-up days** — the leak the rules closed stayed mostly
+  closed, but three new miss classes emerged: dated-event names (TSLA
+  8/31 → I-9), wrong-lean mentions (MRNA 9/1, SPCX 9/3), and lean-free
+  mentions (PLTR 9/1, SLS 9/2 & 9/3).
+- **Flow-lean ≠ price is now 9 instances** and the score is lopsided:
+  the "smart money" flow lean was wrong or early on MRNA (×3), HIMS (×3
+  incl. the dead I-2 build), RDDT, SPCX, WDC ($4.2M put wrong-footed in
+  24h). I-5 (price over flow) is the single best-performing rule in the
+  spec.
 
 ## Standing observations (hypotheses, not conclusions)
 
-1. **The trigger discipline is the product** — 15/17 paid, 11/11 correct
-   kills — but 8/27 delivered the second CONF-FAILED, and both lifetime
-   failures are the same shape: a bearish breakdown trigger that fired on
-   volume and immediately reversed (RKT 8/19, MRNA 8/27). The playbook's
-   pattern-2 failed-breakdown trap is the live counter-pattern to breakdown
-   confirmations; watch whether a third instance makes this a spec question.
-2. **The ruleset works: recall 13/14 over two days** vs 56% lifetime before
-   it. The mechanism is real — checklist read current, escalations firing
-   (PLTR's I-2 flag paid +4.75% same day).
-3. **"Priced for perfection" now spans four days and both directions:**
-   INTU/KSS beats sold, NVDA's beat *bought* (+8.7% — the brief refused to
-   predict which way, correctly), MRVL's beat sold 7.6% AH. The briefs'
-   check-the-reaction framing (FINAL RULES #10) is the right posture; no
-   spec change.
-4. **Flow-lean ≠ next-day price is now 5 instances** (adds HIMS +6.13%
-   against the put-flip lean — though the flag's own price level said
-   no-short before the rip, which is I-5/price-over-flow working). Gap
-   pre-paid triggers remain the other live calibration count.
+1. **The trigger discipline holds at scale: 28/34 paid, 15/15 clean
+   kills** across 14 graded days — but its cost surfaced (DELL). The
+   failed-breakdown/failed-kill reversal shape now has 4 instances (RKT,
+   MRNA 8/27, MRNA 8/28's gap-fade, DELL 9/2).
+2. **Event-day index cards confirm at tops (n=2).** Warsh and jobs-day
+   both printed their bull confirmation within minutes of the session
+   high. If a third lands, propose a retest requirement; not yet.
+3. **The checklist automation only works when reviews run.** Five
+   consecutive briefs hand-applied the rules from a stale file — they did
+   it correctly every time (the fallback is real), but 8/31's 1/4 recall
+   day happened *inside* that window. Evening reviews are the fix
+   (standing offer to schedule them).
+4. **Vol cards: the straddle is usually right.** 3 of 5 resolved within
+   0.2% of the line. The two decisive resolutions (AVGO rich, LULU cheap)
+   were both names where positioning was extreme going in.
