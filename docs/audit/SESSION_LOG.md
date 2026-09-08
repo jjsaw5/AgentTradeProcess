@@ -668,3 +668,42 @@ post-close review would prevent; the offer to automate stands.
 First fire: Tuesday 2026-09-08 ~6 PM ET (grades the 9/8 brief).
 
 **DEVIATIONS:** None.
+
+---
+
+## 2026-09-08 (evening) — scheduled post-close review #1 (brief 9/8)
+
+**Trigger:** the 6:00 PM ET routine (first scheduled fire). Graded the 9/8
+brief same-evening under the evening-cadence amendment; closes are 4:00 PM
+near-settled prints, labeled as such (SOXL from its settled bar).
+
+### What changed
+
+- `brief-review/reviews/2026-09-08.md` — F 10/10 (with a 5¢ SPY-low feed
+  provenance note); O HIT (both index scripts surgical: SPY lost 769.05
+  at the open and ran the scripted look-out-below to 765.99; QQQ tagged
+  721.886 vs the 721.86 rejection line by 3¢ and reversed); **M MISS —
+  third, same shape → I-10 PROPOSED** (no bare neutral/mixed on
+  NARROW-breadth mornings); G HIT (SPY's below-768.35 acceleration +
+  768-wall cap exact). Radar: energy CONF-PAID (USO +2.9%, week 4), WDC
+  CONF-PAID via its own 10:30 whipsaw arbiter (+2.1%, bear-flow streak
+  dead), NVDA INVALIDATED (failed gap; armed bear branch paid −1.5%),
+  GME vol card OPEN to tomorrow's open. W: precision 6/7 (TE +10.1% a
+  first-day flag hit), recall 7/10 (SPCX +3.7% quiet-lined again, RDDT
+  −3.3%, HTZ 11¢ artifact).
+- **RULE COMPLIANCE milestone: first brief since 8/27 with a current
+  checklist; both I-2 auto-escalations (WDC, XLE) executed** — the full
+  automation loop ran end-to-end for the first time.
+- **mrna-halo complex DEACTIVATED** (deliberate edit: no member ±5% in
+  the last two sessions; active 8/19–9/8).
+- Scorecard n=15 (facts 110/114, mood 12/15, radar 30/36 + 16/16 kills,
+  precision 86/120, recall 86/123, flow-lean instances 10). DB synced
+  (48 stmts). MUST_MENTION regenerated: 6 names, data through 9/8.
+- Open: GME vol card (9/9 open), NVDA Sep-9 240C final note (9/9), MRK
+  Sep 165C.
+
+### DEVIATIONS
+
+None. (Closes graded on labeled near-settled 4 PM prints per the
+amendment; officials land overnight and any cent-level drift is checked
+next run.)
