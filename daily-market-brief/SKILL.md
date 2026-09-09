@@ -222,6 +222,16 @@ GEX availability note: per-ticker GEX exists for nearly every optionable name, b
 - `GET /stable/economic-calendar?from=YYYY-MM-DD&to=YYYY-MM-DD` — structured previous/consensus/actual for §3. **Timestamps are UTC** — convert to ET before reporting. Prefer these structured actuals over web-scraped numbers when they conflict, but flag the conflict.
 - `GET /stable/sector-performance-snapshot` — sector breadth for §7.
 - `GET /stable/stock-news?limit=30` — may return empty on this tier; if empty, say so and rely on web research.
+- `GET /stable/news/stock?symbols={t}&from=YYYY-MM-DD&to=YYYY-MM-DD&limit=100&page=N` — **per-ticker
+  headline history, and it is NOT empty on this tier** (verified 2026-09-09: 698 headlines for META
+  and 770 for GOOGL over 45 days). This is the feed §4B runs on. Two things to know before using it:
+  **(a) paginate** — `page` starts at 0 and one page is 100 rows, so a single call sees only a
+  fraction of a mega-cap's week; **(b) roughly 20% of a mega-cap's feed is 13F/holdings spam**
+  ("X Acquires 2,878 Shares of...") and on a big news day fifty outlets restate one story, so any
+  count taken off this feed without de-duplication and noise filtering is meaningless.
+  `daily-market-brief/tools/catalyst_cadence.py` does both.
+- `GET /stable/news/press-releases?symbols={t}&limit=N` — company-issued releases only. Useful to
+  separate what the **company** said from what the press wrote about it.
 
 Label anything from these feeds that fails: `UNVERIFIED — UW/FMP unavailable this run`.
 
@@ -551,6 +561,118 @@ Two layers, both required:
 Honesty rules: never present a PDUFA date as a guaranteed mover; approval ≠ stock-goes-up
 (sell-the-news is common); options on names with dated catalysts carry inflated IV — quote
 the expected move, and label the direction unknowable.
+
+---
+
+# 4B. PRODUCT & CORPORATE CATALYST CADENCE (added 2026-09-09)
+
+THIS SECTION IS MANDATORY. It exists because of 2026-09-09: META gapped **+5.2%**
+premarket ($613.48 → $645.18) on the launch of "Muse", its personal AI agent. The brief
+had no way to see it coming, and the reason is structural — §4A covers dated biotech
+catalysts, §3 and §4 cover calendars, and §5/§6/§10 are all *reactive*. A tech product
+launch has no calendar to pull, so it fell through every path into §6, where it arrives
+as a gap that is already over. This section is the before-the-news layer for
+**non-biotech corporate catalysts**, and it is deliberately built on §4A's two-layer shape.
+
+The miss was not one headline. Meta had shipped **four** Muse products in five weeks and
+the stock paid for three of them — and none of it ever reached the brief:
+
+| date | event | META close |
+|---|---|---|
+| 2026-08-05 | Muse Spark 1.2 + Muse Code | +0.14% |
+| 2026-08-10 | Muse Glimmer (open-source model) | +0.48% |
+| 2026-08-25 | *press reports a personal AI agent is coming* | +1.97% |
+| 2026-09-02 | "settlement could clear the way for new AI product launches" (Morgan Stanley) | +2.47% |
+| 2026-09-03 | Muse Spark 1.3 — "parity with Anthropic and OpenAI" | **+3.01%** |
+| 2026-09-08 | Muse personal agent launches | −0.53% |
+
+**8/24 → 9/4: +10.3% paid out across the cadence.** The event itself was sold (−0.53%),
+and then gapped +5.2% overnight anyway. The tradeable intelligence was never the launch
+date — it was *"this company ships something every two weeks and the tape pays each time."*
+
+Two layers, both required.
+
+## Layer 1 — cadence detection (mandatory, every run)
+
+Run `daily-market-brief/tools/catalyst_cadence.py` over the §6A watchlist plus mega-cap
+tech. It reports, per ticker, terms running unusually hot against **that ticker's own
+45-day baseline**, with the stock's actual close and gap on each flagged day.
+
+```bash
+python3 daily-market-brief/tools/catalyst_cadence.py \
+        --tickers META,GOOGL,NVDA,MSFT,AMZN,AAPL,TSLA --days 45 --recent 5
+```
+
+**Do NOT use a keyword list.** This was tested on 2026-09-09 against this exact episode:
+a regex for forward-looking language (`set to launch`, `ahead of`, `will unveil`,
+`teases`) run over 8/24–8/26 returned **ZERO hits**. The signal headline — *"Breakfast
+News: Meta's AI Agent To Do Your Errands"* — contains no forward-looking verb and reads
+like it describes a shipped product. Recurring product codenames surface on **frequency**,
+not phrasing. The unsupervised scan, which does not know the word "Muse" exists, found it
+on 8/05, 8/10, 9/03 and 9/08.
+
+Report a flagged theme only after **reading the underlying headlines** — the tool surfaces
+candidates, never conclusions. State the theme in plain language, name the product, and
+give the reaction history.
+
+## Layer 2 — follow-through scoring
+
+A theme is only worth the owner's attention if the tape has been **paying** for it. For
+any theme appearing on two or more separate days in the window, state explicitly:
+
+- how many times it has appeared, and on what dates
+- **the stock's close-to-close move on each of those dates**
+- whether the next instalment is plausibly near
+
+Worked example, in the form §4B output should take:
+
+> 🟡 **META — "Muse" AI product line, 4th mention in 5 weeks.** Prior releases moved the
+> stock **+0.14% (8/05), +0.48% (8/10), +3.01% (9/03)**. Cadence ≈ every 2 weeks; the
+> market is paying more for each successive release. A further release is a live
+> unscheduled catalyst. **No date is known** — this is a cadence, not a calendar.
+
+A theme that appears repeatedly and the stock **ignores** is equally worth one line: it
+tells the owner not to chase the next one.
+
+## Honesty rules
+
+- **A term spike is ATTENTION, not an event.** It measures what the press is writing
+  about, nothing more. Never report a spike as a confirmed product announcement.
+- **Never state or imply a launch date that has not been announced by the company.** A
+  cadence supports "a further release is plausible," never "Meta will launch on the 15th."
+- **A fetch failure is `UNVERIFIED — news feed unavailable this run`**, never "no
+  catalysts found." Absence of a measurement is not a measurement of absence
+  (CLAUDE.md §3).
+- **Product news ≠ stock up.** The Muse agent launch itself closed **−0.53%** on the day
+  it shipped. Buy-the-rumour/sell-the-news is the base case for a telegraphed launch;
+  always give the counter-case.
+- **Say when a theme was already priced.** If the stock has already run on the cadence,
+  say so with the number — a catalyst into a +10% three-week run is a different trade
+  from the same catalyst into a flat tape.
+
+## What this section does not know — read before trusting it
+
+`UNCALIBRATED` per CLAUDE.md §7. Validated against **one** episode, after the fact, which
+is the weakest possible evidence. Specifically:
+
+1. **It missed 2026-08-25** — the single day the personal agent was actually pre-reported.
+   Two agent headlines were drowned by Instagram-trial coverage (that day's top terms were
+   *mosseri, instagram, trial*). **The detector catches cadences, not tip-offs.** Do not
+   present it as an early-warning system for a specific announcement.
+2. **It produces false positives.** Generic words on thin news days clear the threshold
+   (2026-09-04 flagged `time` on two unrelated headlines). Every hit must be read.
+3. **Thresholds are unvalidated.** `min_articles=5, min_ratio=3.0, min_share=0.15,
+   min_count=2` were chosen against one case and have not been swept.
+4. **The theme regex problem is solved; the ranking problem is not.** On a heavy news day
+   the real theme can be outranked by a louder unrelated story — which is exactly what
+   happened on 8/25.
+5. **Coverage is FMP's news feed only.** A catalyst reported somewhere FMP does not index
+   is invisible here.
+
+Path off `UNCALIBRATED`: log each flagged theme and its subsequent reaction. When the log
+holds enough graded instances to say whether "cadence + the tape paying" precedes
+anything, this section can be re-rated. Until then it is a **research prompt, not a
+signal**.
 
 ---
 
@@ -1048,6 +1170,10 @@ Include:
 - anything likely to reverse quickly
 - unavailable Robinhood tools
 - catalysts that could appear without warning
+- **the limits of §4B's cadence scan** — it detects *recurring* corporate themes, not
+  one-off tip-offs, and it demonstrably missed the single day Meta's agent was
+  pre-reported (2026-08-25). If §4B is quiet, say "no unusual theme concentration
+  detected," never "no product catalysts are coming." 
 
 ---
 

@@ -584,3 +584,90 @@ unfiled and is now **outside the brokerage `span=week` window**, so it cannot be
 reconstructed from this data path; the daily brief's scheduled task still runs
 from the `aggressive-trading-bot` working directory (§0 contamination,
 unresolved since 8/18).
+
+---
+
+## 2026-09-09 — §4B added to the brief: product & corporate catalyst cadence
+
+Prompted by the owner after META gapped **+5.2%** premarket (613.48 → 645.18) on the
+launch of "Muse", its personal AI agent: *"I'd like to look at our market brief and see if
+we have something that catches these announcements... This would have been a good thing to
+know about."*
+
+### The gap, diagnosed before anything was written
+
+**Nothing in the brief could have caught it, and the reason is structural.** §4A (Drug &
+FDA Catalyst Watch) is the only before-the-news layer and it is biotech-only. §3 and §4 are
+calendar-driven. §5, §6 and §10 are all reactive. A tech product launch has no calendar to
+pull, so it falls through every path into §6 — where it arrives as a gap that is already
+over. That is exactly what happened.
+
+The miss was larger than one day. Meta shipped **four** Muse products in five weeks and the
+tape paid for three (8/05 +0.14%, 8/10 +0.48%, 9/03 **+3.01%**), running **+10.3% from 8/24
+to 9/4**. The launch itself closed **−0.53%** — sold on the day — then gapped +5.2%
+overnight anyway. None of the cadence ever reached the brief.
+
+### What changed
+
+1. **`daily-market-brief/SKILL.md` §4B (new)** — Product & Corporate Catalyst Cadence.
+   Modelled deliberately on §4A's two-layer shape: Layer 1 detects themes running hot
+   against a ticker's own 45-day baseline; Layer 2 scores follow-through by reporting the
+   stock's actual reaction to each prior instance of the theme.
+2. **`daily-market-brief/tools/catalyst_cadence.py` (new)** — the detector §4B runs.
+3. **`SKILL.md` DATA SOURCES** — corrected the FMP news entry. The spec said
+   `/stable/stock-news` "may return empty on this tier"; `/stable/news/stock` with date
+   params and pagination is **not** empty (698 headlines for META, 770 for GOOGL over 45
+   days). Added the two traps that make raw counts off this feed meaningless: it paginates
+   at 100 rows, and ~20% of a mega-cap's feed is 13F spam with fifty outlets restating one
+   story on a big day.
+4. **`SKILL.md` §13** — added §4B's blind spot to what the brief does not know.
+
+### Findings, including the one that killed the obvious design
+
+**A keyword detector does not work, and this was tested rather than assumed.** A regex for
+forward-looking language (`set to launch`, `ahead of`, `will unveil`, `teases`) backtested
+against 8/24–8/26 returned **ZERO hits**. The signal headline — *"Breakfast News: Meta's AI
+Agent To Do Your Errands"* — contains no forward-looking verb and reads like it describes a
+shipped product. The design was abandoned on the evidence, not kept and hedged.
+
+**Unsupervised term-frequency works.** Scanning for terms over-represented against a
+ticker's own baseline — with no keyword list, not knowing "Muse" exists — surfaced it on
+**8/05, 8/10, 9/03 and 9/08**. On a live multi-ticker run it also independently found
+NVDA's **$12.9B Hugging Face acquisition** (9/03) and a Google Cloud/Accenture deal, so it
+is finding real narratives rather than one fitted example.
+
+**Two noise sources were found and fixed by testing, not by inspection:** 13F/holdings spam
+initially cleared the filter and produced a false positive on 2026-09-04
+(`capital`/`position`/`magnificent`), and weekend days generated pure listicle noise
+(*"Prediction: Nvidia Stock Will Double"*). The filter was tightened and non-trading days
+are now excluded by default.
+
+### DEVIATIONS
+
+**1. §4B ships `UNCALIBRATED` and its limits are written into the section itself (§7).**
+Validated against **one** episode, after the fact — the weakest possible evidence. Recorded
+in the spec, not just here: it **missed 2026-08-25**, the single day the agent was actually
+pre-reported, because two agent headlines were outranked by Instagram-trial coverage. It
+detects **cadences, not tip-offs**, and §4B says so in those words. Thresholds
+(`min_articles=5, min_ratio=3.0, min_share=0.15, min_count=2`) were chosen against one case
+and have not been swept.
+
+**2. Residual false positives are accepted and documented, not tuned away.** 2026-09-04
+still flags `time` on two unrelated headlines. Tightening further would risk suppressing
+real low-volume signals, and the honest fix is that every hit must be read before it is
+reported — which §4B mandates.
+
+**3. §9 pre-registration, and the prediction failed.** Before building, the stated
+expectation was that a forward-looking keyword filter would catch the 8/25 headline "with
+some noise." It caught **nothing**. The failure is recorded here and in §4B rather than the
+approach being quietly swapped and presented as the original plan.
+
+**4. §0 contamination — still live, now partially surfaced.** `DATA SOURCES` continues to
+point at `C:\Users\jpats\aggressive-trading-bot` for the API keys. Noticed while editing
+that section and **left unchanged**, because rewriting the runtime's key path is a separate
+change that could break the scheduled 9:05 run. Flagged to the owner in session. Open since
+2026-08-18.
+
+**5. Read-only throughout (§2).** No order placed, modified or cancelled. All brokerage and
+vendor calls were reads. Both API keys remain unrotated by owner decision (8/19; unchanged,
+and the Unusual Whales key remains a known exposure per §6).
