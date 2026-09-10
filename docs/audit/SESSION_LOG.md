@@ -707,3 +707,37 @@ near-settled prints, labeled as such (SOXL from its settled bar).
 None. (Closes graded on labeled near-settled 4 PM prints per the
 amendment; officials land overnight and any cent-level drift is checked
 next run.)
+
+---
+
+## 2026-09-09 (evening) — scheduled run #2: NO BRIEF RAN today
+
+**Trigger:** the 6:00 PM routine. Markets were open; **`briefs/2026-09-09.md`
+does not exist** — the morning brief task (which runs outside this
+session's visible Routines, likely the local desktop scheduled task)
+produced nothing and pushed nothing. Nothing to grade; no scorecard row
+(n stays 15). `reviews/2026-09-09.md` written as a NO-BRIEF marker so the
+archive shows the gap was caught same-day. **Escalated to the owner in
+the evening summary — the checklist loop closed two days ago and the
+brief side went down the day after.**
+
+### Done tonight anyway
+
+- Official 9/8 closes re-checked: every 9/8 grade stands (cent drift
+  only, max DELL 39¢); the 12 drifted move_pct rows corrected in the DB
+  (one materially: HTZ 9/8 is −5.0% official, crossing the I-4 line).
+- Open items resolved: **GME vol card INVALIDATED by its own text**
+  (opened 19.10 inside the 17.65/20.70 band; +5.3% close vs ±7.9%
+  straddle — vol rich; series now 3 fair / 2 rich / 1 cheap). **NVDA
+  Sep-9 240C final:** card stays CONF-PAID, but the 78k-OI calls it rode
+  expired worthless (NVDA 223.70) — direction right, strike wrong. MRK
+  Sep 165C interim −2.2%, dying quietly.
+- 9/9 watchlist moves recorded (outcome NO-BRIEF, I-4 continuity only —
+  they grade nothing; no flow leans recorded, so I-2 streaks neither
+  advance nor reset). MUST_MENTION regenerated: 5 names, data through
+  9/9, current for tomorrow IF a brief runs.
+
+### DEVIATIONS
+
+None by this process. The missing brief is the deviation — it belongs to
+the morning task and is escalated, not papered over.
