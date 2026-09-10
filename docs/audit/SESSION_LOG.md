@@ -741,3 +741,46 @@ brief side went down the day after.**
 
 None by this process. The missing brief is the deviation — it belongs to
 the morning task and is escalated, not papered over.
+
+---
+
+## 2026-09-10 (evening) — scheduled run #3: two reviews (9/9 T+1, 9/10 same-evening)
+
+**Correction to last night's escalation:** the 9/9 brief DID run on time —
+committed 9:14:55 AM ET Wednesday, pre-registration intact by commit
+timestamp — but its push failed to reach `main` until Thursday morning.
+The failure was in the morning task's push step, not its run. Yesterday's
+NO-BRIEF marker file was rewritten as the full T+1 review with the
+incident note preserved at the top (original text remains in git history;
+CLAUDE.md §9 — not rewritten to look prescient, the correction is dated).
+
+### What changed
+
+- `reviews/2026-09-09.md` (T+1, officials): F 8/9 — the error is the
+  **ORCL card wired to resolve before its own catalyst → I-11 PROPOSED**
+  (card-QA timing rule). O/M/G all HIT (760 wall held within 94¢; the
+  52-wk-high breakout attempt was rejected exactly where the hold rule
+  said to wait — chasing the 9:31 high bought the top). Radar: SPY bear
+  card paid to its magnet; META Muse card paid +6.55%; XLE NO-TRIGGER.
+  Recall 3/6 — GME/ARCT/HTZ all mentioned leanlessly.
+- `reviews/2026-09-10.md` (same-evening): F 9/9, O/M/G HIT (the 760 wall
+  capped the bounce within 9¢). Radar: a kill-side day — ORCL card's
+  de-risk branch fired at 2:25 and named the whole AI-complex leak;
+  **XLE's 6-brief escalation took its first loss and its own armed
+  sell-the-news branch caught it** (USO +5.6% while XLE fell); SPY
+  fired-and-flat (−3¢); PLTR card OPEN. Recall 8/13 — **RDDT's 4th
+  unflagged ≥3% move → I-12 PROPOSED** (repeat-mover rule), TE/SIG/OPEN/
+  SLS also quiet-lined into ≥3% moves.
+- Scorecard **n=17** (facts 127/132, mood 14/17, O 11H/6M with six
+  straight HITs, G 10H/6M/1X, radar 32/39 + 18/18 kills, precision
+  99/136, recall 98/143). Vol series: 6 resolved (3 fair / 2 rich /
+  1 cheap), ORCL open. DB synced (91 stmts; 9/9 NO-BRIEF rows replaced
+  with graded outcomes on officials).
+- MUST_MENTION regenerated: **12 names through 9/10**, incl. three I-2
+  escalations (XLE 6th brief, MRNA, NBIS) — current for tomorrow's
+  CPI-day brief.
+- Open: ORCL vol test + PLTR card (both 9/11), MRK Sep 165C (dying).
+
+### DEVIATIONS
+
+None.
