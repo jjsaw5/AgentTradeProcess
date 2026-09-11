@@ -784,3 +784,39 @@ CLAUDE.md §9 — not rewritten to look prescient, the correction is dated).
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-09-11 (evening) — scheduled run #4: brief 9/11 graded (n=18)
+
+**Trigger:** the 6:00 PM routine. CPI day, ORCL aftermath, weekly opex.
+
+### What changed
+
+- `reviews/2026-09-11.md`: F 7/8 (GPRO 3-session % off 0.5pt — the
+  computed-means-computed class); O HIT (7th straight — flipped PDH
+  supports never retested); M HIT (15/18); **G HIT (11th) — the
+  above-764-glue + opex-pin call WAS the day** (SPY settled 764.20 in
+  the named 765 zone, QQQ 714.85 on the 715 pin; expiry-pin calls now
+  3-for-4). Radar: **ORCL's failed gap** (+7.5% open on a blowout, red
+  close) INVALIDATED the continuation card with the armed bear read
+  paying −3%; oil-unwind card paid (USO −2.2%); the index gap-test fired
+  and went flat (8th CONF-FAILED, −0.2%); SPCX card survived a 145.92
+  stress test and rides to Monday's OI print.
+- Resolutions: **ORCL vol test → RICH (third straight seller win**; max
+  close-basis ±7.6% vs ±11.7% priced, despite a 10.4% intraday range on
+  resolution day); PLTR Dec-27 190C window closed NO-TRIGGER (thesis
+  expired unproven); MRK Sep 165C −6.7%, near-certain worthless.
+- W: precision 4/6 (**MRNA +5.4% — the I-2 escalation's second same-day
+  payoff**, flagged that morning; WDC −3.0% on the only fresh-put-buying
+  flag). Recall 4/6: **SLS −14.4% quiet-lined** (worst single recall
+  miss of the era, driver unattributed) and CSCO +4.4% quiet-lined.
+  **DELL +12% driver also unattributed — Monday's brief must answer for
+  both** (logged as an open item).
+- Scorecard n=18; DB synced (54 stmts); MUST_MENTION regenerated (7
+  names through 9/11; I-2 escalations: XLE 7th, MRNA 4th, DELL and USO
+  new).
+
+### DEVIATIONS
+
+None.

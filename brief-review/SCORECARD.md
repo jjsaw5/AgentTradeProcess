@@ -1,6 +1,6 @@
 # Brief accuracy scorecard
 
-**Status: UNCALIBRATED (n=17 of 20 graded trading days).** Nothing here is
+**Status: UNCALIBRATED (n=18 of 20 graded trading days).** Nothing here is
 evidence of skill or its absence yet — the scorecard exists so that at n=20
 nobody has to argue from anecdotes. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
@@ -26,37 +26,39 @@ process's, not the briefs').
 | **2026-09-08** | 10/10 | HIT | MISS | **HIT** | 2 paid / 2 fired · 1 inv (NVDA failed gap — armed bear branch paid) · GME vol OPEN | 6/7 | 7/10 | Third mood miss, same shape (neutral on a NARROW tape → I-10); SPCX quiet-lined again. **First run with a current checklist — both I-2 auto-escalations executed** |
 | 2026-09-09 | 8/9 | HIT | HIT | HIT | 2 paid / 2 fired · 1 no-trig (52wk-high breakout rejected — hold rule worked) · ORCL card DEFECTIVE TIMING (→ I-11) | 7/9 | 3/6 | ORCL card wired to resolve before its own catalyst; GME/ARCT leanless mentions missed +5.3%/−5.7%. Brief ran on time but its push failed — graded T+1 |
 | **2026-09-10** | 9/9 | HIT | HIT | **HIT** | 0 paid / 1 fired (SPY, −3¢ from trigger at the close) · **2 inv, both armed branches paid** (ORCL de-risk call; XLE sell-the-news — escalation's first loss) · 2 OPEN | 6/7 | 8/13 | **RDDT's 4th unflagged ≥3% move (→ I-12 repeat-mover rule)**; TE −6.4%, SIG −4.6% quiet-lined. USO +5.6% while XLE fell — crude ripped, energy equities sold |
+| **2026-09-11** | 7/8 | HIT | HIT | **HIT** | 1 paid / 2 fired (gap-test fired-and-flat) · 1 inv (ORCL failed gap: +7.5% open, red close — armed bear read paid) · resolved: ORCL vol RICH, PLTR window closed NO-TRIGGER | 4/6 | 4/6 | **MRNA +5.4% — the I-2 escalation's 2nd same-day payoff**; SLS −14.4% and CSCO +4.4% quiet-lined; DELL +12% and SLS −14% drivers unattributed (Monday must answer) |
 
-## Cumulative (n=17)
+## Cumulative (n=18)
 
-- **Facts: 127/132 (96%).** New-era errors: 8/20's two quoted figures, the
+- **Facts: 134/140 (96%).** New-era errors: 8/20's two quoted figures, the
   8/28 MRVL prior-year-revenue mislabel, 9/1's USO +2.9%-that-was-+3.08%.
   All four are sourcing/labeling failures, not price-record failures — I-6
   fixed the class it targeted; the residue is quarter-labels and
   arithmetic checks.
-- **Mood: 14/17.** The three misses (9/2, 9/4, 9/8) all share the
+- **Mood: 15/18.** The three misses (9/2, 9/4, 9/8) all share the
   neutral-label-on-a-NARROW-tape shape (→ I-10); 9/9 and 9/10 stated
   directional leans on narrow tapes and both graded HIT — the I-10
   pattern confirms in both directions.
-- **Open read: 11 HIT / 6 MIXED — six HITs in a row.** Gap/range classification 17/17 at the
+- **Open read: 12 HIT / 6 MIXED — seven HITs in a row.** Gap/range classification 18/18 at the
   index level; every MIXED is one index behaving and the other poking
   through its script.
-- **Regime: 10 HIT / 6 MIXED / 1 MISS — 7 HITs in the last 8 days.**
+- **Regime: 11 HIT / 6 MIXED / 1 MISS — 8 HITs in the last 9 days, incl. opex-pin calls now 3-for-4.**
   The named walls/magnets keep outperforming the amplification narrative
   (765 magnet within 29¢, QQQ expiry pin within 5¢, 9/3's thin-air trend
   day the first HIT earned by the gasoline half).
-- **Radar: fired-and-resolved confirmations paid 32/39 (82%).**
-  CONF-FAILED lifetime 7 — and a shape is emerging: both index event-day
+- **Radar: fired-and-resolved confirmations paid 33/41 (80%).**
+  CONF-FAILED lifetime 8 — and a shape is emerging: both index event-day
   cards (Warsh 8/28, jobs 9/4) confirmed within 25 minutes of the session
   top; the other failures were meme-mechanical (GPRO) or fired-and-flat
-  (USO −9¢, SPY 9/10 −3¢). **Invalidations 18/18** — including DELL 9/2, the most
+  (USO −9¢, SPY 9/10 −7¢, the 9/11 gap test −0.2%). **Invalidations 19/19** — including DELL 9/2, the most
   expensive correct kill on the books (killed at −6%, stock closed
-  +15.8%). NO-TRIGGER 14, ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
-- **Vol-card series (6 resolved, 1 open):** NVDA ≈fair, MRVL ≈fair,
-  PANW ≈fair, AVGO **rich**, LULU **cheap**, GME **rich** (+5.3% vs
-  ±7.9%). ORCL resolves 9/11. Three dead-heats, two rich, one cheap —
-  the straddle is mostly right; sellers have the current edge.
-- **Watchlist: precision 99/136 (73%) · recall 98/143 (69%).** Recall
+  +15.8%). NO-TRIGGER 15, ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
+- **Vol-card series (7 resolved):** NVDA ≈fair, MRVL ≈fair, PANW ≈fair,
+  AVGO **rich**, GME **rich**, ORCL **rich** (max close-basis ±7.6% vs
+  ±11.7% priced — despite a 10.4% intraday range on resolution day),
+  LULU **cheap**. Sellers have won three straight; the one buyer's win
+  (LULU) was the biggest single edge in the series.
+- **Watchlist: precision 103/142 (73%) · recall 102/149 (68%).** Recall
   under the full ruleset: 13/14 in its first two days, then **36/47 across
   the six catch-up days** — the leak the rules closed stayed mostly
   closed, but three new miss classes emerged: dated-event names (TSLA
