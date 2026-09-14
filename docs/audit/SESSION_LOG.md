@@ -859,3 +859,44 @@ layer to run live against today's brief. First-ever invocation of
   output; shipping the three survivors as explicitly-labeled paper cards
   is a judgment call, logged here rather than papered over. Spec text
   unchanged (spec edits need the owner).
+
+---
+
+## 2026-09-14 evening — scheduled post-close review run #5 (session_011KkW5BCTCJtexFUdkGVPsU)
+
+**Graded `briefs/2026-09-14.md` (the 9:15 re-run — the standing version;
+both morning versions authored pre-open) per SKILL.md evening cadence.
+n=19. First-ever day-card grading (day_cards n=3 of 20).**
+
+- Grades: F 15/15 · O HIT (8th straight — flipped PDL capped SPY's high
+  to 8 cents) · M HIT (16/19) · G HIT (12th — both indexes stalled
+  inside the named flip zones) · R: 2 paid / 3 fired · 1 INVALIDATED
+  (XLE 65.14 break, armed bear paid; USO green = divergence #2) · 1
+  NO-TRIGGER (QQQ — right structure, 10:30 clock expired before the
+  11:40–12:50 completion). W precision 10/12, recall 10/13.
+- **Day cards (real contract marks):** SPY 762C CONF-FAILED −24.3%
+  (fired 10:10, time-stopped 11:30; thesis validated one bar post-window,
+  +21% untaken); NVDA NO-TRIGGER (clean I-5 stand-down, name −3.4%);
+  MRNA 144C fired 11:25 → OPEN, **+17.5% day 1** ($5.73→$6.73),
+  validation (close >145) met same day.
+- Resolutions: DELL attribution ✓ (RBC $640 + $95B backlog); **SLS
+  attribution ✗** (NO CLEAR DRIVER persists; closed +1.6% green —
+  flow-lean #13 → I-12 evidence). SPCX carried (closed 5¢ above its
+  kill; OI leg needs 9/15 print). MRK interim 13.9% OTM.
+- I-12 evidence appended (HIMS 6th quiet-burn, IBRX +5.9%, SLS). New
+  standing observations: #5 pre-open clocks vs gap-recovery structure
+  (2 instances, one day — watch, don't propose); #6 XLE/USO divergence
+  n=2.
+- DB: 53 stmts (incl. first 3 day_cards rows); MUST_MENTION regenerated
+  (10 names through 9/14; XLE 8th escalation, MRNA 5th, USO 4th).
+- **Process incidents for the owner:** morning brief task ran TWICE
+  (8:50 + 9:15 re-run) and the 9:15 push reached main after the open
+  (9/9 delivery-lag family). Scheduler needs a look.
+
+### DEVIATIONS
+
+- Two competing pre-open brief versions existed; this review graded the
+  9:15 standing version while the morning's day-plan (committed 9:16)
+  was necessarily built on the 8:50 version. Both pre-registrations
+  respected; the divergence is recorded rather than reconciled
+  retroactively.

@@ -1,6 +1,6 @@
 # Brief accuracy scorecard
 
-**Status: UNCALIBRATED (n=18 of 20 graded trading days).** Nothing here is
+**Status: UNCALIBRATED (n=19 of 20 graded trading days).** Nothing here is
 evidence of skill or its absence yet — the scorecard exists so that at n=20
 nobody has to argue from anecdotes. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
@@ -27,45 +27,54 @@ process's, not the briefs').
 | 2026-09-09 | 8/9 | HIT | HIT | HIT | 2 paid / 2 fired · 1 no-trig (52wk-high breakout rejected — hold rule worked) · ORCL card DEFECTIVE TIMING (→ I-11) | 7/9 | 3/6 | ORCL card wired to resolve before its own catalyst; GME/ARCT leanless mentions missed +5.3%/−5.7%. Brief ran on time but its push failed — graded T+1 |
 | **2026-09-10** | 9/9 | HIT | HIT | **HIT** | 0 paid / 1 fired (SPY, −3¢ from trigger at the close) · **2 inv, both armed branches paid** (ORCL de-risk call; XLE sell-the-news — escalation's first loss) · 2 OPEN | 6/7 | 8/13 | **RDDT's 4th unflagged ≥3% move (→ I-12 repeat-mover rule)**; TE −6.4%, SIG −4.6% quiet-lined. USO +5.6% while XLE fell — crude ripped, energy equities sold |
 | **2026-09-11** | 7/8 | HIT | HIT | **HIT** | 1 paid / 2 fired (gap-test fired-and-flat) · 1 inv (ORCL failed gap: +7.5% open, red close — armed bear read paid) · resolved: ORCL vol RICH, PLTR window closed NO-TRIGGER | 4/6 | 4/6 | **MRNA +5.4% — the I-2 escalation's 2nd same-day payoff**; SLS −14.4% and CSCO +4.4% quiet-lined; DELL +12% and SLS −14% drivers unattributed (Monday must answer) |
+| **2026-09-14** | 15/15 | HIT | HIT | **HIT** | 2 paid / 3 fired (DELL bear whipsaw-rule paid; **MRNA closed 146.77 > 145 — escalation validated day 1**) · 1 inv (XLE 65.14 break — armed bear paid; USO green: divergence #2) · 1 no-trig (QQQ — right structure, clock too tight) · **first 3 day-cards graded** | 10/12 | 10/13 | **HIMS +4.7% — 6th quiet-list burn (→ I-12)**; IBRX +5.9% quiet-lined; SLS driver still unattributed after a −14%→+1.6% whipsaw; morning task ran twice + late push |
 
-## Cumulative (n=18)
+## Cumulative (n=19)
 
-- **Facts: 134/140 (96%).** New-era errors: 8/20's two quoted figures, the
+- **Facts: 149/155 (96%).** New-era errors: 8/20's two quoted figures, the
   8/28 MRVL prior-year-revenue mislabel, 9/1's USO +2.9%-that-was-+3.08%.
   All four are sourcing/labeling failures, not price-record failures — I-6
   fixed the class it targeted; the residue is quarter-labels and
   arithmetic checks.
-- **Mood: 15/18.** The three misses (9/2, 9/4, 9/8) all share the
-  neutral-label-on-a-NARROW-tape shape (→ I-10); 9/9 and 9/10 stated
-  directional leans on narrow tapes and both graded HIT — the I-10
-  pattern confirms in both directions.
-- **Open read: 12 HIT / 6 MIXED — seven HITs in a row.** Gap/range classification 18/18 at the
-  index level; every MIXED is one index behaving and the other poking
-  through its script.
-- **Regime: 11 HIT / 6 MIXED / 1 MISS — 8 HITs in the last 9 days, incl. opex-pin calls now 3-for-4.**
+- **Mood: 16/19.** The three misses (9/2, 9/4, 9/8) all share the
+  neutral-label-on-a-NARROW-tape shape (→ I-10); 9/9, 9/10 and 9/14
+  stated directional leans on narrow tapes and all graded HIT — the
+  I-10 pattern confirms in both directions.
+- **Open read: 13 HIT / 6 MIXED — eight HITs in a row.** Gap/range classification 19/19 at the
+  index level; 9/14's flipped PDL capped the day's high to 8 cents.
+- **Regime: 12 HIT / 6 MIXED / 1 MISS — 9 HITs in the last 10 days, incl. opex-pin calls 3-for-4
+  and 9/14's flip-zone call (both indexes stalled inside the named reclaim zones).**
   The named walls/magnets keep outperforming the amplification narrative
   (765 magnet within 29¢, QQQ expiry pin within 5¢, 9/3's thin-air trend
   day the first HIT earned by the gasoline half).
-- **Radar: fired-and-resolved confirmations paid 33/41 (80%).**
-  CONF-FAILED lifetime 8 — and a shape is emerging: both index event-day
+- **Radar: fired-and-resolved confirmations paid 35/43 (81%).**
+  CONF-FAILED lifetime 8 — the shape stands: both index event-day
   cards (Warsh 8/28, jobs 9/4) confirmed within 25 minutes of the session
   top; the other failures were meme-mechanical (GPRO) or fired-and-flat
-  (USO −9¢, SPY 9/10 −7¢, the 9/11 gap test −0.2%). **Invalidations 19/19** — including DELL 9/2, the most
-  expensive correct kill on the books (killed at −6%, stock closed
-  +15.8%). NO-TRIGGER 15, ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
+  (USO −9¢, SPY 9/10 −7¢, the 9/11 gap test −0.2%). **Invalidations 20/20** — DELL 9/2 (the most
+  expensive correct kill) and now XLE 9/14 (the escalation's second loss,
+  caught by its own armed bear branch). NO-TRIGGER 16, ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
+- **Day-cards ledger (NEW, n=3 of 20):** first graded set 9/14, real
+  contract marks. 1 CONF-FAILED (SPY 762C: fired on its written trigger,
+  time-stopped −24.3%, the thesis then validated one bar outside its own
+  window — +21% untaken), 1 NO-TRIGGER (NVDA: price never ratified a
+  166k-contract call build; the name closed −3.4% — I-5's cleanest save
+  yet), 1 fired-and-OPEN (MRNA 144C: +17.5% day 1, validation condition
+  met same day). UNCALIBRATED until n=20.
 - **Vol-card series (7 resolved):** NVDA ≈fair, MRVL ≈fair, PANW ≈fair,
   AVGO **rich**, GME **rich**, ORCL **rich** (max close-basis ±7.6% vs
   ±11.7% priced — despite a 10.4% intraday range on resolution day),
   LULU **cheap**. Sellers have won three straight; the one buyer's win
   (LULU) was the biggest single edge in the series.
-- **Watchlist: precision 103/142 (73%) · recall 102/149 (68%).** Recall
+- **Watchlist: precision 113/154 (73%) · recall 112/162 (69%).** Recall
   under the full ruleset: 13/14 in its first two days, then **36/47 across
   the six catch-up days** — the leak the rules closed stayed mostly
   closed, but three new miss classes emerged: dated-event names (TSLA
   8/31 → I-9), wrong-lean mentions (MRNA 9/1, SPCX 9/3), and lean-free
   mentions (PLTR 9/1, SLS 9/2 & 9/3).
-- **Flow-lean ≠ price is now 12 instances** (adds the NVDA Sep-9 240C
-  book expiring worthless after being directionally right, and SLS 9/10) and the score is lopsided:
+- **Flow-lean ≠ price is now 13 instances** (adds SLS 9/14: −10%
+  premarket with bearish-put framing → closed +1.6% green; earlier adds
+  were the NVDA Sep-9 240C book and SLS 9/10) and the score is lopsided:
   the "smart money" flow lean was wrong or early on MRNA (×3), HIMS (×3
   incl. the dead I-2 build), RDDT, SPCX, WDC ($4.2M put wrong-footed in
   24h). I-5 (price over flow) is the single best-performing rule in the
@@ -89,3 +98,11 @@ process's, not the briefs').
 4. **Vol cards: the straddle is usually right.** 3 of 5 resolved within
    0.2% of the line. The two decisive resolutions (AVGO rich, LULU cheap)
    were both names where positioning was extreme going in.
+5. **Pre-open clocks may be too tight for gap-recovery structure (n=1
+   day, 2 instances).** On 9/14 the brief's QQQ bull window (10:30) and
+   the day-plan's entry window (11:30) both expired minutes before the
+   exact structure they described completed (11:40–12:50). Watching for
+   recurrence before proposing anything.
+6. **XLE/USO divergence (n=2: 9/10, 9/14).** Crude up, energy equities
+   down, both times with protective put flow flagged in advance. The
+   two-sided card structure has paid the bear branch both times.
