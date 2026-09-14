@@ -820,3 +820,42 @@ None.
 ### DEVIATIONS
 
 None.
+
+---
+
+## 2026-09-14 ~9:15 AM ET — first live day-plan run (session_011KkW5BCTCJtexFUdkGVPsU)
+
+**What ran:** owner asked (9/14 morning) for the brief-to-options-plays
+layer to run live against today's brief. First-ever invocation of
+`day-plan/` since its 8/25 creation. Brief landed on main 9:01;
+`day-plan/cards/2026-09-14.md` written 9:08–9:15, before the open.
+
+- Candidate pool: 9 (5 radar cards + 4 triggered §6A flags). All 9 killed;
+  3 survived every filter except Stage 6 sizing and ship as PAPER cards
+  (QQQ two-sided gap, NVDA 215-reclaim vs the call build, MRNA 144 band),
+  pre-registered for T+1 grading.
+- **Load-bearing finding: live equity $384.73** (default margin acct,
+  level 3; agentic-visible acct holds $7.35) → 4% risk cap = $15.39/trade.
+  No honest structure on any candidate fits. Per §5, no stop was widened
+  and no thesis shrunk to fit; the plan says "unaffordable" plainly.
+- Live pulls: UW gex-levels (Fri-vintage, stated), volatility/stats
+  (NVDA iv_rank 0.9 pctile Fri close — the run's best E1 fact; USO 28.9
+  beats XLE 52.2 on E1b), Robinhood portfolio/positions (heat 0).
+  Liquidity gates NOT run — no live option quotes premarket; stated in
+  the card file.
+
+**Decisions:**
+- Sized against the default margin account by inference (the config's
+  ACCOUNT field was never set; agentic account is $7.35). Stated on the
+  card; owner corrects if wrong.
+- Killed-at-sizing survivors shipped as labeled PAPER cards rather than
+  discarded — keeps the pre-registration/grading loop alive (the module's
+  calibration path needs graded cards) without pretending they are sized
+  recommendations.
+
+### DEVIATIONS
+
+- The day-plan spec's Stage 6 kill rule strictly implies a zero-card
+  output; shipping the three survivors as explicitly-labeled paper cards
+  is a judgment call, logged here rather than papered over. Spec text
+  unchanged (spec edits need the owner).
