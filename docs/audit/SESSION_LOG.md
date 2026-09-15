@@ -900,3 +900,47 @@ n=19. First-ever day-card grading (day_cards n=3 of 20).**
   was necessarily built on the 8:50 version. Both pre-registrations
   respected; the divergence is recorded rather than reconciled
   retroactively.
+
+---
+
+## 2026-09-15 evening — scheduled post-close review run #6 (session_011KkW5BCTCJtexFUdkGVPsU)
+
+**Graded `briefs/2026-09-15.md` (the 9:25 standing re-run) per SKILL.md
+evening cadence. n=20 — THE CALIBRATION BAR IS REACHED; owner review
+due. Scorecard header updated to say so (no self-ratification).**
+
+- Grades: F 10/10 · O MIXED (SPY closed 55¢ outside its range; the
+  8-HIT streak ends) · M HIT (17/20) · G MIXED (flip-sign call worked;
+  index gasoline pinned — 3rd single-complex displacement, energy) ·
+  R: 0 paid / 1 fired (range-break −7¢, fired-and-flat #6) · 2
+  NO-TRIGGER (TLT's auction-conditioned confirm — auction verified
+  0.5bp tail / 2.53x; SMH's hold-leg refused a fade) · 2 OPEN (TCOM
+  straddle, RARE tell) · W 4/7, 6/8.
+- **SPCX resolved: INVALIDATED, clean kill #21** (143.54 vs the 148.18
+  line, day 4). **SLS attribution resolved** (Ph3 disclosure-probe,
+  brief §4A) — both halves of the 9/11 item closed.
+- **Day cards (real marks):** SPY 756P CONF-PAID ≈+6% managed (3.59 →
+  scale 4.02 → ratchet 3.60); NVDA 215C fired 10:00, OPEN −10.6%
+  (hard exit 9/16 1 PM); USO 160C fired 10:00 via the XLE leg, OPEN
+  **+31.7%** (peak +57%; exit 9/16 10:00; pipeline/cargo driver
+  verified); MRNA 144C day 2 −28.9% vs entry — gave back +17.5% with
+  no written exit between entry and the distant invalidation
+  (management-asymmetry observation #7, logged not proposed).
+- Live coaching day 2: owner watched the SPY bear trade fire, pay,
+  and exit by rule in real time; declined a late USO chase on advice
+  consistent with the card's own R/R; a real-money +$146 day was
+  reported by the owner (fills not shared; no journal entry written).
+  Owner equity read $495.68 at the morning run (deposit observed) and
+  $642.08 intraday per owner screenshot.
+- DB: 57 stmts; MUST_MENTION regenerated (5 names through 9/15).
+  Evidence appended to R-1 (OPEN 14¢) and I-12 (ARCT leanless).
+- **Owner action items:** (1) n=20 calibration review + six PROPOSED
+  items; (2) morning-task reliability — 4 incidents this week.
+
+### DEVIATIONS
+
+- The 2:35 PM intraday addendum estimated the energy-card fire as
+  "midday"; settled bars show the XLE leg armed at 10:00. Corrected in
+  tonight's grading with the earlier (more adverse-inclusive) time;
+  the addendum text stands unedited per §9, with the correction noted
+  in the review and the addendum trail.
