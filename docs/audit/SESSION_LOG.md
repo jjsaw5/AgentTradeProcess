@@ -944,3 +944,65 @@ due. Scorecard header updated to say so (no self-ratification).**
   tonight's grading with the earlier (more adverse-inclusive) time;
   the addendum text stands unedited per §9, with the correction noted
   in the review and the addendum trail.
+
+---
+
+## 2026-09-16 — FOMC-day live session + evening review #7 (n=21)
+
+**Session:** continued CCR session (branch
+`claude/stock-brief-accuracy-review-z3m0v7`, pushes mirrored to main
+under the standing review authorization).
+
+- **FOMC day, live:** decision readout delivered at 2:03 via a
+  pre-armed wake (+25bp to 3.75–4.00%, unanimous, first hike since
+  July 2023 — verified from live coverage; dots UNVERIFIED all
+  session and carried). Presser board at 2:30; trigger reads at 2:45
+  (NO FIRE — whipsaw candle pierced 756.15 by a dime, closed 759;
+  refused in real time) and 3:00 (**BEAR FIRE** — candle closed
+  753.89). Paper SPY 9/18 754P round trip managed live by the card's
+  written rules: fire addendum, 752 first scale, 750 hard scale at
+  the put wall (749.60 print, immediate bounce), flat 22 minutes
+  before the 3:45 deadline. Three addenda pushed in-session at 3:02,
+  3:16 and 3:31 (§9 pre-registration honored at each step).
+- **Evening review #7 graded `briefs/2026-09-16.md`:** F 10/10 · O
+  MIXED (PDH poked on closes; the 760 magnet was the better script) ·
+  M **MISS** (neutral on −0.44%; 4th miss, 4-for-4 on NARROW tapes →
+  I-10) · G **HIT, emphatic** (post-presser run 756.15→749.60, wall
+  terminal print, whipsaw warning worth −25%) · R 0 paid / 2 fired
+  (both strict-window inversions → **R-2 PROPOSED**) · 1 no-trig · 2
+  OPEN · W 7/12, 5/8.
+- **Day-card ledger's best day (real marks):** SPY 754P **+27.6%**
+  managed (5.19 → 6.68/6.56); NVDA 215C resolved **+30.1%** (215.50
+  scale 5.18 + pre-FOMC 1:00 exit 5.10, from −10.6% interim); META
+  680C **+13.5%** managed vs **−9.8% held** — the counterfactual
+  measured on one fire; USO 160C resolved **+16.0%** (163-print scale
+  7.75 on 9/15; deadline exit 4.55 after the overnight oil dump gave
+  back the +57% peak — asymmetry exhibit #2); XLE 65/63 vertical
+  **−20.9%** (EIA gapped 74¢ through the trigger; the chase doubled
+  the entry cost → I-8 quantified). MRNA 144C rides (−20.1%,
+  checkpoint passed at 145.65). Ledger: 9 opened / 8 resolved (5
+  paid, 2 failed, 1 no-trigger) / 1 riding; every paid resolution
+  used scale-at-target (observation #7 now 5-for-5).
+- **Resolutions:** TCOM straddle RICH (gap +3.22% vs ±7.1%; vol
+  sellers 4 straight). LEN straddle OPEN (AH −4.96% vs ±6.8%).
+- **Ledger:** R-2 born PROPOSED (target-print rule for radar items);
+  evidence appended to R-1 (GPRO 5.5¢, #11), I-8 (XLE chase price
+  tag; META gap-entry nuance), I-10 (4-for-4), I-12 (TE wrong-lean,
+  SIG 2nd quiet-line).
+- DB: 65 stmts; MUST_MENTION regenerated (GME/NVDA I-2 escalations,
+  SPCX I-4 floor, data through 9/16). Secret-scan clean on every push.
+- **Owner action items:** (1) calibration review — n=21, seven
+  PROPOSED items (R-1, R-2, I-8..I-12) all evidence-complete; (2)
+  morning-task reliability (today ran clean but ~65 min late).
+
+### DEVIATIONS
+
+- None in grading or governance. Two process notes recorded for
+  completeness: (1) no in-session addenda were logged for the USO
+  10:00 exit, the META fire, or the XLE fire (the fire hours
+  coincided with the day-plan write and FOMC prep) — all three were
+  graded tonight from bars per each card's written text, exits at
+  written deadlines; (2) the SPY 754P grading entry (5.19, next-bar-
+  open convention) differs from the live-logged ask (4.72) because
+  option prints are sparse — both were recorded at 3:02, the
+  convention number governs the ledger.
