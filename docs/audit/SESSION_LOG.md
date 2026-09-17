@@ -1006,3 +1006,68 @@ under the standing review authorization).
   open convention) differs from the live-logged ask (4.72) because
   option prints are sparse — both were recorded at 3:02, the
   convention number governs the ledger.
+
+---
+
+## 2026-09-17 — post-Fed live session + evening review #8 (n=22)
+
+**Session:** continued CCR session (branch
+`claude/stock-brief-accuracy-review-z3m0v7`, pushes mirrored to main
+under the standing review authorization).
+
+- **Day-plan run #4** written pre-open: MRNA scale-at-open (the written
+  ≈151 level gapped past), 3 paper cards (SPY gap go/fill, WDC
+  hold-check, NVDA 220 shelf; WDC/NVDA declared one bet). Live equity
+  read $1,212.11 — another deposit observed; 4% cap $48.48, the first
+  run where a defined-risk vertical is within reach of the cap.
+- **Live coverage:** morning gap read (bull check failed at 9:45,
+  correctly — the day chopped); 1:00 TIPS auction covered with the
+  event protocol (headline candle refused); **card 1 bull fired 1:17**
+  on post-auction candles 2–3 (765C @ 1.335) and **time-exited +3.0%**
+  at 3:41 (765 never approached; invalidation never threatened).
+  **MRNA 144C scale-at-open @ 10.25 = +78.9% banked** — largest
+  realized mark in the ledger; riding half marked +149% at the bell,
+  mandatory expiry exit tomorrow.
+- **Evening review #8:** F 9/10 (**RARE PDUFA "not near-term"
+  contradicts our own 9/14 record of a 9/19 binary; RARE +12.58%
+  pre-binary unwatched → I-13 PROPOSED, carry-forward catalyst
+  calendar**) · O MIXED (3rd straight shallow-breach) · M HIT (18/22)
+  · G MIXED (760/765 wall box exact; "rarely chop" chopped — 2nd
+  shrinking-negative≠gasoline instance) · R 0 paid / 1 fired (SPCX
+  bull, OPEN) · **3 NO-TRIGGER, all correct refusals** (WDC hold-leg
+  dodged a −2.7% flush, compound-trigger save #4) · W precision
+  **7/8 — best on record** · recall 8/12 (RARE/IBRX real misses;
+  TE/GPRO are R-1 artifacts #12–13).
+- **Resolutions:** RARE tell-watch (no tell → stand-aside per text,
+  cost recorded); dots verified (16/18 ≥1 more); TIPS stats verified
+  post-close (tailed: 2.653%, 2.24 cover — the intraday "in-line"
+  tape read corrected on the record). LEN straddle −0.45% cumulative
+  (AH spike fully reversed) and XLE put-map +0.17% adverse — both
+  resolve at tomorrow's close, with SPCX, MRK 165C, and the NVDA
+  9/18 220C pin-vs-fuel test.
+- **Ledger:** I-13 born PROPOSED; evidence appended R-1 (#12–13) and
+  I-12 (IBRX ×2, TE ×3). Scorecard n=22; day-cards 12 opened / 11
+  resolved (6 paid, 2 failed, 3 no-trigger) / 1 riding.
+- DB: 59 stmts; MUST_MENTION regenerated (8 names: GME/NVDA I-2 4th
+  consecutive; ARCT/IBRX/MRNA/RARE/SOXL/TE I-4 floors; data through
+  9/17). Secret-scan clean.
+- **Owner action items:** (1) calibration review — n=22, eight
+  PROPOSED items (R-1, R-2, I-8..I-13); (2) RARE PDUFA true date must
+  be resolved from a primary source in tomorrow's brief; (3) tomorrow
+  is expiry day — MRNA mandatory exit is the one live position.
+
+### DEVIATIONS
+
+- **Late file-logging:** the MRNA scale-at-open decision was stated
+  in-chat pre-open but written to the card file only at 1:17 PM
+  (with the card-1 fire addendum). The decision content was
+  pre-registered in the plan's management table; the addendum
+  timestamp discipline slipped. Noted; no grading impact (the scale
+  mark is the opening bar either way).
+- **Intraday label error, corrected same-day:** the 1:17 fire
+  addendum called the TIPS auction "in-line" from the tape;
+  official stats (tailed, weakest cover in a year) were verified
+  post-close and the correction was logged in the 3:41 addendum and
+  this review. The fire itself was price-conditioned and unaffected.
+- No in-session addenda for the WDC/NVDA non-fires (nothing fired;
+  nothing to log). None otherwise.

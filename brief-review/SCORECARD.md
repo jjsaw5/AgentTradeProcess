@@ -1,12 +1,12 @@
 # Brief accuracy scorecard
 
 **Status: UNCALIBRATED — n=20 REACHED 2026-09-15. OWNER CALIBRATION REVIEW
-DUE (now n=21).** The founding bar ("at n=20 nobody has to argue from
-anecdotes") is met: 21 graded briefs, 175 checked facts, 46 resolved radar
-confirmations, 21 clean kills, 178 recall events, and a day-card ledger at
-9 opened / 8 resolved on real contract marks. What graduates from
+DUE (now n=22).** The founding bar ("at n=20 nobody has to argue from
+anecdotes") is met: 22 graded briefs, 185 checked facts, 46 resolved radar
+confirmations, 21 clean kills, 190 recall events, and a day-card ledger at
+12 opened / 11 resolved on real contract marks. What graduates from
 UNCALIBRATED is the owner's decision (CLAUDE.md §7); nothing here
-self-ratifies. Seven PROPOSED items (R-1, R-2, I-8–I-12) await the same
+self-ratifies. Eight PROPOSED items (R-1, R-2, I-8–I-13) await the same
 review. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
 2026-09-07 in a catch-up batch (settled data; the delay was the review
@@ -37,22 +37,28 @@ process's, not the briefs').
 
 | **2026-09-16** ⚠FOMC | 10/10 | MIXED (PDH poked on closes; 760 magnet honored the spirit) | **MISS** (neutral on −0.44% — 4th, all on NARROW tapes → I-10 now 4-for-4) | **HIT (emphatic)** — post-presser break RAN 756.15→749.60, 750 put wall was the exact terminal print, whipsaw filter saved a −25% touch-buy | 0 paid / 2 fired — **both strict-window inversions**: SPY bear hit its named 750 target (−0.57%) but closed 20¢ over the trigger (→ R-2); META faded a gap-chase entry · 1 no-trig (NVDA compound conf) · 2 OPEN (XLE running in favor, LEN AH −4.96%) · resolved: TCOM straddle **RICH** (gap +3.2% vs ±7.1%) | 7/12 | 5/8 | **Day-card ledger's best day: SPY 754P +27.6%, NVDA +30.1%, META +13.5% (vs −9.8% unscaled), USO +16.0% (from +57% peak), XLE −20.9% (gap doubled entry cost → I-8).** TE wrong-lean −4.65%, SIG quiet-lined +3.1% (I-12); GPRO 5.5¢ artifact (R-1 #11) |
 
-## Cumulative (n=21)
+| **2026-09-17** | 9/10 (RARE PDUFA "not near-term" contradicts our own 9/14 record of a 9/19 binary) | MIXED (gap-up ✓; PDH-as-support broke by $1 on closes, no consequence) | HIT (mildly bullish, +1.14% with the 761.65 hold honored) | MIXED (760/765 wall box WAS the day to within 62¢; "rarely chop" claim chopped — 2nd shrinking-negative≠gasoline instance) | 0 paid / 1 fired (SPCX bull, OPEN to 9/18) · **3 NO-TRIGGER, all correct refusals** (WDC hold-leg dodged a −2.7% flush — 4th compound-trigger save; NVDA 4th 220 rejection; SPY chop refused) | **7/8 (best on record)** | 8/12 | **RARE +12.6% pre-binary missed on a self-inflicted date error (→ I-13 carry-forward calendar); MRNA 144C scale-at-open banked +78.9%, riding half +149% into expiry; SPY 765C +3.0% time-exit scratch; TIPS tailed (2.653%, 2.24 cover) and the tape absorbed it** |
 
-- **Facts: 169/175 (97%).** New-era errors: 8/20's two quoted figures, the
+## Cumulative (n=22)
+
+- **Facts: 178/185 (96%).** Newest error class is the worst kind: an
+  internal contradiction (RARE PDUFA "not near-term" 9/17 vs our own 9/14
+  dated record) that cost a +12.6% catch → I-13. New-era errors: 8/20's two quoted figures, the
   8/28 MRVL prior-year-revenue mislabel, 9/1's USO +2.9%-that-was-+3.08%.
   All four are sourcing/labeling failures, not price-record failures — I-6
   fixed the class it targeted; the residue is quarter-labels and
   arithmetic checks.
-- **Mood: 17/21.** The four misses (9/2, 9/4, 9/8, 9/16) all share the
-  neutral-label-on-a-NARROW-tape shape (→ I-10, now 4-for-4 with zero
-  counter-instances); every directional lean on a narrow tape (9/9,
-  9/10, 9/14, 9/15) has graded HIT — the pattern confirms both ways.
-- **Open read: 13 HIT / 8 MIXED.** Gap/range classification 21/21 at the
-  index level; the two recent MIXED grades are both shallow-breach
-  shapes (55¢ close outside 9/15; a $1.31 intraday PDH poke 9/16 where
-  the 760 GEX magnet, not the PDH, described the realized pin).
-- **Regime: 13 HIT / 7 MIXED / 1 MISS — and 9/16 is the signature HIT:
+- **Mood: 18/22.** The four misses (9/2, 9/4, 9/8, 9/16) all share the
+  neutral-label-on-a-NARROW-tape shape (→ I-10, still 4-for-4 with zero
+  counter-instances); every directional lean since (incl. 9/17's
+  conditioned "mildly bullish") has graded HIT — the pattern confirms
+  both ways.
+- **Open read: 13 HIT / 9 MIXED.** Gap/range classification 22/22 at the
+  index level; the three straight MIXED grades are all shallow-breach
+  shapes (55¢ close outside 9/15; $1.31 PDH poke 9/16; a $1.03
+  support-pierce-and-recover 9/17) — the classification engine is
+  perfect, the wall-behavior letter keeps costing the grade.
+- **Regime: 13 HIT / 8 MIXED / 1 MISS — and 9/16 is the signature HIT:
   the index "gasoline amplifies" claim finally delivered at the index
   level on the day built for it** (post-presser break ran −0.9% in
   three candles; the named 750 put wall was the terminal print to
@@ -72,11 +78,20 @@ process's, not the briefs').
   +27.6% and +13.5% — the divergence between the two grading systems
   is now measured, not argued.
   **Invalidations 21/21** — DELL 9/2 (the most expensive correct kill),
-  XLE 9/14, and SPCX 9/15. NO-TRIGGER 19 — including NVDA 9/16, whose
-  compound conf (hold 215 AND close >220) refused a chop day.
+  XLE 9/14, and SPCX 9/15. NO-TRIGGER 22 — the 9/17 trio were all
+  correct refusals (WDC's hold-leg dodged a −2.7% flush, the 4th
+  compound-trigger save; NVDA's 220 close-requirement absorbed a 4th
+  rejection; SPY's basing check refused a 0.37% chop day).
   Ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
-- **Day-cards ledger (n=9 opened, 8 resolved, 1 riding — real contract
-  marks throughout):** resolved: SPY 762C 9/14 **−24.3%** (time-stopped
+- **Day-cards ledger (n=12 opened, 11 resolved, 1 riding — real contract
+  marks throughout):** 9/17 adds: SPY 9/21 765C **+3.0%** (post-auction
+  fire, time-exit scratch — the flat-by-3:45 rule took a coin off the
+  table ahead of BOJ), WDC 440C **NO-TRIGGER (protective — refusal
+  avoided a −2.7% flush)**, NVDA 220C NO-TRIGGER (4th shelf rejection),
+  and the MRNA 144C **scale-at-open @ 10.25 = +78.9% banked** (largest
+  realized mark in the ledger; riding half +149% into the mandatory
+  9/18 expiry exit). Running tally: 6 paid / 2 failed / 3 no-trigger.
+  Prior detail: resolved: SPY 762C 9/14 **−24.3%** (time-stopped
   one bar early), NVDA 9/14 NO-TRIGGER, SPY 756P 9/15 **+6.1% managed**,
   USO 160C **+16.0% managed** (scale at the 163 print +46%; the
   unprotected overnight leg gave back a +57% peak to −14% at its
@@ -94,7 +109,11 @@ process's, not the briefs').
   AVGO **rich**, GME **rich**, ORCL **rich**, LULU **cheap**, TCOM
   **rich** (gap +3.2% / close +3.0% vs ±7.1% priced). Sellers have won
   four straight; LEN (±6.8%, AH print already −4.96%) resolves Friday.
-- **Watchlist: precision 124/173 (72%) · recall 123/178 (69%).** Recall
+- **Watchlist: precision 131/181 (72%) · recall 131/190 (69%).** 9/17's
+  7/8 precision is the best single day on record — six of seven paying
+  flags carried the right lean same-day (GME, NBIS, MRNA, RDDT, DELL,
+  SPCX). Half of 9/17's four recall misses are R-1 penny artifacts
+  (#12–13); the real two are RARE (the I-13 date error) and IBRX (I-12). Recall
   under the full ruleset: 13/14 in its first two days, then **36/47 across
   the six catch-up days** — the leak the rules closed stayed mostly
   closed, but three new miss classes emerged: dated-event names (TSLA
