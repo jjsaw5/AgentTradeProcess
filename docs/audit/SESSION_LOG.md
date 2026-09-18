@@ -1071,3 +1071,83 @@ under the standing review authorization).
   this review. The fire itself was price-conditioned and unaffected.
 - No in-session addenda for the WDC/NVDA non-fires (nothing fired;
   nothing to log). None otherwise.
+
+---
+
+## 2026-09-18 — evening review #9 (scheduled): quad-witching day graded; the ledger's two biggest trades closed; owner's live account rode the release
+
+- **Review:** `brief-review/reviews/2026-09-18.md` graded the standing
+  ~9:20 brief (the 8:55 version was overwritten by a re-run — pipeline
+  incident #5). F 18/19 (GME "Thu low 21.97" was 21.92); O HIT (both
+  index scripts realized); M HIT — mildly bullish on +0.12% div-adj,
+  19-for-23; G HIT (the cleanest structural call yet: pin → 2:30
+  witching release → dissolved walls; QQQ closed through the 720 wall
+  exactly per the OPEX caveat).
+- **Radar (hardest day on record):** 0 paid / 2 CONF-FAILED — both
+  first-candle traps (QQQ long confirmed on the 9:30–9:45 bar and
+  reversed; USO's up line satisfied by the opening gap) → **I-14
+  PROPOSED** (first-eligible-candle rule); 1 INVALIDATED (SPCX — whose
+  155-pin claim broke in 30 min; pre-registered pin study resolved PIN
+  LOST at 4.45% range); 1 NO-TRIGGER (INTC, protective); RARE and the
+  USO down-branch carried OPEN to Monday.
+- **Five carried items resolved:** LEN straddle RICH (−4.47% vs ±6.8%;
+  sellers five straight), XLE map CONF-FAILED (−0.05% scratch), SPCX
+  9/17 bull CONF-FAILED (−0.60%), MRK 165C worthless, RARE date =
+  9/19 approved EARLY 9/17 (I-13 case file complete).
+- **Day cards — the ledger's biggest day, both paid on written rules:**
+  MRNA 144C RESOLVED **+85.0% blended graded** (the 155-ratchet fired
+  at 10:15; graded exit 10.95 supersedes the 12:51 deadline mark per
+  the card's own convention); the 2 PM release SPY 761C **+132.7%
+  blended in 68 minutes** — tripwires pre-computed, headline candle
+  refused, first §5-compliant entry in program history, 761-print
+  scale, 3:45-wall time exit. Three protective NO-TRIGGERs (Bowman
+  two-sided, INTC, NVDA — whose 220 break came only on the forbidden
+  3:45–4:00 bar, closing 222.08). Ledger: 16/16 resolved, 8 paid /
+  2 failed / 6 no-trigger, scale-at-target 8-for-8.
+- **W:** precision 1/5 (worst on record — three failed flags had
+  open-satisfied confirms, the same first-candle shape); recall 1/4
+  (WDC "nothing notable" +4.12% the day after being a failed flag →
+  I-12 append; DELL ceiling-only −3.38%; ARCT bullish-hold lean
+  −5.14%).
+- **Owner's live-account day, logged for the journal (playbook §5 —
+  the human executed every order, §2):** a real morning loss (−$188.24,
+  −20.3%, shape consistent with an untriggered SPY put chased in the
+  10:00 dip); a real MRNA sale ~10:05 (ahead of the paper deadline,
+  orderly tape); then 5x SPY 9/18 759C bought BEFORE the 2:15–2:30
+  confirmation completed (~10x the §5 cap) — coached in-chat to
+  bank-3/run-2 with the 760.00 ratchet; owner sold all 5 into the
+  761.3–761.5 push and finished **+$386.85 (+41.76%) on the day at
+  $1,313.20**, flat 50 minutes before the wall. Graded as executed:
+  rule-breaking entry, rule-following exit — both named plainly in
+  chat and here.
+- **Ledger:** I-14 born PROPOSED; I-12 evidence appended (WDC).
+  Scorecard n=23. Vol-card series 9 resolved, sellers 5 straight.
+- DB: 63 stmts; MUST_MENTION regenerated (5 names: GME/NVDA I-2 5th
+  consecutive, META I-2 new escalation, ARCT/SOXL I-4 floors; data
+  through 9/18). Secret-scan clean.
+- **Owner action items:** (1) calibration review — n=23, NINE proposed
+  items (R-1, R-2, I-8..I-14), all evidence-complete; (2) morning-task
+  reliability — incident #5 (9:20 re-run overwrote the 8:55 brief and
+  changed trigger levels under the day plan's feet); (3) confirm the
+  ~$286 morning cash outflow inferred at 9:09; (4) Monday's brief must
+  carry the broken NVDA 220 shelf, RARE and USO open legs.
+
+### DEVIATIONS
+
+- **Unwatched ratchet on the MRNA exit:** the card's 155-line (15-min
+  close below 155) fired at 10:15 while the session was mid-morning
+  coaching; the paper exit was logged only at the 12:51 deadline. The
+  12:52 addendum self-flagged the gap and tonight's grading applied
+  the earlier, rule-correct mark (10.95 — which happened to be the
+  more adverse one). Same class as the 9/15 energy-card correction.
+- **Addendum figure error, corrected in the review:** the 12:52
+  addendum's "closest SPY 15-min close 759.37" was actually 759.00
+  (10:30–10:45 bar). No grading impact (both above 758).
+- **Card-numbering drift:** the afternoon addenda called the release
+  card "card 4"/"4b" against the file's own CARD 2/CARD 4 headers.
+  Content unambiguous; noted.
+- **Owner traded outside §5 sizing on an owner-directed 0DTE day**
+  (entry before confirmation, ~10x cap): logged above and in the card
+  addenda at the time, not silently. The ratified spec was not
+  amended; the coaching enforced the written exits.
+- None otherwise.
