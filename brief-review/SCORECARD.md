@@ -1,13 +1,12 @@
 # Brief accuracy scorecard
 
 **Status: UNCALIBRATED — n=20 REACHED 2026-09-15. OWNER CALIBRATION REVIEW
-DUE (now n=23).** The founding bar ("at n=20 nobody has to argue from
-anecdotes") is met: 23 graded briefs, 204 checked facts, 50 resolved radar
-confirmations, 22 clean kills, 194 recall events, and a day-card ledger at
-16 opened / 16 resolved on real contract marks. What graduates from
-UNCALIBRATED is the owner's decision (CLAUDE.md §7); nothing here
-self-ratifies. Nine PROPOSED items (R-1, R-2, I-8–I-14) await the same
-review. Rubric: `brief-review/SKILL.md`. One row
+DUE (now n=24).** The founding bar ("at n=20 nobody has to argue from
+anecdotes") is met: 24 graded briefs, 210 checked facts, 53 resolved radar
+confirmations, 22 clean kills, day-card ledger at 19 opened / 19 resolved on
+real contract marks. What graduates from UNCALIBRATED is the owner's decision
+(CLAUDE.md §7); nothing here self-ratifies. Nine PROPOSED items (R-1, R-2,
+I-8–I-14) await the same review. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
 2026-09-07 in a catch-up batch (settled data; the delay was the review
 process's, not the briefs').
@@ -41,30 +40,33 @@ process's, not the briefs').
 
 | **2026-09-18** ⚠QUAD WITCHING | 18/19 (GME "Thu low 21.97" was 21.92) | **HIT** (both index scripts realized: SPY flat-in-adjusted-range; QQQ's 718 rejection → 717/716 magnet answered in one bar) | HIT (mildly bullish, +0.12% div-adj — the ex-div pre-correction made the grade clean) | **HIT** (pin → 2:30 release → walls dissolved; QQQ closed THROUGH the 720 wall exactly per the OPEX caveat) | 0 paid / 2 CONF-FAILED — **both first-candle traps** (QQQ long confirmed on the 9:30–9:45 bar and reversed; USO's up line satisfied by the open gap → I-14) · 1 inv (SPCX — but its 155 pin claim broke in 30 min) · 1 no-trig (INTC, protective) · 2 OPEN (RARE fired to 15.07; USO down-branch) · resolved: LEN straddle **RICH** (−4.47% vs ±6.8% — sellers 5 straight), XLE map CONF-FAILED (−0.05%), SPCX 9/17 bull CONF-FAILED (−0.60%), SPCX pin study **PIN LOST** (4.45% range), MRK 165C worthless | **1/5 (worst on record)** | 1/4 | **Day-card ledger's two biggest trades closed the same day: MRNA 144C +85.0% blended graded (ratchet fired 10:15, unwatched live — deviation) and the 2 PM release 761C +132.7% on the framework's first live run, first §5-compliant entry. WDC "nothing notable" +4.12% the day after a failed flag (I-12); NVDA broke 220 on the untradeable final bar** |
 
-## Cumulative (n=23)
+| **2026-09-21** | 6/6 (XLE trigger uses div-adj close — footnote, not error) | **HIT** (gap-up → clean gap-and-go; SPY held 762 from bar 1, closed 773.53) | HIT (mildly bullish/broad, SPY +1.55% / QQQ +2.88%, IWM+DIA in — 20/24) | **HIT** (negative-gamma gasoline trend day: the break traveled all day without a pullback) | **3 CONF-PAID** (SPY/QQQ gap→770+; semis SMH/INTC; energy XLE bear, no gap-past) / 2 OPEN (SPCX bear fired late −0.5%, WBD research) · resolved: **NVDA 220-shelf CONFIRMED >225 — the 5-brief I-2 escalation paid**, USO down-branch CONF-PAID (−3.7%), RARE post-approval CONF-FAILED (−0.3%) | 5/8 | 8/8 checked | **Owner's biggest day on record (+177%, $1,237→$3,426) on a chase entry (2-for-2 w/ 9/18) + textbook exit, flat by 11:20 — journaled not card-graded. I-14 guard's first keep: 3 first-candle refusals + 3 paid confirms. Pipeline incident #6 (9:25 re-run). DB sync DEFERRED (recycle wiped token)** |
 
-- **Facts: 196/204 (96%).** 9/18 adds one five-cent sourcing miss (GME
-  "Thursday's low 21.97" vs actual 21.92 — outcome-immaterial, label
-  wrong). Prior newest error class is the worst kind: an
+## Cumulative (n=24)
+
+- **Facts: 202/210 (96%).** 9/21 clean 6/6 (the XLE "63.93 Friday close" is
+  the dividend-adjusted figure, correct basis, footnoted). Prior newest error
+  class is the worst kind: an
   internal contradiction (RARE PDUFA "not near-term" 9/17 vs our own 9/14
   dated record) that cost a +12.6% catch → I-13. New-era errors: 8/20's two quoted figures, the
   8/28 MRVL prior-year-revenue mislabel, 9/1's USO +2.9%-that-was-+3.08%.
   All four are sourcing/labeling failures, not price-record failures — I-6
   fixed the class it targeted; the residue is quarter-labels and
   arithmetic checks.
-- **Mood: 19/23.** The four misses (9/2, 9/4, 9/8, 9/16) all share the
+- **Mood: 20/24.** The four misses (9/2, 9/4, 9/8, 9/16) all share the
   neutral-label-on-a-NARROW-tape shape (→ I-10, still 4-for-4 with zero
   counter-instances); every directional lean since (incl. 9/17's
   conditioned "mildly bullish") has graded HIT — the pattern confirms
   both ways.
-- **Open read: 14 HIT / 9 MIXED.** Gap/range classification 23/23 at the
+- **Open read: 15 HIT / 9 MIXED.** Gap/range classification 24/24 at the
   index level; the three straight MIXED grades are all shallow-breach
   shapes (55¢ close outside 9/15; $1.31 PDH poke 9/16; a $1.03
   support-pierce-and-recover 9/17) — the classification engine is
   perfect, the wall-behavior letter keeps costing the grade.
-- **Regime: 14 HIT / 8 MIXED / 1 MISS — 9/18 adds the cleanest
-  structural call yet (pin → timed release → dissolved walls, all three
-  realized on schedule); 9/16 remains the signature HIT:
+- **Regime: 15 HIT / 8 MIXED / 1 MISS — 9/21 is a clean gasoline-trend HIT
+  (the break traveled all day, no pullback); 9/18 added the cleanest
+  structural call (pin → timed release → dissolved walls); 9/16 remains the
+  signature event-day HIT:
   the index "gasoline amplifies" claim finally delivered at the index
   level on the day built for it** (post-presser break ran −0.9% in
   three candles; the named 750 put wall was the terminal print to
@@ -73,20 +75,14 @@ process's, not the briefs').
   before 9/16 the amplification had kept expressing through single
   complexes while the index pinned — the event-day exception is now
   recorded.
-- **Radar: fired-and-resolved confirmations paid 35/50 (70%).**
-  CONF-FAILED lifetime 15 — three shapes now: event-day cards confirming
-  at tops (Warsh 8/28, jobs 9/4); the fired-and-flat / strict-window
-  class, now 10 (USO −9¢, SPY 9/10 −7¢, the 9/11 gap test −0.2%, SPY
-  9/15 −7¢, SPY 9/16 +20¢-over-trigger **with its named 750 target
-  printed in between** → R-2 PROPOSED, META 9/16 gap-chase, XLE 9/16
-  −0.05% at window end, SPCX 9/17 −0.60%); and **the first-candle trap,
-  born 9/18 with two members in one day** (QQQ long confirmed on the
-  9:30–9:45 bar and reversed; USO's up line satisfied by an opening gap
-  print → I-14 PROPOSED). The two
-  9/16 entries in the strict-window class are the first where the
-  day-plan ledger ran the identical fires under written scale management
-  and paid +27.6% and +13.5% — the divergence between the two grading
-  systems is now measured, not argued.
+- **Radar: fired-and-resolved confirmations paid 38/53 (72%).** 9/21 was
+  the best radar day since 9/16 — **3 clean CONF-PAID** (SPY/QQQ gap→770+,
+  semis SMH/INTC, energy XLE-bear) on a trend day, each refusing the
+  first-candle trap the new I-14 guard targets; the guard's first live day
+  and its first keep. NVDA's broken-220 shelf resolved CONFIRMED (>225,
+  +2.24%) — the 5-brief I-2 escalation's cleanest payoff, no premature entry.
+  CONF-FAILED lifetime 15 unchanged (RARE post-approval resolved
+  fired-and-flat −0.3%, already an armed Friday fire not a fresh one).
   **Invalidations 22/22** — SPCX 9/18 joins (the bear line fired in the
   first half hour and the name chopped −1.31%), after DELL 9/2 (the most
   expensive correct kill), XLE 9/14, and SPCX 9/15. NO-TRIGGER 23 —
@@ -95,26 +91,16 @@ process's, not the briefs').
   compound-trigger save; NVDA's 220 close-requirement absorbed a 4th
   rejection; SPY's basing check refused a 0.37% chop day).
   Ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
-- **Day-cards ledger (n=16 opened, 16 resolved, 0 riding — real contract
-  marks throughout):** 9/18 (quad-witching 0DTE special) adds the
-  ledger's two biggest resolutions on the same day: **MRNA 144C RESOLVED
-  +85.0% blended graded** (half 10.25 open-scale 9/17, half 10.95 at the
-  10:15 155-ratchet — the graded exit beats the 12:51 deadline exit
-  logged live; five days, entered/scaled/exited on written rules) and
-  the **2 PM witching-release SPY 761C +132.7% blended** (0.245 →
-  0.72/0.42 in 68 minutes; first §5-compliant entry in program history;
-  tripwires pre-computed, headline candle refused, 760.00 ratchet never
-  fired, time-exit at the 3:45 wall). Plus three protective
-  NO-TRIGGERs: Bowman two-sided (SPY's 758 line pierced intrabar to
-  757.97 and refused by the close rule), INTC 110C (dead at the 10:30
-  check, closed red), NVDA 220C post-2PM (**the 220 break came only on
-  the 3:45–4:00 washing-machine bar — closed 222.08 — the window
-  correctly refused the only confirming candle**). Running tally:
-  **8 paid / 2 failed / 6 no-trigger; every paid resolution used
-  scale-at-target (8-for-8)**. 9/17 detail: SPY 9/21 765C **+3.0%**
-  (post-auction fire, time-exit scratch), WDC 440C NO-TRIGGER
-  (protective), NVDA 220C NO-TRIGGER (4th shelf rejection), MRNA
-  scale-at-open @ 10.25 = +78.9% banked.
+- **Day-cards ledger (n=19 opened, 19 resolved, 0 riding — real contract
+  marks throughout):** 9/21 adds three correct NO-TRIGGERs (SPY gap
+  retest-hold never offered on a no-pullback trend day; INTC retest never
+  came — closed +12.1% but the chase was correctly refused; DELL sat 568–585
+  all day, the card's own do-nothing branch). Running tally: **8 paid / 2
+  failed / 9 no-trigger; scale-at-target 8-for-8.** The owner's real +177%
+  day (chase entry, textbook exit, 2-for-2 with 9/18) is journaled in the
+  execution record, not card-graded — the paper ledger and the human's
+  execution stay separate by design. 9/18 detail: MRNA 144C +85.0% blended
+  (10:15 ratchet exit), release 761C +132.7% (first §5-compliant entry).
   Prior detail: resolved: SPY 762C 9/14 **−24.3%** (time-stopped
   one bar early), NVDA 9/14 NO-TRIGGER, SPY 756P 9/15 **+6.1% managed**,
   USO 160C **+16.0% managed** (scale at the 163 print +46%; the
@@ -135,16 +121,14 @@ process's, not the briefs').
   print fully round-tripped and the move never came). **Sellers have
   won five straight** — the earnings-straddle-rich pattern is the
   owner-review headline from this series.
-- **Watchlist: precision 132/186 (71%) · recall 132/194 (68%).** The
-  whiplash pair: 9/17's 7/8 precision is the best day on record; 9/18's
-  1/5 is the worst (witching chop — three of the four failed flags had
-  their written confirms satisfied at the open and reversed, the same
-  first-candle shape as the radar failures). 9/18 recall 1/4: WDC
-  "nothing notable" +4.12% the day after being a failed flag (→ I-12),
-  DELL ceiling-only-lined −3.38%, ARCT's bullish-hold lean −5.14% (its
-  16 floor did hold on the close). Half of 9/17's four recall misses are
-  R-1 penny artifacts
-  (#12–13); the real two are RARE (the I-13 date error) and IBRX (I-12). Recall
+- **Watchlist: precision 137/194 (71%) · recall 140/202 (69%).** 9/21
+  precision 5/8 (NVDA, META +11.3%, SOXL +14.9%, MRNA +12.3%, ARCT on the
+  16-breakdown level; misses GME 5th-lean-no-price, DELL standoff, WDC
+  modest). Recall 8/8 on the checked core movers (INTC, SMH, META, MRNA,
+  SOXL, ARCT, USO, HIMS-on-its-level) — the full 34-name sweep is deferred
+  with the DB sync, flagged honestly. NVDA's confirmed 225 break makes the
+  I-2 escalation 1-for-1 on payoff when the price finally triggers; GME is
+  0-for-5 on the same rule (lean without price). Recall
   under the full ruleset: 13/14 in its first two days, then **36/47 across
   the six catch-up days** — the leak the rules closed stayed mostly
   closed, but three new miss classes emerged: dated-event names (TSLA
@@ -198,6 +182,16 @@ process's, not the briefs').
    day-plan convention change is the owner's call, not this ledger's.
 8. **Event-flat rules cut both ways (n=2, 9/16).** The FOMC no-hold
    discipline banked NVDA +30.1% at 1:00 (the position would have been
-   whipsawed through the presser) and simultaneously forced XLE's
-   −20.9% exit at 1:45 while its direction kept working into the close.
-   Watching, not proposing — the asymmetric sample is one day.
+   whipsawed through the presser) and simultaneously forced XLE's −20.9%
+   exit at 1:45 while its direction kept working into the close. Watching,
+   not proposing — the asymmetric sample is one day.
+9. **The card set is silent on no-pullback trend days (n=2, watch-not-propose).**
+   9/18 (release trend) and 9/21 (gap trend) both trended cleanly while the
+   day-plan's retest-based entries never armed; the owner filled the silence
+   with a chase entry that paid both times (+177% on 9/21). **n=2 is not
+   evidence for a rule** — and the obvious "trend-continuation entry" fix
+   risks becoming a chase-license, the exact thing the retest rule prevents.
+   If ever added, such an entry must carry its own confirmation (a first
+   higher-low holding above a rising short-MA/VWAP after 9:45) and a written
+   invalidation. The owner's chase is now 2-for-2; two wins is precisely when
+   the discipline erodes. Watching. Owner calibration-review item.

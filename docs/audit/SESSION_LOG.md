@@ -1151,3 +1151,65 @@ under the standing review authorization).
   addenda at the time, not silently. The ratified spec was not
   amended; the coaching enforced the written exits.
 - None otherwise.
+
+---
+
+## 2026-09-21 — evening review #10 (scheduled): gap-and-go graded; radar's best day since 9/16; owner's biggest day on record; DB sync deferred
+
+- **Review:** `brief-review/reviews/2026-09-21.md` graded the standing ~9:25
+  brief (the 8:55 version was overwritten by a re-run — pipeline incident #6).
+  F 6/6; O HIT (clean gap-and-go, SPY held 762 from bar 1, closed 773.53); M
+  HIT (mildly bullish/broad, SPY +1.55% / QQQ +2.88%, 20-for-24); G HIT
+  (negative-gamma gasoline trend day — the break traveled all day, no pullback).
+- **Radar — best day since 9/16:** 3 CONF-PAID (SPY/QQQ gap → 770+; semis
+  SMH/INTC, both closed big; energy XLE-bear, which correctly did NOT gap past
+  its trigger — the brief built it on XLE not the gapped-past USO) / 2 OPEN
+  (SPCX bear fired late −0.5% multi-day; WBD research card, OI test tomorrow).
+  Each paid confirm refused a first-candle trap — the **I-14 guard's first
+  live day and its first keep**.
+- **Three carried items resolved:** NVDA broken-220 shelf **CONFIRMED >225
+  (+2.24%)** — the 5-brief I-2 escalation's cleanest payoff, zero premature
+  entry; USO down-branch CONF-PAID (−3.7%); RARE post-approval CONF-FAILED
+  (−0.3%, the sell-the-news drift the card priced).
+- **Day cards:** all three NO-TRIGGER and correct — SPY gap retest never
+  offered (no-pullback trend), INTC retest never came (closed +12% but chase
+  refused), DELL sat 568–585 (the card's own do-nothing branch). Ledger 19/19,
+  8 paid / 2 failed / 9 no-trigger.
+- **W:** precision 5/8 (NVDA, META +11.3%, SOXL +14.9%, MRNA +12.3%, ARCT on
+  its 16-breakdown level; misses GME 5th-lean-no-price, DELL, WDC); recall 8/8
+  on the checked core movers (full 34-name sweep deferred with the DB).
+- **Owner's live-account day (playbook §5; §2 human executes):** 7× 0DTE index
+  calls bought into the running gap (a chase entry, ~88% of the account, the
+  same shape as 9/18 — now 2-for-2), then managed textbook: banked 5 of 7 into
+  the first wall touch, ran 2 on written ratchet/break rules, flat by ~11:20.
+  Account **$1,237 → $3,426, +$2,189 / +177%** — the largest day on record.
+  Journaled, not card-graded. Rule-breaking entry, rule-following exit; the
+  exit is the repeatable half, and two wins on a chase is exactly when the
+  discipline erodes (standing observation #9).
+- **Ledger:** no new numbered PROPOSED item; standing observation #9 added
+  (trend-day card silence — watch-not-propose). Scorecard n=24.
+- **DB sync DEFERRED:** the weekend container recycle wiped `turso.env` and the
+  local `.env`; the owner had not re-provisioned the Turso token by 6 PM, and
+  per §6 it was not requested into chat. The markdown review is authoritative;
+  the DB and MUST_MENTION.md (left at its 9/18 generation) catch up when the
+  token returns. Tomorrow's brief must hand-apply I-2/I-4 and note the
+  checklist staleness in §13.
+- **Owner action items:** (1) re-provision the Turso token to the deployment
+  secret store or a gitignored `.env`; (2) calibration review — n=24, nine
+  PROPOSED items (R-1, R-2, I-8..I-14); (3) morning-task reliability —
+  incident #6 (9:25 re-run overwrote the 8:55 brief); (4) the chase-entry
+  pattern (2-for-2) for the execution journal.
+
+### DEVIATIONS
+
+- **DB sync not performed** (Turso credentials wiped by the container recycle,
+  not re-provisioned by review time). Declared here rather than silently
+  skipped; the review, scorecard, card annotation and this log were still
+  written and pushed. Sync + MUST_MENTION regen owed once the token returns.
+- **MUST_MENTION.md not regenerated** (depends on the DB) — it remains at its
+  9/18 data, now 2 sessions stale; flagged for tomorrow's brief to hand-apply.
+- **Owner traded outside the written cards** (7× 0DTE chase entry, ~88% of the
+  account) on a self-directed basis — logged in the card addenda in real time
+  and journaled in the review, not silently. The ratified §5 limits were not
+  amended; the coaching enforced the written exits.
+- None otherwise.
