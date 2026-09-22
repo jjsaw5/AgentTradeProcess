@@ -1248,3 +1248,39 @@ under the standing review authorization).
   deployment secret store / gitignored `.env`. Until rotated, this token is a
   known exposure.
 - None otherwise.
+
+---
+
+## 2026-09-22 — CALIBRATION REVIEW RULED: brief-accuracy layer graduated, all nine proposals ratified
+
+- The owner reviewed `brief-review/CALIBRATION_REVIEW_2026-09-21.md` and
+  **adopted every recommendation in full.**
+- **Graduation:** the **brief-accuracy layer (facts / open-read / mood / regime
+  / radar) GRADUATED from UNCALIBRATED to CALIBRATED** at n=24 — the 22/22
+  invalidation record is the load-bearing proof. The **options-expert /
+  day-card selection edge REMAINS UNCALIBRATED** per §7 (8 paid of 19 resolved;
+  revisit at ~20 paid). Scorecard status header updated accordingly.
+- **Nine proposals RATIFIED 2026-09-22** and written into their specs the same
+  day (own commit, as governance requires):
+  - `daily-market-brief/SKILL.md`: **I-10** (narrow-tape mood → §1 Market Mood),
+    **I-13** (carry-forward catalyst calendar → §4A), **I-12** (repeat-mover →
+    §6A), **I-9 SCOPED to flagged + large-cap** (dated corporate events → §6A),
+    **I-14** (first-eligible-candle → §9), **I-8** (gap rule for triggers → §9),
+    **I-11** (card-QA timing → §9).
+  - `brief-review/SKILL.md`: **R-2** (named-target grading → §R), **R-1** (recall
+    ≥$0.25 floor → §W). Both apply to reviews from 2026-09-22 forward; lifetime
+    counts not restated (`CLAUDE.md` §9).
+  - `IMPROVEMENTS.md` now carries **zero PROPOSED items**.
+- Visual one-pager of the review published as an artifact for reference.
+
+### DEVIATIONS
+
+- **Spec files edited (`daily-market-brief/SKILL.md`, `brief-review/SKILL.md`).**
+  These sit OUTSIDE the review's standing direct-to-main authorization by
+  design; the edits were made only on the owner's explicit same-session
+  go-ahead ("I agree with your rulings ... move forward"), which is exactly the
+  ratification path `brief-review/SKILL.md` §8 and `CLAUDE.md` §7 require. Each
+  rule was added additively in the house "(ratified DATE — ledger I-X)" format;
+  no existing rule was altered or removed.
+- **Turso token exposure (from 2026-09-21) still open** — rotation still owed.
+- None otherwise.

@@ -1,5 +1,7 @@
 # CALIBRATION REVIEW — assembled 2026-09-21 (n=24)
 
+> **RULED 2026-09-22 — owner adopted every recommendation in full.** Layer A (brief accuracy) GRADUATED to CALIBRATED; Layer B (options-expert edge) KEPT UNCALIBRATED. All nine proposals RATIFIED (R-1, R-2, I-8–I-14; I-9 scoped to flagged + large-cap) and written into their specs the same day; `IMPROVEMENTS.md` now carries zero PROPOSED items. The `DECISION:` slots below are left as the record of what was decided.
+
 **Status: DECISION PACKAGE FOR THE ACCOUNT OWNER.** This document assembles the
 nine open PROPOSED items (R-1, R-2, I-8…I-14) and the UNCALIBRATED-graduation
 question into one place to rule on. Nothing here self-ratifies — per

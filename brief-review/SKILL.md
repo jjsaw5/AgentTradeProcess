@@ -122,6 +122,15 @@ Grades per item:
 
 Roll-up: `x CONF-PAID / y confirmations fired`, plus counts of the rest.
 
+**NAMED-TARGET GRADING (ratified 2026-09-22 — ledger R-2).** A radar item that
+names a price target grades `CONF-PAID` if that target prints after the trigger
+and before the timing window ends, independent of the window-end close. Items
+without a named target keep the strict window-end basis. Applies to reviews
+from 2026-09-22 forward per `CLAUDE.md` §9; lifetime counts are not restated.
+This corrects the strict-window inversions where a trade that hit its stated
+target (SPY 9/16 printed its named 750 wall; the day-card version paid +27.6%)
+graded CONF-FAILED on a small mean-revert by the bell.
+
 ### W — Watchlist flags (§6A)
 
 - **Precision:** of the names the brief FLAGGED, how many either moved ≥2%
@@ -131,6 +140,11 @@ Roll-up: `x CONF-PAID / y confirmations fired`, plus counts of the rest.
   how many had been flagged or mentioned with the right lean? Report
   `caught / movers`. Quiet-name one-liners that stayed quiet are silent hits;
   a "nothing notable" on a name that moved ≥3% is a named miss.
+  **Recall floor (ratified 2026-09-22 — ledger R-1):** count a name in the
+  recall-mover denominator only if it moved **≥3% close-to-close AND ≥$0.25
+  absolute**, so sub-$5 names stop tripping the test on single-cent moves.
+  Applies from 2026-09-22 forward per `CLAUDE.md` §9; lifetime counts are not
+  restated.
 
 ### H — Hindsight gap analysis (the improvement engine)
 

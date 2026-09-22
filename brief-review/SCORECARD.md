@@ -1,12 +1,16 @@
 # Brief accuracy scorecard
 
-**Status: UNCALIBRATED — n=20 REACHED 2026-09-15. OWNER CALIBRATION REVIEW
-DUE (now n=24).** The founding bar ("at n=20 nobody has to argue from
-anecdotes") is met: 24 graded briefs, 210 checked facts, 53 resolved radar
-confirmations, 22 clean kills, day-card ledger at 19 opened / 19 resolved on
-real contract marks. What graduates from UNCALIBRATED is the owner's decision
-(CLAUDE.md §7); nothing here self-ratifies. Nine PROPOSED items (R-1, R-2,
-I-8–I-14) await the same review. Rubric: `brief-review/SKILL.md`. One row
+**Status: BRIEF-ACCURACY LAYER CALIBRATED 2026-09-22 (owner decision, n=24).
+OPTIONS-EXPERT / DAY-CARD EDGE REMAINS UNCALIBRATED (§7).** The founding bar
+(n=20, "enough that nobody argues from anecdotes") was met 2026-09-15; at n=24
+the owner accepted the sample and graduated the brief-accuracy layer (facts,
+open-read, mood, regime, radar) — the invalidation record (22/22) is the
+load-bearing proof. The day-card selection edge stays UNCALIBRATED until ~20
+*paid* resolutions (currently 8 paid of 19). 24 graded briefs, 210 checked
+facts, 53 resolved radar confirmations, 22 clean kills. **All nine open
+improvement proposals were RATIFIED 2026-09-22** (R-1, R-2, I-8–I-14; I-9
+scoped) and written into their specs — the ledger now carries zero PROPOSED
+items. See `CALIBRATION_REVIEW_2026-09-21.md` for the ruling. Rubric: `brief-review/SKILL.md`. One row
 per reviewed brief; full evidence in `reviews/`. Rows 8/28–9/4 were graded
 2026-09-07 in a catch-up batch (settled data; the delay was the review
 process's, not the briefs').
