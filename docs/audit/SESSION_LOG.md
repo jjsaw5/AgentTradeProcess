@@ -1213,3 +1213,38 @@ under the standing review authorization).
   and journaled in the review, not silently. The ratified §5 limits were not
   amended; the coaching enforced the written exits.
 - None otherwise.
+
+---
+
+## 2026-09-21 (late) — deferred DB sync COMPLETED + credential exposure
+
+- The owner provided the Turso token to unblock the sync deferred at the 6 PM
+  review. Rebuilt the recycle-wiped tooling in the gitignored scratchpad
+  (`db_exec.py` via the Turso HTTP pipeline API, creds from env only), ran
+  **sync0921.py — 43 statements OK** (brief_reviews now n=24; 9/21 radar_items,
+  3 day_cards, watchlist_events, flow_observations, and the carried open-item
+  resolutions: NVDA 220-shelf CONFIRMED, USO down-branch CONF-PAID, RARE
+  CONF-FAILED). **MUST_MENTION.md regenerated — data through 2026-09-21** (7
+  names; GME/NVDA I-2 6th consecutive, META I-2 4th + I-4, ARCT/INTC/MRNA/SOXL
+  I-4 floors) and committed. Tomorrow's brief reads a current checklist — no
+  hand-application needed.
+- Added an open_item for the owner's **psychedelics MAHA-summit watch
+  (CMPS/DFTX/HELP)** — CMPS the only near-term catalyst (year-end FDA NDA),
+  DFTX 1H27, HELP 2028; summit ~Sept 20–22 is sentiment, not a binary; the
+  9/22 brief should pin the date and add a flow read. **Owner to add the three
+  tickers to the "Options plays" Robinhood watchlist** (the live-fetched list;
+  §2 keeps my brokerage access read-only, so the owner edits it in the app).
+
+### DEVIATIONS
+
+- **CREDENTIAL EXPOSURE (§6):** the Turso `TURSO_AUTH_TOKEN` was pasted into
+  the session transcript by the owner to enable the sync. Per §6 a key written
+  into a transcript is compromised and must be rotated regardless of who saw
+  it — this is a **new known exposure**, second to the standing UW-key exposure
+  (2026-08-18). It was used once to complete tonight's sync, stored only in the
+  gitignored scratchpad `turso.env` (mode 600), never printed, echoed, or
+  committed; every staged diff was secret-scanned clean. **ACTION REQUIRED:
+  rotate the Turso database token** and re-provision the new one to the
+  deployment secret store / gitignored `.env`. Until rotated, this token is a
+  known exposure.
+- None otherwise.
