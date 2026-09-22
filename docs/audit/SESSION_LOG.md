@@ -1284,3 +1284,59 @@ under the standing review authorization).
   no existing rule was altered or removed.
 - **Turso token exposure (from 2026-09-21) still open** — rotation still owed.
 - None otherwise.
+
+---
+
+## 2026-09-22 (evening) — Scheduled post-close review #11: graded the 9/22 brief + day-plan run #7 (n=25)
+
+- **First scorecard row AFTER graduation.** The brief-accuracy layer went
+  CALIBRATED earlier today; this review reports live rates with no UNCALIBRATED
+  banner for the brief layer. The options-expert / day-card edge stays
+  UNCALIBRATED (§7) — and today added **zero paid** card resolutions, keeping it
+  at 8 paid of 23.
+- **Grades (settled/near-settled RH data, evening-cadence amendment):**
+  F 8/8 · O MIXED · M **MISS** · G MIXED · R **3 CONF-PAID / 3 fired + 1 correct
+  GME NO-TRIGGER** · W precision 7/8 · recall 8/10.
+  - **M MISS is a new shape** (not I-10): mildly-bullish lean on a broadly-green
+    tape (QQQ +0.81%) where SPY finished flat-red (−0.01%) and the rotation call
+    inverted — semis LED, Dow FELL. Ends the "every directional lean since 9/8
+    graded HIT" streak. Logged as a distinct miss class.
+  - **The headline finding:** the §9 radar direction was excellent (NVDA/MRNA/SOXL
+    all CONF-PAID), but **all four day cards gave no clean entry** — 2 correct
+    NO-TRIGGERs (NVDA/GME retests never armed) and 2 fired-but-untradeable
+    (MRNA/SOXL confirmed only after gapping past their triggers). This is
+    **observation #9's shape for the 3rd time** (9/18, 9/21, 9/22).
+  - **DELL** was the §6A win: the Oct2 395/400/405 put-ladder read as
+    tail-hedge-turned-directional (I-5) paid −4.55%.
+- **Ratified rules, first live application:** R-1 floor excluded OPEN (+3.17% but
+  $0.085) from recall — its first keep. R-2 graded MRNA CONF-PAID on its named
+  176.86 target (hit inside the confirm candle). I-8/I-14 governed the GME refusal
+  and the MRNA/SOXL first-eligible-candle confirms.
+- **Two PROPOSED items appended to IMPROVEMENTS.md** (the review only proposes,
+  never ratifies): **I-15** (post-binary drift watch — RARE ran +6.55% quiet-lined
+  3 sessions post-approval) and **D-1** (a guarded trend-continuation entry for
+  the day-plan spec, since obs #9 reached n=3 — deliberately narrow, must carry
+  its own confirmation + invalidation so it can't become a chase-license).
+- **OPEN items:** resolved SPCX 9/21 bear (CONF-FAILED — reversed above 152.63),
+  WBD 9/21 arb (flat, no edge), GME 9/21 lean (finally a price move, card still
+  NO-TRIGGER). Carried/new OPEN: META into Connect (Wed 9/23), NVDA into summit
+  (Thu 9/24), CSCO −4.51% driver (unattributed; also a possible I-12 tracking
+  gap), KBH earnings (tonight), RARE post-approval drift.
+- **DB synced** (n=25; 4 radar, 4 cards, 32 watchlist events, 6 items open).
+  **MUST_MENTION regenerated** through 9/22 (8 names; RARE now on the floor via
+  I-4 +6.5%, so tomorrow's brief is forced to cover it even absent I-15).
+- Pushed to the working branch and `main` per the standing review authorization
+  (scope: `brief-review/**`, `day-plan/cards/**`, `SESSION_LOG` only).
+
+### DEVIATIONS
+
+- **Turso token exposure (from 2026-09-21) STILL OPEN.** The token survived in the
+  gitignored scratchpad (mode 600) and was used for tonight's sync without being
+  printed, echoed, or committed; every staged diff was secret-scanned clean. But
+  it remains a known §6 exposure until the owner **rotates it** — the second known
+  exposure alongside the Unusual Whales key. Rotation still owed.
+- **Owner execution note (positive, not a deviation):** the owner traded nothing
+  today — watched a no-clean-entry tape and stayed flat. After chasing 2-for-2
+  (9/18, 9/21), the discipline held on a day built to tempt it. Journaled, not
+  card-graded.
+- None otherwise.
