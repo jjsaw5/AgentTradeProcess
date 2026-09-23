@@ -1362,3 +1362,12 @@ under the standing review authorization).
   omission (§3: never give false certainty). Corrected the same morning the
   owner disclosed it; originals left legible per §9.
 - Turso token rotation still owed.
+
+## 2026-09-23 (10:55 AM) — Playbook journal: 9/18, 9/21, 9/22, 9/23 rows + owner's recovery-trade rule
+
+- Owner-directed ("Let's add it to the journal"): four journal rows appended to
+  `playbook/PLAYBOOK.md` §6, including the owner's 9/23 reflection on 9/22 and
+  the recovery-trade rule in the owner's words. Playbook edit made on explicit
+  same-session go-ahead (spec-adjacent; outside the review's direct-to-main
+  scope by design).
+- DEVIATIONS: None beyond the standing token-rotation item.
