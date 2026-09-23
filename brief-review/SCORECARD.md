@@ -48,7 +48,9 @@ process's, not the briefs').
 
 | **2026-09-22** | 8/8 | MIXED (SPY range-day/774.89 wall nailed; QQQ broke its 743.22 wall and trended — range-bias failed on QQQ) | **MISS** (mildly-bullish, SPY −0.01% flat-red; NEW shape — not I-10: tape broadly green [QQQ +0.81%] but **rotation INVERTED** — semis LED, Dow fell) | MIXED (SPY 770–775 friction band pinned a 2.55pt range, closed mid-band — emphatic; QQQ 750 cap held but the 740 pin failed, QQQ trended) | **3 CONF-PAID / 3 fired** (NVDA hold-225 +0.64%; MRNA >172.94 → named 176.86 hit under R-2, +5.57%; SOXL >141.93 +7.07%) · 1 NO-TRIGGER (GME retest never came, correct I-8 refusal) · resolved: **SPCX 9/21 bear CONF-FAILED** (reversed above 152.63) | 7/8 (META OPEN into Connect; SPCX the miss) | 8/10 (80%) | **Radar direction excellent (3/3) but ALL FOUR day cards gave NO CLEAN ENTRY — obs #9 shape n=3 (9/18/21/22); 0 paid added, ledger stays 8 paid. Entry-quality asterisk: all 3 radar pays were post-gap reclaim confirms (I-8 divergence). DELL put-ladder read PAID −4.55% (I-5 win). Recall misses: RARE +6.6% & CSCO −4.5% quiet-lined (CSCO 2nd → I-12 tracking gap). R-1 floor's first live keep (excluded OPEN $0.085). ~~Owner FLAT all day — chase discipline held~~ **CORRECTED 9/23: owner ran 15 intraday round trips on the pinned tape, −$884 (−25.4%); see review CORRECTION**** |
 
-## Cumulative (n=25)
+| **2026-09-23** | 8/8 | MIXED (SPY "range-day" broke PDL in 15 min and trended; QQQ "failed record touch = trap" nailed) | **MISS** (neutral/"SPY-pinned" on −0.73%; 6th — I-10 named a lean, the lean was wrong; semis-bearish half right) | **HIT** (the brief's own conditionals — "sub-771 glue→gasoline", "below ~746 gasoline" — fired at 9:45 and the tape did exactly that) | **1 CONF-PAID / 3 fired** (USO retest-hold after a gap, +1.27% — I-8's retest clause paid) · 2 CONF-FAILED (NVDA carry −1.0%, 7 closes under 225 but never 222.50; GME fired-and-flat −0.1%) · 1 NO-TRIGGER (MRNA never dipped) · 1 OPEN (META → Thu) | 4/7 (2 of 4 hits moved AGAINST the lean: IBRX −7.3%, RARE −4.7%) | 8/11 (73%) | **DAY CARDS PAID — first since 9/18: GME 24C +33% managed, USO 147C +12.5% managed; NVDA 230C −10% (stall rule). Closing-state + retest triggers armed on a trend day — obs #9 counter-instance.** Weak 5-yr auction (5.033%, 2.21 cover, dealers 13.6%) failed to make a new closing low = failed breakdown. Misses: ARCT −7.7% leanless (I-12 execution gap), PLTR +3.7% bare, NBIS wrong-lean. R-1 excluded 3 artifacts. **Owner +82.2% ($2,612→$4,759): morning A−, afternoon 10 more round trips −$57 with stops — R-3 caught it (snapshots would have said "flat")** |
+
+## Cumulative (n=26)
 
 > **9/22 (first post-graduation row) in one line:** Facts 8/8; Open MIXED; Mood
 > MISS (new non-I-10 shape — rotation inverted on a broadly-green tape); Regime
@@ -56,7 +58,7 @@ process's, not the briefs').
 > + 1 correct GME refusal; **but 0 day-card paid (all 4 no-clean-entry → obs #9
 > n=3)**. Live rates below now include it.
 
-- **Facts: 210/218 (96%).** 9/22 clean 8/8 (all spot-checks verified; prior-day
+- **Facts: 218/226 (96%).** 9/23 clean 8/8. 9/22 clean 8/8 (all spot-checks verified; prior-day
   intraday H/L not independently re-pulled — labeled). 9/21 clean 6/6 (the XLE "63.93 Friday close" is
   the dividend-adjusted figure, correct basis, footnoted). Prior newest error
   class is the worst kind: an
@@ -66,7 +68,7 @@ process's, not the briefs').
   All four are sourcing/labeling failures, not price-record failures — I-6
   fixed the class it targeted; the residue is quarter-labels and
   arithmetic checks.
-- **Mood: 20/25.** The **9/22 miss is a NEW shape** — the first non-I-10 mood
+- **Mood: 20/26.** 9/23 MISS #6: "neutral / SPY-pinned" on a −0.73% rates trend day — I-10 was APPLIED (a lean was named) and the named lean was wrong; the rule fixes the label class, not a wrong regime read. Two of the six misses are now "lean named, lean wrong" (9/22 rotation, 9/23 pinned). The **9/22 miss is a NEW shape** — the first non-I-10 mood
   miss: a mildly-bullish lean on a **broadly-green tape** (QQQ +0.81%) where SPY
   specifically finished flat-red (−0.01%) AND the rotation call inverted (semis
   led, Dow fell). It ends the "every directional lean since graded HIT" streak.
@@ -74,11 +76,11 @@ process's, not the briefs').
   neutral-label-on-a-NARROW-tape shape (→ I-10, 4-for-4). Two distinct miss
   classes now: I-10 (neutral-on-narrow) and 9/22's rotation-inversion (breadth
   green, SPY flat, leadership backwards).
-- **Open read: 15 HIT / 10 MIXED.** Gap/range classification 25/25 at the index
+- **Open read: 15 HIT / 11 MIXED.** 9/23 MIXED: SPY range-day bias broke in 15 minutes; QQQ's "failed record touch = trap" was exact. Gap/range classification 25/25 at the index
   level; 9/22 MIXED = SPY range-day nailed (rejected the 774.89 wall, closed
   inside) while QQQ broke its flagged 743.22 wall and trended — a
   split-personality index day, not a shallow breach.
-- **Regime: 15 HIT / 9 MIXED / 1 MISS — 9/22 MIXED (SPY pinned a 2.55pt band and
+- **Regime: 16 HIT / 9 MIXED / 1 MISS — 9/23 HIT: the section named the exact trapdoors (sub-771 / below ~746 → gasoline) and both fired and amplified on a rates day the mood section missed — the regime read carried the day. 9/22 MIXED (SPY pinned a 2.55pt band and
   closed mid-band, emphatic; QQQ's 750 cap held but its 740 pin failed as QQQ
   trended — a co-characterized index misbehaving). 9/21 is a clean gasoline-trend HIT
   (the break traveled all day, no pullback); 9/18 added the cleanest
@@ -92,7 +94,7 @@ process's, not the briefs').
   before 9/16 the amplification had kept expressing through single
   complexes while the index pinned — the event-day exception is now
   recorded.
-- **Radar: fired-and-resolved confirmations paid 41/56 (73%).** 9/22 added
+- **Radar: fired-and-resolved confirmations paid 42/59 (71%).** 9/23: USO CONF-PAID (+1.27%) on I-8's retest-hold clause — a gapped-past level that produced a tradeable entry instead of a void, the clause's first payoff; NVDA carry CONF-FAILED (−1.0%, seven 15-min closes under 225, never 222.50 — the stand-aside band); GME fired-and-flat (−0.1%, no named target in the radar; the CARD with its 24.32 target paid +33% — the R-2 distinction in one name). CONF-FAILED lifetime 18, NO-TRIGGER 25 (MRNA never dipped). 9/22 added
   **3 CONF-PAID** (NVDA hold-225 +0.64%; MRNA >172.94 with its named 176.86 target
   hit inside the confirm candle → CONF-PAID under R-2, +5.57%; SOXL >141.93 +7.07%)
   — but with an honest asterisk: all three confirmed only on **post-gap violent
@@ -116,8 +118,8 @@ process's, not the briefs').
   compound-trigger save; NVDA's 220 close-requirement absorbed a 4th
   rejection; SPY's basing check refused a 0.37% chop day).
   Ungradeable 2, one DEFECTIVE-TIMING carry (ORCL 9/9 → I-11).
-- **Day-cards ledger (n=23 opened, 23 resolved, 0 riding — real contract
-  marks throughout):** **9/22 adds ZERO paid** — 2 correct NO-TRIGGERs (NVDA
+- **Day-cards ledger (n=26 opened, 26 resolved, 0 riding — real contract
+  marks throughout):** **9/23 adds TWO PAID — the first since 9/18:** GME 9/25 24C **+33% managed** (10:15 reclaim-close entry ~0.60; half at the 24.32 target 0.70, half at the +50% ratchet 0.90 at 2:00; adverse −5%), USO 10/2 147C **+12.5% managed** (I-8 retest-hold entry 5.10 at 11:00; half at the 148 target 5.68, rest flat-3:00 5.83; adverse −7.5% at the auction dip); NVDA 9/25 230C **−10% managed** (bull branch fired 10:30 at 0.83, stall-2-candles rule out ~0.75; −29% if held, −48% adverse). Both winners were closing-state triggers with a retest built in — obs #9 counter-instance. **Running tally: 10 paid / 3 failed / 13 no-entry; scale-at-target 10-for-10.** 9/22 added ZERO paid — 2 correct NO-TRIGGERs (NVDA
   hold-225 retest never armed, low 226.50; GME 23.00–23.11 retest never touched,
   I-8 refusal) and **2 FIRED-but-NO-CLEAN-ENTRY** (MRNA confirmed with its target
   already printed inside the confirm candle; SOXL confirmed ~3.5pts past trigger
@@ -153,7 +155,7 @@ process's, not the briefs').
   print fully round-tripped and the move never came). **Sellers have
   won five straight** — the earnings-straddle-rich pattern is the
   owner-review headline from this series.
-- **Watchlist: precision 144/202 (71%) · recall 148/212 (70%).** 9/22
+- **Watchlist: precision 148/209 (71%) · recall 156/223 (70%).** 9/23 precision 4/7 (SOXL, IBRX, RARE, SLS by the ≥2% rule — but IBRX and RARE moved AGAINST their bull leans; lean-accuracy 2/4; META OPEN). Recall 8/11: caught IBRX/SOXL/RARE/SLS/USO/HIMS(29.53)/TE(4.10)/SPCX(152.63); missed **ARCT −7.7%** (leanless complex note — I-12 execution gap), **PLTR +3.7%** (bare mention, 2nd leanless burn), **NBIS −4.1%** (wrong lean). R-1 excluded GPRO/HTZ/OPEN artifacts (#14–16). 9/22
   precision 7/8 (GME, SOXL, MRNA, WDC, DELL, NVDA-story, INTC-story; META carried
   OPEN into Connect; SPCX the miss — flagged bear, closed green). **DELL is the
   standout:** the Oct2 395/400/405 put-ladder read as tail-hedge-turned-directional
@@ -173,7 +175,7 @@ process's, not the briefs').
   closed, but three new miss classes emerged: dated-event names (TSLA
   8/31 → I-9), wrong-lean mentions (MRNA 9/1, SPCX 9/3), and lean-free
   mentions (PLTR 9/1, SLS 9/2 & 9/3).
-- **Flow-lean ≠ price is now 14 instances** (adds TE 9/16: flagged off
+- **Flow-lean ≠ price is now 17 instances** (adds 9/23: NBIS bull-lean −4.1%; §8A NU call-vertical −3.8% and SHOP Dec-145C −3.7% the same day they were published — three bullish flow flags, three red closes; before that: 14 instances (adds TE 9/16: flagged off
   call alerts, closed −4.65%; before that SLS 9/14: −10% premarket with
   bearish-put framing → closed +1.6% green) and the score is lopsided:
   the "smart money" flow lean was wrong or early on MRNA (×3), HIMS (×3
@@ -241,4 +243,10 @@ process's, not the briefs').
    9/23 W. The "two wins is when discipline erodes" warning landed on day
    three exactly as written; the losses came from fighting the glue regime
    the brief called, not from a card.** Owner
-   calibration-review decision; the review only proposes.
+   calibration-review decision; the review only proposes. **Counter-instance
+   9/23:** two of three cards ARMED and PAID on a trend day — GME (15-min-close
+   reclaim of a level price opened below, no gap) and USO (I-8 retest-hold after
+   a gap). The difference from 9/18–9/22: closing-state triggers with the retest
+   written into the card, on levels price was already near — not "pull back to
+   the trigger" on a runaway. n=3 silences, 1 counter. The counter argues the fix
+   is trigger *construction* (I-8's retest clause + closing-state), not D-1.

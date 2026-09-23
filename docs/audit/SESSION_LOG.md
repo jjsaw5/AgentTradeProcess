@@ -1371,3 +1371,38 @@ under the standing review authorization).
   same-session go-ahead (spec-adjacent; outside the review's direct-to-main
   scope by design).
 - DEVIATIONS: None beyond the standing token-rotation item.
+
+---
+
+## 2026-09-23 (evening) — Scheduled post-close review #12: graded the 9/23 brief + day-plan run #8 (n=26)
+
+- **Grades:** F 8/8 · O MIXED · M **MISS** (#6 — I-10 applied, named lean wrong) ·
+  G **HIT** (the section's own trapdoor conditionals fired and amplified) ·
+  R 1 CONF-PAID / 3 fired (USO via I-8's retest clause — its first payoff) ·
+  2 CONF-FAILED (NVDA −1.0%, GME fired-and-flat) · 1 NO-TRIGGER · 1 OPEN (META → Thu)
+  · W precision 4/7 (lean-accuracy 2/4) · recall 8/11.
+- **Day cards: 2 PAID / 1 FAILED — first paid cards since 9/18** (GME 24C +33%,
+  USO 147C +12.5%, NVDA 230C −10% on the stall rule), on real contract marks.
+  Ledger 10 paid / 3 failed / 13 no-entry. Obs #9 gets its first counter-instance
+  (closing-state + retest triggers armed on a trend day).
+- **Weak 5-yr auction verified from TreasuryDirect** (5.033%, 2.21 cover,
+  indirects 47%, dealers 13.6%); the failed breakdown that followed it is the
+  day's structural note.
+- **Owner execution journaled from filled orders (R-3 applied voluntarily):**
+  the afternoon held 10 more round trips (−$57, all stopped) after "all my trades
+  are done" — snapshots would have said "flat" for a second straight day.
+  Day +82.2%. Recovery-trade rule (written this morning) gets its first test
+  tonight in the journal; grade B.
+- Ledger: evidence appended to I-12 (ARCT/PLTR execution gaps), I-15 (RARE
+  reversal, line held), R-3 (afternoon fills). No new PROPOSED items.
+- DB synced (n=26; 5 radar, 3 cards, 30+ watchlist events); MUST_MENTION
+  regenerated; pushed to branch + main (standing scope).
+
+### DEVIATIONS
+
+- **Off-whitelist UW endpoint used intraday** (`greek-exposure/strike-expiry`
+  for the 0DTE read at 1:33 PM) — returned 200 with plausible data; labeled
+  directional-not-exact to the owner. Not added to the probe script.
+  Candidate for `DATA_LAYER.md` verification, not done tonight.
+- Turso token rotation still owed.
+- None otherwise.
