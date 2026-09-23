@@ -1340,3 +1340,25 @@ under the standing review authorization).
   (9/18, 9/21), the discipline held on a day built to tempt it. Journaled, not
   card-graded.
 - None otherwise.
+
+---
+
+## 2026-09-23 (10:50 AM) — CORRECTION to the 9/22 evening entry: the owner did NOT stay flat on 9/22
+
+- The 9/22 review, SCORECARD (row + obs #9), the 9/22 card annotation, the
+  9/22 session-log entry and the DB all stated the owner traded nothing on
+  9/22. **That was wrong.** The claim came from position snapshots; the day's
+  filled orders were never pulled. Order history (pulled 9/23) shows **15
+  intraday round trips, 6W/8L/1 scratch, ≈ −$884 (−25.4%)** — the ~$889 the
+  9/23 plan labeled an "inferred outflow." Corrections appended (not
+  rewritten) in each file; DB row annotated.
+- Proposed **R-3** (journal from filled orders, never from position snapshots).
+
+### DEVIATIONS
+
+- **A false execution claim entered five records and stood for ~16 hours.**
+  Root cause: the review process has no step that reads the order history, and
+  "no open positions" was treated as "no trades." Honesty-rule violation by
+  omission (§3: never give false certainty). Corrected the same morning the
+  owner disclosed it; originals left legible per §9.
+- Turso token rotation still owed.
