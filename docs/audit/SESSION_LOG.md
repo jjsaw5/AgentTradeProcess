@@ -1406,3 +1406,59 @@ under the standing review authorization).
   Candidate for `DATA_LAYER.md` verification, not done tonight.
 - Turso token rotation still owed.
 - None otherwise.
+
+---
+
+## 2026-09-24 (day) — Live index-only coaching (owner-directed), no spec changes
+
+- Owner directed "SPY/QQQ only" at 9:12 (card addendum already on disk). Twenty
+  15-minute check-ins via scheduled self-reminders from 9:47 to 3:01, each
+  reading the just-closed candle against card 1's written triggers. No trigger
+  fired inside the plan's windows: 4 rejections at the bull lines, 3 floor
+  holds, the 12:15 headline candle crossed the bull line after the card's own
+  noon cutoff and inside the auction window, and the 1:30 pullback failed its
+  hold test. Plan outcome: zero trades. Owner's real outcome: 22 round trips,
+  −6.07% (journaled in the evening review from filled orders).
+- 7-year auction verified from TreasuryDirect JSON at 1:03 (5.085%, 2.42,
+  57.2% indirects, 12.5% dealers); no when-issued yield available → tail
+  UNVERIFIED, said so.
+- UW positioning read at 12:46 used whitelisted probes only
+  (greek-exposure/strike, max-pain). Feed exposes a date, not a time →
+  freshness labeled UNVERIFIED to the owner.
+- Intel driver at 9:54: NO CLEAR DRIVER FOUND (news feed empty since 5:34 AM),
+  said so; advised retest-over-breakout, not the chase.
+- DEVIATIONS: None. (Standing: Turso token rotation still owed.)
+
+## 2026-09-24 (evening) — Scheduled post-close review #13: graded the 9/24 brief + day-plan run #9 (n=27)
+
+- **Grades:** F 8/8 · O MIXED · M **MISS** (#7 — "mildly bearish" on −0.07%;
+  not I-10; the counter-case named the day) · G MIXED (levels exact, "gasoline"
+  described 4 minutes of the day) · R **0 CONF-PAID / 1 fired** (ARCT
+  fired-and-flat CONF-FAILED) · **3 NO-TRIGGER** — **META gapped 0.42% past its
+  bull line, I-8 voided the card, stock +4.48%, 745C 19.73→33.90 uncaptured**
+  (I-8 cost instance #1; obs #9 n=4; D-1's clearest case) · index card refused
+  by its own noon rule · IBRX clean kill · COST OPEN → Fri open · W precision
+  7/10 with lean-accuracy 7/7 · recall 10/14.
+- **Day cards: 0 PAID / 0 FAILED / 3 NO-ENTRY.** Ledger 10 paid / 3 failed /
+  16 no-entry of 29.
+- **Owner execution from filled orders (R-3, day 2):** 22 round trips, 13W/9L,
+  −$280 realized, equity $4,759.19 → $4,470.48 (−6.07%), **zero stop orders**,
+  entries in both no-entry windows, both named wicks chased, two off-plan
+  names, two trades after the 3:00 flat deadline; the owner's own recovery-trade
+  rule went live at ~12:16 (flip reclaimed) and was not applied after the 1:34
+  loss (obeying it → ≈ +$215). Grade D. Journal row is the owner's to write —
+  the playbook was NOT edited (owner-directed edits only).
+- Ledger: evidence appended to I-8 (cost instance), D-1 (n=4 + the discipline
+  caveat now live), R-3 (applied day 2), I-12 (NBIS, 3rd execution-gap name).
+  **No new PROPOSED items** — D-1 already covers the META gap.
+- Auction result verified from TreasuryDirect; 12:15 headline driver stated as
+  likely summit tone / truce extension, UNVERIFIED to the minute.
+- DB synced (n=27; 5 radar, 3 cards, watchlist events, flows, open items);
+  MUST_MENTION regenerated; pushed to branch + main (standing scope).
+
+### DEVIATIONS
+
+- **None in this review.** All UW probes used tonight were whitelisted; the
+  off-whitelist `greek-exposure/strike-expiry` endpoint from 9/23 remains a
+  DATA_LAYER.md verification candidate, still not done.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
