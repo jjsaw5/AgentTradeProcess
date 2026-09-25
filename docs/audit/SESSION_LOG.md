@@ -1462,3 +1462,81 @@ under the standing review authorization).
   off-whitelist `greek-exposure/strike-expiry` endpoint from 9/23 remains a
   DATA_LAYER.md verification candidate, still not done.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-09-25 (day) — Day-plan run #10 + live check-ins (no spec changes)
+
+- "Brief landed" at ~9:20; run #10 written 9:20–9:32 from the brief then on
+  disk (the ~8:56 run). Three cards: QQQ record-test two-sided index card
+  (Monday 9/28 expiry, one-loss rule stated as MET — glue day), USO breakdown
+  two-sided (10/2), GME §5 ticket (10/2). META/MRNA/NVDA/COST/SOXL/INTC/IBRX
+  killed to lines. Equity read live ($4,470.54 → cap $178.82/trade).
+- Thirteen 15-minute check-ins via scheduled self-reminders from 9:47 to the
+  3:01 wrap, each reading the just-closed candle against the written triggers:
+  bear fired 10:15 with its targets printing inside/just after the trigger
+  candle; USO reclaim fired 10:00, half at 151, stopped 12:15; bull fired 12:15,
+  held 12:30, pinned to the 3:00 exit; GME killed 10:00; COST RICH at the print.
+- UMich 10:00 (48.1 vs 47.8 prelim; MarketScreener/CNN) reported as the likely
+  10:00-candle driver, UNVERIFIED as cause, stated so. USO's 11:45–12:00 drop:
+  NO CLEAR DRIVER FOUND, said so.
+- Owner's real outcome: 71 fills, −19.2% (journaled in the evening review from
+  filled orders; the playbook was not edited).
+
+### DEVIATIONS
+
+- **The day-plan was built from a brief version that a scheduled re-run
+  overwrote at ~9:20.** The re-run added UMich 10:00 as the day's in-hours
+  print (and swapped radar #4 MRNA → DELL); the card was not re-read and never
+  carried the 9:55–10:05 no-entry window the S5 event gate requires. The 10:00
+  candle was the day's only move. Recorded on the card and proposed as D-2.
+- **Live coaching offered an entry the card did not write** — a 10:45 "failed
+  bounce" second bear entry (paper), voided 15 minutes later at a loss. Graded
+  against the coach in the review, not against the card.
+- Standing: Turso token rotation still owed.
+
+## 2026-09-25 (evening) — Scheduled post-close review #14: graded the 9/25 brief (9:20 re-run) + day-plan run #10 (n=28)
+
+- **Grades:** F **8/9** (one stale cross-reference — §6A MRNA "§9 card" after
+  the re-run moved slot #4 to DELL) · O MIXED (SPY actually opened 19¢ under
+  its PDH; PDH-as-support failed on the 10:00 candle) · M **HIT** ("mildly
+  bullish, semis-led" on +0.54%; "narrow" wrong — Dow led, 7/9 sectors green)
+  · G **HIT** (flips held on closes / QQQ three candles under, 740 wall caught
+  it, glue → pinned 770/745 as written) · R **2 CONF-PAID / 3 fired** (QQQ bear
+  under R-2 with the half-target already through at the fire; DELL +1.57%
+  strict via its fallback clause after opening BELOW the line) · 1 CONF-FAILED
+  (USO reclaim killed by the opposite level, −1.9%) · **2 NO-TRIGGER** (META
+  bear line gapped past by 1.15 → I-8 void, stock −3.30% = I-8 cost #2; GME
+  clean kill, −6.45%) · COST straddle RICH · W precision 8/12, lean-accuracy
+  5/8 (GME/IBRX/INTC call-flow leans wrong) · recall 7/8 (IMMX −6.15% leanless).
+- **Day cards: 1 PAID / 1 FAILED / 1 NO-ENTRY** (QQQ 740P ≈ +12% managed; USO
+  150C ≈ −10% managed after half at 151; GME killed). Ledger 11 paid / 4 failed
+  / 17 no-entry of 32. Real 10-minute option marks; ≈ labelled.
+- **Owner execution from filled orders (R-3, day 3):** 93 orders → 71 fills,
+  68 lots, 36W/32L, −$842 realized, equity $4,470.54 → $3,610.81 (−19.2%);
+  one-loss rule broken on the first trade at 9:40 (inside the opening window),
+  9:55 entry inside the UMich window, every ticket the 0DTE vs the card's
+  Monday expiry, 5–8 lots vs 1, off-plan MRNA, trades after 3:00, stops
+  abandoned after 11:00. Grade F. Playbook not edited (owner-directed only).
+- **Ledger:** evidence appended to I-8 (cost #2), D-1 (no bear-side structure;
+  discipline caveat now two sessions), R-3 (day 3). **Two new PROPOSED items,
+  neither ratified:** **D-2** (brief re-run → day-plan reconciliation: record
+  the brief's commit hash; addendum through the S5 event gate before 9:45 when
+  a re-run lands after the card) and **I-16** (cooling-off clause for
+  OI-confirmed flags that fail their own line two sessions running — IBRX n=3,
+  pre-registered last night as "a third → propose").
+- Open items: COST, summit, RARE (I-15 line lost) resolved; SPCX carries;
+  I-12 DB check overdue a third night; Monday carries MU/PCE 9/30, FDA
+  binaries, MRK escalation test.
+- DB synced (n=28); MUST_MENTION regenerated; pushed to branch + main
+  (standing scope: brief-review/**, day-plan/cards/**, SESSION_LOG).
+
+### DEVIATIONS
+
+- **None in this review** beyond the two day-side deviations recorded above
+  (card built from a superseded brief; coached entry not in the card), which
+  this review grades rather than repeats.
+- UW probes tonight: none run (the day's positioning read used whitelisted
+  probes only). Off-whitelist `greek-exposure/strike-expiry` endpoint from 9/23
+  remains a DATA_LAYER.md verification candidate, still not done.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
