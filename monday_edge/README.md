@@ -35,6 +35,7 @@ the environment only; `.env`, `cache/` and `output/` are git-ignored.
 ```
 python run.py study [--llm] [--start YYYY-MM-DD]     # ~5y history → output/study_report.html, patterns.csv, weekends.csv
 python run.py today [--llm] [--gap SPY=0.45 --gap QQQ=0.70]   # Monday pre-open → output/brief_YYYY-MM-DD.html
+python run.py grade YYYY-MM-DD [--dry-run]            # fill a logged Monday's outcome from the real tape (re-run as days close)
 python run.py study --mock [--seed N]                 # synthetic world → output/mock/
 python run.py today --mock
 python acceptance.py                                  # the spec §11 acceptance test over seeds 7, 11, 23, 42, 99
@@ -66,6 +67,18 @@ re-runs are cheap. `today` fetches its news, posts and quote uncached.
    noise passes that about 0.7% of the time; the report shows the eligible
    test count and the implied fluke count next to the confirmed list.
 6. **Reports** (`report.py`): self-contained HTML, light/dark, phone-scrollable.
+
+## The log (the path off UNCALIBRATED)
+
+`today` writes `log/<date>.json` and `.md` on its **first** run of the day
+and never overwrites them: the gap, tags, Friday context, analog base rates
+and any confirmed pattern that applies, recorded before the outcome exists.
+`grade <date>` fills the outcome section from the real tape (same-day fill,
+first-hour fill, minutes to fill, close-with-gap, 0–4DTE returns) and scores
+each against the `gap size` tier rate the card pre-registered. Re-run it as
+horizons close; it never rewrites the inputs. `--force-card` exists for a
+broken first run and must be explained in the session log. One Monday
+grades nothing; the twelfth one can.
 
 ## Reading the output honestly
 
@@ -103,6 +116,7 @@ re-runs are cheap. `today` fetches its news, posts and quote uncached.
 | `report.py` | study report and today brief (HTML) |
 | `mock_data.py` | synthetic world with planted effects |
 | `acceptance.py` | spec §11 acceptance test |
+| `logcard.py` | pre-registered Monday cards and their T+1 grading |
 | `run.py` | CLI |
 
 ## Later (not in v1)

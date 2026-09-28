@@ -325,14 +325,14 @@ class MockFMP:
         self.w = world
         self.notes: list[str] = []
 
-    def eod(self, symbol: str, start: date, end: date) -> pd.DataFrame:
+    def eod(self, symbol: str, start: date, end: date, cache: bool = True) -> pd.DataFrame:
         df = self.w.vix if symbol.upper() in ("^VIX", "VIX") else self.w.prices.get(symbol.upper())
         if df is None:
             return pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"])
         df = df[(df["date"] >= start) & (df["date"] <= end)]
         return df[["date", "open", "high", "low", "close", "volume"]].reset_index(drop=True)
 
-    def intraday_5m(self, symbol: str, day: date) -> pd.DataFrame:
+    def intraday_5m(self, symbol: str, day: date, cache: bool = True) -> pd.DataFrame:
         bars = self.w.intraday.get((symbol.upper(), day))
         if bars is None:
             return pd.DataFrame(columns=["ts", "open", "high", "low", "close", "volume"])

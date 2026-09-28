@@ -2,3 +2,4 @@ cache/
 output/
 .env
 __pycache__/
+log/mock/

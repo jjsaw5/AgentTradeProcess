@@ -3,6 +3,7 @@
 
     python run.py study [--mock] [--llm] [--start YYYY-MM-DD] [--seed N]
     python run.py today [--mock] [--llm] [--gap SPY=0.45 --gap QQQ=0.70]
+    python run.py grade YYYY-MM-DD [--mock] [--dry-run]
 
 Nothing here trades. Brokerage access is read-only everywhere in this repo;
 this tool does not even reach a brokerage — it reads FMP and Unusual Whales.
@@ -20,7 +21,7 @@ import pandas as pd
 
 from analyze import analogs, analyze, matching_confirmed
 from build import build_dataset
-from config import settings
+from config import HERE, settings
 from sessions import (em_bucket, gap_bucket, gap_size, gex_regime, lookup_on_or_before, news_window,
                       vix_regime)
 from tagger import tag_weekend, tone_vs_gap
@@ -193,9 +194,24 @@ def cmd_today(args) -> int:
     out = cfg.out_dir / f"brief_{today}.html"
     out.write_text(today_brief(today, (w_start, w_end), tag, per_ticker, analog_rows, matches, headlines, is_session, cfg),
                    encoding="utf-8")
+    from logcard import write_card
+    log_dir = HERE / "log" / ("mock" if args.mock else "")
+    jp, mp = write_card(log_dir, today, tag, per_ticker, analog_rows, matches, is_session, force=args.force_card)
+    if jp:
+        log(f"[today] pre-registered card written: {mp}")
+    else:
+        log(f"[today] card for {today} already exists in {log_dir} — not overwritten (first run of the day is the record)")
     log(f"\n[today] caution: n under ~15 is an anecdote; wait out the first 30 minutes on a fill thesis; size by Playbook gates.")
     log(f"[today] wrote {out}")
     return 0
+
+
+def cmd_grade(args) -> int:
+    cfg, fmp, uw = _setup(args)
+    from logcard import grade_card
+    log_dir = HERE / "log" / ("mock" if args.mock else "")
+    res = grade_card(log_dir, date.fromisoformat(args.session), fmp, dry_run=args.dry_run, log=log)
+    return 0 if res else 1
 
 
 def main(argv=None) -> int:
@@ -213,7 +229,14 @@ def main(argv=None) -> int:
     t.add_argument("--llm", action="store_true")
     t.add_argument("--gap", action="append", help="manual gap in %, e.g. --gap SPY=0.45 (repeatable)")
     t.add_argument("--seed", type=int, default=42)
+    t.add_argument("--force-card", action="store_true", help="overwrite today's pre-registered card (breaks pre-registration; say why in the session log)")
     t.set_defaults(fn=cmd_today)
+    g = sub.add_parser("grade", help="fill a logged Monday's outcome from the real tape (re-runnable as horizons close)")
+    g.add_argument("session", help="session date YYYY-MM-DD of an existing log card")
+    g.add_argument("--mock", action="store_true")
+    g.add_argument("--seed", type=int, default=42)
+    g.add_argument("--dry-run", action="store_true", help="print the outcome without writing the card")
+    g.set_defaults(fn=cmd_grade)
     args = ap.parse_args(argv)
     return args.fn(args)
 

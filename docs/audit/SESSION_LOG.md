@@ -1687,3 +1687,46 @@ owner directly).
   killed itself with a `pkill` pattern that matched its own text; neither
   touched the data, both cost a relaunch.
 - Standing: both API keys owed a rotation.
+
+## 2026-09-28 (09:28–09:40 ET) — Monday Edge: first pre-registered card, `grade` command
+
+The owner shared the morning's human brief (`briefs/2026-09-28.md`, commit
+97950e7) and asked to use it. Both read the weekend the same way (Iran talks
+collapsed, risk-off, small down gap; the rule tag `geopolitical / risk_off /
+statement` matches the brief's driver, and `statement` is right by the spec's
+definition since a proposal was rejected, not signed).
+
+### What changed
+
+- **`monday_edge/log/2026-09-28.md` + `.json`** — hand-written at 09:28 ET
+  from the 08:58 pre-open run, committed 13:29:27 UTC (one minute before the
+  open) so the timestamp is the pre-registration. It records the inputs, the
+  analog base rates each outcome will be scored against (the `gap size`
+  tier: SPY same-day fill 47%, QQQ 58%; first-hour 23% / 42%; close-with-gap
+  51% / 50%), that no confirmed pattern applies, and how the base rates bear
+  on the brief's QQQ two-sided card (a PDC reclaim is a gap fill; coin flip
+  on history, rarely inside the first hour). Outcome left empty.
+- **`logcard.py`** — `today` now writes that card automatically on its first
+  run of the day and refuses to overwrite it; `grade YYYY-MM-DD` fills the
+  outcome from real bars (uncached, since a day in progress must not enter
+  the cache) and re-runs as horizons close. Mock cards go to `log/mock/`
+  (gitignored). README documents the loop.
+- `eod` / `intraday_5m` gained a `cache` flag for the same reason.
+
+### Live check (not a grade)
+
+`grade 2026-09-28 --dry-run` at 09:31 ET: SPY opened 768.39 (−0.38% vs the
+−0.30% pre-market mid), QQQ 740.46 (−0.54%). One bar; nothing scored. The
+real grade belongs at T+1 and again after Friday 10/2 — the evening
+brief-review routine is the natural place to run it.
+
+### DEVIATIONS
+
+- **The first card was written by hand, not by the tool**, because the
+  writer did not exist at 08:58 and the open was two minutes away when the
+  brief arrived. Its numbers are copied from the 08:58 console output; the
+  tool-written format differs slightly. Recorded so the hand-written card
+  is not mistaken for tool output.
+- The card's `category` analog rows carry the feed-volume artifact noted in
+  the previous entry; the card says so and uses the `gap size` tier.
+- Standing: both API keys owed a rotation.

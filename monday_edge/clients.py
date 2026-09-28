@@ -148,8 +148,8 @@ class FMP:
             return []
         return _rows(body)
 
-    def eod(self, symbol: str, start: date, end: date) -> pd.DataFrame:
-        rows = self._get("historical-price-eod/full", {"symbol": symbol, "from": str(start), "to": str(end)})
+    def eod(self, symbol: str, start: date, end: date, cache: bool = True) -> pd.DataFrame:
+        rows = self._get("historical-price-eod/full", {"symbol": symbol, "from": str(start), "to": str(end)}, cache=cache)
         df = pd.DataFrame(rows)
         if df.empty:
             return pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"])
@@ -162,9 +162,10 @@ class FMP:
         df = df[["date", "open", "high", "low", "close", "volume"]].dropna(subset=["close"])
         return df.sort_values("date").drop_duplicates("date").reset_index(drop=True)
 
-    def intraday_5m(self, symbol: str, day: date) -> pd.DataFrame:
-        """5-minute bars for one day. Timestamps are naive US/Eastern bar starts; keeps 09:30 <= ts < 16:00."""
-        rows = self._get("historical-chart/5min", {"symbol": symbol, "from": str(day), "to": str(day)})
+    def intraday_5m(self, symbol: str, day: date, cache: bool = True) -> pd.DataFrame:
+        """5-minute bars for one day. Timestamps are naive US/Eastern bar starts; keeps 09:30 <= ts < 16:00.
+        Pass cache=False for a day that may still be in progress: only a complete day belongs in the cache."""
+        rows = self._get("historical-chart/5min", {"symbol": symbol, "from": str(day), "to": str(day)}, cache=cache)
         df = pd.DataFrame(rows)
         cols = ["ts", "open", "high", "low", "close", "volume"]
         if df.empty or "date" not in df.columns:
