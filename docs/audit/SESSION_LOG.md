@@ -1629,3 +1629,51 @@ under the standing review authorization).
 - `websockets` pip-installed into the container for the socket probe.
 - Standing: Turso token rotation still owed; UW key known exposure.
 - None otherwise.
+
+## 2026-09-28 (1:25–1:45 PM) — Wire the verified websocket channels into `uw_stream.py` (owner-directed)
+
+- `options-expert/tools/uw_stream.py` rewritten around a `FrameState`:
+  joins `option_trades:TICKER`, `price:TICKER`, `flow-alerts` alongside the
+  existing `market_tide` / `gex` / `net_flow` / `news` / `trading_halts`;
+  `--contracts` tapes named OCC symbols client-side (prints, ask/bid/mid side
+  counts and premium, NBBO mid drift, last, volume, OI, `BIG PRINT` ≥ $50k);
+  live `GEX FLIP` line on an aggregate gamma sign change; every headline kept
+  (macro ticker-less headlines now print — the war-headline tape is mostly
+  those); `--frame-interval` (default 900 s, wall-clock aligned to
+  :00/:15/:30/:45) prints a FRAME block and `--frame-file` appends one JSON
+  line per frame for the scheduled desk read. Tripwires, drop-oldest queue,
+  reconnect and heartbeat unchanged.
+- **Two pre-existing handler defects fixed:** the `gex:TICKER` handler printed
+  `NA` for every field (it looked for REST `gex-levels` keys — `call_wall`,
+  `gamma_flip` — that the socket payload does not carry) and the
+  `flow-alerts` handler used `type`/`strike`/`expiry` keys that are not in the
+  payload (`option_chain`, `rule_name`, `total_ask_side_prem` are). Both
+  handlers had been "verified joining ok" on 8/18 without their output being
+  checked. **A third, worse one:** the socket `market_tide` payload is a
+  ~2-second **increment**, not the session-cumulative value the REST
+  `market-tide` returns, and the tripwires (thresholds of $40M, "two
+  consecutive updates") were being evaluated on those increments — A fired on
+  kilo-dollar noise in the live test, B and C could never fire. Since 8/18 the
+  stream's tripwires have been meaningless. Fixed: increments are summed from
+  stream start (labelled "since hh:mm" — start the stream before the open or
+  the morning is missing) and the tripwires see one reading per completed
+  5-minute bucket, per the playbook's completed-bars rule. `net_flow` uses
+  `net_call_prem`/`net_put_prem` keys (not `_premium`) and is likewise an
+  increment; summed per ticker into the frame. Recorded here because it is
+  the §3 lesson again: a join ack is a 200, not a success.
+- **Live test 1:27–1:29 PM:** 3 frames at 30 s, per-contract tape on the
+  0DTE SPY 767P and QQQ 738C (74–120 prints per 30 s each), gex/price/tide
+  populated, headlines captured, 0 dropped of 5,293 received, key absent from
+  both stdout and the frame file (grepped).
+- `odte-desk/SKILL.md` §3 item 6 and §8 rows updated to "wired";
+  `options-expert/SKILL.md` Stage 7 monitor line updated.
+- Owner's live question at 1:26 ("the QQQ 1:00 15-min candle spiked — was it
+  positioning for the 1:30?") answered from FMP 1-min bars, UW
+  `net-prem-ticks` and the headline feed — see chat; not a desk frame (module
+  not yet scheduled), not logged as one.
+
+### DEVIATIONS
+
+- `BIG_PRINT_USD = 50_000` is a round number with no evidence behind it,
+  labelled so in the source.
+- None otherwise. Standing: Turso token rotation still owed.

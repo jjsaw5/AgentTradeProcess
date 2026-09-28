@@ -463,11 +463,13 @@ Straight from the playbook — no card ships without all four:
 For 0DTE: the real bell is **3:30 PM ET**, not 4:00. Robinhood force-closes at
 3:45. Whatever exists at 3:30 is the result.
 
-**Once a card is live, run the monitor:** `tools/uw_stream.py --tickers SPY,QQQ`
-streams the tide, per-ticker GEX and net flow, news (including Truth Social
-posts) and trading halts, and fires the playbook §4 tripwires on live data
-instead of 5-minute polls. Halts are always surfaced — a halt on an open
-position is not a low-priority event.
+**Once a card is live, run the monitor:** `tools/uw_stream.py --tickers SPY,QQQ
+--contracts <OCC symbols> --frame-file <path>` streams the tide, per-ticker
+live GEX, price, the per-contract option tape, flow alerts, news (including
+Truth Social posts) and trading halts, fires the playbook §4 tripwires on live
+data instead of 5-minute polls, and rolls everything up into a FRAME line on
+every 15-minute boundary (`odte-desk/SKILL.md` §3). Halts are always surfaced
+— a halt on an open position is not a low-priority event.
 
 ---
 

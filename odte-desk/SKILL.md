@@ -97,10 +97,29 @@ Per frame, in this order. Every endpoint below is verified in
    names: `mark_price`, bid/ask, `delta`, `gamma`, `theta`, `vega`,
    `implied_volatility`, `open_interest`, `volume`, `updated_at`. Robinhood is
    the tradable mark; UW is never quoted as the fill.
-6. **Headlines.** UW `news/headlines` (`is_major`) since the last frame. When
-   the stream (`options-expert/tools/uw_stream.py`) is running, its `news` and
-   `trading_halts` channels take precedence. A halt on a name the owner holds
-   is always the first line of the frame.
+6. **The stream.** `options-expert/tools/uw_stream.py` (wired for the desk
+   2026-09-28) runs for the session with the day's tickers and any held
+   contracts, and appends one JSON line per 15-minute boundary to a frame
+   file:
+
+   ```
+   python options-expert/tools/uw_stream.py --tickers SPY,QQQ \
+       --contracts <OCC symbols of held/candidate contracts> \
+       --frame-file <scratch>/stream-YYYY-MM-DD.jsonl
+   ```
+
+   Each frame line carries: `price` (last and cumulative volume per ticker,
+   basis UNVERIFIED), `gex` (live aggregate gamma/delta/charm/vanna per 1%
+   move, `_oi`/`_vol`/`_dir`, ms-stamped), `tide`, per-contract `contracts`
+   (prints, ask-side vs bid-side counts and premium, NBBO mid drift, last
+   price, volume, OI, big prints), every `headline` since the last frame,
+   `halts`, and the stream's own `rx`/`dropped` counters. The scheduled read
+   takes the **last line** of the file; if `dropped` is non-zero the frame
+   says so. Live it also prints `BIG PRINT`, `GEX FLIP`, `HALT`, `TRUTH` /
+   `MACRO` / `HELD` headline lines and the playbook tripwires as they fire.
+   A halt on a name the owner holds is always the first line of the frame.
+   Without the stream, fall back to REST `news/headlines` (`is_major`) and
+   `gex-levels`, and say the intraday freshness is UNVERIFIED.
 7. **Owner state.** `get_option_positions`; `get_option_orders` filled since
    9:30. Position snapshots are never evidence of no trades (R-3).
 
@@ -327,9 +346,9 @@ verified items are now in `options-expert/DATA_LAYER.md` §7. Re-verify with
 | "What happened the last n times this trigger shape fired" | the scoring DB (`brief-review/DATA_STORE.md`) | **unprobed** — token absent from the remote container | Query shape (untested): `SELECT date, ticker, grade, evidence FROM radar_items WHERE ticker=? AND grade IN ('CONF-PAID','CONF-FAILED') ORDER BY date DESC LIMIT 10`, and the same against the day-card table once its name is confirmed in `DATA_STORE.md`. Until run, the desk says `NA_unresolved` for the prior-outcome line. |
 | Short-dated vol (VIX1D, VIX9D/VIX ratio, VIX3M) | **Cboe delayed-quote JSON** (no key) | **verified, ~15-min delayed** | Session header and every frame's `GATES` block: VIX1D vs VIX (below = no event priced into today; above = the day is the event). Labelled `cboe ~15m delayed hh:mm`. Robinhood serves VIX only; FMP 402s the rest. |
 | Overnight range from the instrument that trades overnight | **FMP `ESUSD`** 5-min bars | **verified, ~10-min delayed** | 9:35 frame: overnight high/low from Sunday 18:00 / prior 18:00 to 9:30, labelled `ES` and converted to SPY only as a ratio with the ratio stated. **No NQ on this plan** (402). |
-| Headline latency on a war-headline tape | **UW websocket `news`** | **verified live** | Wire into every scheduled frame: headlines since the last frame, first line if any names a held ticker or has `is_trump_ts`. |
-| Who is hitting the bid in the strike the owner holds | **UW websocket `option_trades:TICKER`** filtered client-side to the contract | **verified live**, ~80 prints/s on SPY, median 30 ms | Per frame for a held contract: prints, ask-side vs bid-side count and premium, NBBO drift. Tooling: extend `options-expert/tools/uw_stream.py` with a per-contract filter. |
-| Intraday gamma freshness | **UW websocket `gex:TICKER`** | **verified live**, ms-stamped | Aggregate gamma per 1% move (`_oi` / `_vol` / `_dir`) as the live regime cross-check on `gex-levels` (date-only). Sign flips intraday are reported with their timestamp. |
+| Headline latency on a war-headline tape | **UW websocket `news`** | **verified live; wired** (`uw_stream.py`, frame `headlines`) | Every headline since the last frame is in the frame line; live print when it names a watched ticker, is a Truth Social post, or is ticker-less macro. |
+| Who is hitting the bid in the strike the owner holds | **UW websocket `option_trades:TICKER`** filtered client-side to the contract | **verified live**, ~80 prints/s on SPY, median 30 ms | **wired** (`uw_stream.py --contracts`, frame `contracts`): prints, ask-side vs bid-side counts and premium, NBBO mid drift, last price, volume, OI, big prints ≥ $50k. |
+| Intraday gamma freshness | **UW websocket `gex:TICKER`** | **verified live**, ms-stamped | **wired** (`uw_stream.py`, frame `gex`; live `GEX FLIP` line on a sign change). Aggregate gamma per 1% move (`_oi` / `_vol` / `_dir`) as the live regime cross-check on `gex-levels` (date-only). |
 | Level 2 at the trigger level | **Robinhood `get_equity_price_book`** | **verified; 249 KB / 2 symbols** | Only through a top-n extractor: the five levels either side of the trigger and any level whose size is ≥5× its neighbours (a wall). Never pasted raw into a frame. |
 | Auction results as they print | **TreasuryDirect JSON** (no key) | **verified** | 1:00 auction frames: high yield, bid-to-cover, indirect / dealer / direct **as a share of competitive accepted, denominator stated**. Bills use `highDiscountRate`. |
 | Consolidated volume / VWAP | Polygon, Databento | **not connected** (reachable, no credential) | UW `price:TICKER.vol` is a candidate substitute, basis `UNVERIFIED`; not a floor input until compared to a known consolidated print. |
