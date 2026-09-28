@@ -42,6 +42,7 @@ are working from elsewhere, say so out loud before writing anything here.
 | `options-expert/reference/` | Vendored third-party docs, with a README recording where they are wrong. Do not edit the vendored bodies; re-fetch to update. |
 | `brief-review/` | Grades each archived brief against the realized market at T+1. `SKILL.md` the rubric, `reviews/` per-day grades, `SCORECARD.md` the cumulative accuracy record, `IMPROVEMENTS.md` the PROPOSED→RATIFIED ledger for brief-spec changes, `MUST_MENTION.md` the generated coverage floor the morning brief reads. Reviews never edit briefs. |
 | `day-plan/` | The ~9:20 strategy layer: selects the brief's trigger-complete cards through review-validated filters, runs survivors through the options-expert stages, and writes 0–3 pre-open conditional plans to `cards/`. Append-only after the open; graded by brief-review at T+1. |
+| `monday_edge/` | Post-weekend gap study for SPY/QQQ. `study` builds ~5y of sessions (gap, weekend-news tags, Friday context, 0–4DTE outcomes) and keeps only patterns that survive a 30% newest-weekends holdout; `today` matches this weekend to that history. Reads FMP/UW only; writes CSV/HTML. Its findings are **reasoned, not validated** (§7) until live Mondays are logged against them. |
 
 Changes to a spec are commits. The process has a history on purpose.
 

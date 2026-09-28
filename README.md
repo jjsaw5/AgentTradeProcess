@@ -32,3 +32,9 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   (added 2026-08-18). Each scheduled run writes its full brief here, commits,
   and pushes (see the spec's OUTPUT DELIVERY section). One file per trading
   day; automated runs touch only this directory.
+
+- `monday_edge/` — Python tool that measures what SPY/QQQ do after a
+  post-weekend open, by gap size and weekend-news category, keeping only
+  patterns that survive an out-of-sample holdout. `python run.py study` and
+  `python run.py today`; `python acceptance.py` runs the synthetic-world
+  acceptance test. Read-only data access; nothing here trades.
