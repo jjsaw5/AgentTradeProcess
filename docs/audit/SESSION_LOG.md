@@ -1540,3 +1540,81 @@ under the standing review authorization).
   probes only). Off-whitelist `greek-exposure/strike-expiry` endpoint from 9/23
   remains a DATA_LAYER.md verification candidate, still not done.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-09-28 (day) — Day-plan run #11 + live check-ins (no spec changes)
+
+- "Brief landed" at 9:16; run #11 written 9:16–9:28 from commit 97950e7 (the
+  9:05 run): QQQ two-sided index card (Wed 9/30 expiry), USO retest-only
+  continuation (10/2), MRK 150 reclaim into the dated 10/10 PDUFA (10/16).
+  META/MU/NVDA/INTC/SPCX/XLE killed to lines. Live equity $3,610.74 → 4% cap
+  $144.43; the card stated per leg that the index card does not fit as a
+  1-lot with its own stop. Brief commit hash recorded and a 9:31 re-check
+  step written (D-2 applied voluntarily).
+- 9:32 re-check found the ~9:45 re-run (839ead4) on main; a 9:36 addendum
+  reconciled it before the 9:45 clock (no new in-hours event; radar swaps
+  USO/QQQ/NVDA adopted as amendments; card dead at 12:00; USO 2:00 kill
+  clock; Starship success verified from three sources; 9:30 gap statuses).
+- Check-ins 9:47 → 3:02 (fifteen). QQQ bear fired 10:00; the card's SPY
+  confirmation printed on the gated 10:30–10:45 Dallas Fed candle; no entry.
+  USO clause-2 fired on the same gated candle; spread 34% → no ticket; killed
+  12:30 on a 10× volume oil candle. MRK no trigger. Dallas Fed number and
+  Barkin's remarks not found online → UNVERIFIED, said so. Two oil headline
+  candles (12:15, 1:10): NO CLEAR DRIVER FOUND, said so both times.
+- Owner questions answered on the tape: wall map (UW 12:57 gex-levels), the
+  gamma flip as a regime switch, bar size / ATR and sizing, the 1:30 speech
+  rated LOW impact (correct).
+
+### DEVIATIONS
+
+- **D-2 applied before ratification** (brief hash in the card; 9:36 addendum).
+  Voluntary, stated in the card.
+- **Off-whitelist UW endpoint used at 10:54** (`greek-exposure/strike-expiry`
+  for the same-day-expiry strike map). DATA_LAYER.md verification still owed.
+- **The live coaching mis-stated the owner's execution from 11:02 to 3:02**
+  ("zero index trades, one-loss rule intact") by reading position snapshots
+  between sub-five-minute scalps. The evening R-3 pull shows 31 round trips.
+  Recorded as a coaching error; the fix is R-3's own premise (fills, never
+  snapshots) applied intraday — a live fills check at each check-in.
+- Standing: Turso token rotation still owed.
+
+## 2026-09-28 (evening) — Scheduled post-close review #15: graded the 9/28 brief (9:45 re-run) + day-plan run #11 (n=29)
+
+- **Grades:** F 8/8 · O MIXED (the "sellers' second try" conditional was the
+  call of the day; "range-day bias" wrong for QQQ) · M **HIT** (mildly bearish,
+  broad, defensives/energy rotation — every clause) · G **HIT** (fuzzy zone →
+  whipsaw, walls, 735 magnet, 737–738 pin; "EOD positive" stale by 10 AM as
+  the section itself warned) · R **1 CONF-PAID / 3 fired** (QQQ bear, R-2 on
+  736.03) · 2 CONF-FAILED (USO hold-the-gap killed at 1:15 −2.8%; NVDA fired
+  at the buyback high, −0.85% to 3:00) · MU OPEN · W precision 5/11,
+  lean-accuracy 2/5 (INTC/GME/SPCX wrong) · recall 7/12 (SOXL, ARCT, AKAM,
+  IMMX, ROIV missed; R-1 excluded OPEN, TE).
+- **Day cards: 0 PAID / 0 FAILED / 3 NO-ENTRY.** QQQ withheld by the card's
+  own SPY-confirmation filter + the S5 gate (≈ +35% managed counterfactual —
+  obs #9 n=5); USO refused by the spread gate (gate's first live save, −41%
+  avoided); MRK no trigger. Ledger 11 / 4 / 20 of 35.
+- **Owner execution (R-3, day 4):** 62 fills, 31 round trips, 166 lots,
+  17W/14L, +$846 realized, equity $3,610.74 → $4,441.23 (+23.0%). One trade
+  (QQQ 737P ×8, 10:38, stop-limit exit at 5.00, +$1,965) was the card's read
+  at 8× the size; the other 30 netted ≈ −$1,119. One-loss rule breached
+  9:51; opening-window entries; all 0DTE; after-3:00 trips. Grade D. Playbook
+  not edited.
+- **Ledger:** **D-3 PROPOSED** (tiered event gate: regional surveys 5-minute,
+  top-tier prints 15-minute; evidence 9/28 both fires on the Dallas Fed
+  candle vs 9/25 UMich being the day's move). Evidence appended to D-2
+  (applied, re-run reconciled in time), R-3 (day 4 — the coach's own
+  snapshot error), D-1 (obs #9 n=5), I-16 (IBRX back over 8.50). Nothing
+  ratified.
+- Open items: Monday-carry item resolved (dates corrected); MU straddle
+  OPEN → Thu/Fri; SPCX on 145; I-12 check overdue a fourth night (ARCT
+  leanless burn #3); Q3-binary cluster drift noted, not proposed.
+- DB synced (n=29); MUST_MENTION regenerated; pushed to branch + main
+  (standing scope).
+
+### DEVIATIONS
+
+- **None in this review.** The day-side deviations above (D-2 applied,
+  off-whitelist endpoint, the coaching's snapshot error) are graded here, not
+  repeated.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
