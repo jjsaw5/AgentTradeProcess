@@ -218,6 +218,18 @@ class FMP:
         rows = self._get("quote", {"symbol": symbol}, cache=False)
         return rows[0] if rows else {}
 
+    def premarket(self, symbol: str) -> dict:
+        """Pre-market bid/ask mid from `aftermarket-quote` (verified live 2026-09-28 08:40 ET;
+        `quote` itself stays stamped at Friday's close until the open). {} if unavailable."""
+        rows = self._get("aftermarket-quote", {"symbol": symbol}, cache=False)
+        if not rows:
+            return {}
+        r = rows[0]
+        bid, ask = pd.to_numeric(r.get("bidPrice"), errors="coerce"), pd.to_numeric(r.get("askPrice"), errors="coerce")
+        if not (pd.notna(bid) and pd.notna(ask)) or bid <= 0 or ask <= 0:
+            return {}
+        return {"price": float((bid + ask) / 2), "bid": float(bid), "ask": float(ask), "timestamp": r.get("timestamp")}
+
 
 class UW:
     """Unusual Whales. Bearer auth. Degrades to empty + a note on plan limits; never crashes."""

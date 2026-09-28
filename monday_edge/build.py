@@ -97,6 +97,9 @@ def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | 
 
     df = pd.DataFrame(rows)
     df = df.sort_values(["session", "ticker"]).reset_index(drop=True)
+    heads_by_year = (df.drop_duplicates("session").assign(year=lambda x: pd.to_datetime(x["session"]).dt.year)
+                     .groupby("year")["n_headlines"].median().to_dict())
+    oldest_post = min((p["ts_utc"] for p in posts), default=None)
     cfg.out_dir.mkdir(parents=True, exist_ok=True)
     out_path = cfg.out_dir / "weekends.csv"
     df.to_csv(out_path, index=False)
@@ -109,6 +112,9 @@ def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | 
         "no_headlines_pct": (100.0 * no_headlines / len(sessions)) if sessions else float("nan"),
         "uw_notes": list(uw.notes),
         "fmp_notes": list(getattr(fmp, "notes", [])),
+        "headlines_median_by_year": {int(k): float(v) for k, v in heads_by_year.items()},
+        "oldest_post_utc": oldest_post[:10] if oldest_post else None,
+        "n_posts": len(posts),
         "tagger": "llm" if use_llm else "rules",
         "out_path": str(out_path),
     }

@@ -179,6 +179,13 @@ def study_report(an, df: pd.DataFrame, notes: dict, cfg) -> str:
     parts.append(f"<li>Missing intraday bars: {notes.get('missing_intraday_pct', float('nan')):.1f}% of session×ticker rows "
                  "(daily fill still computed; intraday fields NaN).</li>")
     parts.append(f"<li>Weekends with no headlines in the window: {notes.get('no_headlines_pct', float('nan')):.1f}% (tagged quiet by construction).</li>")
+    hby = notes.get("headlines_median_by_year") or {}
+    if hby:
+        parts.append("<li>Median headlines per weekend by year: " + ", ".join(f"{y}: {v:.0f}" for y, v in sorted(hby.items())) +
+                     ". Years with few headlines are tagged <i>quiet</i> by construction — a fact about the feed, not the weekend.</li>")
+    if notes.get("n_posts") is not None:
+        parts.append(f"<li>Presidential posts: {notes['n_posts']} pulled; oldest reachable {_e(notes.get('oldest_post_utc') or 'n/a')}. "
+                     "Earlier weekends have no post input, so their Trump mode rests on headlines alone.</li>")
     parts.append("<li>Unusual Whales: " + ("; ".join(_e(n) for n in uw_notes) if uw_notes else "no gaps reported") + "</li>")
     if fmp_notes:
         parts.append("<li>FMP: " + "; ".join(_e(n) for n in sorted(set(fmp_notes))[:10]) + "</li>")

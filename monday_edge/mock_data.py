@@ -348,6 +348,10 @@ class MockFMP:
         out.sort(key=lambda h: h["published_utc"])
         return out
 
+    def premarket(self, symbol: str) -> dict:
+        q = self.quote(symbol)
+        return {"price": q["price"], "bid": q["price"], "ask": q["price"], "timestamp": q["timestamp"]} if q else {}
+
     def quote(self, symbol: str) -> dict:
         df = self.w.prices.get(symbol.upper())
         if df is None or df.empty:

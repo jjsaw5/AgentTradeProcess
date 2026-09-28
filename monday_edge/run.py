@@ -139,14 +139,19 @@ def cmd_today(args) -> int:
         if t in manual:
             gap, src = manual[t], "manual"
         else:
-            q = fmp.quote(t)
-            px = q.get("open") if (not pre_open and q.get("open")) else q.get("price")
+            if pre_open:
+                pm = fmp.premarket(t)
+                px, src = pm.get("price"), "pre-market quote (bid/ask mid)"
+            else:
+                q = fmp.quote(t)
+                px, src = q.get("open") or q.get("price"), "open"
             try:
                 px = float(px)
             except (TypeError, ValueError):
                 px = np.nan
             gap = (px / prev_close - 1.0) * 100.0 if np.isfinite(px) and np.isfinite(prev_close) and prev_close > 0 else np.nan
-            src = ("pre-market quote" if pre_open else "open") if np.isfinite(gap) else "UNVERIFIED (no quote)"
+            if not np.isfinite(gap):
+                src = "UNVERIFIED (no quote)"
         em = uw.implied_moves(t, prev) if uw.enabled else {}
         gex = uw.greek_exposure(t) if uw.enabled else None
         regime, net_g, pctile = gex_regime(gex, prev)
