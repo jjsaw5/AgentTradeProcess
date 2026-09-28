@@ -119,7 +119,10 @@ def _to_utc(ts, tz):
     if pd.isna(t):
         return None
     if t.tzinfo is None:
-        t = t.tz_localize(tz)
+        # DST edges: a naive stamp in the repeated fall-back hour is read as standard time (the
+        # later instant); one in the spring-forward gap is shifted forward. Either error is under
+        # an hour and only ever lands inside a weekend window, so it cannot move a row across it.
+        t = t.tz_localize(tz, ambiguous=False, nonexistent="shift_forward")
     return t.tz_convert("UTC").to_pydatetime()
 
 
