@@ -56,7 +56,7 @@ def _setup(args):
 
 def cmd_study(args) -> int:
     cfg, fmp, uw = _setup(args)
-    df, notes = build_dataset(fmp, uw, cfg, use_llm=args.llm, log=log)
+    df, notes = build_dataset(fmp, uw, cfg, use_llm=args.llm, log=log, workers=args.workers)
     an = analyze(df, cfg)
     from report import study_report
     pat_path = cfg.out_dir / "patterns.csv"
@@ -206,6 +206,7 @@ def main(argv=None) -> int:
     s.add_argument("--llm", action="store_true", help="tag weekends with the Anthropic model (needs ANTHROPIC_API_KEY)")
     s.add_argument("--start", help="override START_DATE (YYYY-MM-DD)")
     s.add_argument("--seed", type=int, default=42, help="mock world seed")
+    s.add_argument("--workers", type=int, default=3, help="parallel sessions during the build (API rate limits permitting)")
     s.set_defaults(fn=cmd_study)
     t = sub.add_parser("today", help="tag this weekend, estimate the gap, show matching history")
     t.add_argument("--mock", action="store_true")

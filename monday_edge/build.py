@@ -4,6 +4,7 @@ Context columns use only Friday data and weekend news (no look-ahead).
 """
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 
 import numpy as np
@@ -32,7 +33,7 @@ def _posts_in_window(posts: list[dict], start: datetime, end: datetime) -> list[
     return out
 
 
-def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | None = None):
+def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | None = None, workers: int = 3):
     """Return (DataFrame, notes dict). Also writes cfg.out_dir/weekends.csv."""
     today = today or date.today()
     tickers = list(cfg.tickers)
@@ -56,44 +57,56 @@ def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | 
     posts = uw.potus_posts(first_start) if uw.enabled else []
     log(f"[build] {len(posts)} presidential posts since {first_start.date()}")
 
-    rows = []
-    missing_intraday = 0
-    no_headlines = 0
-    for i, (p, d) in enumerate(sessions, 1):
+    def one_session(pd_: tuple):
+        p, d = pd_
         w_start, w_end = news_window(p, d)
         headlines = fmp.news(w_start, w_end, symbols=tuple(tickers))
+        truncated = bool(getattr(fmp, "last_news_truncated", False))
         w_posts = _posts_in_window(posts, w_start, w_end)
         tag = tag_weekend(headlines, w_posts, cfg, use_llm=use_llm)
-        if not headlines:
-            no_headlines += 1
         vix_p = lookup_on_or_before(vix, p, "close")
+        out, missing = [], 0
         for t in tickers:
             intr = fmp.intraday_5m(t, d)
             oc = compute_outcomes(daily[t], p, d, intr)
             if not oc:
                 continue
             if not oc["has_intraday"]:
-                missing_intraday += 1
+                missing += 1
             em = uw.implied_moves(t, p) if uw.enabled else {}
             em1, em5 = em.get(1, np.nan), em.get(5, np.nan)
             regime, net_g, pctile = gex_regime(gex[t], p)
             gb = gap_bucket(oc["gap_pct"], cfg.gap_flat, cfg.gap_large)
-            row = {
+            out.append({
                 "session": d, "prev": p, "ticker": t,
                 "window_start_utc": w_start.isoformat(), "window_end_utc": w_end.isoformat(),
                 **{k: tag.get(k) for k in TAG_FIELDS},
                 "top_headlines": " | ".join(tag.get("top_headlines") or []),
+                "news_truncated": truncated,
                 **oc,
                 "em1_pct": em1, "em5_pct": em5, "em_bucket": em_bucket(oc["gap_pct"], em1),
                 "vix": vix_p, "vix_regime": vix_regime(vix_p),
                 "gex_net": net_g, "gex_regime": regime, "gex_pctile": pctile,
                 "gap_bucket": gb, "gap_size": gap_size(oc["gap_pct"], cfg.gap_flat, cfg.gap_large),
                 "tone_vs_gap": tone_vs_gap(tag["risk_tone"], gb),
-            }
-            rows.append(row)
-        if i % 10 == 0 or i == len(sessions):
-            log(f"[build] {i}/{len(sessions)} sessions ({d}) — {tag['category']}/{tag['trump_mode']}, "
-                f"{len(headlines)} headlines")
+            })
+        return out, missing, len(headlines) == 0, truncated, tag
+
+    rows = []
+    missing_intraday = 0
+    no_headlines = 0
+    n_truncated = 0
+    done = 0
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+        for (p, d), (out, missing, empty, truncated, tag) in zip(sessions, ex.map(one_session, sessions)):
+            rows.extend(out)
+            missing_intraday += missing
+            no_headlines += int(empty)
+            n_truncated += int(truncated)
+            done += 1
+            if done % 10 == 0 or done == len(sessions):
+                log(f"[build] {done}/{len(sessions)} sessions ({d}) — {tag['category']}/{tag['trump_mode']}, "
+                    f"{tag['n_headlines']} headlines{' [news window truncated]' if truncated else ''}")
 
     df = pd.DataFrame(rows)
     df = df.sort_values(["session", "ticker"]).reset_index(drop=True)
@@ -110,6 +123,7 @@ def build_dataset(fmp, uw, cfg, use_llm: bool = False, log=print, today: date | 
         "date_range": (sessions[0][1], sessions[-1][1]),
         "missing_intraday_pct": (100.0 * missing_intraday / n_rows) if n_rows else float("nan"),
         "no_headlines_pct": (100.0 * no_headlines / len(sessions)) if sessions else float("nan"),
+        "news_truncated_pct": (100.0 * n_truncated / len(sessions)) if sessions else float("nan"),
         "uw_notes": list(uw.notes),
         "fmp_notes": list(getattr(fmp, "notes", [])),
         "headlines_median_by_year": {int(k): float(v) for k, v in heads_by_year.items()},

@@ -179,6 +179,9 @@ def study_report(an, df: pd.DataFrame, notes: dict, cfg) -> str:
     parts.append(f"<li>Missing intraday bars: {notes.get('missing_intraday_pct', float('nan')):.1f}% of session×ticker rows "
                  "(daily fill still computed; intraday fields NaN).</li>")
     parts.append(f"<li>Weekends with no headlines in the window: {notes.get('no_headlines_pct', float('nan')):.1f}% (tagged quiet by construction).</li>")
+    if notes.get("news_truncated_pct") is not None:
+        parts.append(f"<li>News page cap cut the window short on {notes['news_truncated_pct']:.1f}% of weekends "
+                     "(coverage not proven for those; raise MAX_NEWS_PAGES to close it).</li>")
     hby = notes.get("headlines_median_by_year") or {}
     if hby:
         parts.append("<li>Median headlines per weekend by year: " + ", ".join(f"{y}: {v:.0f}" for y, v in sorted(hby.items())) +

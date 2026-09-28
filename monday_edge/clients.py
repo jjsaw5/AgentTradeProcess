@@ -134,6 +134,7 @@ class FMP:
         self.news_tz = ZoneInfo(news_tz)
         self.max_news_pages = max_news_pages
         self.notes: list[str] = []
+        self.last_news_truncated = False
 
     def _get(self, path: str, params: dict, cache: bool = True):
         p = dict(params)
@@ -173,22 +174,43 @@ class FMP:
         df = df[(t >= 9 * 60 + 30) & (t < 16 * 60)]
         return df[cols].sort_values("ts").reset_index(drop=True)
 
-    def _news_pages(self, path: str, params: dict, cache: bool):
+    def _news_day(self, path: str, day: date, extra: dict, start_utc: datetime, cache: bool) -> tuple[list, bool]:
+        """Page one endpoint for one calendar day, newest first, until a page reaches back past
+        `start_utc`, a short page arrives, or the page cap. Returns (rows, truncated)."""
         out = []
         for page in range(self.max_news_pages):
-            rows = self._get(path, {**params, "page": page, "limit": 250}, cache=cache)
+            rows = self._get(path, {**extra, "from": str(day), "to": str(day), "page": page, "limit": 250}, cache=cache)
             out.extend(rows)
             if len(rows) < 250:
-                break
-        return out
+                return out, False
+            oldest = None
+            for r in rows:
+                ts = _to_utc(r.get("publishedDate") or r.get("published_date") or r.get("date"), self.news_tz)
+                if ts is not None and (oldest is None or ts < oldest):
+                    oldest = ts
+            if oldest is not None and oldest < start_utc:
+                return out, False
+        return out, True  # cap hit before the page reached the window start: coverage is not proven
 
     def news(self, start_utc: datetime, end_utc: datetime, symbols=("SPY", "QQQ"), cache: bool = True) -> list[dict]:
-        """General + stock news inside [start_utc, end_utc), deduped by title."""
+        """General + stock news inside [start_utc, end_utc), deduped by title.
+
+        Verified 2026-09-28: `general-latest` honors from/to but pages newest-first at ~1000 rows
+        per day, so a single Fri->Mon query spends the page cap on Monday afternoon and never
+        reaches the weekend. Each day is therefore queried on its own. `self.last_news_truncated`
+        is True when the cap cut a day short of the window start (a fact about coverage, not
+        about the weekend)."""
         start_local = start_utc.astimezone(self.news_tz).date()
         end_local = end_utc.astimezone(self.news_tz).date()
-        base = {"from": str(start_local), "to": str(end_local)}
-        raw = self._news_pages("news/general-latest", base, cache)
-        raw += self._news_pages("news/stock", {**base, "symbols": ",".join(symbols)}, cache)
+        raw, truncated = [], False
+        day = start_local
+        while day <= end_local:
+            for path, extra in (("news/general-latest", {}), ("news/stock", {"symbols": ",".join(symbols)})):
+                rows, trunc = self._news_day(path, day, extra, start_utc, cache)
+                raw.extend(rows)
+                truncated = truncated or trunc
+            day += timedelta(days=1)
+        self.last_news_truncated = truncated
         seen, out = set(), []
         for r in raw:
             title = (r.get("title") or "").strip()
