@@ -1,0 +1,41 @@
+{
+  "session": "2026-09-28",
+  "prev": "2026-09-25",
+  "written_et": "2026-09-28 09:28",
+  "inputs_run_et": "2026-09-28 08:58",
+  "tag": {"category": "geopolitical", "category_score": 230, "risk_tone": "risk_off", "trump_mode": "statement",
+          "n_headlines": 1175, "posts": 34, "tagger": "rules"},
+  "tickers": {
+    "SPY": {"prev_close": 771.35, "gap_pct_premarket": -0.30, "gap_source": "aftermarket-quote bid/ask mid 08:58 ET",
+            "gap_size": "small", "gap_bucket": "small_down", "em1_pct": 0.20, "em_bucket": ">1 EM",
+            "gex_regime": "positive", "vix_regime": "<15", "tone_vs_gap": "news agrees with gap",
+            "brief_levels": {"PDH": 772.28, "PDL": 766.29, "PDC": 771.35, "pm_high": 769.32, "pm_low": 766.86}},
+    "QQQ": {"prev_close": 744.50, "gap_pct_premarket": -0.49, "gap_source": "aftermarket-quote bid/ask mid 08:58 ET",
+            "gap_size": "small", "gap_bucket": "small_down", "em1_pct": 0.50, "em_bucket": "0.5-1 EM",
+            "gex_regime": "positive", "vix_regime": "<15", "tone_vs_gap": "news agrees with gap",
+            "brief_levels": {"PDH": 745.92, "PDL": 739.64, "PDC": 744.50, "pm_high": 745.06, "pm_low": 736.03}}
+  },
+  "analogs": {
+    "SPY": [
+      {"tier": "category + gap size + Trump mode", "n": 47, "fill_same_day": 0.45, "fill_1h": 0.21, "median_min_to_fill": 68, "continuation": 0.55, "h0_ret": 0.05, "h4_ret": 0.41},
+      {"tier": "category + gap size", "n": 50, "fill_same_day": 0.44, "fill_1h": 0.22, "median_min_to_fill": 50, "continuation": 0.58, "h0_ret": 0.07, "h4_ret": 0.42},
+      {"tier": "category", "n": 133, "fill_same_day": 0.62, "fill_1h": 0.42, "median_min_to_fill": 28, "continuation": 0.50, "h0_ret": 0.03, "h4_ret": 0.20},
+      {"tier": "gap size", "n": 116, "fill_same_day": 0.47, "fill_1h": 0.23, "median_min_to_fill": 55, "continuation": 0.51, "h0_ret": -0.02, "h4_ret": 0.16},
+      {"tier": "all weekends", "n": 299, "fill_same_day": 0.60, "fill_1h": 0.40, "median_min_to_fill": 25, "continuation": 0.49, "h0_ret": -0.04, "h4_ret": 0.09}
+    ],
+    "QQQ": [
+      {"tier": "category + gap size + Trump mode", "n": 44, "fill_same_day": 0.48, "fill_1h": 0.27, "median_min_to_fill": 45, "continuation": 0.52, "h0_ret": 0.20, "h4_ret": -0.09},
+      {"tier": "category + gap size", "n": 44, "fill_same_day": 0.48, "fill_1h": 0.27, "median_min_to_fill": 45, "continuation": 0.52, "h0_ret": 0.20, "h4_ret": -0.09},
+      {"tier": "category", "n": 133, "fill_same_day": 0.57, "fill_1h": 0.43, "median_min_to_fill": 12, "continuation": 0.50, "h0_ret": 0.11, "h4_ret": 0.08},
+      {"tier": "gap size", "n": 109, "fill_same_day": 0.58, "fill_1h": 0.42, "median_min_to_fill": 20, "continuation": 0.50, "h0_ret": 0.06, "h4_ret": -0.16},
+      {"tier": "all weekends", "n": 299, "fill_same_day": 0.58, "fill_1h": 0.44, "median_min_to_fill": 15, "continuation": 0.50, "h0_ret": 0.04, "h4_ret": -0.12}
+    ]
+  },
+  "confirmed_patterns_matching": [],
+  "pre_registered": {
+    "note": "No confirmed pattern applies. Base rates only; each line is the analog rate this Monday will be scored against, not a prediction of direction.",
+    "SPY": {"fill_same_day_rate": 0.47, "fill_1h_rate": 0.23, "continuation_rate": 0.51, "reference_tier": "gap size (n=116)"},
+    "QQQ": {"fill_same_day_rate": 0.58, "fill_1h_rate": 0.42, "continuation_rate": 0.50, "reference_tier": "gap size (n=109)"}
+  },
+  "outcome": null
+}
