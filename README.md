@@ -32,3 +32,9 @@ runtime copies (scheduled tasks, skills) load from or sync to this repo.
   (added 2026-08-18). Each scheduled run writes its full brief here, commits,
   and pushes (see the spec's OUTPUT DELIVERY section). One file per trading
   day; automated runs touch only this directory.
+
+- `odte-desk/SKILL.md` — the live intraday desk (added 2026-09-28): scheduled
+  15-minute-close reads plus chat-driven frames, Robinhood chart-screenshot
+  protocol, exit points on the underlying with derived contract marks, gates
+  printed as warnings, no sizing. `odte-desk/log/` is the pre-registered
+  frame record, graded by brief-review.

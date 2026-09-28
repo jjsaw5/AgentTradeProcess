@@ -42,6 +42,7 @@ are working from elsewhere, say so out loud before writing anything here.
 | `options-expert/reference/` | Vendored third-party docs, with a README recording where they are wrong. Do not edit the vendored bodies; re-fetch to update. |
 | `brief-review/` | Grades each archived brief against the realized market at T+1. `SKILL.md` the rubric, `reviews/` per-day grades, `SCORECARD.md` the cumulative accuracy record, `IMPROVEMENTS.md` the PROPOSED→RATIFIED ledger for brief-spec changes, `MUST_MENTION.md` the generated coverage floor the morning brief reads. Reviews never edit briefs. |
 | `day-plan/` | The ~9:20 strategy layer: selects the brief's trigger-complete cards through review-validated filters, runs survivors through the options-expert stages, and writes 0–3 pre-open conditional plans to `cards/`. Append-only after the open; graded by brief-review at T+1. |
+| `odte-desk/` | The live intraday desk (created 2026-09-28): reads the brief, the day-plan cards and the owner's Robinhood chart screenshots against the live tape on every 15-minute close and on request; frames direction and exit points on the underlying with the derived contract mark at each. Does not size (owner decision); prints gates as warnings, never refuses. `SKILL.md` the process, `log/` the pre-registered frame record, graded by brief-review at T+1. |
 
 Changes to a spec are commits. The process has a history on purpose.
 
@@ -183,7 +184,8 @@ stop-limit buffer, the time and loss rules, the tide tripwires, A/B/C grading.
 These came from live sessions with recorded outcomes.
 
 **Reasoned but unvalidated — everything in `options-expert/` that is not from
-the playbook:** the edge tests (E1–E5), the liquidity gates, the structure
+the playbook, and all of `odte-desk/` (2026-09-28: the expected-mark formula,
+the T1/T2 exit construction, the chart-read protocol):** the edge tests (E1–E5), the liquidity gates, the structure
 matrix, heat accounting, the correlation rule, the kill list. The playbook
 contains **no** position-sizing rules, no liquidity thresholds and no
 selection framework; that entire layer was invented on 2026-08-18. It is

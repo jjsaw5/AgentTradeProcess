@@ -1540,3 +1540,61 @@ under the standing review authorization).
   probes only). Off-whitelist `greek-exposure/strike-expiry` endpoint from 9/23
   remains a DATA_LAYER.md verification candidate, still not done.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-09-28 (afternoon) — New module: `odte-desk/` (owner-directed design session)
+
+- **What changed:** created `odte-desk/SKILL.md` + `odte-desk/log/` — the live
+  intraday research desk for 0DTE plays. Rows added to `CLAUDE.md` §1 and §7
+  and to `README.md`. **R-4 PROPOSED** in `brief-review/IMPROVEMENTS.md` (the
+  grading step for desk frames, including the expected-mark error).
+- **Why:** the process ended at 9:30. The last three graded sessions (9/22,
+  9/24, 9/25) were 15 / 22 / 71 fills of 0DTE index contracts against cards
+  written for weekly expiry, and the intraday coaching that existed was
+  improvised (9/24, 9/25 self-reminders; one coached entry not on any card).
+  The session between 9:45 and 3:30 now has an owner.
+- **Owner decisions taken this session (dialog, recorded verbatim in spirit):**
+  1. The other repository (`Aggressive-Trading-Bot`) is not an input and was
+     not read. Nothing from its context touched this design.
+  2. The desk runs both on a schedule (9:35 opening-range mark; every 15-minute
+     close 9:45–3:30; 3:00 and 3:30 bells) and chat-driven.
+  3. Exit points are given on the underlying AND as the derived contract mark.
+  4. Chart input is Robinhood screenshots; read as interpretation, checked
+     against the feed, provenance labelled per level.
+  5. The 0DTE gate (and the one-loss, event, volume, regime gates) **prints a
+     warning and does not refuse.**
+  6. **The desk does not size.** Direction, trigger, invalidation and exits
+     only; the owner makes the sizing call at the ticket.
+  7. Every frame is logged pre-outcome and graded by brief-review.
+  8. Module name `odte-desk`.
+- **Design choices Claude made (not owner-ratified, flagged as such):**
+  - 15-minute close as the scheduled verdict candle (matches every day card);
+    5-minute on request or where a card is written on it.
+  - `T1` = nearest structural level in the direction, `T2` = the next,
+    `RANGE BOUND` from the 0DTE implied move; T1 is the scale line
+    (scorecard obs #7).
+  - The expected-mark formula is first-order (Δ, ½Γ, θ over hours held),
+    labelled `computed: ours`, ignores vega, and is UNCALIBRATED.
+  - A named `pattern input` slot for the "edge trading pattern tool" the owner
+    referred to; its location and output format are not yet known to this
+    repo, so the day-plan cards fill the slot until recorded.
+  - §8 candidate data sources (VIX1D via Robinhood, consolidated tape, ES/NQ,
+    UW `news` / `option_trades` websocket channels, level 2, TreasuryDirect,
+    the scoring DB per frame) listed as **unverified**; none may be used until
+    probed into `DATA_LAYER.md`.
+- **Concern stated to the owner, on the record:** a 0DTE-expert desk that
+  answers every question with a play is a chase license against the 9/22–9/25
+  record. The owner chose warnings over refusals; the spec makes "no trade" a
+  first-class answer and prints every gate every time.
+
+### DEVIATIONS
+
+- **Working from a remote cloud session, not the owner's machine.** The
+  working directory was this repository (`CLAUDE.md` §0 satisfied); no other
+  repository's `CLAUDE.md` was in force.
+- **Spec written before any frame ran.** The module has zero outcomes; every
+  number it will print is `UNCALIBRATED` and the spec says so in five places.
+- **R-4 is PROPOSED, not ratified**; `brief-review/SKILL.md` was not edited.
+- Standing: Turso token rotation still owed; UW key known exposure (§6).
+- None otherwise.
