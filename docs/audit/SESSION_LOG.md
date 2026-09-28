@@ -1598,3 +1598,34 @@ under the standing review authorization).
 - **R-4 is PROPOSED, not ratified**; `brief-review/SKILL.md` was not edited.
 - Standing: Turso token rotation still owed; UW key known exposure (§6).
 - None otherwise.
+
+## 2026-09-28 (1:15–1:35 PM) — odte-desk §8 data-source probes (owner-directed)
+
+- Owner: "probe all the data sources in section 8." Expectations pre-registered
+  in `odte-desk/log/2026-09-28-PROBE.md` before any call; results appended.
+- **Verified new sources:** Cboe delayed-quote JSON for VIX / VIX1D / VIX9D /
+  VIX3M (no key, ~15 min delayed; VIX1D 10.59 under VIX 16.00 at 13:04); FMP
+  `ESUSD` quote + 5-min bars with the overnight session (~10 min delayed;
+  `NQUSD` 402); UW websocket `news`, `option_trades:SPY` (~80 prints/s,
+  aggressor tags, 30 ms median latency), `gex:SPY` (ms-stamped), `price:SPY`,
+  `flow-alerts`; Robinhood level 2 (works, 249 KB for two symbols — top-n
+  extraction only); TreasuryDirect auction JSON.
+- **Not verified:** the scoring DB (Turso token absent from this container);
+  Polygon / Databento (reachable, no credential). Robinhood does not carry
+  VIX1D / VIX9D; FMP 402s them.
+- **Finding:** the 9/23 and 9/24 auction hand pulls used different
+  denominators (total vs competitive accepted) for indirect/dealer shares.
+  Both were arithmetically right on their own basis; neither stated it. The
+  desk spec now requires the denominator on every auction line. Also:
+  `DATA_STORE.md`'s schema table omits the day-card table the reviews use.
+- Wrote `options-expert/DATA_LAYER.md` §7 (addendum), rewrote `odte-desk/
+  SKILL.md` §8 with statuses and desk uses, added `odte-desk/tools/
+  probe_desk.sh` and `probe_ws.py`.
+
+### DEVIATIONS
+
+- Two expectations were wrong and are left as written: NQ was expected to work
+  on FMP (402), and Cboe delayed quotes were not expected to be this complete.
+- `websockets` pip-installed into the container for the socket probe.
+- Standing: Turso token rotation still owed; UW key known exposure.
+- None otherwise.

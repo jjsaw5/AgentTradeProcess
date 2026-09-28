@@ -532,3 +532,21 @@ of the column marked authoritative.
    column without a `source` field.
 5. **Never place, modify, or cancel an order.** Robinhood access is read-only
    and stays that way regardless of what any downstream process concludes.
+
+---
+
+## 7. Addendum 2026-09-28 — odte-desk §8 probes (market open, ~1:20 PM ET)
+
+Probed for the `odte-desk/` module; full record with pre-registered
+expectations in `odte-desk/log/2026-09-28-PROBE.md`. Re-verify with
+`odte-desk/tools/probe_desk.sh` and `odte-desk/tools/probe_ws.py`.
+
+| Source | Status | Notes |
+|---|---|---|
+| **Cboe delayed quotes** `https://cdn.cboe.com/api/global/delayed_quotes/quotes/_{VIX,VIX1D,VIX9D,VIX3M}.json` | **verified, no key** | 307 → `cdn-api.cboe.com`; follow redirects. `current_price`, `prev_day_close`, `bid`, `ask`, `last_trade_time`. **~15-min delayed.** Closes the VIX term-structure gap in §5 for regime reads, not for ticks. FMP still 402s all of `^VIX1D/^VIX9D/^VIX3M/^VVIX`; Robinhood carries VIX only (live, venue-timestamped). |
+| **FMP `ESUSD`** (`quote`, `historical-chart/5min`) | **verified** | E-mini S&P quote and 5-min bars **including the overnight session** — the overnight range source. Observed **~10 min delayed** (one measurement); read `timestamp`. **`NQUSD` is 402** on this plan; `YMUSD`/`RTYUSD` listed, unprobed. |
+| **UW websocket** `news`, `option_trades:TICKER`, `gex:TICKER`, `price:TICKER`, `flow-alerts` | **verified live** | ~80 prints/s on `option_trades:SPY`; each print carries aggressor `tags` (`bid_side`/`ask_side`/`mid_side`), NBBO at execution, OI, volume, `executed_at` ms; exec→receive latency median 30 ms. `gex:TICKER` is timestamped to the ms (aggregate gamma/delta/charm/vanna per 1% move, `_oi`/`_vol`/`_dir`) — the live counterpart to date-only `gex-levels`. `news` on the socket has no `is_major` field. `price:TICKER.vol` is a cumulative volume of **unverified** basis. |
+| **Robinhood `get_equity_price_book`** | **verified** | Full ladder (SPY ~200/~480 levels, QQQ ~1,250/~4,800), `updated_at` ns. **249 KB for two symbols** — extract top-n with a script; never read raw. |
+| **TreasuryDirect** `TA_WS/securities/auctioned?format=json` | **verified, no key** | Notes: `highYield`, `bidToCoverRatio`, `competitiveAccepted`, `totalAccepted`, `indirectBidderAccepted`, `primaryDealerAccepted`, `directBidderAccepted`. Bills: `highDiscountRate`. **State the denominator** — the 9/23 and 9/24 hand pulls used different ones (total vs competitive). |
+| Polygon / Databento | not connected | Reachable (401), no credential. |
+| Scoring DB (Turso) | not probed here | `TURSO_URL`/`TURSO_TOKEN` absent from the remote container. `DATA_STORE.md` schema table omits the `day_cards` table the reviews reference. |

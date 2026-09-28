@@ -315,23 +315,24 @@ said, not on what was executed.
 
 ---
 
-## 8. Candidate data sources — not yet verified, do not design against
+## 8. Data sources beyond `DATA_LAYER.md` §1–6 — probed 2026-09-28
 
-The owner asked for suggestions. Each of these would close a named gap; none
-is in `DATA_LAYER.md`, so none may be used until probed and recorded there.
+The owner asked for suggestions, then for probes. Record:
+`log/2026-09-28-PROBE.md` (expectations pre-registered, results appended);
+verified items are now in `options-expert/DATA_LAYER.md` §7. Re-verify with
+`tools/probe_desk.sh` and `tools/probe_ws.py`.
 
-| Gap it closes | Candidate | Status |
-|---|---|---|
-| "What happened the last n times this trigger shape fired" | the repo's own scoring DB (`brief-review/DATA_STORE.md`), queried per frame | exists; query shape not written |
-| Short-dated vol the 0DTE trade actually cares about (VIX1D, VIX9D/VIX ratio) | Robinhood `get_index_quotes` for `VIX1D` / `VIX9D`; Cboe data | unprobed; FMP 402s, UW plan-gated |
-| Volume floor calibrated to an undercounting feed; no vendor VWAP | a consolidated tape (Polygon, Databento) | not connected |
-| Overnight range from the instrument that actually trades overnight | ES / NQ futures quotes | unprobed on FMP; UW futures channels plan-gated |
-| Headline latency during a war-headline tape | UW websocket `news` channel (verified) wired into the scheduled frames | verified endpoint, not yet wired |
-| Who is hitting the bid in the strike the owner holds | UW `option_trades:TICKER` websocket channel, filtered to the contract | verified endpoint, not yet wired |
-| Level 2 at the trigger level | Robinhood `get_equity_price_book` | listed as available, not re-probed |
-| Auction results as they print (1:00 Treasury auctions) | TreasuryDirect JSON, used by hand 9/23 and 9/24 | works; not in the probe script |
-
----
+| Gap it closes | Source | Status (2026-09-28) | Desk use |
+|---|---|---|---|
+| "What happened the last n times this trigger shape fired" | the scoring DB (`brief-review/DATA_STORE.md`) | **unprobed** — token absent from the remote container | Query shape (untested): `SELECT date, ticker, grade, evidence FROM radar_items WHERE ticker=? AND grade IN ('CONF-PAID','CONF-FAILED') ORDER BY date DESC LIMIT 10`, and the same against the day-card table once its name is confirmed in `DATA_STORE.md`. Until run, the desk says `NA_unresolved` for the prior-outcome line. |
+| Short-dated vol (VIX1D, VIX9D/VIX ratio, VIX3M) | **Cboe delayed-quote JSON** (no key) | **verified, ~15-min delayed** | Session header and every frame's `GATES` block: VIX1D vs VIX (below = no event priced into today; above = the day is the event). Labelled `cboe ~15m delayed hh:mm`. Robinhood serves VIX only; FMP 402s the rest. |
+| Overnight range from the instrument that trades overnight | **FMP `ESUSD`** 5-min bars | **verified, ~10-min delayed** | 9:35 frame: overnight high/low from Sunday 18:00 / prior 18:00 to 9:30, labelled `ES` and converted to SPY only as a ratio with the ratio stated. **No NQ on this plan** (402). |
+| Headline latency on a war-headline tape | **UW websocket `news`** | **verified live** | Wire into every scheduled frame: headlines since the last frame, first line if any names a held ticker or has `is_trump_ts`. |
+| Who is hitting the bid in the strike the owner holds | **UW websocket `option_trades:TICKER`** filtered client-side to the contract | **verified live**, ~80 prints/s on SPY, median 30 ms | Per frame for a held contract: prints, ask-side vs bid-side count and premium, NBBO drift. Tooling: extend `options-expert/tools/uw_stream.py` with a per-contract filter. |
+| Intraday gamma freshness | **UW websocket `gex:TICKER`** | **verified live**, ms-stamped | Aggregate gamma per 1% move (`_oi` / `_vol` / `_dir`) as the live regime cross-check on `gex-levels` (date-only). Sign flips intraday are reported with their timestamp. |
+| Level 2 at the trigger level | **Robinhood `get_equity_price_book`** | **verified; 249 KB / 2 symbols** | Only through a top-n extractor: the five levels either side of the trigger and any level whose size is ≥5× its neighbours (a wall). Never pasted raw into a frame. |
+| Auction results as they print | **TreasuryDirect JSON** (no key) | **verified** | 1:00 auction frames: high yield, bid-to-cover, indirect / dealer / direct **as a share of competitive accepted, denominator stated**. Bills use `highDiscountRate`. |
+| Consolidated volume / VWAP | Polygon, Databento | **not connected** (reachable, no credential) | UW `price:TICKER.vol` is a candidate substitute, basis `UNVERIFIED`; not a floor input until compared to a known consolidated print. |
 
 ## 9. What this module refuses to do
 
