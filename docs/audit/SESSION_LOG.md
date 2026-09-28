@@ -1616,3 +1616,74 @@ was run. Result over seeds 7, 11, 23, 42, 99:
   The first real `study` run should be treated as a verification run.
 - **`fill 1st hr` in the mock is structurally low** (the Brownian bridge
   crosses Friday's close late); it says nothing about real markets.
+
+## 2026-09-28 (later) — Monday Edge: first live run (verification run)
+
+Keys were provided in chat and placed in `monday_edge/.env` (gitignored).
+**Both keys are a known exposure under §6 (pasted into a transcript) and
+should be rotated.** They are not in any commit, log or artifact; every
+staged diff was secret-scanned before commit.
+
+### What changed (three commits after the build)
+
+- **FMP news paging was a silent filter.** `news/general-latest` honors
+  `from`/`to` but pages newest-first at ~1,000 rows/day, so a Fri→Mon query
+  spent the 8-page cap on Monday afternoon and rarely reached the weekend.
+  The 2023-04-17 weekend went from 9 headlines to 1,244 after paging per
+  day and stopping once a page reaches past the window start. Weekends the
+  cap still cuts short are flagged `news_truncated` (0 of 299 this run).
+- **Pre-open gap source.** FMP `quote` stays stamped at Friday's close until
+  the open (verified 08:40 ET); `today` now uses `aftermarket-quote` bid/ask
+  mid pre-open and labels it.
+- **DST edge.** A headline at 2022-11-06 01:58 (repeated hour) crashed the
+  first build; naive stamps now localize with `ambiguous=False`.
+- Build runs sessions through a 3-worker pool; data notes now record
+  headlines per weekend by year, post depth, and truncation.
+
+### Result of the live `study` (299 sessions, 2021-01-04 → 2026-09-21)
+
+- **No confirmed pattern.** No eligible group even reached |z| ≥ 2 in
+  discovery; the strongest was VIX 15–20 on 4DTE return at z −1.9, opposite
+  sign in the holdout. 152 (SPY) / 168 (QQQ) eligible tests, ≈1.1 expected
+  flukes each. Reported plainly as a valid result.
+- Baselines (SPY, discovery): same-day fill 64%, first-hour fill 42%, close
+  with gap 50%. By gap bucket: flat fills 86% (mostly trivially), small
+  50–54%, large_down 38%, large_up 23%. Numbers are underlying moves.
+- **The category feature is a feed-volume artifact, not a news read.**
+  Median headlines per weekend: 2021: 6, 2022: 25, 2023: 839, 2024: 582,
+  2025: 112, 2026: 130. So 2021–22 is almost all `quiet`, 2023–24 almost
+  all `geopolitical` (the keyword list with the most common words wins when
+  800 headlines are scored), and `trump_mode` is `statement` on nearly every
+  weekend from 2023 on because "president … says" is trivially present.
+  The category and Trump views therefore say nothing yet. This is recorded
+  in the report's data notes; the fix (share-based scoring, or `--llm`) is
+  **not** applied now because retuning the feature after seeing the results
+  would be post-hoc (§9). It is the first follow-up.
+- Coverage: intraday bars 100%; GEX 100% (UW history from 2022-03-30);
+  implied move from 2023-10-30 only (403 `historic_data_access_missing`
+  before, so `em_bucket` is `n/a` for the first half); posts reach back to
+  2024-05-05 (5,587 pulled).
+
+### Live `today` brief (2026-09-28, run ~08:58 ET, pre-open)
+
+1,175 headlines and 34 posts in the window → `geopolitical`, `risk_off`,
+`statement`. SPY −0.30% pre-market (bid/ask mid), QQQ −0.49%; Friday GEX
+positive, VIX <15. No confirmed pattern applies. Analogs for "small_down"
+show same-day fill 47% (SPY, n=116) against 60% for all weekends: the
+distribution the brief shows, not a signal. Written to
+`monday_edge/output/brief_2026-09-28.html` (gitignored; delivered to the
+owner directly).
+
+### DEVIATIONS
+
+- **Outputs are not versioned.** The spec git-ignores `output/`; the study
+  report, `patterns.csv`, `weekends.csv` and the brief exist only in the
+  session container and were sent to the owner. If the record matters, the
+  brief belongs in a `monday_edge/log/` the way `options-expert/log/` works;
+  not done because it was not asked.
+- **The tagger is known to be weak on this feed and was left as built** (see
+  above) so that the first result is the pre-registered one.
+- **A background waiter fired on a stale traceback** and one shell command
+  killed itself with a `pkill` pattern that matched its own text; neither
+  touched the data, both cost a relaunch.
+- Standing: both API keys owed a rotation.
