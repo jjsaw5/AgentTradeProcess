@@ -1752,3 +1752,50 @@ under the standing review authorization).
 - `BIG_PRINT_USD = 50_000` is a round number with no evidence behind it,
   labelled so in the source.
 - None otherwise. Standing: Turso token rotation still owed.
+
+## 2026-09-29 (9:18 AM – 3:40 PM) — odte-desk first live session
+
+- **What ran:** `odte-desk/` live for its first session, in this remote
+  container, against the 9/29 brief (0b32199): session header 9:21, 20
+  scheduled 15-minute-close reads (9:36 → 3:31) via self-reminders, 4
+  chat-driven frames/chart reads, the UW stream with per-contract tape. Full
+  record `odte-desk/log/2026-09-29.md` (26 entries) + the 24 stream frame
+  lines in `odte-desk/log/2026-09-29-stream-frames.jsonl`. Branch
+  `claude/blissful-hopper-r5fp6a` (not main); 25 commits today.
+- **Owner interaction:** answered "QQQ could stay green, anticipating calls"
+  with an armed-not-fired frame at 9:24 (bull never fired); "why big candles"
+  at 10:37 (they weren't — median 5-min range 1.16 vs 1.35 Mon; whipsaw from
+  a split per-strike gamma structure, verified live); "planned events that
+  could break the glue" at 10:47; "is there a 2pm event" at 2:01 (Williams;
+  driver confirmed by the 2:50 rate-odds wire); two Robinhood chart
+  screenshots read per §4 with per-level provenance.
+- **Results on the written basis:** QQQ two-sided NO-TRIGGER both sides
+  (retired 12:00; the bear close printed 12:45); NVDA fired 10:30 →
+  CONF-FAILED −0.74%; USO NO-TRIGGER (clock clause) then −4.2% on
+  SPR/Brent/mediation wires. Owner: 21 round trips, ≈ −$1,088 realized,
+  equity $4,441.48 → $3,340.65 (−24.8%) from `get_portfolio`; the full fill
+  table is in the desk log for the evening review (R-3).
+- **No day-plan card landed on main today** (run #12 absent). Recorded in
+  every frame; the review should note the day-plan scheduler gap.
+- **Spec consequences proposed (not edited tonight):** expected-mark vega
+  term for the first ~20 min; fill-second spot reference; `GEX FLIP`
+  hysteresis; stream reconnect test; the 12:00 card-death clause on
+  two-sided index cards cost the bear close today (evidence for the review,
+  which proposes, never ratifies).
+
+### DEVIATIONS
+
+- **Three scheduled frames (10:01, 10:16, 10:31) were not produced** — the
+  remote container restarted ~10:00 and took the stream and the pending
+  trigger with it; recorded as a gap in the desk log, not backfilled.
+- **The stream died silently at 9:30:43 and my first restart did not launch**
+  (pgrep guard matched the shell). Two tool defects recorded in the desk log
+  for `uw_stream.py`; not fixed tonight.
+- **Chat-driven answers were given before their frames were written** on
+  four occasions (time-sensitive); each was then logged verbatim in intent
+  with the timestamp of the answer. Pre-registration held for every level
+  and expected mark (written before the outcome).
+- Working from a remote container, not the owner's machine; working
+  directory was this repository (§0 satisfied).
+- Standing: Turso token rotation still owed; UW key known exposure; the
+  Turso token is absent from this container so the scoring DB was not read.
