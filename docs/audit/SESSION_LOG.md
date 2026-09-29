@@ -1618,3 +1618,49 @@ under the standing review authorization).
   off-whitelist endpoint, the coaching's snapshot error) are graded here, not
   repeated.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-09-29 (evening) — Scheduled post-close review #16: graded the 9/29 brief (n=30); no day-plan run today
+
+- **No day-plan card:** the owner did not invoke the morning run, so no card
+  was written or graded. No live coaching today.
+- **Grades:** F 9/9 · O **HIT** (inside-range / on-the-flip / two-sided-noise
+  read exact) · M **MISS** (#8 by the SPY-band rule: "mildly bullish" on
+  −0.17%; the brief's own "QQQ-led drift up, not broad" qualifier was the
+  realized shape — 5 of 8 misses now carry the right hedge) · G MIXED (walls
+  exact — 740 capped every push, 765 magnet; "gasoline / breaks travel" never
+  tested, nothing broke) · R **1 CONF-PAID / 2 fired** (USO bear, late 2:00
+  fire, +0.87% to 3:00) · 1 CONF-FAILED (QQQ bear fired by two cents,
+  flat at the noon death) · 1 NO-TRIGGER (NVDA retest-only, the pullback did
+  not hold 230; the refusal saved −1.1%) · MU OPEN · W precision 5/9
+  (lean-accuracy 3/5: META bearish call and AAPL bull lean wrong) · recall
+  5/10 — **QURE −37.4% on a data readout the brief's §4A filed as "not a
+  binary"; IMMX −8.1%, SLN −3.75% from the same cluster; ARCT −5.2% leanless
+  (burn #4); RARE +6.2% quiet.**
+- **Owner execution (R-3, day 5):** 40 fills, 20 round trips, 141 lots,
+  9W/11L, −$1,088 realized; equity $4,441.23 → $3,340.67 (−24.8%; −30% from
+  the 9/23 high). One-loss rule breached on the first trade; opening-window
+  entries; all 0DTE; 10-lot sizing (a single $1,070 no-stop call = 24% of
+  equity); four 10-lot losers = −$1,360; 3:00 flat missed by 17 minutes.
+  Grade F. Playbook not edited.
+- **Ledger:** **I-17 PROPOSED** (level lines or an explicit no-position flag
+  for every carried undated-binary / biotech data-readout name; "data
+  presentation, not a binary" retired for single-asset companies — evidence
+  9/25 IMMX, 9/28 cluster +2–5%, 9/29 QURE −37%). Evidence appended to R-3
+  (day 5), I-16 (IBRX two sessions over 8.50 with the lean kept), I-12 (ARCT
+  burn #4). Nothing ratified.
+- Open items: MU straddle → Thu/Fri; META/DELL carried bear triggers stand;
+  I-12 check fifth night overdue; SPCX 150 fight; Wednesday's PCE/GDP/MU/
+  quarter-end carried.
+- DB synced (n=30); MUST_MENTION regenerated; pushed to branch + main
+  (standing scope).
+
+### DEVIATIONS
+
+- **None.** No UW probes tonight; no unratified rule applied (the owner did
+  not invoke the day-plan, so D-2 did not arise). Data sources: Robinhood
+  settled prints, BLS/Conference Board figures via press for the 10:00
+  prints (the reaction, not the numbers, is graded), GuruFocus/SEC for the
+  QURE readout — secondary for the cause, primary for the price.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
