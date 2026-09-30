@@ -1664,3 +1664,65 @@ under the standing review authorization).
   prints (the reaction, not the numbers, is graded), GuruFocus/SEC for the
   QURE readout — secondary for the cause, primary for the price.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-09-30 (evening) — Scheduled post-close review #17: graded the 9/30 brief (n=31); no day-plan run today
+
+- **Graded brief:** the ~9:25 re-run (commit eaf0bd3, the on-disk file). A
+  same-day spec amendment (commit 3d7b2b0, "placeholder-estimate trap") was
+  merged by the brief session before this review ran; the review grades the
+  brief, not the amendment, but records (§H1, I-18) that the amendment's
+  causal example is contradicted by the LSEG consensus and that the real
+  mechanism was the BEA benchmark revision. Reviews never edit the brief spec.
+- **No day-plan card:** the owner did not invoke the morning run; no live
+  coaching today.
+- **Grades:** F 10/11 (✗ ROIV carried as a same-week binary for a drug
+  approved 8/27; GDP, the Citi Moderna rating and the Dec-11 stopgap
+  UNVERIFIED and excluded) · O **MIXED** (both opened *inside* PDH by
+  57¢/39¢ — first index classification miss in 29; structure right) · M
+  **MISS** #9 by the band rule (−0.24%; the counter-case was the realized
+  shape) · G **HIT** (glue + pin + flip-break in the closing candle; 770 held
+  to the cent; caveat quarter-end MOC) · R **2 CONF-PAID / 3 fired** (INTC
+  +1.14% strict / +3.65% c-t-c; SPY gap-hold strict +0.13%, 770 never) · 1
+  CONF-FAILED (MRNA short +3.2% against) · 1 INVALIDATED (TLT
+  "PCE-validated" MEDIUM-HIGH dead at 10:15; 25/25) · MU OPEN
+  (beat-and-raise, −0.95% after hours) · W precision 5/9 (lean 3/4; MRK
+  wrong-way #24) · recall 5/6 (SLS +6.95% leanless — I-12 burn).
+- **Ledger:** **I-18 PROPOSED** (revision-aware surprise grading;
+  post-catalyst reaction check for "print-validated" radar items; correction
+  of the 9/30 amendment's example). Evidence appended to R-3 (day 6), I-12
+  (DB check resolved; SLS), I-16 (IBRX ×3, MRK line #1), I-17 (ROIV/RARE
+  calendar). Nothing ratified.
+- **Owner execution (R-3, day 6):** 64 orders → 45 fills, 23 round trips, 81
+  lots, 6W/17L, −$2,696 realized (Robinhood realized-P&L endpoint confirms);
+  **equity $3,340.67 → $637.29 (−80.9%; −86.6% from the 9/23 high).** First
+  trade 9:31 in the opening candle and lost; one-loss rule breached at 9:35;
+  three MRNA trips inside the no-trade window (−$738 in 13 minutes); 8-lot
+  0DTE index calls at 58% of equity three times in 33 minutes; one resting
+  stop in 23 trips; trading stopped 13:44 (reason not visible in the order
+  data — UNVERIFIED). Grade F. Recorded plainly: at $637.29 the §5 limits
+  size $25.49 of risk per trade, so the framework sizes nothing on this
+  watchlist. Playbook not edited; journal rows 9/24–9/30 owed.
+- **Open items resolved:** I-12 DB-coverage check (data complete; the gap is
+  brief-side); live-coaching fills-not-positions procedure closed as
+  standing; 9/29 carried triggers (META/DELL stand, re-carried); RARE UX111
+  (approved). New: I-18 ruling; MU 9/30 ±7.7% test (Thu open); Thursday
+  ISM/claims/NKE + negative-gamma note (UW 4:15 flips 763.65/740.55 above
+  both closes); account/playbook decision.
+- DB synced (n=31); MUST_MENTION regenerated; pushed to branch + main
+  (standing scope).
+
+### DEVIATIONS
+
+- **None.** UW probes tonight were whitelisted endpoints only (gex-levels,
+  greek-exposure by date, market-tide). No unratified rule applied (no
+  day-plan run, so D-2 did not arise; I-18 is proposed, not used). Data
+  sources: Robinhood settled prints, realized-P&L and order endpoints for
+  the owner's fills; Fox Business/LSEG for the PCE consensus and the BEA
+  revision; Yahoo/CNBC for the close, ADP and the 10-year; Roivant/BioSpace
+  and Ultragenyx filings for the two FDA facts. Barkin's 1:30 remarks and
+  the 15:45 driver were not sourced — reported as NO CLEAR DRIVER FOUND.
+- Standing: Turso token rotation still owed (known exposure since 9/21). The
+  repo's `.env` is absent in this container; the UW key reached curl from the
+  environment's secret store by variable name, as §6 requires.
