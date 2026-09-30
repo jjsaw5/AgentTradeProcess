@@ -220,6 +220,34 @@ GEX availability note: per-ticker GEX exists for nearly every optionable name, b
 **FMP** (base `https://financialmodelingprep.com`, param `apikey=<key>`):
 
 - `GET /stable/economic-calendar?from=YYYY-MM-DD&to=YYYY-MM-DD` — structured previous/consensus/actual for §3. **Timestamps are UTC** — convert to ET before reporting. Prefer these structured actuals over web-scraped numbers when they conflict, but flag the conflict.
+
+  **THE PLACEHOLDER-ESTIMATE TRAP (added 2026-09-30, after it produced a wrong call).**
+  When FMP has no real consensus for a row, it fills `estimate` with the **previous**
+  value. The row then looks like a clean beat or miss when nothing of the sort happened.
+
+  **Rule: if `estimate == previous` exactly, the surprise is `UNVERIFIED`.** Report the
+  actual and say the consensus could not be confirmed. Never call it a beat or a miss, and
+  never build a market narrative on it.
+
+  Base rate for calibration: across 325 US rows over 2026-08-01 → 09-30, `estimate ==
+  previous` on **9%** of rows — uncommon enough that a cluster of them on one release is a
+  strong tell, not a coincidence.
+
+  **How it bit us, 2026-09-30.** The brief reported *"core PCE came in cool, 3.0% vs 3.3%
+  estimate"* and led the day with it. All three rows carrying that story —
+  `Core PCE Price Index YoY` (est 3.3, prev 3.3), `PCE Price Index YoY` (3.7/3.7) and
+  `Personal Income MoM` (0.4/0.4) — had `estimate == previous`. The real message was
+  "3.0% is **lower than last month**", which is a different and far less market-moving
+  claim than "0.3pp below Wall Street." Meanwhile the rows with genuine forecasts
+  (`estimate != previous`) said the opposite of dovish: **GDP 2.2 vs 1.5** and
+  **ADP 90k vs 70k**, both hot.
+
+  **The cross-check that caught it, and the one to run every time:** the bond curve. A
+  genuine 0.3pp core PCE downside surprise lifts TLT more than 1%. TLT was **−0.03%**,
+  while SHY +0.12% and IEF +0.20% — a bull steepener, i.e. a little more near-term easing
+  priced and **no disinflation bid at the long end at all.** Per CLAUDE.md §3, price action
+  overrules the feed. **If a claimed inflation surprise is not confirmed by the curve, the
+  surprise is the thing in doubt, not the market.**
 - `GET /stable/sector-performance-snapshot` — sector breadth for §7.
 - `GET /stable/stock-news?limit=30` — may return empty on this tier; if empty, say so and rely on web research.
 
