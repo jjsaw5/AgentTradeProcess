@@ -191,17 +191,31 @@ def main():
         else:
             out["market_tide"] = {"status": st}
         # major headlines since `since`
-        d, st = fetch("news/headlines?limit=50", hdr)
+        # The vendor's is_major flag is set on almost every press release
+        # (dividend notices, earnings-date announcements — observed 2026-10-01),
+        # so it is not a usable filter. Keep a headline only if it names a
+        # tracked ticker or carries a macro / market keyword.
+        d, st = fetch("news/headlines?limit=100", hdr)
         if st == "ok" and isinstance(d, list):
+            tracked = set(TICKERS) | set(os.environ.get("FBC_TICKERS", "").split(","))
+            macro = ("FED", "POWELL", "RATE", "YIELD", "TREASUR", "INFLATION", "CPI", "PCE",
+                     "PAYROLL", "JOBS", "UNEMPLOYMENT", "TARIFF", "OIL", "CRUDE", "OPEC",
+                     "IRAN", "ISRAEL", "HORMUZ", "STRIKE", "MISSILE", "CHINA", "TRUMP",
+                     "SHUTDOWN", "S&P 500", "NASDAQ", "STOCKS", "HALT")
             heads = []
             for r in d:
                 when = et_time(r.get("created_at") or r.get("time") or r.get("timestamp"))
-                if when and when.date() == today and when.time() >= since and r.get("is_major"):
+                if not (when and when.date() == today and when.time() >= since):
+                    continue
+                text = (r.get("headline") or "").upper()
+                tick = set(r.get("tickers") or [])
+                if tick & tracked or any(k in text for k in macro):
                     heads.append({"et": when.strftime("%H:%M"), "headline": r.get("headline"),
                                   "tickers": r.get("tickers")})
-            out["major_headlines"] = {"rows": heads, "status": "ok"}
+            out["market_headlines"] = {"rows": heads[:15], "status": "ok",
+                                       "note": "filtered by tracked tickers and macro keywords; is_major ignored"}
         else:
-            out["major_headlines"] = {"status": st}
+            out["market_headlines"] = {"status": st}
     finally:
         os.unlink(hdr)
     print(json.dumps(out, indent=1))

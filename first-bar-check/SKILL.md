@@ -47,7 +47,11 @@ reports; the owner decides.
      range in plain numbers.
    - `market-tide` — net call vs put premium, 5-minute bars since 9:30.
    - `net-prem-ticks` — per-minute net premium and net delta for SPY/QQQ.
-   - `news/headlines` — rows since 9:30 with `is_major` true.
+   - `news/headlines` — rows since 9:30 that name a tracked ticker or carry a
+     macro keyword (Fed, yields, jobs, oil, Iran, tariffs…). **`is_major` is
+     ignored:** on 2026-10-01 the vendor set it on nearly every press release.
+     To add the day's §9 / card tickers, set `FBC_TICKERS=TICK1,TICK2` when
+     running the tool.
    Any request that fails, returns `data: []`, or carries a stale timestamp is
    reported as `UNVERIFIED — <endpoint>` on its line. Absent is never zero.
 
@@ -82,7 +86,7 @@ Off the table: <cards killed, triggers voided by a gap, or "nothing">
 Your rule for this day type: <the fixed rule text from the brief's §0, verbatim>
 ```
 
-Add one more line only if `news/headlines` shows an `is_major` headline since
+Add one more line only if the tool's `market_headlines` shows a relevant headline since
 9:30 — the headline, its time, and "price reaction: <x>". Never explain a
 move with a headline the timestamps don't support.
 
