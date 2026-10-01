@@ -1835,3 +1835,44 @@ under the standing review authorization).
   trig_011YWkm7xV2WPXdyKjPvt1AJ (10:16 ET weekdays), both into this session.
 - **Classifier outage:** ~10 tool calls between 17:45 and 17:50 ET returned
   no safety verdict; the commit landed on the owner's "Commit" at 17:51.
+
+---
+
+## 2026-10-01 (evening) — Scheduled post-close review #18: graded the 10/1 brief (n=32); no day-plan run
+
+- **Grades:** F **7/9** (✗ the §1 🔴 lead — "the government shut down at
+  12:01 AM … jobs report likely delayed" — false: a CR signed 9/2 runs to
+  12/11, BLS schedule unchanged, and the 9/30 brief had it right; ✗ ROIV
+  carried again as a Q3 PDUFA) · O MIXED (inside-range exact, 29/30; the
+  range-day bias broke for three hours) · M **MISS** #10 (SPY +0.18%; "narrow"
+  wrong) · G **HIT** (QQQ's 740 governed the day; SPY stopped at the named 760
+  floor) · R 1 CONF-PAID / 1 fired (SPY ISM bear +0.06%, a scratch) · 1
+  INVALIDATED (QQQ record card, clean kill 26/26) · MRK and NKE OPEN · MU 9/30
+  vol card resolved (opened −1.08%, option sellers won) · W precision 1/8,
+  recall 2/6.
+- **Ledger:** **I-21 PROPOSED** (calendar-changing leads need a primary
+  government source and a prior-brief check) and **R-4 PROPOSED** (SCRATCH
+  grade for near-zero confirmations). Evidence appended to R-3 (day 7) and
+  I-12 (SLS #2, ARCT). Nothing ratified.
+- **Day-type record:** 10/01 appended as UNCLEAR (translated from the brief's
+  pre-I-19 vocabulary) — broke down at 10:00, stuck, reversed at 1:15. UNCLEAR
+  totals now 4 days, +$3,728.
+- **Owner execution (R-3, day 7):** 19 orders → 16 fills, 8 round trips, 10
+  lots, 3W/5L, −$299; equity $637.29 → $337.62 (−47.0%). Done by 11:44 —
+  fewest trips and lots in a week. Three entries on the ISM headline candle;
+  one 2-lot 0DTE put at $600 (94% of equity), no stop, −$292. Grade D.
+- **Preview correction:** tonight's 10/2 evening preview (scratchpad, not
+  committed) used 30-minute bars for Thursday's low (759.25); the 5-minute
+  bars give 759.00. Corrected in the preview file.
+- DB synced (n=32, 15 open items); MUST_MENTION regenerated (7 names, data
+  through 10/01); pushed to branch + main (standing scope).
+
+### DEVIATIONS
+
+- **None.** No unratified rule was applied to grading: I-19's day-type
+  translation is recorded for the ledger only and the brief is graded on its
+  own words; R-4 is proposed, not used (the +0.06% fire is graded PAID by the
+  existing sign rule). Data: Robinhood bars, quotes, orders and realized P&L;
+  BLS schedule and congress/press for the shutdown fact; Roivant/BioSpace for
+  ROIV.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
