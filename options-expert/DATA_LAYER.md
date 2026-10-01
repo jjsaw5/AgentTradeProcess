@@ -303,6 +303,21 @@ Needing parameters before they return data: `/api/volatility/anomaly/top`
 (`direction=short_vol|long_vol`), `/api/market/correlations` (`tickers=`),
 `/api/stock/{t}/atm-chains` (`expirations=`).
 
+**Added 2026-10-01 (live probe + vendor OpenAPI):**
+`/api/stock/{t}/historical-risk-reversal-skew` **requires `expiry` and
+`delta`** (10 or 25) — bare, it returns HTTP 200 with `data: []` (the §3d
+trap). With `expiry=2026-10-16&delta=25` MU returned 156 daily rows through
+10/01. The value is described only as "the difference between put and call
+volatility"; its sign convention is unverified, so use changes, not levels.
+`/api/market/top-net-impact` rows carry **no timestamp** and the endpoint
+**defaults to the last market day** — always pass `date=`.
+`/api/stock/{t}/volatility/variance-risk-premium` was **a month stale** on
+10/01 (last row 2026-09-02); `/api/stock/{t}/volatility/realized` carries
+the same implied and realized volatility and was current — use that.
+`/api/stock/{t}/gex-levels` changed method on 2026-08-22 (vendor changelog):
+levels now come from directionalized volume rather than open interest, and
+the response gained `date`, `time`, `source` and `nearby_flips`.
+
 **Plan-gated:** `/api/volatility/vix-term-structure` returns **403
 `volatility_scope_required`** — it needs a volatility data add-on this key does
 not carry. VIX term structure therefore remains a genuine gap, but for a
