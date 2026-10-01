@@ -1726,3 +1726,27 @@ under the standing review authorization).
 - Standing: Turso token rotation still owed (known exposure since 9/21). The
   repo's `.env` is absent in this container; the UW key reached curl from the
   environment's secret store by variable name, as §6 requires.
+
+---
+
+## 2026-10-01 (pre-market) — Owner conversation: plain-language request; win/loss day audit
+
+- **Owner asked** (a) for the brief to use simpler terms ("lost in glue, shelf,
+  floor, ceiling") and (b) whether the brief correctly called "travel" on the
+  owner's big winning days, and whether those days had bigger events.
+- **Audit (from the graded reviews, no new data):** on the four winning days
+  (9/18 +$1,050, 9/21 +$2,190, 9/23 +$2,147, 9/28 +$830) the brief had called
+  a running day or a running day conditional on a named line breaking, and
+  the line broke. On the three days it called a stuck day (9/22, 9/25, 9/30)
+  it was right all three times and the owner lost $4,447 trading direction.
+  On two days it called running and was wrong (9/24, 9/29; −$1,389).
+  Scheduled events were not the clean separator: the best day (9/21) had no
+  scheduled US data; the worst (9/30) had core PCE.
+- **I-19 PROPOSED** in IMPROVEMENTS.md: a STUCK / RUNNING / UNCLEAR box at the
+  top of §0 with a fixed plain-word translation table. Not applied to the
+  brief spec — the spec is outside the standing push scope and the ledger
+  requires the owner's ratification.
+
+### DEVIATIONS
+
+- **None.** No data pulled; no spec edited; no rule applied.
