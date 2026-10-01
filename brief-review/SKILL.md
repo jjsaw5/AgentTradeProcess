@@ -208,6 +208,12 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    the adverse excursion between trigger and resolution. Record to the
    `day_cards` DB table and note the roll-up in the review file and
    `SCORECARD.md`. Day cards are UNCALIBRATED until 20 are graded.
+   **First-bar checks (added 2026-10-01, ledger D-4):** if the card file
+   carries `## FIRST-BAR CHECK` blocks, grade each one under a
+   `## First-bar check` heading in the review: did the stated day type match
+   the realized behaviour from that time to 3:00 (HIT / MISS / UNCLEAR), and
+   did every "Fired" line report the 15-minute close correctly? Checks are
+   UNCALIBRATED until 20 are graded.
 7. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
 8. **Publish to `main` (owner-authorized 2026-08-26):** review sessions

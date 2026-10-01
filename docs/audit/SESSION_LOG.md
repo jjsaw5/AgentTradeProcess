@@ -1781,3 +1781,45 @@ under the standing review authorization).
 - **Pushing a spec edit to `main` outside the standing review scope** — done
   on the owner's explicit instruction in this conversation, not under the
   standing authorization. Recorded so the scope stays legible.
+
+---
+
+## 2026-10-01 (after the close) — I-20 and D-4 ratified; UW maximum-use map; first-bar check built
+
+- **Owner decision:** "Yes approve it all. I want to maximize the usage of UW."
+- **I-20 written into `daily-market-brief/SKILL.md`:** walls/flip/magnet from
+  UW `gex-levels` only, with its timestamp printed; per-strike summation
+  retired (DATA_LAYER §3e truncation trap); `nearby_flips` within ~1% of spot
+  forces UNCLEAR; `max-pain` on Mon/Wed/Fri; new "Expected range today" line
+  in the §0 box from `interpolated-iv`; a UW MAXIMUM-USE MAP adding
+  `news/headlines`, `sector-tide`, `top-net-impact`, `iv-rank`,
+  `volatility/term-structure`, `volatility/realized`,
+  `variance-risk-premium`, `historical-risk-reversal-skew`, each mapped to
+  one section, run in parallel with a 30-second per-request budget; §6A
+  FLOW IS A VETO, NOT A REASON (flow leans one line; flow never raises
+  confidence); §4A VERIFY BEFORE CALLING IT A BINARY.
+- **D-4 built:** `first-bar-check/SKILL.md` (spec) and
+  `first-bar-check/tools/uw_snapshot.py` (UW pulls; key passed through a
+  mode-600 header file, never on the command line; empty, failed or stale
+  responses reported as UNVERIFIED). **Verified live 17:44 ET:** gex-levels,
+  spot-exposures (bracket check passed), interpolated-iv, net-prem-ticks and
+  market-tide all returned today's data stamped 16:15 or later. Two fixes
+  after the first run: tide is cumulative, so the 10:16 run subtracts the bar
+  before 10:00; the expected move is a fraction and now prints as a percent.
+  `brief-review/SKILL.md` grades each check nightly; `CLAUDE.md` §1 lists the
+  module.
+- **Routines:** 9:46 ET weekdays and 10:16 ET weekdays (the second exits
+  quietly unless the brief's §3 lists a 10:00 release), both firing into this
+  cloud session.
+
+### DEVIATIONS
+
+- **Spec and governance edits pushed to `main`** (`daily-market-brief/`,
+  `first-bar-check/`, `CLAUDE.md` §1 table) on the owner's explicit
+  instruction in this conversation, outside the standing review scope.
+- **Map endpoints not all re-probed today:** the brief-side map relies on
+  DATA_LAYER's 2026-08-18 verification for `sector-tide`, `top-net-impact`,
+  `iv-rank`, `term-structure`, `volatility/realized`,
+  `variance-risk-premium` and `historical-risk-reversal-skew`. The spec
+  tells the brief to treat any failure or empty response as UNVERIFIED; a
+  fresh probe is owed (see the closing note of this entry if completed).

@@ -217,8 +217,30 @@ Before parsing any downloaded file, verify it exists and is non-empty. A missing
 - `GET /api/stock/{ticker}/flow-alerts?limit=30&unusual=true` — per-ticker unusual options activity. Use for §5 (squeeze radar), §6A (my watchlist), §9 (opportunities), §10 (attention watch), and any big earnings name (e.g., tonight's largest reporter).
 - `GET /api/stock/{ticker}/volatility/stats` — current IV, IV rank/high/low. Pair with the Robinhood ATM straddle when quoting an expected move.
 - `GET /api/stock/{ticker}/greek-exposure` — daily dealer gamma-exposure series. Net GEX = call_gamma + put_gamma on the latest row; compare vs. the prior day. Use for the GAMMA REGIME line in §8 (SPY and QQQ).
-- `GET /api/stock/{ticker}/greek-exposure/strike` — per-strike GEX for today. The 2–3 strikes near spot with the largest |call_gex| + |put_gex| are the "gamma walls" (pin magnets / friction levels) for §0 and §8. Also note roughly where net GEX flips sign below spot — the approximate glue-to-gasoline boundary. Label all of this as approximate; sign conventions vary, so present computed values and behavior implications, not false precision. (Validated 2026-08-13: net +2.8M and walls at 775/780 correctly explained that day's pin at 777.8.)
+- `GET /api/stock/{ticker}/greek-exposure/strike` — per-strike GEX, end-of-day frame. **Superseded for walls by `gex-levels` (ratified 2026-10-01, ledger I-20; `options-expert/DATA_LAYER.md` §3e):** do NOT sum strikes to find walls or the flip — a default page size truncated the window on 2026-08-18 and produced a confident wrong answer. If you read this endpoint at all, pass `limit=500` and assert the strikes bracket spot (some above AND some below) before using a single row; a one-sided window is a paging artifact and is discarded. (Historical note: on 2026-08-13 net +2.8M with walls at 775/780 explained the pin at 777.8.)
 - `GET /api/option-trades/flow-alerts?limit=60&unusual=true` — market-wide alerts. **Caveat: this list can be premium-sorted and include multi-week-old alerts — always check each alert's timestamp before calling anything "today's flow."**
+
+**UW MAXIMUM-USE MAP (ratified 2026-10-01, ledger I-20 — owner: "I want to maximize the usage of UW").**
+These are verified-working endpoints (`options-expert/DATA_LAYER.md` §3a-0)
+the brief did not use, each mapped to the one place it earns its call. Every
+one obeys the hardened curl rule, the timestamp rule and the `data: []` rule.
+
+| Endpoint | Where | What it answers, in plain words |
+|---|---|---|
+| `stock/{SPY,QQQ}/interpolated-iv` → `implied_move_perc` at the 1-day row | §0 DAY TYPE box, new line **"Expected range today"** | "Options expect SPY to move about ±X% today — roughly A to B." On a STUCK day this is the whole box the price lives in; it tells the owner whether a 0DTE option even has room to pay. Also the 5- and 7-day rows for any §9 card that holds overnight. |
+| `stock/{SPY,QQQ}/gex-levels` | §0 LINES table, §8 | Ceilings, floors, switch line, magnet — vendor-computed, timestamped. |
+| `stock/{SPY,QQQ}/max-pain` (today's expiry) | §8 on Mon/Wed/Fri | The expiration-day magnet. |
+| `news/headlines?limit=50` (`is_major`) | §2, §6, §13 | Overnight market-moving headlines with timestamps — a primary source before web search. A move with no matching headline stays NO CLEAR DRIVER FOUND. |
+| `market/{sector}/sector-tide` (technology, energy, financials, health care) | §7 | Which sectors the options money leaned into yesterday — rotation, directly. |
+| `market/top-net-impact` | §8A | The names with the biggest net premium market-wide — a second discovery list. |
+| `stock/{t}/iv-rank` + `volatility/term-structure` | §4 earnings names, §9 cards | Is the option expensive vs its own year (IV rank) and is the event priced into one expiry (term-structure kink)? Off-whitelist — handle a 404 as expected. |
+| `stock/{t}/volatility/realized` + `variance-risk-premium` | §4 earnings expected move | Implied vs how much the stock actually moves — the "is the straddle cheap?" question, measured instead of guessed. |
+| `stock/{t}/historical-risk-reversal-skew` | §6A flagged names | Whether the options market is paying up for calls or puts over time — positioning that is harder to fake than one day of flow. |
+
+**Run-time budget:** these add ~20 requests. Run them in parallel with the
+Robinhood pulls, never in series; any that has not answered within 30 seconds
+is marked `UNVERIFIED` and the brief moves on. The time saved by the shorter
+flow write-ups below pays for them.
 
 Additional endpoints (entitlement verified 2026-08-17 — all live on our key):
 
@@ -386,6 +408,7 @@ words only, before anything else in the brief:
 > **TODAY LOOKS LIKE: STUCK / RUNNING / UNCLEAR**
 > **What that means for you:** [the one sentence from the PLAIN-WORD TABLE for that type]
 > **The line that changes it:** SPY [price] · QQQ [price] — [what happens if it breaks, in plain words]
+> **Expected range today:** SPY [low]–[high], QQQ [low]–[high] (options market, ±[x]% — UW `interpolated-iv`, 1-day row; `UNVERIFIED` if unavailable)
 > **Your own rule for this day type:** [the fixed text below, verbatim]
 > **Your record on this day type:** [from the DAY-TYPE RECORD in `brief-review/SCORECARD.md` — days, your net result, and how the brief's call held up. If the table is missing or more than one trading day stale, say so.]
 
@@ -631,6 +654,14 @@ Two layers, both required:
    the buyer might be front-running. (Precedent: a $169k MRNA Dec 75C ask-side sweep printed
    the afternoon BEFORE the melanoma news.)
 
+**VERIFY BEFORE CALLING IT A BINARY (ratified 2026-10-01 — brief-review ledger
+I-20).** A calendar row is a lead, not a fact. Before any name is called a
+dated or same-week binary, confirm the date and status against a company
+press release or SEC filing (web check). On 9/30 the brief carried ROIV as a
+same-week binary for a drug approved August 27, and carried RARE's 9/19
+decision (approved) as unresolved for four briefs. Unconfirmed → say
+`UNVERIFIED — calendar row only`.
+
 Honesty rules: never present a PDUFA date as a guaranteed mover; approval ≠ stock-goes-up
 (sell-the-news is common); options on names with dated catalysts carry inflated IV — quote
 the expected move, and label the direction unknowable.
@@ -822,6 +853,17 @@ exists because HIMS burned the quiet list five times in five graded reviews
 (−4.3%, +13.5%, +6.1%, −8.0%) while its call accumulation was noted — and
 deprioritized — in brief after brief.
 
+**FLOW IS A VETO, NOT A REASON (ratified 2026-10-01 — brief-review ledger
+I-20).** The graded record: a flow lean pointed against price 24 times and
+with it 18 times since 9/24 — a coin flip as direction (NVDA: 13 consecutive
+bull-flow briefs, price flat). So a flow lean gets **one line** — what was
+bought, how much, and the one price that would prove it right — unless it
+carries a written price trigger, in which case the trigger is the story and
+the flow is one clause. Never rate a card's confidence up because of flow;
+flow can only *veto* a card whose price trigger fired against it. I-2
+escalation still applies (the name is FLAGGED and the cumulative build is
+quantified) — in that one line.
+
 **CARRY-OVER FLAGS OBEY PRICE OVER FLOW (ratified 2026-08-25 — brief-review
 ledger I-5).** When a prior brief's card or flag carried a written price
 trigger that has since CONFIRMED, the follow-up brief must restate that
@@ -929,7 +971,7 @@ Do NOT invent technical levels.
 Using the UW greek-exposure endpoints (see DATA SOURCES), report for each:
 
 - **Net GEX** (latest day vs. prior day): positive and rising / positive falling / negative — with the plain-English translation: positive = "glue day" (moves dampened, pins near big strikes, breakouts need extra proof, fading edges favored); negative = "gasoline day" (moves amplify, respect breaks immediately, momentum favored).
-- **Gamma walls:** pull `gex-levels` (UW's computed call wall / put wall / flip / magnet) AND compute the 2–3 biggest per-strike GEX levels near spot from `greek-exposure/strike`. When the two methods agree, report the levels once with confidence; when they disagree, show both and say the zone is fuzzy. Walls act as pin magnets and friction zones, especially on expiration days (Mon/Wed/Fri for SPY/QQQ).
+- **Gamma walls [ceilings / floors]:** use UW's `gex-levels` (call wall / put wall / flip / magnet / `nearby_flips`) — the vendor computes them across the whole chain (ratified 2026-10-01, ledger I-20). **Read its `time` field and print it** ("as of Tue 4:15 PM"); pre-market it is yesterday's close and the 9:46 first-bar check refreshes it. If `nearby_flips` lists more than one flip within ~1% of spot, the switch line is a zone — call the day UNCLEAR, not STUCK or RUNNING. On expiration days (Mon/Wed/Fri for SPY/QQQ) add `max-pain` for today's expiry as the expiration-day magnet. Walls act as magnets and friction, never guarantees.
 - **Approximate flip zone** where the regime would turn negative, if identifiable (UW's `gamma_flip` vs. our sign-change scan — same agree/disagree rule).
 
 Keep it to ~4 lines total. These are approximations — never present a wall or flip level as a guarantee. Every technical term carries its plain word in brackets on first use (PLAIN-WORD TABLE), and the day type here must match the §0 box.
