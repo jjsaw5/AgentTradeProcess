@@ -198,10 +198,12 @@ def main():
         d, st = fetch("news/headlines?limit=100", hdr)
         if st == "ok" and isinstance(d, list):
             tracked = set(TICKERS) | set(os.environ.get("FBC_TICKERS", "").split(","))
-            macro = ("FED", "POWELL", "RATE", "YIELD", "TREASUR", "INFLATION", "CPI", "PCE",
-                     "PAYROLL", "JOBS", "UNEMPLOYMENT", "TARIFF", "OIL", "CRUDE", "OPEC",
-                     "IRAN", "ISRAEL", "HORMUZ", "STRIKE", "MISSILE", "CHINA", "TRUMP",
-                     "SHUTDOWN", "S&P 500", "NASDAQ", "STOCKS", "HALT")
+            import re
+            macro = re.compile(
+                r"\b(FED|FOMC|POWELL|RATE HIKES?|RATE CUTS?|YIELDS?|INFLATION|CPI|PCE|"
+                r"PAYROLLS?|JOBS REPORT|JOBLESS|UNEMPLOYMENT|TARIFFS?|OIL PRICES?|CRUDE|"
+                r"BRENT|OPEC|IRAN|ISRAEL|HORMUZ|HOUTHIS?|MISSILES?|AIRSTRIKES?|TRUMP|"
+                r"SHUTDOWN|S&P 500|NASDAQ|DOW JONES|STOCK MARKET|FUTURES|HALTED|HALTS?)\b")
             heads = []
             for r in d:
                 when = et_time(r.get("created_at") or r.get("time") or r.get("timestamp"))
@@ -209,7 +211,7 @@ def main():
                     continue
                 text = (r.get("headline") or "").upper()
                 tick = set(r.get("tickers") or [])
-                if tick & tracked or any(k in text for k in macro):
+                if tick & tracked or macro.search(text):
                     heads.append({"et": when.strftime("%H:%M"), "headline": r.get("headline"),
                                   "tickers": r.get("tickers")})
             out["market_headlines"] = {"rows": heads[:15], "status": "ok",
