@@ -232,10 +232,10 @@ one obeys the hardened curl rule, the timestamp rule and the `data: []` rule.
 | `stock/{SPY,QQQ}/max-pain` (today's expiry) | §8 on Mon/Wed/Fri | The expiration-day magnet. |
 | `news/headlines?limit=50` (`is_major`) | §2, §6, §13 | Overnight market-moving headlines with timestamps — a primary source before web search. A move with no matching headline stays NO CLEAR DRIVER FOUND. |
 | `market/{sector}/sector-tide` (technology, energy, financials, health care) | §7 | Which sectors the options money leaned into yesterday — rotation, directly. |
-| `market/top-net-impact` | §8A | The names with the biggest net premium market-wide — a second discovery list. |
+| `market/top-net-impact` | §8A | The names with the biggest net premium market-wide — a second discovery list. **The response carries no timestamp** (probed 2026-10-01), so its freshness cannot be asserted: label it "as pulled at HH:MM" and never call it today's flow before the open. |
 | `stock/{t}/iv-rank` + `volatility/term-structure` | §4 earnings names, §9 cards | Is the option expensive vs its own year (IV rank) and is the event priced into one expiry (term-structure kink)? Off-whitelist — handle a 404 as expected. |
-| `stock/{t}/volatility/realized` + `variance-risk-premium` | §4 earnings expected move | Implied vs how much the stock actually moves — the "is the straddle cheap?" question, measured instead of guessed. |
-| `stock/{t}/historical-risk-reversal-skew` | §6A flagged names | Whether the options market is paying up for calls or puts over time — positioning that is harder to fake than one day of flow. |
+| `stock/{t}/volatility/realized` | §4 earnings expected move | Implied vs how much the stock actually moves — the "is the straddle cheap?" question, measured instead of guessed. Use this one: it carries both `implied_volatility` and `realized_volatility` and was current to the day on 2026-10-01. **Do NOT use `variance-risk-premium`** — probed 2026-10-01 its last row was 2026-09-02, a month stale. |
+| ~~`stock/{t}/historical-risk-reversal-skew`~~ | — | **Suspended:** probed 2026-10-01 it returned HTTP 200 with `data: []` on MU — the bad-parameter trap (CLAUDE.md §3). It likely needs an expiry or delta parameter; do not call it until `options-expert/DATA_LAYER.md` records a working form. |
 
 **Run-time budget:** these add ~20 requests. Run them in parallel with the
 Robinhood pulls, never in series; any that has not answered within 30 seconds

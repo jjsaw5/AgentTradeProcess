@@ -1823,3 +1823,15 @@ under the standing review authorization).
   `variance-risk-premium` and `historical-risk-reversal-skew`. The spec
   tells the brief to treat any failure or empty response as UNVERIFIED; a
   fresh probe is owed (see the closing note of this entry if completed).
+- **Probe completed 17:51 ET (after the commit-retry outage cleared):**
+  `max-pain`, `news/headlines`, `sector-tide` (slug is case-insensitive),
+  `iv-rank`, `volatility/term-structure` and `volatility/realized` returned
+  today's data. **Three corrections written into the map:**
+  `variance-risk-premium` is a month stale (last row 9/02) — replaced by
+  `volatility/realized`; `historical-risk-reversal-skew` returned 200 with
+  `data: []` — suspended until a working parameter form is recorded;
+  `top-net-impact` carries no timestamp — labelled "as pulled" only.
+- **Routines created:** trig_01RnUeEP4qNGicrrMvyz5gV5 (9:46 ET weekdays),
+  trig_011YWkm7xV2WPXdyKjPvt1AJ (10:16 ET weekdays), both into this session.
+- **Classifier outage:** ~10 tool calls between 17:45 and 17:50 ET returned
+  no safety verdict; the commit landed on the owner's "Commit" at 17:51.
