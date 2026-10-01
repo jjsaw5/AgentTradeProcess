@@ -81,9 +81,33 @@ Examples:
 
 **Open interest — how many options contracts currently exist and haven't been closed.**
 
-**Gamma exposure (GEX) — how much options dealers must buy or sell stock as prices move. Positive = dealers trade against the move (market glue: dampened, pinny). Negative = dealers trade with the move (gasoline: amplified, trendy).**
+**Gamma exposure (GEX) — how much options dealers must buy or sell stock as prices move. Positive = dealers trade against the move, so price tends to stay STUCK. Negative = dealers trade with the move, so once price breaks a line it tends to keep RUNNING.**
 
 Do not turn the report into a textbook. One short explanation is enough.
+
+## PLAIN-WORD TABLE (ratified 2026-10-01, ledger I-19 — owner request)
+
+The owner asked for plain words: *"I'm getting lost in things like glue, shelf,
+floor, ceiling."* Sections **0, 1 and 12 use ONLY the plain word** from this
+table. Section 8 may keep the technical term for the record, but every
+technical term there carries its plain word in brackets the first time it
+appears, e.g. "positive gamma [STUCK]".
+
+| Technical term | Plain word | What it means for the owner |
+|---|---|---|
+| glue / positive gamma / pin day | **STUCK** | Price will likely bounce between two lines. Buying calls or puts and waiting for a run usually loses. |
+| gasoline / negative gamma / trend day | **RUNNING** | Once price breaks a line it tends to keep going. Trade the break, not the bounce. |
+| methods disagree / spot sitting on the flip / fuzzy zone | **UNCLEAR** | Nobody knows yet. Wait for the first 15-minute close after 9:45 to pick a side, or sit out. |
+| gamma flip | **switch line** | Above it the day tends to be STUCK; below it, RUNNING. |
+| call wall / ceiling / resistance | **ceiling** | Price likely stalls here the first time it gets there. |
+| put wall / floor / shelf / support | **floor** | Price likely bounces here the first time it gets there. |
+| gamma magnet / pin / max pain | **magnet** | Price tends to drift back to this number, strongest late on expiration days (Mon/Wed/Fri for SPY/QQQ). |
+| PDH / PDL / PDC | **yesterday's high / low / close** | |
+| gap-and-go / gap-fill | **gap holds / gap closes** | |
+| confirmation / invalidation | **go signal / wrong signal** | |
+
+Never use "shelf," "trapdoor," "launch pad," "air pocket" or any other
+metaphor that is not in this table.
 
 ---
 
@@ -354,9 +378,30 @@ The goal of this report is to identify **situations worth investigating**, not a
 
 # 0. MY PRE-MARKET SETUP
 
-Open the report with this section, before everything else. It is my morning ritual reminder plus the concrete numbers I need — keep the whole section under ~18 lines.
+Open the report with this section, before everything else. It is my morning ritual reminder plus the concrete numbers I need — keep the whole section under ~25 lines.
 
-First, print my routine reminder (adapt only if the day demands it):
+**FIRST, the DAY TYPE box (ratified 2026-10-01, ledger I-19).** Five lines, plain
+words only, before anything else in the brief:
+
+> **TODAY LOOKS LIKE: STUCK / RUNNING / UNCLEAR**
+> **What that means for you:** [the one sentence from the PLAIN-WORD TABLE for that type]
+> **The line that changes it:** SPY [price] · QQQ [price] — [what happens if it breaks, in plain words]
+> **Your own rule for this day type:** [the fixed text below, verbatim]
+> **Your record on this day type:** [from the DAY-TYPE RECORD in `brief-review/SCORECARD.md` — days, your net result, and how the brief's call held up. If the table is missing or more than one trading day stale, say so.]
+
+How to choose the day type (from the same data §8 uses — the box and §8 must agree):
+
+- **STUCK** — positive gamma at the opening price on SPY or QQQ (the lead index), with the open INSIDE yesterday's range; or an expiration-day magnet the brief expects to hold.
+- **RUNNING** — negative gamma with the opening price clearly away from the switch line (not inside a fuzzy zone), or a gap outside yesterday's range on negative gamma. A gap alone is never enough.
+- **UNCLEAR** — everything else: price sitting on or inside the switch-line zone, the two methods disagree, SPY and QQQ disagree, or the gamma sign and the open location point opposite ways. **When in doubt, UNCLEAR.**
+
+The fixed rule text, by type (quote verbatim — these are the owner's and the playbook's words, not the brief's):
+
+- **STUCK:** *"After any losing trade on a day the brief calls glue/pin, I am DONE with the indexes for the day. Not for 30 minutes — done."* (owner's rule, written 9/23, `playbook/PLAYBOOK.md` journal 9/22) · *"Expect failed breaks; demand the full retest confirmation, favor fading edges, take profits at walls."* (playbook §1c)
+- **RUNNING:** *"Trust breaks, continuation is the A-setup … respect breaks instantly, momentum runs, tighten stops."* (playbook §1a/§1c) · No entry before the first 15-minute close at 9:45 (I-14).
+- **UNCLEAR:** *"Inside both ranges = hands off."* (playbook opening-range rule) · Treat the day as STUCK until a line breaks on a 15-minute close after 9:45.
+
+Then print my routine reminder (adapt only if the day demands it):
 
 > **Your 20-minute setup:** 1) Read this brief. 2) Write down today's event times. 3) Draw the lines below on SPY + QQQ (and flagged watchlist names). 4) Write your two triggers + invalidations BEFORE 9:30. 5) Re-read time & loss rules (playbook §1d). 6) First 10–15 min: watch, don't trade — volume floor arms off the first completed bars.
 
@@ -372,7 +417,9 @@ Then a **LINES TO DRAW** table for SPY and QQQ (add any §6A-flagged liquid name
 | Record / 52-wk high (if within ~1.5%) | | |
 | Nearest round number | | |
 
-Finish §0 with one line reading the open's likely location: is price opening INSIDE yesterday's range (range-day bias — PDH/PDL are the walls), ABOVE the previous day high (gap up — PDH flips to first support; gap-and-go vs. gap-fill is question one), or BELOW the previous day low (mirror)?
+In the LINES table, label the gamma rows in plain words: "Ceilings / floors" for the walls, "Switch line" for the flip.
+
+Finish §0 with one line reading the open's likely location, in plain words: is price opening INSIDE yesterday's range (yesterday's high and low are the ceiling and floor), ABOVE yesterday's high (gap up — yesterday's high becomes the first floor; does the gap hold or close?), or BELOW yesterday's low (mirror)? Say which prices the line is based on and their time ("as of 9:08"); premarket prices drift before the bell.
 
 ---
 
@@ -885,7 +932,7 @@ Using the UW greek-exposure endpoints (see DATA SOURCES), report for each:
 - **Gamma walls:** pull `gex-levels` (UW's computed call wall / put wall / flip / magnet) AND compute the 2–3 biggest per-strike GEX levels near spot from `greek-exposure/strike`. When the two methods agree, report the levels once with confidence; when they disagree, show both and say the zone is fuzzy. Walls act as pin magnets and friction zones, especially on expiration days (Mon/Wed/Fri for SPY/QQQ).
 - **Approximate flip zone** where the regime would turn negative, if identifiable (UW's `gamma_flip` vs. our sign-change scan — same agree/disagree rule).
 
-Keep it to ~4 lines total. These are approximations — never present a wall or flip level as a guarantee.
+Keep it to ~4 lines total. These are approximations — never present a wall or flip level as a guarantee. Every technical term carries its plain word in brackets on first use (PLAIN-WORD TABLE), and the day type here must match the §0 box.
 
 Then explain:
 
@@ -1161,8 +1208,8 @@ Finish with this extremely concise section.
 ## Market Mood
 [Bullish / Mixed / Bearish]
 
-## Gamma Regime
-[Positive (glue) / Negative (gasoline) + key wall levels]
+## Day Type
+[STUCK / RUNNING / UNCLEAR + the switch line, nearest ceiling and nearest floor for SPY and QQQ, in plain words]
 
 ## Biggest Scheduled Risk
 [Event + time]

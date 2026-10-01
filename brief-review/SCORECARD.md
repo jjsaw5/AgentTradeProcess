@@ -188,6 +188,45 @@ process's, not the briefs').
   24h). I-5 (price over flow) is the single best-performing rule in the
   spec.
 
+## Day-type record (ratified 2026-10-01, ledger I-19)
+
+The morning brief quotes this table in its §0 DAY TYPE box. **One row per day
+the owner traded**, built from the owner's filled orders (R-3) and the brief's
+regime call translated into the PLAIN-WORD TABLE (`daily-market-brief/SKILL.md`).
+"Brief's call" is what the brief said before the open; "What happened" is the
+graded realization. August rows come from the playbook journal (those briefs
+were not archived). The evening review appends a row and recomputes the totals
+every day the owner trades.
+
+| Date | Brief's call | What happened | Owner result | How the owner traded |
+|---|---|---|---|---|
+| 2026-08-13 | STUCK (playbook journal) | Stuck, pinned 775–780 | +$239 | 8 trips, stops, grade A− |
+| 2026-08-14 | STUCK (playbook journal: "max-glue OPEX") | Stuck all afternoon | +$124 | 4 trips, flat by 11:00, grade A |
+| 2026-08-17 | RUNNING (playbook journal) | Ran lower | green, amount not recorded | 2 trips, flow-led stop, grade A− |
+| 2026-09-18 | UNCLEAR (stuck morning, "respect breaks" after the 2:30 release) | Stuck to 2:30, then ran | +$1,050 | Bought before the go signal; scaled out; grade B |
+| 2026-09-21 | RUNNING | Ran all day (SPY +1.55%) | +$2,190 | 7 lots 0DTE into the gap; flat by 11:20; grade B |
+| 2026-09-22 | STUCK | Stuck (SPY 2.55-point range) | −$884 | 15 trips, flipped direction 8 times, no stops; grade D |
+| 2026-09-23 | UNCLEAR (stuck unless SPY 771 / QQQ 746 broke) | Both broke by 9:45 and ran | +$2,147 | 5 trips, all with resting stops, flat by 10:33; grade A− |
+| 2026-09-24 | RUNNING | Stuck for 3 hours, then a headline | −$289 | 22 trips, zero stops; grade D |
+| 2026-09-25 | STUCK (Friday expiration magnet) | Dropped at 10:00, then stuck 3 hours | −$860 | 71 fills, 0DTE instead of the card's Monday expiry; grade F |
+| 2026-09-28 | UNCLEAR (fuzzy zones, "if it falls out, it runs") | Fell out in 15 min, ran lower | +$830 | 31 trips; one 8-lot trade +$1,965, the rest −$1,135; grade D |
+| 2026-09-29 | RUNNING | Never broke; stuck | −$1,101 | 20 trips, 10-lot sizes; grade F |
+| 2026-09-30 | STUCK (expiration-day magnet) | Stuck for six hours | −$2,703 | 23 trips, first trade in the opening candle; grade F |
+
+**Totals by the brief's call:**
+
+| Day type | Days | Brief right | Owner net | Owner when trading small and few (≤8 trips) | Owner when trading many (15+ trips) |
+|---|---|---|---|---|---|
+| STUCK | 5 | 5 of 5 | **−$4,084** | 2 days, **+$363** | 3 days, **−$4,447** |
+| RUNNING | 4 | 2 of 4 | **+$800** plus 8/17 (amount not recorded) | 2 days, +$2,190 plus 8/17 | 2 days, −$1,390 |
+| UNCLEAR | 3 | resolved by a break all 3 times (9/23 and 9/28 by 10:00; 9/18 at 2:30) | **+$4,027** | 2 days, +$3,197 | 1 day, +$830 (one trade made it all) |
+
+What the table says, plainly: **on STUCK days the brief has been right every
+time, and the owner has made money only on the days they traded a few times and
+stopped early.** Every UNCLEAR day so far was settled by an early break, and
+those were the best days; the record does not yet say what an UNCLEAR day that
+never breaks costs. RUNNING calls have been the brief's weakest (2 of 4).
+
 ## Standing observations (hypotheses, not conclusions)
 
 1. **The trigger discipline holds at scale: 28/34 paid, 15/15 clean

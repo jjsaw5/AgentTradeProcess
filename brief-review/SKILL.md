@@ -96,8 +96,10 @@ stated reasoning matches one of them — say which.
 
 ### G — Regime / gamma call
 
-Did realized behavior match the characterization (glue = pin/dampened near
-named walls; gasoline = breaks extend; chop = rangebound)? Evidence: day range
+Did realized behavior match the characterization (glue / STUCK = pin/dampened near
+named walls; gasoline / RUNNING = breaks extend; UNCLEAR = graded on which way it
+resolved and when)? From 2026-10-01 grade the §0 DAY TYPE box, which must agree
+with §8. Evidence: day range
 vs. the prior 5 sessions' average range, whether named walls acted as
 magnets/friction, whether breaks continued or whipsawed. Grade:
 `HIT / MISS / UNCLEAR`. Walls were labeled approximate; grade the *behavioral
@@ -173,6 +175,11 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
 2. `brief-review/SCORECARD.md` — one row per reviewed brief plus recomputed
    cumulative rates. The scorecard is the calibration record; it displays
    `UNCALIBRATED (n=X of 20)` until 20 trading days are graded.
+   **Day-type record (ratified 2026-10-01, I-19):** on every day the owner
+   traded, append one row to the scorecard's DAY-TYPE RECORD (the brief's §0
+   day type in plain words, what happened, the owner's result from filled
+   orders, and how they traded) and recompute its totals. The next morning's
+   brief quotes this table, so it must be current by the evening review.
 3. `brief-review/IMPROVEMENTS.md` — append any new PROPOSED items.
 4. **Database sync** (added 2026-08-20; see `DATA_STORE.md`): upsert the
    review's `brief_reviews` row, its `radar_items` and `watchlist_events`,

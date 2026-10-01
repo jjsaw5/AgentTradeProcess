@@ -1750,3 +1750,34 @@ under the standing review authorization).
 ### DEVIATIONS
 
 - **None.** No data pulled; no spec edited; no rule applied.
+
+---
+
+## 2026-10-01 (pre-market, cont.) — I-19 ratified and written into the brief spec; UW and timing proposals
+
+- **Owner ratified I-19** ("Let's make those changes to the brief") and added
+  one requirement: the brief must show the owner's own rule and record for
+  the day type ("my own rules say a 0DTE loses, I need to see that as well").
+- **Written into `daily-market-brief/SKILL.md`:** PLAIN-WORD TABLE (STUCK /
+  RUNNING / UNCLEAR, switch line, ceiling, floor, magnet; metaphors banned in
+  §0/§1/§12); §0 DAY TYPE box (five lines, with the owner's 9/23 rule and the
+  playbook §1c text quoted verbatim, plus the record line); §8 plain-word
+  brackets; §12 "Day Type" replaces "Gamma Regime".
+- **New `brief-review/SCORECARD.md` DAY-TYPE RECORD** (12 owner-traded days,
+  8/13–9/30; August rows from the playbook journal because those briefs were
+  not archived) with totals by type; `brief-review/SKILL.md` Output step 2 now
+  maintains it, and the G rubric grades the §0 box.
+- **Correction recorded:** reviews 9/25–9/30 called it the "one-loss rule."
+  The owner's written rule is narrower: done with the **indexes** after any
+  losing trade on a day the brief calls glue/pin. The brief quotes the
+  owner's wording, not the reviews' paraphrase.
+- **PROPOSED:** I-20 (rebalance UW use: vendor gamma levels only, add the
+  1-day expected range, shrink flow narration, verify FDA calendar rows) and
+  D-4 (a 9:46 first-bar check instead of a second full brief, plus 10:16 on
+  10:00-data days). Not applied.
+
+### DEVIATIONS
+
+- **Pushing a spec edit to `main` outside the standing review scope** — done
+  on the owner's explicit instruction in this conversation, not under the
+  standing authorization. Recorded so the scope stays legible.
