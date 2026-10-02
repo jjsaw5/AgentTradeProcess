@@ -1876,3 +1876,39 @@ under the standing review authorization).
   BLS schedule and congress/press for the shutdown fact; Roivant/BioSpace for
   ROIV.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-02 (day + evening) — First-bar checks #1–2; scheduled post-close review #19 (n=33)
+
+- **Day:** the 9:46 and 10:16 first-bar checks ran on schedule (D-4's first
+  day), delivered at 9:48 and 10:18, and were appended to
+  `day-plan/cards/2026-10-02.md`. One owner request at 10:05 for live QQQ
+  levels was answered from `uw_snapshot.py` and Robinhood bars.
+- **Evening grades:** F **10/10** (BLS-verified jobs figures; MRK PDUFA
+  verified against Merck's release — I-20(d) on day one; Toshiba driver
+  UNVERIFIED, not counted) · O **HIT** (gap held, 30/31) · M **HIT** · G
+  **MIXED** (first I-19 box: UNCLEAR-treat-as-STUCK right; the conditional
+  "up-RUNNING after the premarket highs" fired and failed) · **first-bar
+  checks: 9:46 HIT, 10:16 MIXED** · R 1 CONF-PAID / 3 fired (WDC short
+  +1.37%; jobs-gap long and USO bear failed) · MRK OPEN · resolved MRK 10/01
+  (NO-TRIGGER), NKE and both MU straddle tests (sellers won) · W precision
+  8/18 (lean 7/7), recall 8/11 (SPCX wrong-way #26, SIG, CSCO missed).
+- **Ledger:** no new proposals. Evidence appended to R-3 (day 8), I-21 (no
+  explicit retraction of 10/01's false lead), R-4 (today's fails exceed the
+  band). Nothing ratified.
+- **Day-type record:** 10/02 appended (UNCLEAR, early break failed, then
+  pinned); UNCLEAR now 5 days, +$3,645.
+- **Owner execution (R-3, day 8):** 3 trips, 4 lots, 2W/1L, −$83; equity
+  $337.62 → $254.04 (−24.8%). Stopped after the first loss — the rule held
+  for the first time since 9/23 — but one 2-lot 0DTE call at 105% of equity
+  was bought inside the 10:16 check's "wait for 10:30". Grade D.
+- DB synced (n=33); MUST_MENTION regenerated (10 names, data through 10/02);
+  pushed to branch + main (standing scope).
+
+### DEVIATIONS
+
+- **None.** No unratified rule applied (R-4 is cited only to note it would not
+  have changed today's grades). Data: Robinhood bars, quotes, orders and
+  realized P&L; BLS Employment Situation release; UW via the snapshot tool.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
