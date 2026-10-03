@@ -1,0 +1,99 @@
+Per trade (entry 9:45 last trade; % of premium at 10:15 / 10:45 / 12:00 / 3:30):
+SPY 2026-09-23 UNCLEAR put  K772 RAN   right | 0DTE $0.98:  +173  +209  +252  +347 | 1DTE $1.78:   +87  +105  +122  +159
+SPY 2026-09-24 RUNNING call K765 RAN   right | 0DTE $1.22:   +52   +11   -43  +115 | 1DTE $2.42:   +27   +10   -14   +60
+SPY 2026-09-25 STUCK   call K769 STUCK right | 0DTE $1.55:   -59   -48    +6    -7 | 1DTE $2.75:   -37   -25    +9   +11
+SPY 2026-09-28 UNCLEAR put  K768 STUCK right | 0DTE $1.53:    +6   +99   +81   +35 | 1DTE $2.52:    +3   +54   +46   +26
+SPY 2026-09-29 RUNNING put  K765 STUCK right | 0DTE $1.48:   -13   -15   +51   -54 | 1DTE $2.61:    -5    -5   +32   -10
+SPY 2026-09-30 STUCK   call K767 STUCK wrong | 0DTE $1.32:   +54   +25   +66   -64 | 1DTE $2.42:   +29   +18   +41   -20
+SPY 2026-10-01 UNCLEAR put  K763 STUCK wrong | 0DTE $1.64:   +87   +49   +75   -93 | 1DTE $2.86:   +47   +28   +41   -35
+SPY 2026-10-02 UNCLEAR call K772 STUCK wrong | 0DTE $1.32:    -8    -3   -82   -98 | 1DTE $2.42:    -5    +4   -46   -60
+QQQ 2026-09-23 UNCLEAR put  K745 RAN   right | 0DTE $1.64:  +217  +214  +168  +159 | 1DTE $2.72:  +119  +119   +94   +92
+QQQ 2026-09-24 RUNNING call K737 RAN   right | 0DTE $1.87:   -14   -25   -57  +109 | 1DTE $3.41:    -5    -6   -21   +57
+QQQ 2026-09-25 STUCK   call K744 STUCK wrong | 0DTE $1.90:   -62   -63   -37   -78 | 1DTE $3.58:   -36   -35   -11   -14
+QQQ 2026-09-28 UNCLEAR put  K738 STUCK right | 0DTE $1.87:   +65  +163   +50   -47 | 1DTE $3.25:   +35   +81   +31    -2
+QQQ 2026-09-29 RUNNING put  K737 STUCK wrong | 0DTE $2.19:   -44   -64   -42   -93 | 1DTE $3.94:   -22   -34   -13   -29
+QQQ 2026-09-30 STUCK   call K742 STUCK right | 0DTE $2.07:   +33    +7   +56   +19 | 1DTE $3.67:   +20    +7   +34   +13
+QQQ 2026-10-01 UNCLEAR put  K742 STUCK wrong | 0DTE $2.62:   +53   +25   +62   -89 | 1DTE $4.14:   +34   +20   +39   -29
+QQQ 2026-10-02 UNCLEAR call K752 STUCK wrong | 0DTE $2.01:   +24   +25   -69   -99 | 1DTE $3.71:   +16   +19   -30   -54
+
+P1 cost ratio 1DTE/0DTE at 9:45: 1.82, 1.98, 1.77, 1.65, 1.76, 1.83, 1.74, 1.83, 1.66, 1.82, 1.88, 1.74, 1.80, 1.77, 1.58, 1.85 | median 1.79
+
+ALL (n=16)
+  10:15: 0DTE mean  +35.3% median  +28.6% sd  74.5 | 1DTE mean  +19.1% median  +17.6% sd  40.2 | 1DTE better on 6/16
+  10:45: 0DTE mean  +38.1% median  +17.7% sd  86.0 | 1DTE mean  +22.6% median  +14.0% sd  44.5 | 1DTE better on 7/16
+  12:00: 0DTE mean  +33.6% median  +50.5% sd  87.2 | 1DTE mean  +22.1% median  +31.8% sd  43.5 | 1DTE better on 7/16
+  3:30 : 0DTE mean   +3.8% median  -50.6% sd 120.4 | 1DTE mean  +10.4% median   -6.1% sd  55.9 | 1DTE better on 10/16
+
+P2: WRONG direction or STUCK day (n=12)
+  10:15: 0DTE mean  +11.4% median  +14.9% sd  47.5 | 1DTE mean   +6.6% median   +9.4% sd  27.2 | 1DTE better on 5/12
+  10:45: 0DTE mean  +16.7% median  +15.8% sd  63.2 | 1DTE mean  +11.1% median  +12.8% sd  32.8 | 1DTE better on 6/12
+  12:00: 0DTE mean  +18.2% median  +50.5% sd  57.2 | 1DTE mean  +14.4% median  +31.8% sd  30.4 | 1DTE better on 5/12
+  3:30 : 0DTE mean  -55.6% median  -71.1% sd  45.1 | 1DTE mean  -16.8% median  -16.8% sd  25.2 | 1DTE better on 10/12
+
+P3: RIGHT direction on a RAN day (n=4)
+  10:15: 0DTE mean +106.9% median +112.6% sd  92.7 | 1DTE mean  +56.7% median  +56.7% sd  48.7 | 1DTE better on 1/4
+  10:45: 0DTE mean +102.2% median +109.9% sd 110.2 | 1DTE mean  +57.1% median  +57.5% sd  55.7 | 1DTE better on 1/4
+  12:00: 0DTE mean  +80.1% median  +62.5% sd 133.2 | 1DTE mean  +45.2% median  +39.6% sd  63.8 | 1DTE better on 2/4
+  3:30 : 0DTE mean +182.2% median +136.6% sd  97.0 | 1DTE mean  +92.2% median  +76.1% sd  40.9 | 1DTE better on 0/4
+
+(b) STUCK after 9:45 (n=12)
+  10:15: 0DTE mean  +11.4% median  +14.9% sd  47.5 | 1DTE mean   +6.6% median   +9.4% sd  27.2 | 1DTE better on 5/12
+  10:45: 0DTE mean  +16.7% median  +15.8% sd  63.2 | 1DTE mean  +11.1% median  +12.8% sd  32.8 | 1DTE better on 6/12
+  12:00: 0DTE mean  +18.2% median  +50.5% sd  57.2 | 1DTE mean  +14.4% median  +31.8% sd  30.4 | 1DTE better on 5/12
+  3:30 : 0DTE mean  -55.6% median  -71.1% sd  45.1 | 1DTE mean  -16.8% median  -16.8% sd  25.2 | 1DTE better on 10/12
+
+(b) RAN after 9:45 (n=4)
+  10:15: 0DTE mean +106.9% median +112.6% sd  92.7 | 1DTE mean  +56.7% median  +56.7% sd  48.7 | 1DTE better on 1/4
+  10:45: 0DTE mean +102.2% median +109.9% sd 110.2 | 1DTE mean  +57.1% median  +57.5% sd  55.7 | 1DTE better on 1/4
+  12:00: 0DTE mean  +80.1% median  +62.5% sd 133.2 | 1DTE mean  +45.2% median  +39.6% sd  63.8 | 1DTE better on 2/4
+  3:30 : 0DTE mean +182.2% median +136.6% sd  97.0 | 1DTE mean  +92.2% median  +76.1% sd  40.9 | 1DTE better on 0/4
+
+(c) wrong at 3:30 (n=7)
+  10:15: 0DTE mean  +14.9% median  +23.9% sd  50.9 | 1DTE mean   +9.1% median  +15.6% sd  28.7 | 1DTE better on 3/7
+  10:45: 0DTE mean   -0.8% median  +24.8% sd  42.1 | 1DTE mean   +3.0% median  +18.2% sd  24.3 | 1DTE better on 3/7
+  12:00: 0DTE mean   -3.7% median  -36.8% sd  63.6 | 1DTE mean   +3.1% median  -11.5% sd  34.3 | 1DTE better on 4/7
+  3:30 : 0DTE mean  -87.7% median  -93.2% sd  11.5 | 1DTE mean  -34.3% median  -28.9% sd  15.7 | 1DTE better on 7/7
+
+(c) right at 3:30 (n=9)
+  10:15: 0DTE mean  +51.1% median  +33.3% sd  85.3 | 1DTE mean  +27.0% median  +19.6% sd  45.8 | 1DTE better on 3/9
+  10:45: 0DTE mean  +68.3% median  +10.7% sd  98.4 | 1DTE mean  +37.8% median   +9.9% sd  50.3 | 1DTE better on 4/9
+  12:00: 0DTE mean  +62.7% median  +51.4% sd  91.9 | 1DTE mean  +36.9% median  +32.2% sd  44.1 | 1DTE better on 3/9
+  3:30 : 0DTE mean  +75.0% median  +35.3% sd 118.6 | 1DTE mean  +45.2% median  +26.2% sd  51.0 | 1DTE better on 3/9
+
+(d) brief called STUCK (n=4)
+  10:15: 0DTE mean   -8.3% median  -12.7% sd  52.4 | 1DTE mean   -6.0% median   -8.2% sd  30.7 | 1DTE better on 2/4
+  10:45: 0DTE mean  -19.8% median  -20.5% sd  36.7 | 1DTE mean   -8.6% median   -9.0% sd  22.0 | 1DTE better on 3/4
+  12:00: 0DTE mean  +22.8% median  +31.0% sd  41.1 | 1DTE mean  +18.0% median  +21.1% sd  20.8 | 1DTE better on 2/4
+  3:30 : 0DTE mean  -32.5% median  -35.7% sd  40.0 | 1DTE mean   -2.5% median   -1.6% sd  14.5 | 1DTE better on 3/4
+
+(d) brief called RUNNING (n=4)
+  10:15: 0DTE mean   -4.9% median  -13.6% sd  34.9 | 1DTE mean   -1.5% median   -5.3% sd  17.8 | 1DTE better on 3/4
+  10:45: 0DTE mean  -23.3% median  -20.0% sd  26.8 | 1DTE mean   -8.6% median   -5.4% sd  15.7 | 1DTE better on 3/4
+  12:00: 0DTE mean  -22.4% median  -42.1% sd  43.0 | 1DTE mean   -4.1% median  -13.8% sd  21.2 | 1DTE better on 3/4
+  3:30 : 0DTE mean  +19.0% median  +27.3% sd  93.7 | 1DTE mean  +19.7% median  +23.8% sd  39.8 | 1DTE better on 2/4
+
+(d) brief called UNCLEAR (n=8)
+  10:15: 0DTE mean  +77.2% median  +59.1% sd  74.9 | 1DTE mean  +42.1% median  +34.8% sd  39.3 | 1DTE better on 1/8
+  10:45: 0DTE mean  +97.7% median  +74.4% sd  81.5 | 1DTE mean  +53.8% median  +41.1% sd  40.6 | 1DTE better on 1/8
+  12:00: 0DTE mean  +67.1% median  +68.6% sd 103.5 | 1DTE mean  +37.2% median  +40.3% sd  52.5 | 1DTE better on 2/8
+  3:30 : 0DTE mean  +14.4% median  -68.0% sd 151.3 | 1DTE mean  +12.2% median  -15.3% sd  72.2 | 1DTE better on 5/8
+
+Dollars per 1 contract at 3:30 (0DTE vs 1DTE):
+  SPY 2026-09-23 0DTE    +340 (cost 98) | 1DTE    +283 (cost 178)
+  SPY 2026-09-24 0DTE    +140 (cost 122) | 1DTE    +146 (cost 242)
+  SPY 2026-09-25 0DTE     -11 (cost 155) | 1DTE     +29 (cost 275)
+  SPY 2026-09-28 0DTE     +54 (cost 153) | 1DTE     +66 (cost 252)
+  SPY 2026-09-29 0DTE     -80 (cost 148) | 1DTE     -26 (cost 261)
+  SPY 2026-09-30 0DTE     -85 (cost 132) | 1DTE     -48 (cost 242)
+  SPY 2026-10-01 0DTE    -153 (cost 164) | 1DTE    -101 (cost 286)
+  SPY 2026-10-02 0DTE    -129 (cost 132) | 1DTE    -145 (cost 242)
+  QQQ 2026-09-23 0DTE    +260 (cost 164) | 1DTE    +250 (cost 272)
+  QQQ 2026-09-24 0DTE    +203 (cost 187) | 1DTE    +196 (cost 341)
+  QQQ 2026-09-25 0DTE    -148 (cost 190) | 1DTE     -49 (cost 358)
+  QQQ 2026-09-28 0DTE     -88 (cost 187) | 1DTE      -7 (cost 325)
+  QQQ 2026-09-29 0DTE    -204 (cost 219) | 1DTE    -114 (cost 394)
+  QQQ 2026-09-30 0DTE     +40 (cost 207) | 1DTE     +48 (cost 367)
+  QQQ 2026-10-01 0DTE    -233 (cost 262) | 1DTE    -118 (cost 414)
+  QQQ 2026-10-02 0DTE    -198 (cost 201) | 1DTE    -199 (cost 371)
+
+NA_no_data checkpoints: 0

@@ -1912,3 +1912,47 @@ under the standing review authorization).
   have changed today's grades). Data: Robinhood bars, quotes, orders and
   realized P&L; BLS Employment Situation release; UW via the snapshot tool.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-03 (Saturday) — Two pre-registered option studies: overnight 1DTE hold; 0DTE vs 1DTE in-session
+
+- **Why:** owner asked whether to switch from 0DTE to an overnight 1DTE hold
+  (buy late, sell into the open; flip to 0DTE if wrong), then whether the
+  brief's data could help, then asked for a 0DTE-vs-1DTE test and a commit.
+- **Added `options-expert/log/studies/`** (README + two study folders). Each has
+  a PREREG written before results, dated addenda written before results, a
+  RESULTS file scored against the predictions, and the scripts.
+- **Overnight 1DTE:** the afternoon direction predicted the next open 43-44%
+  (worse than my 48-56% guess). The 180-SMA trend filter added nothing beyond
+  the 58% base rate of up-gaps. Real SPY 1DTE marks lost 70-95% of their time
+  value by 9:45. Breakeven needs ~65% direction accuracy, and ~41% of
+  right-direction nights still lose. Verdict: don't do it.
+- **0DTE vs 1DTE (8 sessions, 16 trades, real marks):** 1DTE costs ~1.8x.
+  When wrong at 3:30, 1DTE lost 34% on average vs 88% for 0DTE, and lost less
+  on 7/7. When right on a run day, 0DTE made ~2x the %. P4 missed: both means
+  were positive, not negative. Exploratory, not pre-registered: entries were
+  ahead at 10:15-12:00 and gave it back by 3:30.
+- **Data findings:**
+  - Robinhood intraday equity history is real only from ~2026-01-30 (30-min)
+    and 2026-04-01 (5-min). Earlier bars are `interpolated` filler at fake
+    prices.
+  - Intraday option history is real for only ~8 sessions (from 9/23). Every
+    earlier bar is filler, returned with HTTP 200.
+  - Both are recorded in the studies' addenda and should go into DATA_LAYER.md
+    when the owner next touches it.
+- No spec changes. No rule ratified or proposed.
+
+### DEVIATIONS
+
+- **Analysis scope changed after the data pull, before results (both studies).**
+  Intraday history was shallower than designed. The overnight study moved H1
+  to 30-minute bars and used a 2-year daily proxy for H2. The 0DTE/1DTE study
+  shrank from 33 to 8 sessions. Each change is written as a dated addendum
+  *before* any result was computed (§9). The original designs are left
+  unedited above them.
+- **Cost model in the overnight study is a fitted Black-Scholes estimate**
+  (calendar time, IV = VIX x fitted multipliers from 20 real SPY marks; QQQ IV
+  = VIX x realized ratio, since there is no VXN feed). It is labelled
+  ESTIMATE throughout.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
