@@ -1956,3 +1956,49 @@ under the standing review authorization).
   = VIX x realized ratio, since there is no VXN feed). It is labelled
   ESTIMATE throughout.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-05 (day + evening) — First-bar checks #3–4; scheduled post-close review #20 (n=34)
+
+- **Day:** the 9:46 and 10:16 first-bar checks ran on schedule (delivered
+  9:49 and 10:18) and were appended to `day-plan/cards/2026-10-05.md`. Both
+  said STUCK.
+- **Evening grades:**
+  - F **10/10**. ISM Services 54.9 vs 55.0 (prices 74.0) verified against
+    ISM's PR Newswire release. PCVX's "dated today" Phase-3 row checked out.
+    The OPEC+ lead is UNVERIFIED: every confirming article matched the
+    10/05/2025 decision and none carried a verifiable 2026 date.
+  - O **MIXED** · M **MISS #11** (bearish tilt on a broad breakout).
+  - G **HIT** (UNCLEAR resolved up on the 10:15 close and held).
+  - **First-bar checks: 9:46 MISS, 10:16 MIXED** — both read heavy positive
+    gamma above price as a ceiling; it migrated up with price.
+  - R: SPY/QQQ ISM box-break **CONF-PAID**; INTC / WDC / USO NO-TRIGGER;
+    **MRK 10/02 card INVALIDATED** at 139.52 (clean kill 27/27).
+  - W precision 7/9, recall 7/9 (MRNA, RARE missed). Off-list PCVX +31% on a
+    readout the brief itself listed.
+- **Ledger:**
+  - New **D-5 PROPOSED**: a trigger firing on the check's candle bars a
+    STUCK headline.
+  - Evidence appended to I-17 (PCVX), I-21 (OPEC+ possible stale lead) and
+    R-3 (day 9).
+  - The review first drafted an I-22 for PCVX, then folded it into the
+    existing I-17 rather than duplicate it. Nothing ratified.
+- **Day-type record:** 10/05 appended (UNCLEAR, early break held). UNCLEAR is
+  now 6 days, +$3,728.
+- **Owner execution (R-3, day 9):** 2 trips, 2 lots, 2W/0L, +$83; equity
+  $254.04 → $336.33 (+32.4%). Both entries were inside the opening candle
+  before any signal, each about 90% of the account, with no stops. Grade D
+  (a rule-bending win).
+- DB synced (n=34); MUST_MENTION regenerated (10 names, data through 10/05).
+  Pushed to branch + main (standing scope).
+
+### DEVIATIONS
+
+- **None.** No unratified rule was applied: D-5, I-17, I-21 and R-4 are cited
+  as proposals only, and R-4 would not change today's grades (the fired
+  confirmation moved +0.18%, outside the band).
+- Data sources: Robinhood bars, orders, realized P&L and portfolio; ISM via PR
+  Newswire; Vaxcyte company release; UW via the snapshot tool. Secondary
+  coverage for MRNA and MRK is marked UNVERIFIED.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
