@@ -1988,3 +1988,15 @@ under the standing review authorization).
   `.claude/skills/README.md`. The skill's scope is diagram styling; it states
   no rule that touches §2–§9, and the README says CLAUDE.md wins on conflict.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+- **Follow-up, same session — first diagram: `docs/diagrams/module-flow.html`**
+  (+ `module-flow.png` render). Five-lane swimlane of one trading day: brief →
+  day plan → first-bar check → owner → brief review, with the T+1 coverage
+  floor and ratified spec edits looping back to the next brief. Handoffs taken
+  from each module's SKILL.md, not from memory. Passes the skill's
+  `self_check.py` and upstream `verify-geometry.py` (0 findings). Kept the
+  skill's default palette; the owner asked for the diagram without choosing
+  one.
+- **Spec inconsistency found, not fixed:** `daily-market-brief/SKILL.md` line
+  12 says the brief "normally runs around 8:00 AM ET"; CLAUDE.md §1,
+  `brief-review/SKILL.md` and the briefs themselves ("as of 9:08") say 9:05.
+  The diagram uses 9:05. The spec line is left for the owner.
