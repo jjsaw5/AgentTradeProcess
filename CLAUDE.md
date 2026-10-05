@@ -43,6 +43,7 @@ are working from elsewhere, say so out loud before writing anything here.
 | `brief-review/` | Grades each archived brief against the realized market at T+1. `SKILL.md` the rubric, `reviews/` per-day grades, `SCORECARD.md` the cumulative accuracy record, `IMPROVEMENTS.md` the PROPOSED→RATIFIED ledger for brief-spec changes, `MUST_MENTION.md` the generated coverage floor the morning brief reads. Reviews never edit briefs. |
 | `day-plan/` | The ~9:20 strategy layer: selects the brief's trigger-complete cards through review-validated filters, runs survivors through the options-expert stages, and writes 0–3 pre-open conditional plans to `cards/`. Append-only after the open; graded by brief-review at T+1. |
 | `first-bar-check/` | The 9:46 (and 10:16 on 10:00-data days) confirmation: re-reads the brief's STUCK / RUNNING / UNCLEAR day type against the first eligible 15-minute bar and live Unusual Whales levels, in eight plain lines appended to that day's card file. Ratified 2026-10-01 (ledger D-4). Reports only; never recommends an entry. |
+| `.claude/skills/` | Vendored third-party Claude Code skills, pinned to an upstream commit. Auto-loaded for sessions started here, so each is standing instruction: read in full before committing, never on marketplace auto-update. `README.md` records provenance. Currently: `diagram-design` (HTML/SVG diagrams; no bearing on trading). |
 
 Changes to a spec are commits. The process has a history on purpose.
 

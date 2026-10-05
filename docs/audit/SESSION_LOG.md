@@ -1956,3 +1956,35 @@ under the standing review authorization).
   = VIX x realized ratio, since there is no VXN feed). It is labelled
   ESTIMATE throughout.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-05 (Monday) — Vendored the `diagram-design` skill
+
+- **Why:** owner asked to pull https://github.com/cathrynlavery/diagram-design,
+  set it up and start using it.
+- **Added `.claude/skills/diagram-design/`**, a copy of upstream
+  `skills/diagram-design/` at commit `cb80b0d` (plugin v2.6.56), plus its MIT
+  `LICENSE` and `THIRD_PARTY_LICENSES.md`. Added `.claude/skills/README.md`
+  (provenance, review notes, update procedure) and a `.claude/skills/` row in
+  CLAUDE.md §1.
+- **Decision — vendor, don't use the plugin marketplace.** Upstream recommends
+  `/plugin marketplace add` with auto-update. A skill is standing instruction;
+  auto-update would let an upstream push change this repo's instructions with
+  no trace in its history — the §0 failure mode. A pinned copy is also what
+  persists across cloud sessions, which start from a fresh clone.
+- **Review before commit:** read SKILL.md in full; grepped the reference docs
+  for URLs and the five bundled Python scripts for imports, network,
+  subprocess and file writes (stdlib only; writes only to an explicit output
+  path). Generated diagrams load Google Fonts when opened. `self_check.py`
+  passes on the bundled flowchart example.
+- **Not taken:** the upstream slash commands, CI scripts, plugin manifests;
+  style-guide customisation (the skill asks on first use; the owner decides).
+
+### DEVIATIONS
+
+- **Third-party instructions imported into the repo.** This is the category
+  §0 warns about, done deliberately at the owner's request and recorded in
+  `.claude/skills/README.md`. The skill's scope is diagram styling; it states
+  no rule that touches §2–§9, and the README says CLAUDE.md wins on conflict.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
