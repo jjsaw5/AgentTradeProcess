@@ -223,7 +223,9 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
       `python3 options-expert/tools/record_marks.py plan --date D --equity-file <saved pull>`.
       It prints each symbol's 9:45 price, first-bar side and ATM strike.
    2. `get_option_instruments` per symbol at that strike, call AND put, expiries
-      D and the next trading day. Pass `state=expired` for D.
+      D and the next trading day. The same evening D's contracts are still
+      `state=active` (closing-only); after that they are `state=expired`. An
+      empty answer means try the other state, never "no contracts".
    3. `get_option_historicals` for the 8 contracts, 5-minute, 9:30–16:00 ET of D.
    4. Run `record_marks.py record --date D --equity-file … --option-file …`. It
       appends 8 rows to `options-expert/log/marks/option_marks.csv`. It refuses

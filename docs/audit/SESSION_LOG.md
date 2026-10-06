@@ -2042,3 +2042,58 @@ under the standing review authorization).
   dated Bloomberg video. INTC's attribution rests on secondary coverage and is
   labelled as such.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-06 (day + evening) — First-bar checks #5–6; scheduled post-close review #21 (n=35); option marks session 1/20
+
+- **Day:** the 9:46 and 10:16 checks ran (delivered 9:48 and 10:19) and were
+  appended to `day-plan/cards/2026-10-06.md`. Both said RUNNING, up.
+- **Evening grades:**
+  - F **8/10**:
+    - ✗ MRK PDUFA drug rewritten as Winrevair/sotatercept against four prior
+      records saying I-DXd.
+    - ✗ "DAY-TYPE RECORD table missing" — a heading-name mismatch, fixed on
+      the scorecard side.
+  - O **HIT** · M **HIT** ("broad" wrong: IWM −0.73%) · G **HIT** (a pinned
+    gap day; treat-as-STUCK described it).
+  - **First-bar checks: 9:46 MISS, 10:16 MIXED.** The gap satisfied "outside
+    yesterday's range" before the bell → **D-6 PROPOSED**.
+  - R:
+    - SPY/QQQ gap-and-go **CONF-PAID** (SPY 780 target).
+    - WDC bear **CONF-PAID** (+0.38%).
+    - **MRNA INVALIDATED** (clean kill 28/28).
+    - USO NO-TRIGGER; STZ OPEN.
+  - W: precision 3/8, recall 5/10.
+- **Ledger:** D-6 PROPOSED. Evidence appended to D-5, I-21 (MRK drug rewrite —
+  this rule's exact shape), I-22 and R-3 (day 10). Nothing ratified.
+- **Option marks (step 6A, first evening run):** 8 contracts recorded, none
+  missing. Time-exit sample session 1/20; QQQ's flat first bar skipped per
+  the pre-registration.
+  - Found while running it: on the same evening, D's 0DTE contracts are still
+    `state=active` (closing-only), not `expired`. The 6A text said "expired".
+  - Corrected in `brief-review/SKILL.md` step 6A.
+- **Scorecard:** the day-type table heading now reads "DAY-TYPE RECORD —
+  Day-type record", so the brief's lookup finds it. 10/06 appended (UNCLEAR
+  7 days, +$3,977).
+- **Owner execution (R-3, day 10):**
+  - 4 trips, 7 lots, 4W/0L, +$249; equity $336.33 → $584.68 (+73.8%).
+  - The +$204 trade followed the brief's fired signal and the 10:16 check —
+    the first signal-matched entry in the journal.
+  - The rest bent the rules. Grade D.
+- DB synced (n=35); MUST_MENTION regenerated (10 names, through 10/06).
+  Pushed to branch + main.
+
+### DEVIATIONS
+
+- **One spec wording fix outside a ledger ruling:** `brief-review/SKILL.md`
+  step 6A, sub-step 2 ("state=expired for D" → "still active the same
+  evening; try the other state on an empty answer").
+  - It is a correction to the owner-directed 6A text from this morning, made
+    because following it literally returned an empty list — the "200 is not
+    a success" trap.
+  - Recorded here so it isn't silent.
+- No unratified rule applied. D-5, D-6, I-21, I-22 and R-4 are cited as
+  proposals only.
+- The 3-year auction result is UNVERIFIED (the search result was garbled).
+- Standing: Turso token rotation still owed (known exposure since 9/21).
