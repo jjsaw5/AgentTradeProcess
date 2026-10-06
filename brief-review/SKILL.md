@@ -214,6 +214,24 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    the realized behaviour from that time to 3:00 (HIT / MISS / UNCLEAR), and
    did every "Fired" line report the 15-minute close correctly? Checks are
    UNCALIBRATED until 20 are graded.
+6A. **Record option marks (owner-directed 2026-10-06):** every trading day,
+   record the real 0DTE and 1DTE prices for SPY and QQQ so the time-exit study
+   (`options-expert/log/studies/2026-10-06-time-exit/PREREG.md`) can be run.
+   **Do it the same evening.** Robinhood keeps only ~8 sessions of intraday
+   option history; a missed day is lost after that.
+   1. Pull SPY + QQQ 5-minute bars for D (9:30–16:00 ET). Run
+      `python3 options-expert/tools/record_marks.py plan --date D --equity-file <saved pull>`.
+      It prints each symbol's 9:45 price, first-bar side and ATM strike.
+   2. `get_option_instruments` per symbol at that strike, call AND put, expiries
+      D and the next trading day. Pass `state=expired` for D.
+   3. `get_option_historicals` for the 8 contracts, 5-minute, 9:30–16:00 ET of D.
+   4. Run `record_marks.py record --date D --equity-file … --option-file …`. It
+      appends 8 rows to `options-expert/log/marks/option_marks.csv`. It refuses
+      duplicates, a wrong strike, or a partial set.
+   5. Note in the review: "Option marks: 8 recorded (n sessions in the
+      time-exit sample)", or the reason a day is `NA_unresolved`.
+   The marks are data only. The review does not grade or summarize the
+   time-exit study until its pre-registered 20-session evaluation.
 7. Session log entry per `CLAUDE.md` §8 when a review session touches the
    repo.
 8. **Publish to `main` (owner-authorized 2026-08-26):** review sessions
@@ -221,7 +239,8 @@ loop — it predates this spec and is logged in IMPROVEMENTS.md retroactively.
    brief always reads a current `MUST_MENTION.md` without waiting on a
    merge. Scope of this authorization: `brief-review/**` (reviews,
    scorecard, ledger evidence appends, checklist), `day-plan/cards/**`
-   grading annotations, and `docs/audit/SESSION_LOG.md` — the review's own
+   grading annotations, `docs/audit/SESSION_LOG.md`, and (from 2026-10-06,
+   owner-directed) `options-expert/log/marks/option_marks.csv` — the review's own
    output. **Spec changes remain outside it**: edits to any `SKILL.md`,
    `CLAUDE.md`, or the playbook still require the owner's explicit go-ahead
    (ratification or review), exactly as before. Secret-scan every push, as

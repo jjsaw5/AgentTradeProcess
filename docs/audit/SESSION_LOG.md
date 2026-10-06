@@ -2002,3 +2002,43 @@ under the standing review authorization).
   Newswire; Vaxcyte company release; UW via the snapshot tool. Secondary
   coverage for MRNA and MRK is marked UNVERIFIED.
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+---
+
+## 2026-10-06 (pre-open) — Option-marks recorder + time-exit pre-registration; SpaceX driver addendum
+
+- **Owner request:** "Yes, set up both" — nightly 0DTE/1DTE marks and the
+  "out by 11:00 vs hold" test — "and look into SpaceX, there was a major
+  announcement yesterday."
+- **Added `options-expert/log/studies/2026-10-06-time-exit/PREREG.md`,**
+  written at 08:55 ET before any qualifying data.
+  - The sample starts 10/06. The 9/23–10/02 sessions generated the idea and
+    10/05's underlying path was already seen, so both are excluded.
+  - Predictions T1–T4 are stated, with one evaluation at 20 sessions.
+- **Added `options-expert/tools/record_marks.py`** (`plan` / `record`).
+  - It parses saved Robinhood responses and is read-only.
+  - It writes `options-expert/log/marks/option_marks.csv` and refuses
+    duplicates, a wrong strike, or a partial set.
+  - 10/05 recorded as the first 8 rows (outside the test sample); the
+    duplicate guard was verified.
+- **Spec change (owner-directed): `brief-review/SKILL.md` step 6A** records
+  marks every evening.
+  - Step 8's publish scope now includes the marks CSV.
+  - The 6 PM routine's prompt was updated to match (trig_01Cwd7hmgvqH1pWXJejtRMor).
+- **SpaceX (10/05) addendum** in `brief-review/reviews/2026-10-05.md`. SPCX
+  +7.6% had two pre-open drivers:
+  - Morgan Stanley's Sunday "cheap" note ($300 target);
+  - Musk confirming TSMC talks on the Texas Terafab — the same story that hit INTC.
+  - The brief had both as NO CLEAR DRIVER FOUND. Grades unchanged.
+  - **I-22 PROPOSED:** second-pass driver search when the brief is blind.
+
+### DEVIATIONS
+
+- **Spec edit by owner direction, not ratification of a ledger item:**
+  `brief-review/SKILL.md` step 6A and the step-8 scope change follow the
+  owner's "Yes, set up both". Recorded here because step 8 says spec changes
+  need the owner's explicit go-ahead; this is that go-ahead.
+- Otherwise none. The SpaceX drivers rest on CNBC, Motley Fool, DCD and a
+  dated Bloomberg video. INTC's attribution rests on secondary coverage and is
+  labelled as such.
+- Standing: Turso token rotation still owed (known exposure since 9/21).
