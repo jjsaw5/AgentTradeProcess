@@ -2097,3 +2097,59 @@ under the standing review authorization).
   proposals only.
 - The 3-year auction result is UNVERIFIED (the search result was garbled).
 - Standing: Turso token rotation still owed (known exposure since 9/21).
+
+## 2026-10-07 (day + evening) — First-bar check #7; scheduled post-close review #22 (n=36); option marks session 2/20
+
+Session launched from this repository (§0 satisfied).
+
+- **9:46 first-bar check:**
+  - UNCLEAR, confirmed. Both indexes closed the first bar below Tuesday's lows,
+    with gamma and tide UNVERIFIED (Unusual Whales down, curl 22 / 401).
+  - Appended to `day-plan/cards/2026-10-07.md` (file created; no pre-open card).
+  - The 10:16 check correctly did not run: no 10:00 release on §3.
+- **Evening review** (`brief-review/reviews/2026-10-07.md`):
+  - F 8/10, Open HIT, Mood MIXED (the rubric's drift clause, first use), Regime HIT.
+  - First-bar check MIXED.
+  - Radar: STZ CONF-PAID, SPY/QQQ CONF-FAILED (QQQ never confirmed), AAPL
+    NO-TRIGGER, APLD OPEN. The 10/06 STZ vol card resolved RICH.
+  - W precision 3/10, recall 2/5.
+  - The day's top fact error: the FOMC-minutes scenario tree framed a cutting
+    Fed after the 9/16 hike, contradicting our own 9/16–9/17 briefs. Logged as
+    I-21 evidence.
+  - Auction and minutes facts from CNBC / investinglive / federalreserve.gov,
+    with the dates checked.
+- **Ledger:**
+  - **I-23 PROPOSED, tracking only:** log index-card pair-confirmation; no rule
+    until n≥5 each way, because 9/28 is counter-evidence.
+  - Evidence appended to I-21 (both directions) and D-6 (both directions).
+- **Scorecard:**
+  - 10/07 row and cumulatives updated (n=36).
+  - Day-type row added: UNCLEAR now 8 days, +$3,630; ≤8 trips 7 days, +$2,800.
+- **Option marks (6A):**
+  - 8 recorded, 0 missing (SPY 775 / QQQ 753, both put-side first bars).
+  - Session 2/20. Data only.
+- **Owner execution (R-3, day 11):**
+  - 4 trips, 5 lots, 0W/4L, −$347; equity $584.68 → $237.27 (−59.4%). Grade F.
+  - Journaled from filled orders; read-only.
+- DB synced (49 statements). MUST_MENTION regenerated (7 names, through 10/07).
+  Pushed to branch + main.
+
+### DEVIATIONS
+
+- **Correction to our own prior review, stated rather than edited:**
+  - The 10/06 review said STZ resolves "vs Tuesday's 116.02". The official close is 115.67.
+  - The 10/07 review uses 115.67 and says so; the 10/06 file is left as written.
+  - The verdict is unchanged either way.
+- **One data point treated as an outlier, by judgement:**
+  - SPY's 779.10 print in the 2:50 PM bar (1.0M shares; QQQ flat) is excluded
+    from the narrative high and from the gap-fill call.
+  - The option-marks CSV keeps the raw value, as data.
+- **Unverified inputs:**
+  - The 10-year auction and minutes content come from secondary sources
+    (TreasuryDirect was not pulled).
+  - The minutes' release itself is primary (federalreserve.gov).
+  - Neither the auction nor the minutes was used for a grade beyond the timing and price reaction.
+- No unratified rule applied. D-5, D-6, I-21, I-22, I-23 and R-4 are cited as proposals only.
+- **Standing:**
+  - The Unusual Whales key has been rejected (401) since this morning — rotation owed.
+  - Turso token rotation still owed.
