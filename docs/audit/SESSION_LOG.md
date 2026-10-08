@@ -2153,3 +2153,37 @@ Session launched from this repository (§0 satisfied).
 - **Standing:**
   - The Unusual Whales key has been rejected (401) since this morning — rotation owed.
   - Turso token rotation still owed.
+
+## 2026-10-08 (day + evening) — First-bar checks #8–9; scheduled post-close review #23 (n=37); option marks session 3/20
+
+Session launched from this repository (§0 satisfied).
+
+- **First-bar checks:** 9:46 and 10:16 were both UNCLEAR, confirmed, leaning STUCK (inside Wednesday's range; Unusual Whales down, curl 22). Appended to `day-plan/cards/2026-10-08.md` (file created). The 10:16 check ran because §3 listed a 10:00 release (wholesale sales); its number is UNVERIFIED.
+- **Evening review** (`brief-review/reviews/2026-10-08.md`):
+  - F 5/9, Open MIXED, Mood HIT (breadth ✗), Regime HIT. First-bar checks HIT / HIT.
+  - Radar: QQQ bear CONF-PAID (+0.10%, a SCRATCH under R-4), PLTR CONF-FAILED, XLE NO-TRIGGER (I-8 cost #3). The 10/07 APLD vol card resolved RICH.
+  - W precision 8/12, recall 5/9.
+  - **Top error:** §4A dropped MRK's 10/10 PDUFA the day before it, against ratified I-13. The review re-carries it as an open item.
+- **Ledger:**
+  - **I-24 PROPOSED:** compute "yesterday's sectors" from official sector-ETF closes.
+  - Evidence appended to I-21, D-1 and R-4.
+- **Scorecard:**
+  - 10/08 row and cumulatives updated (n=37).
+  - Day-type row added: UNCLEAR now 9 days, +$3,506; ≤8 trips 8 days, +$2,676.
+- **Option marks:** 8 recorded, 0 missing (SPY 775 / QQQ 754). Session 3/20. Data only.
+- **Owner (R-3, day 12):** 1 trip, −$124; equity $237.27 → $113.26 (−52.3%). Grade D.
+- DB synced (48 statements). MUST_MENTION regenerated (12 names, through 10/08). Pushed to branch + main.
+
+### DEVIATIONS
+
+- **The afternoon driver is from secondary coverage only:**
+  - "FT report on OpenAI revenue", per the Yahoo live blog and TipRanks, both dated 10/08.
+  - The headline's timestamp is UNVERIFIED; the review places it from the tape (~12:45: SMH and NBIS volume ×10, TLT up, oil flat).
+  - Used as narrative, not for any grade.
+- **The 30-year auction result is UNVERIFIED** — no dated source was found tonight. No grade depends on it.
+- **CRWV counted as a recall catch (marginal):**
+  - Its quiet line pointed to NBIS's "distributing" lean.
+  - Yesterday's review counted a leanless CRWV line as a miss. Recorded so the call is visible.
+- **MUST_MENTION.md cannot carry MRK's PDUFA:** the generator's rules (I-2/I-4/I-7) don't cover dated binaries. The carry lives in the review's open items and the DB `open_items` row. No hand edit was made to the generated file.
+- No unratified rule applied. D-1, D-5, D-6, I-21, I-22, I-23, I-24 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, three runs); Turso token rotation.
