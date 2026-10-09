@@ -2187,3 +2187,37 @@ Session launched from this repository (§0 satisfied).
 - **MUST_MENTION.md cannot carry MRK's PDUFA:** the generator's rules (I-2/I-4/I-7) don't cover dated binaries. The carry lives in the review's open items and the DB `open_items` row. No hand edit was made to the generated file.
 - No unratified rule applied. D-1, D-5, D-6, I-21, I-22, I-23, I-24 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, three runs); Turso token rotation.
+
+## 2026-10-09 (day + evening) — First-bar checks #10–11; scheduled post-close review #24 (n=38); option marks session 4/20
+
+Session launched from this repository (§0 satisfied).
+
+- **First-bar checks:**
+  - 9:46: UNCLEAR, confirmed, inside the range.
+  - 10:16: UNCLEAR, confirmed, leaning STUCK (the Michigan candle was flat; numbers UNVERIFIED).
+  - Unusual Whales down (curl 22) both runs.
+  - Appended to `day-plan/cards/2026-10-09.md` (file created).
+- **Evening review** (`brief-review/reviews/2026-10-09.md`):
+  - F 8/9, Open HIT, Mood HIT (leadership qualifier ✗), Regime HIT. First-bar checks MIXED / HIT.
+  - Radar: SPY/QQQ up CONF-FAILED (−0.03%, a SCRATCH under R-4, QQQ unconfirmed). AAPL and SPCX INVALIDATED (clean kills 30/30). DAL NO-TRIGGER. MRK PDUFA OPEN.
+  - W precision 3/8, recall 4/8.
+  - Top miss: MRNA +14.2% on Nasdaq-100 inclusion day, quiet-lined.
+- **Ledger:**
+  - **I-25 PROPOSED:** index-rebalance dates as dated catalysts.
+  - Evidence appended to I-21, I-23 (pair-confirmation log, now 2 unconfirmed / 1 confirmed) and R-4.
+- **Scorecard:**
+  - 10/09 row and cumulatives updated (n=38).
+  - **Standing observation #10 added:** premarket sector leadership reversed three days running (hypothesis, n=3).
+  - No day-type row, because the owner did not trade (the table is one row per traded day).
+- **Option marks:** 8 recorded, 0 missing (SPY 776 / QQQ 749). Session 4/20.
+- **Owner (R-3, day 13):** no orders; equity $113.17. No grade.
+- DB synced (48 statements). MUST_MENTION regenerated (8 names, through 10/09). Pushed to branch + main.
+
+### DEVIATIONS
+
+- **Today's "1DTE" marks are Monday 10/12 contracts** (three calendar days, over a weekend). The pre-registration defines 1DTE as the next trading day's expiry, so this follows the plan. Flagged in the review so the 20-session evaluation can see the weekend rows. No change to the study.
+- **MRNA's driver is from secondary coverage** (Investing.com, Yahoo, StocksToTrade). The Nasdaq-100 announcement date is UNVERIFIED; I-25's evidence says so.
+- **Michigan sentiment numbers are UNVERIFIED** (not indexed tonight). No grade depends on them.
+- **Columbus Day is noted as an open item (bond market closed Monday)** from general knowledge of the holiday calendar, labelled UNVERIFIED for tomorrow's brief to check. Not used in any grade.
+- No unratified rule applied. D-5, D-6, I-21, I-22, I-23, I-24, I-25 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, four runs); Turso token rotation.
