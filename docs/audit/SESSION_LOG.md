@@ -2221,3 +2221,35 @@ Session launched from this repository (§0 satisfied).
 - **Columbus Day is noted as an open item (bond market closed Monday)** from general knowledge of the holiday calendar, labelled UNVERIFIED for tomorrow's brief to check. Not used in any grade.
 - No unratified rule applied. D-5, D-6, I-21, I-22, I-23, I-24, I-25 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, four runs); Turso token rotation.
+
+## 2026-10-12 (day + evening) — First-bar check #12; scheduled post-close review #25 (n=39); option marks session 5/20
+
+Session launched from this repository (§0 satisfied).
+
+- **First-bar check:**
+  - 9:46: UNCLEAR, confirmed and split — SPY pinned inside Friday's range, QQQ closed 30¢ under Friday's low. Unusual Whales down (curl 22).
+  - Appended to `day-plan/cards/2026-10-12.md` (file created).
+  - 10:16 not run: Columbus Day, no 10:00 release — one quiet line.
+- **Evening review** (`brief-review/reviews/2026-10-12.md`):
+  - F 9/10, Open HIT, Mood HIT (every rotational qualifier right), Regime HIT. First-bar check HIT.
+  - Radar: nothing fired — SPY/QQQ, USO and MRK all NO-TRIGGER; MRK PDUFA still OPEN.
+  - W precision 4/9, **recall 8/8**.
+- **Governance finding:** the brief's index card gated its trigger on I-23, a PROPOSED tracking-only item, and misquoted its count.
+- **Ledger:**
+  - **D-7 PROPOSED:** proposals are context, not conditions.
+  - I-23 evidence: a refused unconfirmed break, logged separately from fires.
+- **Scorecard:**
+  - 10/12 row and cumulatives updated (n=39).
+  - Standing observation #10 now has its first counter-instance.
+  - No day-type row (owner flat).
+- **Option marks:** 8 recorded, 0 missing (SPY 779 / QQQ 748). Session 5/20 (SPY flat-skipped).
+- **Owner (R-3, day 14):** no orders; equity $113.27. No grade.
+- DB synced (47 statements). MUST_MENTION regenerated (10 names, through 10/12). Pushed to branch + main.
+
+### DEVIATIONS
+
+- **The review identified (not committed) a deviation in today's brief:** an unratified proposal (I-23) was used as a trigger condition. Recorded under D-7 for the owner. The review did not grade the card as if the clause were valid or invalid — the card was NO-TRIGGER either way on SPY. The QQQ-only counterfactual is reported, not graded.
+- **The HDD-pair driver open item was retired as stale by review judgement** (five sessions, no new information), not by a resolution.
+- **MRK's PDUFA outcome is still unfound** (secondary searches only; no Merck / Daiichi release surfaced). Carried as OPEN; no grade depends on it.
+- No unratified rule applied by the review. D-1–D-7, I-15–I-18, I-21–I-25, R-3 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, five runs); Turso token rotation.
