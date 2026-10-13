@@ -2253,3 +2253,38 @@ Session launched from this repository (§0 satisfied).
 - **MRK's PDUFA outcome is still unfound** (secondary searches only; no Merck / Daiichi release surfaced). Carried as OPEN; no grade depends on it.
 - No unratified rule applied by the review. D-1–D-7, I-15–I-18, I-21–I-25, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, five runs); Turso token rotation.
+
+## 2026-10-13 (day + evening) — First-bar checks #13–14; scheduled post-close review #26 (n=40); MRK record correction; option marks session 6/20
+
+Session launched from this repository (§0 satisfied).
+
+- **First-bar checks:**
+  - 9:46: UNCLEAR, confirmed (QQQ's gap filling, SPY inside).
+  - 10:16: UNCLEAR, leaning STUCK (gap-fill stalled under 744.85). WDC fade fired at 10:15; GS killed at 10:00.
+  - Existing-home-sales number UNVERIFIED. Unusual Whales down (curl 22).
+- **Evening review** (`brief-review/reviews/2026-10-13.md`):
+  - F 6/7, Open HIT, Mood HIT (rotation qualifier ✗), Regime HIT. First-bar checks MIXED / HIT.
+  - Radar: WDC fade CONF-PAID +1.54%; GS INVALIDATED (clean kill 31/31); QQQ/SPY NO-TRIGGER.
+  - W precision 1/8, recall 4/7.
+- **RECORD CORRECTION:** the brief found that the MRK I-DXd BLA was withdrawn on 2026-09-25; I verified it against trade press.
+  - Our briefs carried a non-existent "10/10 PDUFA" from 10/01 to 10/12, and our reviews graded it ✓ five times.
+  - The 10/08 review graded the brief that dropped it as ✗.
+  - Net −4 facts, applied to the SCORECARD cumulative with a correction table in the 10/13 review and an addendum to the 10/08 review. The original grades are not rewritten. The DB's `brief_reviews.facts_correct` is adjusted on the six affected rows, with the note appended to `top_gap`.
+- **Ledger:**
+  - **I-26 PROPOSED:** status re-check for carried catalysts.
+  - I-21 evidence: the fourth day-label error, plus a note that its own 10/06–10/07 MRK evidence rests on the withdrawn catalyst.
+- **Scorecard:** 10/13 row and cumulatives updated (n=40); day-type row added (UNCLEAR now 10 days, +$3,430); obs #10 now 4 reversals / 1 hold.
+- **Option marks:** 8 recorded, 0 missing. Session 6/20 (first all-call session).
+- **Owner (R-3, day 15):** 1 trip, −$76; equity $113.27 → $37.18 (−67.2%). Grade F.
+- DB synced (53 statements). MUST_MENTION regenerated (5 names). Pushed to branch + main.
+
+### DEVIATIONS
+
+- **Changing past grades after the fact.** CLAUDE.md §9 forbids rewriting a plan after results; this is a factual correction to graded facts, not a change of analysis plan.
+  - It is recorded additively: the correction table in today's review, an addendum appended to the 10/08 review, the cumulative adjusted with an explanation, and the DB rows annotated.
+  - No original review text was edited.
+  - **The owner should know the facts rate moved from 94% to 92% partly because of our own error, not the brief's.**
+- **The MRK withdrawal is verified from trade press, not the Merck newsroom directly** (multiple consistent outlets dated 9/25). Labelled as such.
+- **Existing-home-sales number UNVERIFIED.** No grade depends on it.
+- No unratified rule applied by the review. D-1–D-7, I-15–I-18, I-21–I-26, R-3 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, six runs); Turso token rotation; the account decision.
