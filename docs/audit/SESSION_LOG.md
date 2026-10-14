@@ -2288,3 +2288,37 @@ Session launched from this repository (§0 satisfied).
 - **Existing-home-sales number UNVERIFIED.** No grade depends on it.
 - No unratified rule applied by the review. D-1–D-7, I-15–I-18, I-21–I-26, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, six runs); Turso token rotation; the account decision.
+
+## 2026-10-14 (day + evening) — First-bar check #15 (no brief at 9:46); scheduled post-close review #27 (n=41, brief published late); option marks session 7/20
+
+- **First-bar checks:**
+  - **9:46:** `briefs/2026-10-14.md` was absent on main at 9:47. The check ran on yesterday's prices: UNCLEAR, both indexes gapped below yesterday's lows on CPI morning. It named the deciding line ("a 10:00 close back above 775.95 / 738.84 = gap failing; staying under = gap holds") and wrote no cards.
+  - **10:16:** not run — with no brief, no §3 listed a 10:00 release.
+- **The brief ran late.** The scheduled task started at 10:15 ET and the brief was committed at 10:26 ET (13a0716). Its header says so. Why the scheduler fired late cannot be diagnosed from this session.
+- **Evening review** (`brief-review/reviews/2026-10-14.md`). The late-run grading convention was written in the review header **before** grading:
+  - Facts as usual.
+  - Open read NOT GRADED.
+  - Mood and regime on close-to-close, with the publish-to-close drift stated.
+  - Radar: only closes after 10:26 were eligible.
+- **Results:**
+  - F 11/12. CPI, EPS and the DELL Barclays downgrade were all verified. ✗ two claims about our own bank-earnings record.
+  - Mood HIT; Regime HIT; first-bar 9:46 MIXED.
+  - Radar: SPY/QQQ bear CONF-PAID (paired at 11:15, both targets by 11:45); DELL bear CONF-PAID (10:30, 520 printed by 11:30). TSM vol test OPEN.
+  - W precision 10/13, recall 16/18 (missed PLTR, SLS).
+- **Ledger:**
+  - **I-27 PROPOSED:** a late or missing brief protocol covering the brief, the review convention and the 9:46 fallback.
+  - **I-28 PROPOSED:** earnings vol tests should measure reference-to-close, not open-to-close.
+  - I-21 evidence (the own-record claims); D-7 evidence (compliant "context" form).
+- **Scorecard:** n=41. Obs #10 gains its first post-10:00 instance (held). No day-type row (the owner did not trade).
+- **Option marks:** 8 recorded, 0 missing. Session 7/20.
+- **Owner (R-3, day 16):** no orders; equity $37.23. Flat.
+- DB synced (46 statements). MUST_MENTION regenerated: 13 names, up from 5 after the AI-infra flush.
+
+### DEVIATIONS
+
+- **The morning brief was published 56 minutes after the open.** That is a process failure of the scheduled brief task, outside this session. The owner had no brief at the open on a CPI day.
+- **This review graded a post-open brief by a convention no spec contains yet.** It was stated before grading, and is proposed as I-27(b). If the owner rules otherwise, tonight's open-read "NOT GRADED" and post-publish trigger eligibility are the two grades that would change.
+- **TSM vol card:** I flagged a comparator defect before the outcome is known. Tomorrow it is graded as written, per §9 — it is not re-specified after the fact.
+- **CPI consensus:** sources disagree on core (2.5% CNBC/CBS vs 2.4% Morningstar). The brief's 2.5% matches the majority; not counted against it.
+- No unratified rule was applied by the review. D-1–D-7, I-15–I-18, I-21–I-28, R-3 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, seven runs); Turso token rotation; the account decision.
