@@ -2322,3 +2322,39 @@ Session launched from this repository (§0 satisfied).
 - **CPI consensus:** sources disagree on core (2.5% CNBC/CBS vs 2.4% Morningstar). The brief's 2.5% matches the majority; not counted against it.
 - No unratified rule was applied by the review. D-1–D-7, I-15–I-18, I-21–I-28, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, seven runs); Turso token rotation; the account decision.
+
+## 2026-10-15 (day + evening) — First-bar checks #16–17; scheduled post-close review #28 (n=42); option marks session 8/20
+
+- **The brief was on time** (committed 9:18 ET).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, confirmed. The split held: SPY sat on its floor, and QQQ's low stopped 1¢ above its run line.
+  - **10:16:** run because §3 listed business inventories at 10:00. UNCLEAR, leaning STUCK: SPY's 10:00 floor break failed in one candle; the TSM flush fired at 10:00. The inventories number is UNVERIFIED.
+  - Unusual Whales down (curl 22).
+- **Evening review** (`brief-review/reviews/2026-10-15.md`):
+  - F 8/10 · Open MIXED · Mood **MISS** · Regime MIXED · first-bar checks 9:46 HIT / 10:16 MIXED.
+  - **The day:** the complex capitulated at 9:50–9:55, then reversed all day — the brief's own counter-case.
+  - **Radar:**
+    - TSM flush CONF-FAILED; TSM fade CONF-PAID +0.11% (SCRATCH under R-4).
+    - QQQ card NO-TRIGGER (3¢ and 11¢ near misses; the fade fired at 3:15, after its 2:00 deadline).
+    - IBRX OPEN (½¢ short of its trigger).
+    - TLT test resolved, but its stated implication failed.
+    - The 10/14 TSM vol card resolved **RICH**.
+  - **Watchlist:** precision 11/20, recall 8/11. The written two-sided lines paid (GME 27.80, OPEN 2.00, RDDT 153, HIMS 28.50).
+- **Record note (additive):** the 10/14 review used last prints instead of official closes (SPY 769.62 vs 769.60, QQQ 728.84 vs 728.95, DELL 507.58 vs 507.93, TSM 430.08 vs 430.00). No grade moved; the 10/14 file is unedited; official closes are used from tonight.
+- **Ledger:**
+  - **I-29 PROPOSED:** corrections carry forward. The brief repeated two own-record figures last night's review had corrected.
+  - **I-30 PROPOSED:** repeat recall misses join MUST_MENTION. SLS has been missed 4 times in 5 sessions.
+  - Evidence appended: I-18 (retail-sales composition), I-21, D-7 (non-compliant pairing citation, no cost), R-4 (TSM fade scratch), I-26 (IBRX catalyst dated by aggregator).
+- **Scorecard:** n=42. Obs #10 is now 4 reversals / 2 holds. No day-type row (the owner did not trade).
+- **Option marks:** 8 recorded, 0 missing. Session 8/20 (the first session where the call side held all day).
+- **Owner (R-3, day 17):** no orders; equity $37.19. Flat.
+- **DB:** synced (48 statements). Before the sync I checked the `radar_items` schema, because tonight's statements include an UPDATE by column name. MUST_MENTION regenerated (12 names).
+
+### DEVIATIONS
+
+- **Late-fire grading:** the QQQ fade fired at 3:15, after the card's 2:00 deadline, and its target then printed. I graded it NO-TRIGGER, as written. The direction was right; the record shows the counterfactual separately and does not credit it.
+- **TSM card:** graded as two fired confirmations (flush CONF-FAILED, fade CONF-PAID). The second fire came two hours after the first, so the card's same-hour whipsaw clause did not apply.
+- **IBRX:** the approval fact is counted ✓ although the brief misdated it by one day. It hedged the dating, and the substance is verified. The dating is recorded as I-26 evidence rather than as a fact error. A stricter reading would make F 7/10.
+- **Inventories:** the 10:00 business inventories number is UNVERIFIED (not sourced). No grade depends on it.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-30, R-3 and R-4 are cited as proposals only. I-30's candidate (SLS) is listed by hand, not added to MUST_MENTION.
+- **Standing:** Unusual Whales key rotation (401, eight runs); Turso token rotation; the account decision.
