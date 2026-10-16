@@ -2358,3 +2358,36 @@ Session launched from this repository (§0 satisfied).
 - **Inventories:** the 10:00 business inventories number is UNVERIFIED (not sourced). No grade depends on it.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-30, R-3 and R-4 are cited as proposals only. I-30's candidate (SLS) is listed by hand, not added to MUST_MENTION.
 - **Standing:** Unusual Whales key rotation (401, eight runs); Turso token rotation; the account decision.
+
+## 2026-10-16 (day + evening) — First-bar check #18 (no 10:16, no 10:00 release); scheduled post-close review #29 (n=43); option marks session 9/20
+
+- **The brief was on time** (committed 9:18 ET).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning STUCK. SPY's micro-gap above yesterday's high failed in the first bar, leaving both indexes inside their ranges.
+  - **10:16:** correctly not run. Industrial production was at 9:15, and §3 listed no 10:00 release.
+  - Unusual Whales down (curl 22).
+- **Evening review** (`brief-review/reviews/2026-10-16.md`):
+  - F 8/9 · Open HIT · Mood **MISS** · Regime **MISS** · first-bar 9:46 MISS.
+  - **The day:** the AI-infrastructure liquidation took the index down: SPY −1.10%, QQQ −2.49%, SOXL −12.7%, CRWV −11.9%.
+  - **Radar:**
+    - SPY/QQQ bear CONF-PAID (−1.04% to 2:00); CRWV bear CONF-PAID (−4.73% to 2:00).
+    - GME INVALIDATED — clean kill 32/32.
+    - TLT test resolved, but its implication failed again.
+    - The 10/15 IBRX card closed NO-TRIGGER (expired).
+    - The TSM straddle expired UNDERPRICED reference-to-expiry (−5.69%) vs RICH as written.
+  - **Watchlist:** precision 15/18, recall 16/18 (missed SLS, RARE).
+- **Scorecard:** n=43.
+  - New standing observations: **#11** (on complex-driven narrow tapes, the AI complex's direction became SPY's — 2/2) and **#12** (the TLT tests' equity implications failed — 2/2). Both are hypotheses, below proposal threshold.
+  - Obs #10 is now 4 reversals / 3 holds.
+- **Ledger:** evidence appended to I-28 (the comparator flipped the verdict), I-29 (second repeated correction) and I-30 (SLS 5 of 6). No new proposals.
+- **Option marks:** 8 recorded, 0 missing. Session 9/20 (put side held all day; 1DTE = Monday).
+- **Owner (R-3, day 18):** no orders; equity $37.23. Flat.
+- DB synced (47 statements). MUST_MENTION regenerated (19 names after the liquidation).
+
+### DEVIATIONS
+
+- **GME card grading:** the card had a two-stage invalidation (un-confirm below 27.80, kill below 26.50). I graded the first stage firing on the first eligible close as INVALIDATED (clean). The kill line never printed, so a stricter reading would call it "un-confirmed, not killed".
+- **TSM straddle:** the card is graded RICH as written (§9). The UNDERPRICED reference-to-expiry result is reported beside it as I-28 context only, not as a grade change.
+- **Coverage-only items:** the Warsh-coverage contrast ("declined to rule out a hike") comes from midday coverage, not a transcript. It is used only in H, not graded.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-30, R-3 and R-4 are cited as proposals only. Obs #11 and #12 are hypotheses.
+- **Standing:** Unusual Whales key rotation (401, nine runs); Turso token rotation; the account decision.
