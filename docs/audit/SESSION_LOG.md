@@ -2391,3 +2391,42 @@ Session launched from this repository (§0 satisfied).
 - **Coverage-only items:** the Warsh-coverage contrast ("declined to rule out a hike") comes from midday coverage, not a transcript. It is used only in H, not graded.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-30, R-3 and R-4 are cited as proposals only. Obs #11 and #12 are hypotheses.
 - **Standing:** Unusual Whales key rotation (401, nine runs); Turso token rotation; the account decision.
+
+## 2026-10-19 (day + evening) — First-bar checks #19–20; scheduled post-close review #30 (n=44); weekday record correction; option marks session 10/20
+
+- **The brief was on time** (committed 9:19 ET).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning STUCK — both indexes inside Friday's range, and SPY's first bar was 1.2 points.
+  - **10:16:** run because of the 10:00 NAHB release. UNCLEAR, pressing the bull side; the CRWV bear re-arm fired at 10:00. The NAHB number is UNVERIFIED.
+  - **The 9:46 lines contained an unverified claim** ("the narrowest SPY opening bar in two weeks"). I corrected it additively in the 10:16 lines; the card is append-only and was not edited.
+- **Evening review** (`brief-review/reviews/2026-10-19.md`):
+  - F 9/9 · Open HIT · Mood MIXED (drift clause) · Regime HIT · first-bar checks 9:46 HIT / 10:16 MIXED.
+  - **Radar:**
+    - CRWV bear re-arm CONF-PAID.
+    - SPY bull CONF-FAILED −0.06% (SCRATCH under R-4; the card's "morning" had no clock deadline).
+    - GME INVALIDATED — clean kill 33/33.
+    - NFLX vol test OPEN.
+  - **Watchlist:** precision 7/13, recall 6/8.
+- **RECORD CORRECTION (−2):** the brief corrected TSLA/META's report day to Wednesday 10/21 (Monday 10/19 + 2). Our 10/14 F #7 and 10/16 F #5 had marked "Tue 10/21" ✓. Both become ✗:
+  - correction table in tonight's review;
+  - cumulative adjusted;
+  - DB `facts_correct` decremented and annotated on both rows;
+  - originals not edited.
+  - Our 10/16 week-ahead line also called WDC's Thursday report "Wed" (prose, not graded).
+- **Ledger:**
+  - **I-31 PROPOSED:** weekday labels are checked against a computed calendar.
+  - Evidence: I-21 (against the review layer); I-29 and I-30 counter-instances.
+- **Scorecard:** n=44.
+  - Obs #10 is now 4 reversals / 4 holds — no longer supported.
+  - Obs #11 n=3, consistent (SPY and the semis peaked at the same bar).
+- **Option marks:** 8 recorded, 0 missing. Session 10/20.
+- **Owner (R-3, day 19):** no orders; equity $37.22. Flat.
+- DB synced (48 statements). MUST_MENTION regenerated (9 names).
+
+### DEVIATIONS
+
+- **Changing past grades after the fact (weekday correction).** This is a factual correction recorded additively, the same way as the 10/13 MRK correction; no review text was rewritten. The owner should know that **two of the "verified" facts in our record were the review layer's own error.**
+- **Card #1's "morning" timing has no clock time.** I graded it to 12:00 and also reported the close. The grade (CONF-FAILED) is the same either way.
+- **My 9:46 check published an unverified claim.** It was caught within 30 minutes and corrected in the next block, but it went out as fact. It is the kind of statement §3's honesty rules exist to stop.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-31, R-3 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (401, ten runs); Turso token rotation; the account decision.
