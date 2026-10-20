@@ -2430,3 +2430,33 @@ Session launched from this repository (§0 satisfied).
 - **My 9:46 check published an unverified claim.** It was caught within 30 minutes and corrected in the next block, but it went out as fact. It is the kind of statement §3's honesty rules exist to stop.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-31, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, ten runs); Turso token rotation; the account decision.
+
+## 2026-10-20 (day + evening) — First-bar checks #21–22; scheduled post-close review #31 (n=45); option marks session 11/20
+
+- **The brief was on time** (committed 9:16 ET).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning RUNNING down. This changed the brief's split read: SPY joined QQQ below yesterday's low in the opening bar.
+  - **10:16:** UNCLEAR again — the opening break failed within 30 minutes. The QQQ bull reclaim and the WDC bull both fired at 10:15. The Pending Home Sales number is UNVERIFIED.
+- **Evening review** (`brief-review/reviews/2026-10-20.md`):
+  - F 9/9 · Open HIT · Mood **MISS** (by 8 bp) · Regime HIT · first-bar checks 9:46 MISS / 10:16 HIT.
+  - **Radar:**
+    - QQQ bull CONF-PAID (+0.18% to noon); CRWV bull CONF-FAILED (−0.80%).
+    - WDC bull fired, OPEN to Thursday.
+    - NFLX vol tests OPEN.
+  - **Watchlist:** precision 4/13 (the premarket complex sell-off reversed), recall 5/8.
+- **Scorecard:** n=45.
+  - New standing observation **#13**: a gap-down opening bar was the session low on 10/15 and 10/20 (n=2, hypothesis).
+  - Obs #10 is now 4 reversals / 5 holds.
+- **Ledger:** evidence appended to I-30 (RARE meets the threshold, three straight misses) and I-31 (applied by hand). No new proposals.
+- **Option marks:** 8 recorded, 0 missing. Session 11/20.
+- **Owner (R-3, day 20):** no orders; equity $37.14. Flat.
+- DB synced (45 statements). MUST_MENTION regenerated (11 names).
+
+### DEVIATIONS
+
+- **My 9:46 check leaned RUNNING down on a capitulation bar** and was wrong within 30 minutes. That is recorded as a MISS, and the 10:16 check corrected it in the same card. No rule was broken, but the read was wrong.
+- **QQQ card target:** its 718.36 reference was already spent inside the trigger candle. I graded it on the strict move to the "morning" window end (noon), not as an automatic target hit.
+- **CRWV card:** no target was written, so it is graded on the move to the window end (the close).
+- **After-hours moves** (NFLX −5.6%, SPCX +5.7%, the broad AI bid) are reported as context only, not graded. The NFLX tests resolve on Wednesday's open and Friday's close.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-31, R-3 and R-4 are cited as proposals only. RARE meeting I-30's threshold is noted, not acted on.
+- **Standing:** Unusual Whales key rotation (401, eleven runs); Turso token rotation; the account decision.
