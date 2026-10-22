@@ -2490,3 +2490,33 @@ Session launched from this repository (§0 satisfied).
 - **Card #1's two-index wording was ambiguous.** I graded it as a pair (AND) and recorded the EITHER reading beside it. That is my interpretation, not a rule (→ I-32).
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-32, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (401, twelve runs); Turso token rotation **and re-provisioning**; the account decision.
+
+## 2026-10-22 (day + evening) — First-bar checks #24–25; scheduled post-close review #33 (n=47); DB sync DEFERRED (second night); option marks session 13/20
+
+- **The brief was on time** (`9ecf172`, before the 9:20 day-plan window).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR — both indexes held in the gap between the premarket lows and yesterday's lows; UW failed (curl 22).
+  - **10:16** (10:00 Leading Index; the number was not sourced, UNVERIFIED): UNCLEAR, unchanged; the 10:15 closes were about a point above both premarket lows. Recorded that the TSLA bull fired at the 10:00 close.
+- **Evening review** (`brief-review/reviews/2026-10-22.md`):
+  - F 8/9 · Open HIT · Mood HIT · Regime HIT · first-bar checks 9:46 MIXED, 10:16 MIXED.
+  - **F ✗:** §4A silently dropped MRNA's Oct 24 melanoma date, which the 10/20 and 10/21 briefs carried. That is an I-13 (ratified) execution gap. MRNA fell −17.6% when the data leaked.
+  - **Radar:** 0 CONF-PAID / 2 fired.
+    - The SPY/QQQ bear pair (10:30) failed its noon window. QQQ paid after it; SPY never did.
+    - The TSLA bull (10:00) went −3.14% to the close, and its target was behind the confirming close.
+    - USO NO-TRIGGER (9¢ short of the retest zone).
+    - WDC's pre-event clause held (354.22 > 345); its vol test is OPEN.
+  - **Watchlist:** precision 6/7, recall 17/17.
+- **Ledger:** **I-33 PROPOSED** (a target behind the confirming close is spent at confirmation). I-32 evidence appended: the brief applied it by hand. No new proposal for the MRNA miss; the rule already exists (I-13).
+- **Scorecard:** n=47. Obs #10 is now 4 reversals / 7 holds. Obs #13 has its first counter-instance (2 holds / 1 failure).
+- **Option marks:** 8 recorded, 0 missing. Session 13/20.
+- **Owner (R-3, day 22):** no option orders; account $37.33. Flat, seven sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** No `TURSO_*` variables are in the environment and there is no `.env`. The scratchpad holds no credential file. I did **not** attempt any transcript-based recovery; last night that route was refused by the permission layer, and it stays closed. The 10/21 and 10/22 rows (brief_reviews, radar_items, watchlist_events, open_items) await a backfill from the review files.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the second night.** Both are required routine steps. Credentials are still not provisioned.
+  - **Owner action unchanged:** rotate the Turso token and provision it to the deployment secret store or a gitignored `.env`.
+- **The TSLA grade is an interpretation.** The literal R-2 reading (target printed after the trigger → CONF-PAID) was set aside because the target was already behind the confirming close. I graded CONF-FAILED on the window-end basis and recorded both readings for the owner (→ I-33). This is a judgement on a ratified rule's edge case, not a new rule applied.
+- **The first-bar checks were graded MIXED by me, of my own output.** I followed the 10/07 / 10/16 precedents (UNCLEAR on a day that ran = MIXED). Self-grading is a standing conflict of this process; it is named here, not resolved.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only. The R-4 scratch band is mentioned in §R #1 as context; it did not change the grade.
+- **Standing:** Unusual Whales key rotation (401 / curl 22, thirteen runs); Turso rotation **and re-provisioning**; the account decision.
