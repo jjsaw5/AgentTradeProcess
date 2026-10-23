@@ -2520,3 +2520,45 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar checks were graded MIXED by me, of my own output.** I followed the 10/07 / 10/16 precedents (UNCLEAR on a day that ran = MIXED). Self-grading is a standing conflict of this process; it is named here, not resolved.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only. The R-4 scratch band is mentioned in §R #1 as context; it did not change the grade.
 - **Standing:** Unusual Whales key rotation (401 / curl 22, thirteen runs); Turso rotation **and re-provisioning**; the account decision.
+
+## 2026-10-23 (day + evening) — First-bar check #26 (no 10:16, PMIs at 9:45); scheduled post-close review #34 (n=48); DB sync DEFERRED (third night); option marks session 14/20
+
+- **The brief was on time** (`c746430`).
+- **First-bar check, 9:46:** UNCLEAR — the split held (SPY just below yesterday's low, QQQ back inside); UW failed (curl 22). The 10:16 routine fired and correctly stood down: there was no 10:00 release. I replied with one line and committed nothing.
+- **Evening review** (`brief-review/reviews/2026-10-23.md`):
+  - F 8/10 · Open HIT · Mood HIT (the direction; the leadership qualifier inverted) · Regime MIXED · first-bar check 9:46 HIT.
+  - **F ✗:**
+    - §0 misread our DAY-TYPE RECORD (I-29, third instance).
+    - SPCX "~10%" contradicted the verified +7.77%.
+  - **The I-13 fix landed:** MRNA's Saturday date was restored and verified.
+  - **Radar:** 1 CONF-PAID / 3 fired.
+    - SMH compound bounce: paid.
+    - QQQ bull: invalidated on the final bar.
+    - WDC 10/20 card: killed at the 343.54 close.
+    - USO: NO-TRIGGER, second day running.
+  - **Vol tests resolved:** WDC, TSLA and NFLX ×2 RICH; META UNDERPRICED. **Radar OPEN count is now 0.**
+  - **Watchlist:** precision 5/14, recall 3/5 (missed RDDT, HIMS).
+- **Ledger:** no new proposal. I-29 evidence appended.
+- **Scorecard:** n=48.
+  - Obs #10 is now 4 reversals / 8 holds.
+  - Obs #11 has its first counter-instance.
+  - The 10/22 F #9 open item is closed (a labelled basis difference).
+  - Recorded for the record: the 10/22 review used last prints rather than official closes for SPY/QQQ (penny-class).
+- **Option marks:** 8 recorded, 0 missing (the next expiry is Mon 10/26). Session 14/20.
+- **Owner (R-3, day 23):** no option orders; account $37.31. Flat, eight sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted. Backfill 10/21–10/23 from the review files once the token is re-provisioned.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the third night.** These are required steps, and the credentials have not been provisioned.
+  - **Owner action unchanged:** rotate the Turso token and provision it to the secret store or a gitignored `.env`.
+- **Grading judgements, named:**
+  1. **SMH / SOXL counted as one flagged bullet and credited on its confirmed story** rather than on the ≥2% move.
+  2. **MRNA counted as a precision miss tonight.** Its story is Saturday's binary, so the flag is not really gradable on Friday's tape.
+  3. **The WDC 10/20 card graded CONF-FAILED rather than INVALIDATED.** Its kill fired after its confirmation, so the 33/33 clean-kill count is unchanged.
+  4. **PG's ≥2% counted** both raw (−2.70%) and dividend-adjusted (−2.06%).
+
+  Each is my reading of the rubric, not a new rule.
+- **The first-bar check was graded by me, of my own output** (HIT). This is a standing self-grading conflict; it is named, not resolved.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
+- **Standing:** Unusual Whales key rotation (fourteen runs); Turso rotation **and re-provisioning**; the account decision.
