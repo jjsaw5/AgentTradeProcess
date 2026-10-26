@@ -2562,3 +2562,24 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar check was graded by me, of my own output** (HIT). This is a standing self-grading conflict; it is named, not resolved.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
 - **Standing:** Unusual Whales key rotation (fourteen runs); Turso rotation **and re-provisioning**; the account decision.
+
+## 2026-10-26 (day + evening) — NO BRIEF; first-bar check #27 (no-brief fallback, routine 14 min late); no 10:16; evening record (not graded, n stays 48); DB sync DEFERRED (fourth night); option marks session 15/20
+
+- **No brief was published.** `briefs/2026-10-26.md` was absent from main at 10:01, 10:27 and 18:01 ET, and on no remote branch. The brief's scheduler is outside this repo; the cause is UNVERIFIED.
+- **First-bar check, 9:46:** the routine fired at 10:00 ET and was delivered about 10:03. It ran the no-brief fallback on Friday's lines and said UNCLEAR, leaning STUCK. Both indexes then broke Friday's highs (10:15 / 10:30) and held, so it is graded **MISS**. The 10:16 routine correctly stood down (no §3).
+- **Evening record** (`brief-review/reviews/2026-10-26.md`): nothing to grade (F / O / M / G / R / W blank; n unchanged).
+  - Friday's MRNA item resolved: the weekend data was positive (RFS HR 0.58). MRNA opened −6.5%, held the 180.80 line by 85¢ and filled the gap by 10:00, so the 10/23 "either way / no position" framing held.
+  - Owner: no orders; account $37.23. Flat, nine sessions.
+- **Ledger:** I-27 evidence appended (second instance, worse: a brief that never ran). No new proposal.
+- **Scorecard:** a 10/26 row marked NO BRIEF. First-bar tally 11 / 11 / 5 of 27.
+- **Option marks:** 8 recorded, 0 missing. Session 15/20.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **The routine's core step (grading today's brief) could not run: there was no brief.** I wrote a not-graded record rather than skipping the file, so the absence is on the record. The n is unchanged by design.
+- **DB sync and MUST_MENTION regeneration skipped for the fourth night.** Credentials are still not provisioned.
+- **The first-bar check ran without a brief.** It used Friday's lines and a price-only lean; the I-27(c) no-brief fallback is still unratified. It is graded by me, of my own output (MISS). That is a standing self-grading conflict, named.
+- **I did not inspect or modify the brief's scheduled task.** It is not in this session's scope, and changing a scheduled task needs the owner. Reported instead.
+- **No unratified rule applied.** I-27 and the other proposals are cited as proposals only.
+- **Standing:** Unusual Whales key rotation; Turso rotation **and re-provisioning**; the account decision; **diagnose the brief's scheduler**.
