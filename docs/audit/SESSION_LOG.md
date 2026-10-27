@@ -2583,3 +2583,37 @@ Session launched from this repository (§0 satisfied).
 - **I did not inspect or modify the brief's scheduled task.** It is not in this session's scope, and changing a scheduled task needs the owner. Reported instead.
 - **No unratified rule applied.** I-27 and the other proposals are cited as proposals only.
 - **Standing:** Unusual Whales key rotation; Turso rotation **and re-provisioning**; the account decision; **diagnose the brief's scheduler**.
+
+## 2026-10-27 (day + evening) — First-bar checks #28–29; scheduled post-close review #35 (n=49); DB sync DEFERRED (fifth night); option marks session 16/20
+
+- **The brief was late:** committed 9:20:25 ET; its §13 says the run fired ~9:08 instead of ~8:00. This comes the morning after no brief at all.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR — both just above yesterday's highs; SPY by only 5¢.
+  - **10:16:** UNCLEAR, unchanged — the highs were rejected and both were back inside; the 10:00 release numbers are UNVERIFIED.
+- **Evening review** (`brief-review/reviews/2026-10-27.md`):
+  - F 9/10 · Open HIT · Mood HIT · Regime MIXED · first-bar checks 9:46 MIXED, 10:16 MIXED.
+  - **F ✗:** §0 repeated the DAY-TYPE RECORD error that the 10/23 review had corrected (I-29 core failure).
+  - **Radar:**
+    - SPY/QQQ bull pair (11:00): CONF-PAID.
+    - SMH: NO-TRIGGER under I-8 (gapped past, no retest; read literally it would have paid +1.36%).
+    - V vol test: OPEN.
+  - **Watchlist:** precision 12/16, recall 12/14 (missed IONQ, RARE).
+- **Ledger:** evidence appended to I-27, I-29 and I-32. No new proposal; the SMH miss is an I-8 execution gap under an existing ratified rule.
+- **Scorecard:** n=49. Obs #10 is now 4 reversals / 9 holds.
+- **Option marks:** 8 recorded, 0 missing. Session 16/20.
+- **Owner (R-3, day 25):** no option orders; account $37.30. Flat, ten sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the fifth night.** Credentials are still not provisioned; owner action unchanged.
+- **Grading judgements, named:**
+  1. **SMH graded under ratified I-8 (NO-TRIGGER) over its literal card wording (CONF-PAID).** The ratified rule governs. Both readings are recorded.
+  2. **The index pair graded as AND,** per the I-32 convention; the EITHER reading is recorded beside it.
+  3. **The 770 / 720 "references" were not treated as R-2 named targets.** The window-end basis gives the same grade.
+  4. **10:16 graded MIXED, not MISS:** its fade-side description was not a formal lean.
+
+  Each is my reading of the rubric, not a new rule.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
+- **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the account decision; diagnose the brief's scheduler.
