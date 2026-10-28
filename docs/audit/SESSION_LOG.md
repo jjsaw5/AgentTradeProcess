@@ -2617,3 +2617,39 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
 - **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the account decision; diagnose the brief's scheduler.
+
+## 2026-10-28 (day + evening) — Fed day; first-bar check #30 (no 10:16, no 10:00 release); scheduled post-close review #36 (n=50); DB sync DEFERRED (sixth night); option marks session 17/20
+
+- **The brief was on time** (committed 9:19:03 ET, `a0a3e91`, plus a UW-count correction commit `4eb4546`).
+- **First-bar check, 9:46:** UNCLEAR — the thin gap up was fading. The 10:16 routine correctly stood down: there was no 10:00 release.
+- **Evening review** (`brief-review/reviews/2026-10-28.md`):
+  - F 6/9 · Open HIT · Mood HIT · Regime HIT · first-bar check 9:46 HIT.
+  - **The Fed held, 10–2,** with two dissents for a hike. The presser moved SPY about 2.6 points; the decisive moves came after hours (MSFT +5.9%, GOOGL −10.9%).
+  - **F:** the §0 day-type record was read correctly (I-29 restored on that claim). Three new errors:
+    1. META "earnings this week" — it reported 10/21.
+    2. "Sellers won 5 straight" — the record is 4 + 1 buyer win.
+    3. A Tuesday FMP snapshot labelled "Monday-after".
+  - **Radar:** nothing fired.
+    - The FOMC card and VRT did not trigger.
+    - **NVDA was invalidated at 10:00 — a clean kill (34/34).**
+    - V vol test: RICH. MSFT / GOOGL vol tests: OPEN.
+  - **Watchlist:** precision 4/9, recall 6/7 (missed HIMS).
+- **Ledger:** evidence appended to I-29 and I-31. No new proposal.
+- **Scorecard:** n=50. Obs #10 is now 4 reversals / 10 holds.
+- **Option marks:** 8 recorded, 0 missing. Session 17/20.
+- **Owner (R-3, day 26):** no option orders; account $37.24. Flat, eleven sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the sixth night.** Credentials are still not provisioned; owner action unchanged.
+- **Grading judgements, named:**
+  1. **The FOMC card was graded on its SPY numbers.** QQQ's final-bar close above its own pre-2:00 high was not counted as a fire.
+  2. **CRWV / NBIS / SOXL were counted as one flagged bullet.**
+  3. **Obs #10 counted as a hold on leadership** despite defensive flips both ways.
+
+  Each is my reading, not a new rule.
+- **The SLS −14.7% driver was not searched tonight.** It is recorded as unknown and left for the morning brief; this is time-boxing, named.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
+- **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
