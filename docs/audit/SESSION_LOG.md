@@ -2653,3 +2653,36 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
 - **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
+
+## 2026-10-29 (day + evening) — First-bar check #31 (no 10:16, no 10:00 release); scheduled post-close review #37 (n=51); DB sync DEFERRED (seventh night); option marks session 18/20
+
+- **The brief committed 9:21:26 ET,** about a minute past the 9:20 window.
+- **First-bar check, 9:46:** UNCLEAR — the brief's split tape didn't happen: SPY also opened below its low, and QQQ flushed and bounced. The 10:16 routine correctly stood down.
+- **Evening review** (`brief-review/reviews/2026-10-29.md`):
+  - F 9/10 · Open MIXED · Mood MIXED (drift clause) · Regime HIT · first-bar check 9:46 HIT.
+  - **F ✗:** the FMP sector basis again (I-24).
+  - **Radar:** 0 / 2 fired.
+    - QQQ bear: CONF-FAILED.
+    - CRWV bull: CONF-FAILED.
+    - MRK: NO-TRIGGER under the brief's own gap rule (+3.8% unentered; obs #9 n=4 in five sessions).
+  - **Vol tests:** MSFT RICH, GOOGL UNDERPRICED; AMZN OPEN.
+  - **Watchlist:** precision 10/15, recall 8/9 (missed SIG).
+- **Ledger:** I-24 evidence appended. No new proposal; obs #9 now strengthens the pending D-1.
+- **Scorecard:** n=51. Obs #10 is now 4 reversals / 11 holds.
+- **Option marks:** 8 recorded, 0 missing. Session 18/20 — two sessions to the pre-registered evaluation.
+- **Owner (R-3, day 27):** no option orders; account $37.39. Flat, twelve sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the seventh night.** Credentials are still not provisioned; owner action unchanged.
+- **Grading judgements, named:**
+  1. **Mood MIXED on a +0.09% open-to-close drift,** following the 10/19 precedent rather than treating it as flat.
+  2. **The FMP sector line counted ✗ when unlabelled,** consistent with 10/28; it is not counted when the brief labels the basis.
+  3. **The CRWV noon result (−0.06%) graded strictly;** the R-4 scratch band is proposed only.
+  4. **AAPL / NVDA relative-strength flags not credited** (the 10/22 convention).
+
+  Each is my reading, not a new rule.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
+- **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
