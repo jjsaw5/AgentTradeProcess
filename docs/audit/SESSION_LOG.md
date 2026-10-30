@@ -2686,3 +2686,38 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
 - **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
+
+## 2026-10-30 (day + evening) — First-bar check #32 (no 10:16, PMI 9:45); scheduled post-close review #38 (n=52); DB sync DEFERRED (eighth night); option marks session 19/20
+
+- **The brief was on time** (committed 9:14:35 ET).
+- **First-bar check, 9:46:** UNCLEAR leaning RUNNING-down — both indexes below yesterday's lows and under their premarket lows. The 10:16 routine correctly stood down. The card also noted, for tonight's F table, that the brief's 10/29 MRK claim conflicted with our review.
+- **Evening review** (`brief-review/reviews/2026-10-30.md`):
+  - F 6/8 · Open HIT · Mood HIT · Regime HIT · first-bar check 9:46 HIT.
+  - **F ✗:**
+    - The brief restated the 10/29 MRK NO-TRIGGER as "confirmed and paid" (I-29, a grade rewritten).
+    - FMP sector laggards were green on the ETFs (I-24).
+  - **Radar:** 2 / 3 fired.
+    - QQQ bear: CONF-PAID, strictly +0.04% at noon.
+    - AMZN day-after bull: CONF-PAID via R-2.
+    - XLE: CONF-FAILED.
+    - MRK: NO-TRIGGER.
+  - **AMZN vol test:** RICH. **Radar OPEN is now 0.**
+  - **Watchlist:** precision 16/19, recall 16/17 (missed RARE).
+- **Ledger:** evidence appended to I-29 and I-24. No new proposal.
+- **Scorecard:** n=52. Obs #10 is now 4 reversals / 12 holds; obs #13 is 2 holds / 2 failures.
+- **Option marks:** 8 recorded, 0 missing. **Session 19/20** (the PREREG sample starts 10/06, with 10/05 excluded as written). The evaluation runs once after Monday's session 20, in a separate RESULTS document, per the PREREG.
+- **Owner (R-3, day 28):** no option orders; account $37.26. Flat, thirteen sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the eighth night.** Credentials are still not provisioned; owner action unchanged.
+- **Grading judgements, named:**
+  1. **QQQ bear graded CONF-PAID on a +0.04% noon margin.** It would be a scratch under the unratified R-4, which was not applied.
+  2. **MRK graded NO-TRIGGER, not CONF-PAID on a 12:15 re-cross.** The retest-and-hold had failed at 10:30; both readings are recorded.
+  3. **PLTR and CSCO one-liners with stated ranges were counted as recall catches; RARE's level-less line was not.**
+
+  Each is my reading of the rubric, not a new rule.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
+- **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
