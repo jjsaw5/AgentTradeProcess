@@ -2721,3 +2721,51 @@ Session launched from this repository (§0 satisfied).
 - **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-33, R-3 and R-4 are cited as proposals only.
 - **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler; the account decision.
+
+## 2026-11-02 (day + evening) — First-bar checks #33–34 (both ~1 h late after the DST change); scheduled post-close review #39 (n=53); DB sync DEFERRED (ninth night); option marks session 20/20 — sample complete
+
+- **The brief was on time** (committed 9:18:52 ET).
+- **First-bar checks ran late.** This was the first session on EST.
+  - The 9:46 routine fired at 15:44 UTC and was delivered ~10:47; the 10:16 routine fired at 16:07 UTC and was delivered ~11:10. Both labelled their lateness and read every close already in.
+  - 9:46: UNCLEAR leaning RUNNING-up — the QQQ bull fired at 10:30.
+  - 10:16: UNCLEAR, lean withdrawn — the QQQ bull was invalidated at 11:00.
+  - The bar parser's offset was changed from −4h to −5h for ET. It was cross-checked against the printed closes.
+- **Evening review** (`brief-review/reviews/2026-11-02.md`):
+  - F 10/11 · Open HIT · **Mood MISS** · Regime MIXED · first-bar checks 9:46 MISS / 10:16 MIXED.
+  - **F ✗:** PLTR "six straight beats" was five (Q1 2025 was in line).
+  - **F ✓ worth noting:**
+    - Friday's MRK correction was carried, with the review cited as the record (I-29 working).
+    - Friday's sectors came from labelled ETF closes (I-24 fixed in substance).
+  - **Mood:** "mildly bullish, tech-led" on SPY −0.48%. Tech led down while DIA and 7 of 10 sectors were green — a rotation inversion. The counter-case described the day.
+  - **Radar:**
+    - XLE bear: CONF-PAID (R-2).
+    - QQQ bull: CONF-FAILED (its bear branch then paid; the alternative reading is recorded).
+    - SMH: INVALIDATED, a clean kill (35/35).
+    - AAPL / PLTR vol tests: **OPEN 2**.
+  - **Watchlist:** precision 15/23, recall 14/14.
+- **Ledger:**
+  - Evidence appended to I-24 (fixed in substance), I-27 (routines late after DST) and I-29 (working).
+  - **New I-34 PROPOSED:** floating trigger levels ("the final premarket low / high") must be pinned to a number. The 10:16 check printed the XLE 68.46 close without seeing that it had fired against the unwritten 68.50.
+- **Scorecard:** n=53. Obs #10 is now 5 reversals / 12 holds; obs #11 is 4 consistent / 1 counter.
+- **Option marks:** 8 recorded, 0 missing. **Session 20/20 — the PREREG sample is complete.**
+  - The pre-registered evaluation was run **once**, as written: script and output in the scratchpad, draft `TIME_EXIT_RESULTS_DRAFT.md`.
+  - It was **not committed:** its destination (`options-expert/log/studies/2026-10-06-time-exit/RESULTS.md`) is outside the standing push scope, so it waits for the owner's go-ahead.
+  - The review file states that it is drafted and does not summarize it, per the rubric.
+- **Owner (R-3, day 29):** no option orders; account $37.15. Flat, fourteen sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the ninth night.** Credentials are still not provisioned; owner action unchanged.
+- **Tonight's official closes were not yet published** (17:02 ET), so day changes use the 15:59:59 last regular-session print against the official 10/30 close. This is labelled in the review.
+- **Grading judgements, named:**
+  1. **QQQ graded on its first branch to fire** (bull, CONF-FAILED), not on the later bear fire that paid in-window under the card's "bear wins" rule. Both readings are recorded for the owner.
+  2. **XLE's trigger level (68.50) was resolved after the fact** from the extended-hours bars, because the brief never printed it. The card is graded CONF-PAID against that number.
+  3. **USO was counted as a recall catch** via §2/§6 (named with its direction), on the 10/22 precedent. CVX was counted via its one-liner level.
+  4. **9:46 graded MISS rather than MIXED** for a wrong-direction lean, on the 10/20 precedent.
+
+  Each is my reading of the rubric, not a new rule.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **The time-exit evaluation was computed by the same session that recorded the marks.** The PREREG fixed the design beforehand and the evaluation applied it unchanged. One embarrassing prediction (T2) is reported as such.
+- **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-34, R-3 and R-4 are cited as proposals only.
+- **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler and the first-bar routine schedules after DST; the account decision.
