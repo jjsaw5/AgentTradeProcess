@@ -2769,3 +2769,40 @@ Session launched from this repository (§0 satisfied).
 - **The time-exit evaluation was computed by the same session that recorded the marks.** The PREREG fixed the design beforehand and the evaluation applied it unchanged. One embarrassing prediction (T2) is reported as such.
 - **No unratified rule applied by the review.** D-1–D-7, I-15–I-18, I-21–I-34, R-3 and R-4 are cited as proposals only.
 - **Standing:** UW key rotation; Turso rotation **and re-provisioning**; the brief scheduler and the first-bar routine schedules after DST; the account decision.
+
+## 2026-11-03 (day + evening) — NO BRIEF; first-bar check #35 (no-brief, on time); no 10:16; evening record (not graded, n stays 53); 11/02 vol tests resolved; additive correction to 11/02; DB sync DEFERRED (tenth night); option marks session 21 (post-sample)
+
+- **No brief was published.** `briefs/2026-11-03.md` was absent from main and every remote branch at 9:47, 10:16 and 17:01 ET. The cause is UNVERIFIED (the scheduler is outside this repo). This is the second full miss, after 10/26.
+- **First-bar check, 9:46:** fired on time (14:47 UTC).
+  - It used the no-brief price-only lines: UNCLEAR, **no lean**, after 10/26's price-only lean missed.
+  - The day was an inside day (every close inside Monday's range), so it is graded **HIT**.
+  - The 10:16 routine correctly stood down (no §3).
+- **Evening record** (`brief-review/reviews/2026-11-03.md`):
+  - **Monday's vol tests resolved** from the official closes: AAPL **RICH** (−1.95% vs ±4.7%), PLTR **RICH** (−1.64% vs ±13.4%). Radar OPEN 0.
+  - Owner: no orders; account $36.96. Flat, fifteen sessions.
+- **Correction to 11/02 (additive):**
+  - The 11/02 review used 15:59:59 last prints, because the official closes were unpublished at 17:02. The official AAPL / PLTR closes were 338.32 / 178.34.
+  - PLTR's move becomes −3.13%, which crosses the recall threshold; it was flagged, so **11/02 recall is 15/15**.
+  - A dated note is appended to the 11/02 review; its original text is untouched. SCORECARD recall is now 369/500.
+- **Ledger:** I-27 evidence appended (third instance). No new proposal.
+- **Scorecard:**
+  - An 11/03 NO BRIEF row was added.
+  - First-bar tally 15 / 14 / 6 of 35.
+  - The radar bullet notes the resolved vol tests.
+- **Option marks:** 8 recorded, 0 missing. **Session 21, post-sample** (data only; the PREREG closed at 20).
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are still no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **The routine's core step (grading today's brief) could not run: there was no brief.** A not-graded record was written instead; n is unchanged by design.
+- **DB sync and MUST_MENTION regeneration skipped for the tenth night.** Credentials are still not provisioned.
+- **A previously published review was amended.** The 11/02 review gained an appended, dated correction (official closes vs last prints), and SCORECARD's 11/02 recall figure moved 14/14 → 15/15 with the reason stated in place. The original text was not rewritten (CLAUDE.md §9).
+- **Vol tests graded without the brief's requested close re-mark** of the straddles. The verdicts do not depend on it (both moves were under half the priced move); the caveat is stated in the record.
+- **The first-bar check was graded by me, of my own output (HIT).** This is a standing self-grading conflict, named.
+- **I did not inspect or modify the brief's scheduled task.** It is outside this session's scope; reported instead.
+- **No unratified rule applied.** I-27, I-34 and the other proposals are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - UW key rotation; Turso rotation and re-provisioning.
+  - Diagnose the brief scheduler.
+  - The account decision.
