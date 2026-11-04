@@ -2806,3 +2806,32 @@ Session launched from this repository (§0 satisfied).
   - UW key rotation; Turso rotation and re-provisioning.
   - Diagnose the brief scheduler.
   - The account decision.
+
+## 2026-11-04 (day + evening) — NO BRIEF (second day running); first-bar check #36 (no-brief, on time); no 10:16; evening record (not graded, n stays 53); DB sync DEFERRED (eleventh night); option marks session 22 (post-sample)
+
+- **No brief was published** for the second consecutive day. `briefs/2026-11-04.md` was absent from main and every remote branch at 9:47, 10:16 and 17:00 ET. This is the third full miss in eight sessions; the cause is UNVERIFIED.
+- **First-bar check, 9:46 (on time):** UNCLEAR, leaning RUNNING-up, on a post-election gap above Tuesday's range.
+  - The gap held, and the named failed-gap lines were never touched.
+  - The run did not come: QQQ's 10:15 break of Monday's high failed and faded.
+  - Graded **MIXED**. The 10:16 routine correctly stood down.
+- **Evening record** (`brief-review/reviews/2026-11-04.md`):
+  - SPY +1.64%, DIA +3.08%, SMH −2.71%, XLE −4.72%.
+  - The driver is not sourced (NO CLEAR DRIVER FOUND from primary data).
+  - Owner: no orders; account $37.36. Flat, sixteen sessions.
+- **Ledger:** I-27 evidence appended (fourth instance). No new proposal.
+- **Scorecard:** an 11/04 NO BRIEF row was added. First-bar tally 15 / 15 / 6 of 36.
+- **Option marks:** 8 recorded, 0 missing. Session 22, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **The routine's core step (grading today's brief) could not run: there was no brief.** A not-graded record was written; n is unchanged by design.
+- **DB sync and MUST_MENTION regeneration skipped for the eleventh night.** Credentials are still not provisioned.
+- **The first-bar check was graded by me, of my own output (MIXED).** This is a standing self-grading conflict, named.
+- **I did not inspect or modify the brief's scheduled task.** It is outside this session's scope; reported instead.
+- **No unratified rule applied.** I-27, I-34 and the other proposals are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - UW key rotation; Turso rotation and re-provisioning.
+  - Diagnose the brief scheduler.
+  - The account decision.
