@@ -2835,3 +2835,50 @@ Session launched from this repository (§0 satisfied).
   - UW key rotation; Turso rotation and re-provisioning.
   - Diagnose the brief scheduler.
   - The account decision.
+
+## 2026-11-05 (day + evening) — LATE BRIEF (10:53); first-bar check #37 (no brief yet); no 10:16; scheduled post-close review #40 (n=54); DB sync DEFERRED (twelfth night); option marks session 23 (post-sample)
+
+- **The brief ran 3h23m late:** fired ~10:40 ET, committed 10:53:48 (`6dc524b`), after no brief on 11/03 or 11/04.
+- **First-bar check, 9:46:** ran before the brief existed. UNCLEAR, leaning RUNNING-down, on QQQ's −3% opening flush below the week's lows. The day ran to its lows, so it is graded **HIT**. The 10:16 routine correctly stood down (no brief at 10:16).
+- **Evening review** (`brief-review/reviews/2026-11-05.md`), under the 10/14 late-run convention:
+  - F 10/12 · Open NOT GRADED · Mood HIT · Regime MIXED.
+  - **F ✗:**
+    - The DELL "Tuesday's $390.12 close" was wrong (official 408.40).
+    - "Per CLAUDE.md §4" for key rotation is §6 in this repo; the brief is citing the Aggressive-Trading-Bot governance file.
+  - **Radar** (eligible from 11:00): 2 / 2 fired.
+    - SPY/QQQ bear: CONF-PAID (R-2).
+    - APP gap-hold: CONF-PAID (strict).
+    - NVDA: NO-TRIGGER.
+    - XLE rotation: INVALIDATED, a clean kill (36/36).
+  - **Watchlist:** precision 28/29, recall 23/24 (missed SIG). The late-run caveat is recorded.
+- **Ledger:**
+  - Evidence appended to I-27 (fifth instance) and I-29 (the brief asserted an unsourced cause for the missing briefs).
+  - **New I-35 PROPOSED:** the brief states which working directory and CLAUDE.md it ran under.
+- **Source conflict:** the 11/04 SPY daily-bar high (775.64) is not in any 5-minute bar (max 769.22). Which is right is UNVERIFIED.
+  - A dated note is appended to the 11/04 record.
+  - The 11/05 card is append-only and was not edited.
+- **Scorecard:** n=54; cumulatives updated.
+- **Option marks:** 8 recorded, 0 missing. Session 23, post-sample.
+- **Owner (R-3, day 32):** no option orders; account $37.20. Flat, seventeen sessions.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twelfth night.** Credentials are still not provisioned.
+- **The brief itself shows a CLAUDE.md §0 deviation:** it cites another repository's governance section and `.env` path. That is not this session's deviation, but it is recorded here because it bears on every spec the brief reads. Proposed as I-35; nothing was changed in the brief's runtime (outside this session's scope).
+- **Grading judgements, named:**
+  1. **Late-run convention applied** (the 10/14 precedent): Open not graded; radar eligible from 11:00.
+  2. **SPY/QQQ bear graded CONF-PAID under R-2 literal.** The unratified I-33 would treat SPY's 740 target as spent inside the trigger bar; it was not applied, and the note is recorded.
+  3. **APP's noon "hold" confirmation graded strictly to the close** (+0.74%), despite no stated invalidation for that branch.
+  4. **SPY / QQQ / SMH excluded from the recall universe**, as on 10/30.
+  5. **The §13 "CLAUDE.md §4" citation counted as an F ✗.** It is a checkable statement about this repo's governance.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/04 review gained an appended source-conflict note. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-27, I-29, I-33, I-34, I-35 and the others are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (now a 401 "revoked or regenerated", per the brief); Turso rotation and re-provisioning.
+  - Diagnose the brief scheduler, and where it launches (I-35).
+  - The account decision.
