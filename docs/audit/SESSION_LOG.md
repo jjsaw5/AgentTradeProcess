@@ -2882,3 +2882,50 @@ Session launched from this repository (§0 satisfied).
   - The UW key (now a 401 "revoked or regenerated", per the brief); Turso rotation and re-provisioning.
   - Diagnose the brief scheduler, and where it launches (I-35).
   - The account decision.
+
+## 2026-11-06 (day + evening) — First-bar checks #38–39; scheduled post-close review #41 (n=55); owner traded (first since 10/13); DB sync DEFERRED (thirteenth night); option marks session 24 (post-sample)
+
+- **The brief was on time** (committed 9:20:21 ET), the first on-time brief since 11/02.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, unchanged — inside Thursday's range, pressing the bull lines on the opening candle.
+  - **10:16:** UNCLEAR, unchanged — the QQQ bull fired at 10:00 and was back on its line; MRNA's bearish read invalidated at 10:00; the Michigan number UNVERIFIED.
+- **Evening review** (`brief-review/reviews/2026-11-06.md`):
+  - F 10/13 · Open HIT · Mood MIXED (drift clause) · Regime HIT · first-bar checks HIT / HIT.
+  - **F ✗:**
+    - "Earnings sellers have won five straight" (our record: 5 of 6).
+    - Two Wednesday moves labelled Tuesday (USO, MRNA); the USO one contradicts the brief's own §6A.
+  - **Radar:** 0 / 1 fired.
+    - QQQ bull: CONF-FAILED; it fired on the Michigan candle.
+    - DELL: NO-TRIGGER.
+    - MRNA: INVALIDATED, a clean kill (37/37).
+  - **Watchlist:** precision 12/13, recall 17/17.
+- **Owner execution (R-3, day 33):**
+  - One filled round trip: QQQ 0DTE 674C, bought 9:35:59 at $0.30, sold 9:47:45 at $0.79, +$49 (fees $0.09). Account $86.11.
+  - The entry was inside the opening candle, before any trigger, at ~81% of equity, with no stop in the order record.
+  - Recorded grade D on the 10/05 precedent (a rule-bending win). A DAY-TYPE RECORD row was added and the UNCLEAR totals recomputed: 11 days, +$3,479.
+- **Correction to 11/05 (additive):** official closes SPY 733.00 / QQQ 647.05 (the review had last prints 733.25 / 647.77). No grade changes; a dated note was appended there.
+- **Ledger:**
+  - Evidence appended to I-29 and I-31.
+  - **New I-36 PROPOSED:** re-base on official closes the next evening, with threshold-crossing re-grades.
+- **Scorecard:** n=55; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 24, post-sample; the next expiry is Monday 11/09.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the thirteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The owner's trade was given grade D by the review**, on the 10/05 precedent row. The DAY-TYPE RECORD rows' grades have been review-assigned before; the owner's own grade overrides.
+  2. **Mood MIXED via the drift clause:** c-t-c +0.33% sits outside the band, o-t-c +0.08% inside, and the brief's reasoning matches the split.
+  3. **MRNA counted as a clean kill.** The bearish read never confirmed, and price stayed above both lines all day.
+  4. **WDC's broken 265 low was credited as a right line but not as a precision hit** (−1.48%).
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/05 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** R-3, I-29, I-31, I-33–I-36 and the others are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key; Turso rotation and re-provisioning.
+  - The brief scheduler and its launch directory (I-35).
+  - The account decision.
