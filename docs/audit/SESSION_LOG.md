@@ -2929,3 +2929,50 @@ Session launched from this repository (§0 satisfied).
   - The UW key; Turso rotation and re-provisioning.
   - The brief scheduler and its launch directory (I-35).
   - The account decision.
+
+## 2026-11-09 (day + evening) — First-bar checks #40–41; scheduled post-close review #42 (n=56); owner traded (4 round trips); DB sync DEFERRED (fourteenth night); option marks session 25 (post-sample)
+
+- **The brief was on time** (committed 9:19:17 ET).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning RUNNING-up — both opening bars closed above Friday's highs.
+  - **10:16:** UNCLEAR, leaning RUNNING-up (stronger) — the SPY bull fired at 10:00 and held; the Goolsbee / wholesale-sales content is UNVERIFIED.
+- **Evening review** (`brief-review/reviews/2026-11-09.md`):
+  - F 7/10 · Open HIT · Mood HIT · Regime HIT · first-bar checks HIT / HIT.
+  - **F ✗:**
+    - The 11/05 crash was labelled "Wednesday" across ten names.
+    - NVDA's week was stated as −6.4% when it was −9.70%.
+    - The brief called today "the 5th recorded UW-down session".
+  - **Radar:**
+    - SPY gap-hold: CONF-PAID (strict +0.46% at noon).
+    - NVDA: NO-TRIGGER (its stand-down clause).
+    - USO bear: fired 2:30, OPEN to Tuesday's close (the resolution was fixed before the outcome).
+    - HIMS vol test: OPEN to Friday.
+  - **Watchlist:** precision 9/10, recall 13/20. Six of the misses were names the ratified I-4 / I-7 rules required to carry a line.
+- **Owner execution (R-3, day 34):**
+  - Four round trips in 0DTE calls, all winners, +$137 (fees $0.36). Account $222.93.
+  - Three entries were inside the opening candle; one came after the 10:00 signal. No stops.
+  - Recorded grade D on the 10/06 precedent. A DAY-TYPE RECORD row was added and UNCLEAR recomputed: 12 days, +$3,616.
+- **Correction to 11/06 (additive):** official closes SPY 735.29 / QQQ 656.10. No grade changes; a note was appended there.
+- **Ledger:** evidence appended to I-29, I-31 (systematic weekday mislabel) and I-36 (third hand application). No new proposal; the recall gap is a compliance failure of ratified I-4 / I-7, not a missing rule.
+- **Scorecard:** n=56; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 25, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the fourteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The owner's day was graded D by the review** (the 10/06 precedent); the owner's grade overrides.
+  2. **NVDA graded NO-TRIGGER under its own stand-down clause.** The lenient "rally toward 181.5" reading (CONF-FAILED) is recorded, not adopted.
+  3. **USO's afternoon fire was carried OPEN** under the card's "multi-day" timing. The resolution (Tuesday's close vs 142.42) was fixed in tonight's file before the outcome is known.
+  4. **The ten "Wednesday" labels were counted as one F ✗**, not ten.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/06 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-33 is cited for SPY's spent reference only; it did not change the grade (strict window-end was used). R-3, I-29, I-31, I-36 and the others are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key; Turso rotation and re-provisioning.
+  - The brief scheduler and its launch directory (I-35).
+  - The account decision.
