@@ -2976,3 +2976,49 @@ Session launched from this repository (§0 satisfied).
   - The UW key; Turso rotation and re-provisioning.
   - The brief scheduler and its launch directory (I-35).
   - The account decision.
+
+## 2026-11-10 (day + evening) — First-bar checks #42–43; scheduled post-close review #43 (n=57); owner traded (1 round trip); DB sync DEFERRED (fifteenth night); option marks session 26 (post-sample)
+
+- **The brief was on time** (committed 9:19:09 ET) on CPI day.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, unchanged — inside Monday's range, between the card lines after the hot CPI.
+  - **10:16:** UNCLEAR, unchanged — bull lines pressed but not closed through; the Cleveland Fed nowcast number UNVERIFIED.
+- **Late-evening owner question (11/09, 23:11 ET):** "Is tomorrow CPI day?" Answered: yes, 8:30 Tuesday per the brief's FMP calendar, with consensus and the shutdown-timing caveat; not independently verified against BLS. It printed hot.
+- **Evening review** (`brief-review/reviews/2026-11-10.md`):
+  - F 10/12 · Open, Mood and Regime HIT · first-bar checks HIT / HIT.
+  - **F ✗:** two claims the 11/09 review had marked ✗ were repeated (the UW-outage count; the "Wednesday" lows).
+  - **Radar:**
+    - SPY/QQQ bear: CONF-FAILED (13:15, by 1¢ on QQQ).
+    - TLT bear: CONF-FAILED (its level was behind price before the gate).
+    - HIMS: NO-TRIGGER (retest-only, −16.5%).
+    - Carried 11/09 USO bear: CONF-PAID (−0.71%).
+    - CRWV + HIMS vol tests: OPEN to Friday.
+  - **Watchlist:** precision 4/8, recall 6/6 (the I-4 compliance fixed).
+- **Owner execution (R-3, day 35):**
+  - NVDA 1DTE 165P: bought 10:56 at $1.75, sold 12:17 at $1.99, +$24 (fees $0.09). Account $246.80.
+  - No opening-candle entry. 79% of the account; no stop.
+  - Recorded grade C. A DAY-TYPE RECORD row was added; UNCLEAR is now 13 days, +$3,640.
+- **Correction to 11/09 (additive):** official closes SPY 752.69 / QQQ 679.35; no grade changes.
+- **Ledger:** evidence appended to I-29 (core failure), I-33 (n=2) and D-1 (two retest-only misses). No new proposal.
+- **Scorecard:** n=57; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 26, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the fifteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **SPY/QQQ graded as an AND pair under the 1:00 re-arm** (fired 13:15). The 12:45 double fire, between the morning window and the re-arm, was ruled out of window. The EITHER reading (SPY alone at noon) is recorded; it is CONF-FAILED too.
+  2. **TLT's 13:30 fire graded literally** (CONF-FAILED), with the level-behind-price note. The unratified I-33 was not applied.
+  3. **The owner's trade was graded C by the review**, a first use of C in the record, reasoned from the playbook's rules. The owner's grade overrides.
+  4. **The carried USO bear resolved at today's close**, per the resolution fixed in the 11/09 file before the outcome.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/09 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** R-3, I-29, I-32, I-33, I-36 and D-1 are cited as conventions or proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key; Turso rotation and re-provisioning.
+  - The brief scheduler and its launch directory (I-35).
+  - The account decision.
