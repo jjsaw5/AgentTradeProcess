@@ -3022,3 +3022,52 @@ Session launched from this repository (§0 satisfied).
   - The UW key; Turso rotation and re-provisioning.
   - The brief scheduler and its launch directory (I-35).
   - The account decision.
+
+## 2026-11-11 (day + evening) — First-bar check #44; scheduled post-close review #44 (n=58); owner traded (3 round trips); DB sync DEFERRED (sixteenth night); option marks session 27 (post-sample)
+
+- **The brief was committed 9:30:22 ET**, 22 seconds after the open. Its header said "published ~9:40".
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, unchanged — the CRWV gap holding above Tuesday's highs, the opening bar fading from the bull lines.
+  - **10:16:** quiet line (the brief's §3 listed no 10:00 release); nothing appended to the card.
+- **Evening review** (`brief-review/reviews/2026-11-11.md`):
+  - F 10/12 · Open, Mood and Regime HIT · first-bar check 9:46 MIXED (UNCLEAR right; the day ran up from 10:45).
+  - **F ✗:** the UW-outage list, repeated a third morning after two reviews marked it ✗; the self-reported publish time.
+  - **F ✓ worth naming:** the brief corrected our own 11/10 review, which had NBIS and CSCO reporting today. Both report Thursday 11/12 (Robinhood-verified).
+  - **Radar:**
+    - SPY/QQQ bull: CONF-PAID (10:45; 760 / 690 printed in the window).
+    - CRWV bull: CONF-PAID (10:30; +3.4% at noon).
+    - WDC bull: CONF-FAILED (11:00; −1.26% at the close, on a +8.2% day).
+    - NBIS: stand-aside card, not graded.
+    - CRWV + HIMS vol tests: OPEN to Friday. CRWV is outside its band (+24.9%); HIMS has moved back inside its band (−9.3% vs ±~12%).
+  - **Watchlist:** precision 9/11, recall 9/9.
+- **Owner execution (R-3, day 36):**
+  - Three QQQ round trips, net +$2 on the fills; account $248.68.
+  - Two 0DTE puts bought inside the opening candle (−$65, −$69); the second was a re-entry four minutes after the first loss.
+  - Then a Friday 701C bought 10:07 at 37% of the account and exited by a resting stop-limit at 12:50, +$136.
+  - Recorded grade D. A DAY-TYPE RECORD row was added; UNCLEAR is now 14 days, +$3,642.
+- **Correction to 11/10 (additive):** official closes SPY 749.92 / QQQ 674.82 / HIMS 19.13 / USO 141.45, no grade changes; the wrong NBIS / CSCO dates in its open items corrected.
+- **The same wrong dates were in my 11/10 summary to the owner** ("NBIS and CSCO report Wed 11/11"). Corrected in tonight's summary.
+- **Ledger:** evidence appended to I-29 (n=3 on one claim; partial compliance), I-27 (clock times) and I-36 (fifth hand application). No new proposal.
+- **Scorecard:** n=58; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 27, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the sixteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The open read was graded although the brief was committed 22 seconds after the open.** The 10/14 and 11/05 NOT-GRADED precedents were briefs written with the open already in hand. This one used only 9:16–9:20 data, and its "open" line quoted the premarket price. The NOT-GRADED reading would leave Open at 35 HIT (+3 not graded).
+  2. **WDC's "morning–afternoon" window graded to the 4:00 close.** The 12:00 reading also fails (−0.14%), so the grade does not depend on the choice.
+  3. **NBIS's stand-aside card was not graded** as a radar item. Its watch frame's bull side closed through at 10:30 and is recorded only as data.
+  4. **The 9:46 check graded MIXED, not MISS.** The headline (UNCLEAR) matched the brief's and the gap-holds lean was right; it weighted the fade, and the day ran.
+  5. **The owner's day was graded D by the review.** The owner's grade overrides.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/10 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** R-3, I-27, I-29, I-32, I-36 and D-1 are cited as conventions or proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (the brief reports it revoked); Turso rotation and re-provisioning.
+  - The brief scheduler and its launch directory (I-35).
+  - The account decision.
