@@ -3071,3 +3071,54 @@ Session launched from this repository (§0 satisfied).
   - The UW key (the brief reports it revoked); Turso rotation and re-provisioning.
   - The brief scheduler and its launch directory (I-35).
   - The account decision.
+
+## 2026-11-12 (day + evening) — First-bar checks #45–46; scheduled post-close review #45 (n=59); owner traded (7 entries; account $14.77); DB sync DEFERRED (seventeenth night); option marks session 28 (post-sample)
+
+- **The brief was on time** (committed 9:20:10 ET). It led with the NVDA CEO resignation (company-confirmed per its sources).
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning gap-closing — QQQ reclaimed 683.60 in the opening bar; SPY 38¢ short of its bull line.
+  - **10:16:** UNCLEAR, "lean stalled" — SPY's 10:00 close was 11¢ short. The NVDA bull fired at 10:00.
+- **Evening review** (`brief-review/reviews/2026-11-12.md`):
+  - F 10/12 · Open MIXED · Mood HIT · Regime HIT · first-bar checks 9:46 HIT / 10:16 MIXED.
+  - **F ✗:** the UW-outage list, a fourth consecutive repeat; a paraphrase of our 11/11 journal ("after a signal"; the journal says before).
+  - **Radar:** 3 of 3 fired cards paid, all on R-2 targets:
+    - SPY/QQQ bull: 10:45.
+    - NVDA bull: 10:00.
+    - CRWV bull: 10:30.
+  - **The counter-case was the day:** the morning panic was the low.
+  - **Vol tests OPEN to Friday (4):** CSCO, AMAT, CRWV (now inside its band) and HIMS (now outside).
+  - **Watchlist:** precision 8/12, recall 11/11.
+- **Owner execution (R-3, day 37):**
+  - Seven single-lot entries across NVDA and SPY; realized −$272.
+  - An NVDA 11/13 140P (cost $230) is still open, marked ~$6.
+  - A 0DTE SPY 763C expired worthless.
+  - The first entry was at 9:30:53; there were five direction flips and no stops. None of the entries was taken on the three cards that paid.
+  - **Account value $14.77** (from $248.68). The order record alone does not reconcile ~$262 (consistent with money added in the day). Transfer records were not pulled.
+  - Recorded grade F. A DAY-TYPE RECORD row was added; UNCLEAR is now 15 days, +$3,370 realized.
+- **Correction to 11/11 (additive):** official closes for SPY, CRWV, NVDA, WDC, NBIS, CSCO, MRNA, IBRX; no grade changes.
+- **Ledger:** evidence appended to I-29 (n=4 plus a paraphrase error) and I-36 (sixth hand application). No new proposal.
+- **Scorecard:** n=59; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 28, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the seventeenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **Card #1's first eligible close taken as 10:15,** per its own home-sales rule. The bull pair fired at 10:45 either way.
+  2. **NVDA's 10:00 fire counted.** The event-protocol void (a fresh NVDA headline) cannot be checked with UW headlines down; none was assumed.
+  3. **Open read MIXED, not MISS:** the gap question was right; the static levels and SPY's "inside" were wrong.
+  4. **The 10:16 check graded MIXED** ("stalled" 30 minutes before the fire; the UNCLEAR headline fit the day).
+  5. **The DAY-TYPE RECORD carries the owner's realized −$272.** The open NVDA put settles in tomorrow's review; tonight's mark (~−$224) is noted but not totalled.
+  6. **The owner's day was graded F by the review.** The owner's grade overrides.
+
+  Each is my reading of the rubric, not a new rule.
+- **Account reconciliation left open:** a ~$262 gap between fills and the account change is recorded as an observation. Banking and transfer records were deliberately not pulled.
+- **A previously published record was amended:** the 11/11 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** R-3, I-29, I-32, I-36 and D-1 are cited as conventions or proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler and its launch directory (I-35).
+  - **The account decision ($14.77).**
