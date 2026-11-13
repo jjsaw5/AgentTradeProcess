@@ -3122,3 +3122,48 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler and its launch directory (I-35).
   - **The account decision ($14.77).**
+
+## 2026-11-13 (day + evening) — First-bar check #47; scheduled post-close review #46 (n=60); owner did not trade (the NVDA put expired; account $9.78); DB sync DEFERRED (eighteenth night); option marks session 29 (post-sample)
+
+- **The brief ran without Robinhood** (every connector call failed on its run; a first). It was committed 9:31:52 ET, 1m52s after the open. Its premarket numbers are coverage-sourced and labelled. Robinhood answered normally for the 9:46 check and tonight's review.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning weak — inside Thursday's range, the opening bar closed at its low.
+  - **10:16:** quiet line (no 10:00 release).
+- **Evening review** (`brief-review/reviews/2026-11-13.md`):
+  - F 11/12 · Open HIT · **Mood MISS** · Regime MIXED · first-bar check 9:46 HIT.
+  - **F ✓ worth naming:** the UW-outage claim was corrected after four days of repeats (I-29 landing). **F ✗:** one computed prior close (ARCT).
+  - **Radar:**
+    - SPY/QQQ bear: CONF-PAID (10:15; R-2 targets printed by 11:35).
+    - NVDA bear: CONF-FAILED (10:45).
+  - **The week's four vol tests resolved:** CRWV, CSCO and AMAT RICH; HIMS UNDERPRICED. This matches the brief's own standing line.
+  - **The counter-case was the day** for the second day running.
+  - **Watchlist:** precision 7/10; recall 7/9 (SOXL and SIG one-liners had no levels).
+- **Owner (R-3, day 38):**
+  - No trades. The NVDA 11/13 140P expired worthless (−$230, booked to 11/12; the 11/12 day total is −$502).
+  - **Account value $9.78.**
+  - DAY-TYPE totals updated: UNCLEAR 15 days, +$3,140.
+- **Correction to 11/12 (additive):** official closes; no grade changes; the owner's put settled.
+- **Ledger:** evidence appended to I-29 (the first compliance on the outage claim) and I-36 (seventh hand application). No new proposal.
+- **Scorecard:** n=60; cumulatives and the DAY-TYPE RECORD updated.
+- **Option marks:** 8 recorded, 0 missing. Session 29, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the eighteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The open read was graded although the brief was committed 1m52s after the open** (the 11/11 judgement: all content pre-open).
+  2. **The SPY/QQQ bear was graded CONF-PAID on R-2.** The strict 12:00 window-end reading was slightly against (+0.13% / +0.12%); that reading is recorded.
+  3. **The vol tests were resolved on last prints**, not official closes. The official closes are re-checked tomorrow (I-36 practice), and any flip will be recorded additively. HIMS sat 3¢ inside its edge at its 2:55 high but closed well outside it.
+  4. **The owner's expired put was booked to 11/12** (the trade date) by editing the DAY-TYPE totals and appending a settlement note to the 11/12 row. The row's original text is unchanged.
+  5. **Recall misses (SOXL, SIG) were counted although the brief lacked Robinhood data**, per the rubric as written.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/12 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** R-3, I-29, I-32 and I-36 are cited as conventions or proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler, its launch directory (I-35) and today's Robinhood failure on its run.
+  - **The account decision ($9.78).**
