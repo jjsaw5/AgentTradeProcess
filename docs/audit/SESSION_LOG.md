@@ -3167,3 +3167,47 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler, its launch directory (I-35) and today's Robinhood failure on its run.
   - **The account decision ($9.78).**
+
+## 2026-11-16 (day + evening) — First-bar check #48; scheduled post-close review #47 (n=61); owner did not trade (account $8.73); DB sync DEFERRED (nineteenth night); option marks session 30 (post-sample)
+
+- **The brief was on time** (committed 9:17:55 ET, amended 9:18:53). Its header carries a new scheduler line: "scheduled 8:00; fired late at 9:08".
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, unchanged. QQQ's opening bar closed 5¢ above its 671.71 gap ceiling; the check declined it under I-14 and flagged the card's "9:45 candle or later" wording.
+  - **10:16:** quiet line (no 10:00 release).
+- **Evening review** (`brief-review/reviews/2026-11-16.md`):
+  - F 9/12 · Open HIT · Mood HIT · Regime HIT · first-bar check 9:46 MIXED.
+  - **F ✗ (all own-record):**
+    - NVDA's 11/12 premarket −11.2% was quoted as the day's move.
+    - "Day-type record STALE, graded through ~mid-Oct" (it is current through 11/13).
+    - UW "9th consecutive run" (Friday's correct wording reverted).
+  - **The brief read like a run that could not see this repo after ~10/20** (I-35).
+  - **Radar:**
+    - QQQ down: CONF-PAID (10:00; the card's own invalidation fired at 11:00).
+    - SPY down: CONF-PAID (10:15).
+    - NVDA ±10.3% vol test: OPEN to Wednesday.
+  - **Watchlist:** precision 10/11; **recall 10/16**. Six level-less one-liners; the I-4 trailing check was skipped for time.
+- **Owner (R-3, day 39):** no trades; account value $8.73.
+- **Correction to 11/13 (additive):** official closes; no grade or vol-test changes.
+- **Ledger:** evidence appended to I-35 (the brief's view of the repo), I-29 (regression) and I-36 (eighth hand application). No new proposal.
+- **Scorecard:** n=61; cumulatives updated; no DAY-TYPE row (no trades).
+- **Option marks:** 8 recorded, 0 missing. Session 30, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the nineteenth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The QQQ card was graded under I-14** (first eligible close 10:00), not its own "9:45 candle or later" wording. Under that wording the UP side fired by 5¢ at 9:45 and failed (−1.5% to the close). I-14 is ratified, so it governs.
+  2. **QQQ DOWN graded CONF-PAID at the window end** although the card's own close-back invalidation fired one bar after the trigger. The rubric grades confirmation-first items to the window end; the invalidation is recorded.
+  3. **The 9:46 check graded MIXED** (UNCLEAR with no lean on a running day), per the 11/04-type precedent.
+  4. **"No archived brief since ~10/20 was available" was not graded.** It is a claim about the brief's own run environment, and it is recorded as I-35 evidence.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/13 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-29, I-32, I-35 and I-36 are cited as proposals only. I-4 and I-14 are ratified.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - **The brief scheduler, its launch directory and its read access to this repo (I-35).**
+  - The account decision ($8.73).
