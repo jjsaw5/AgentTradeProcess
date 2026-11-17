@@ -3211,3 +3211,46 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - **The brief scheduler, its launch directory and its read access to this repo (I-35).**
   - The account decision ($8.73).
+
+## 2026-11-17 (day + evening) — First-bar checks #49–50; scheduled post-close review #48 (n=62); owner did not trade (account $8.68); DB sync DEFERRED (twentieth night); option marks session 31 (post-sample)
+
+- **The brief was on time** (committed 9:15:43 ET), with the same new "scheduled 8:00; fired late at ~9:08" header as 11/16.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, no lean — both sat on Monday's lows; the opening bar closed pennies under them.
+  - **10:16:** UNCLEAR, leaning down — QQQ DOWN fired on the 10:15 NAHB candle; the SLS provisional bear fired at 10:00.
+- **Evening review** (`brief-review/reviews/2026-11-17.md`):
+  - F 10/12 · Open HIT · Mood MISS · Regime MIXED · first-bar checks 9:46 MIXED / 10:16 HIT.
+  - **F ✗:** "day-type record STALE" and the UW "10th consecutive run" — both repeated the morning after the 11/16 review marked them (I-29 / I-35).
+  - **Radar:**
+    - QQQ down: CONF-PAID (10:15; R-2).
+    - SPY down: CONF-PAID (10:45; R-2).
+    - SLS provisional $20 bear: CONF-FAILED (10:00, +7.8% against).
+    - NVDA vol test: OPEN. It reported 2.68 vs 2.47 and was +2.1% after hours; resolves Wednesday.
+  - **The counter-case was the day** (third time in four sessions).
+  - **Watchlist:** precision 6/15 (the semis-bounce cluster went flat); recall 5/9 (level-less one-liners).
+- **Owner (R-3, day 40):** no trades; account value $8.68.
+- **Correction to 11/16 (additive):** official closes; no grade changes.
+- **Ledger:** evidence appended to I-35 (n=2 on the new scheduler line) and I-36 (ninth hand application). No new proposal.
+- **Scorecard:** n=62; cumulatives updated; no DAY-TYPE row.
+- **Option marks:** 8 recorded, 0 missing. Session 31, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twentieth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **The QQQ DOWN fire on the 10:15 NAHB candle was counted.** The card has no event-candle wait; I-14 eligibility only.
+  2. **SLS's provisional $20 line was graded as written** (CONF-FAILED), despite the brief's "re-anchor before acting" caveat and a possible halt in the opening range.
+  3. **The NVDA vol test is carried as one OPEN item**, with both the 11/16 (±10.3%) and 11/17 (±8.4%) thresholds recorded.
+  4. **Mood graded MISS** on the neutral band rule, although the brief's lean was conditional on 660.48, which broke at 10:15.
+  5. **The 9:46 check graded MIXED** (no lean on a breaking day), per the 11/16 precedent.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/16 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-29, I-32, I-35 and I-36 are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - **The brief scheduler and its read access to this repo (I-35).**
+  - The account decision ($8.68).
