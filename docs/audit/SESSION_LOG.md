@@ -3254,3 +3254,45 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - **The brief scheduler and its read access to this repo (I-35).**
   - The account decision ($8.68).
+
+## 2026-11-18 (day + evening) — First-bar checks #51–52; scheduled post-close review #49 (n=63); owner did not trade (account $8.72); DB sync DEFERRED (twenty-first night); option marks session 32 (post-sample)
+
+- **The brief was on time** (committed 9:17:47 ET), under the same new scheduler header as 11/16–11/17. **This time its own-record claims were right**, and it cited the 11/17 review by name.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning down — NVDA's relief was sold from the open; both opening bars closed under their DOWN lines.
+  - **10:16:** UNCLEAR, no lean — the flush was bought back by 10:00; SPY DOWN fired by 7¢ at 10:15; QQQ was green.
+- **Evening review** (`brief-review/reviews/2026-11-18.md`):
+  - F 11/12 · Open HIT · Mood MISS (by 4 bp) · Regime HIT · first-bar checks 9:46 MIXED / 10:16 HIT.
+  - **Radar:**
+    - SPY down: CONF-PAID (R-2; 730 and 727.00 printed).
+    - QQQ down: CONF-FAILED (invalidated 12:30).
+    - SLS: NO-TRIGGER.
+    - **NVDA vol test resolved RICH:** −2.96% vs ±8.4%.
+  - **The counter-case was the day** (the NVDA relief failed; fourth time in five sessions).
+  - **Watchlist:** precision 12/19; recall 7/10 (last night's misses were promoted and caught).
+- **Owner (R-3, day 41):** no trades; account value $8.72.
+- **Correction to 11/17 (additive):** official closes; no grade changes.
+- **Ledger:** evidence appended to I-35 (it weighs against the scheduler-line hypothesis), I-29 (compliance) and I-36 (tenth hand application). No new proposal.
+- **Scorecard:** n=63; cumulatives updated; no DAY-TYPE row.
+- **Option marks:** 8 recorded, 0 missing. Session 32, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-first night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **Mood graded MISS on a 4 bp margin**, on the last print (SPY −0.29% vs the 0.25% neutral band). The official close is re-checked tomorrow; a flip will be recorded additively.
+  2. **QQQ DOWN graded CONF-FAILED at its 2:00 deadline** although its own invalidation fired first after the trigger (12:30). This is the 11/16 convention (confirmation-first items grade to the window end).
+  3. **SPY DOWN CONF-PAID on R-2.** The trigger was a 7¢ close on the 10:00 release candle (the card has no event wait); the strict 2:00 reading was +0.09% against.
+  4. **PANW's ±11.9% straddle was not graded as a radar item** (it sits in §4, not §9).
+  5. **The 9:46 check graded MIXED:** the down lean caught the 11:20 low but missed the 10:00 reversal.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/17 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-29, I-35 and I-36 are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler (I-35; the read failure cleared, cause unknown).
+  - The account decision ($8.72).
