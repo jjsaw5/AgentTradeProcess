@@ -3296,3 +3296,55 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler (I-35; the read failure cleared, cause unknown).
   - The account decision ($8.72).
+
+## 2026-11-19 (day + evening) — First-bar checks #53–54; scheduled post-close review #50 (n=64); owner did not trade (account $8.68); DB sync DEFERRED (twenty-second night); option marks session 33 (post-sample)
+
+- **The brief was on time** (committed 9:21:09 ET). Its calls: UNCLEAR, mildly bullish, `event-driven — Anthropic IPO` on a gap up above Wednesday's range.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, no lean — the gap held; price was between the lines.
+  - **10:16:** UNCLEAR, leaning down — SPY closed under its gap floor at 10:15; QQQ not yet.
+- **Evening review** (`brief-review/reviews/2026-11-19.md`):
+  - F 10/14 · Open HIT · Mood MISS · Regime HIT · first-bar checks 9:46 MIXED / 10:16 HIT.
+  - **The day:** the gap failed by 10:45 and the indexes trended down. SPY −1.97%, QQQ −2.18%; every sector red.
+  - **ANT** first traded at 11:45 (not 10:00–10:30 as coverage said). The 11:50 bar carried the second leg; no cause was established.
+  - **Radar:**
+    - SPY/QQQ down: CONF-PAID (R-2).
+    - NVDA down: CONF-PAID (R-2). I-14 kept the UP card off the opening bar, which was the day's high.
+    - SLS down: CONF-FAILED (fired-and-flat; no numeric target).
+    - **INTU vol test OPEN** (277.99 after hours, −10.3%; resolves Friday's close).
+  - **The counter-case was the day** (fifth time in six sessions).
+  - **Watchlist:** precision 19/26; recall 13/14 (META the miss).
+  - **§0 own-record ✗ traced to our table:** the brief accurately quoted the UNCLEAR totals row's stale lead-in ("held 4, reversed 3"); the row's entries give 6 / 4.
+- **Owner (R-3, day 42):** no option orders; account value $8.68.
+- **Correction to 11/18 (additive):** official closes; no grade changes (Mood still MISS, by 6 bp).
+- **Scorecard:**
+  - n=64; cumulatives updated; no DAY-TYPE row.
+  - **A dated recount note was appended to the UNCLEAR totals row.** The original clause was left unchanged.
+- **Ledger:** evidence appended to I-24 (FMP sector basis regression), I-29 (our-side staleness, with a scope note) and I-36 (eleventh hand application). No new proposal.
+- **Option marks:** 8 recorded, 0 missing. Session 33, post-sample.
+  - QQQ's 11:50 bar has a suspect 676.46 high; the CSV keeps it raw, and the review flags it.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables and no `.env`. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-second night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **SLS DOWN graded CONF-FAILED** although it ran −3.8% intraday and closed under its line. Its only target was a not-yet-announced offering price, so R-2 had nothing to pay on, and the strict window-end reading (+0.47% against) decided. This follows the 9/24 ARCT fired-and-flat precedent.
+  2. **The SPY/QQQ pair stayed fired** although QQQ closed 4¢ back above 662.80 for one bar (11:30). SPY did not, so the AND condition never reversed, and the card has no written invalidation.
+  3. **§0's "held 4 / reversed 3" graded ✗** although it quotes our own table accurately. The claim is false by the table's own entries, and the fault is recorded as ours.
+  4. **§7's FMP sector figures graded ✗ under the I-24 class** (10/29 precedent: no basis caveat).
+  5. **QQQ's 676.46 high treated as a suspect print.** It was not used in any grade, and the raw CSV was not edited.
+
+  Each is my reading of the rubric, not a new rule.
+- **Previously published records were amended:**
+  - The 11/18 review gained an appended correction.
+  - The SCORECARD UNCLEAR totals row gained an appended, dated recount.
+  - Neither original text was rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **Self-interest, named:** the review grades a brief whose event of the day was Anthropic's IPO, and it is written by Claude (Anthropic). ANT is recorded only as Robinhood prices and timestamps; no valuation view is given or graded.
+- **No unratified rule applied.** I-24, I-29 and I-36 are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler (I-35).
+  - The account decision ($8.68).
