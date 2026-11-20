@@ -3348,3 +3348,52 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler (I-35).
   - The account decision ($8.68).
+
+## 2026-11-20 (day + evening) — First-bar check #55 (10:16 quiet); scheduled post-close review #51 (n=65); owner did not trade (account $8.56); DB sync DEFERRED (twenty-third night); option marks session 34 (post-sample)
+
+- **The brief was on time** (committed 9:20:01 ET). Its calls: UNCLEAR, mildly bearish, `risk-off` on a gap down below Thursday's range; monthly expiration.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, no lean — the gap held; SPY was in the hands-off zone, QQQ 26¢ above its DOWN line; a semis-to-defensives rotation.
+  - **10:16:** a quiet line — no 10:00 release in §3.
+- **Evening review** (`brief-review/reviews/2026-11-20.md`):
+  - F 14/15 · Open HIT · Mood HIT · Regime HIT · first-bar check 9:46 MIXED.
+  - **The day:** SPY's 10:00 pop over 715.65 failed in one bar. The pair broke at 10:45 and trended to the close: SPY −3.49%, QQQ −5.43%, NVDA −13.83%, SMH −10.66%; XLP the only green sector.
+  - **Radar:**
+    - SPY/QQQ down: CONF-PAID (R-2: 705 and 700 printed). The written AND kept the UP side off SPY's 10:00 high.
+    - NVDA down: CONF-PAID (−9.32% at window end).
+    - ANT: NO-TRIGGER (low 83.05).
+    - **INTU vol test resolved UNDERPRICED** (−12.77% vs ±8%).
+  - **The counter-case was not the day** — the run ends at five in six.
+  - **Watchlist:** precision 22/23; recall 16/19.
+  - **Own-record:** the 11/19 recount was used correctly. SLS's CONF-FAILED card was restated as "fired and paid" (✗).
+- **Owner (R-3, day 43):** no option orders; account value $8.56.
+- **Correction to 11/19 (additive):** official closes; ANT's day-1 close 97.17 (not 96.86); no grade changes; INTU's resolution noted.
+- **Scorecard:** n=65; cumulatives updated; no DAY-TYPE row.
+- **Ledger:** evidence appended to I-24 (compliance), I-29 (mixed), I-32 (credit) and I-36 (twelfth hand application). No new proposal.
+- **Option marks:** 8 recorded, 0 missing. Session 34, post-sample; the 1DTE leg is Mon 11/23.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no `TURSO_*` variables, no `.env`, and no scratchpad `turso.env`. No credential recovery was attempted.
+- **The container was recycled before this run:**
+  - The scratchpad was empty, including the time-exit RESULTS draft (not recoverable from the transcript; regenerable from `option_marks.csv`).
+  - The bar parser was rewritten from the same logic.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-third night.** Credentials are still not provisioned.
+- **Lost work, named:** the time-exit RESULTS draft (owner go-ahead pending) was destroyed by the scratchpad wipe. It was never committed, because committing it needed the owner's approval. It will be regenerated only on request.
+- **Grading judgements, named:**
+  1. **Mood graded HIT** on direction, although "mildly" understated a −3.49% day (the rubric grades direction).
+  2. **Open read HIT** although SPY's ceiling broke for one bar at 10:00 (11/18 convention: intraday breaks of the drawn levels are the radar's grade).
+  3. **NVDA DOWN graded CONF-PAID on the strict window-end reading.** The card named no target below 140, and the window end was −9.32% in favour.
+  4. **ANT graded NO-TRIGGER** on a 5¢ miss of 83.00 (intrabar low); no 15-minute close went under 83.26.
+  5. **The SLS "fired and paid" claim graded ✗** although −17.2% was the real close-to-close move. The claim was about the card's result, which our review graded CONF-FAILED.
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/19 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **Self-interest, named:** ANT (Anthropic) was a radar card; this review is written by Claude (Anthropic). The card was graded on Robinhood prices only.
+- **No unratified rule applied.** I-24, I-29, I-32 and I-36 are cited as proposals only.
+- **Standing:**
+  - The time-exit RESULTS document (now to be regenerated) awaits the owner's go-ahead.
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler (I-35).
+  - The account decision ($8.56).
