@@ -3397,3 +3397,57 @@ Session launched from this repository (§0 satisfied).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler (I-35).
   - The account decision ($8.56).
+
+## 2026-11-23 (day + evening) — First-bar check #56 (10:16 quiet); scheduled post-close review #52 (n=66); OWNER TRADED (1 NVDA call, open); DB sync DEFERRED (twenty-fourth night); option marks session 35 (post-sample)
+
+- **The brief was on time** (committed 9:18:47 ET). Its calls: UNCLEAR, mildly bullish, `event-driven — Huang reinstatement` on a +4–7% gap up over Friday's range; flash PMIs at 9:45.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, leaning down / gap fading — both opened above their premarket highs and sold the whole bar.
+  - **10:16:** a quiet line. The PMIs were at 9:45, not 10:00 (10/23, 10/30 precedent).
+- **Evening review** (`brief-review/reviews/2026-11-23.md`):
+  - F 11/13 · Open HIT · Mood HIT · Regime HIT · first-bar check 9:46 MISS.
+  - **The day:** the 10:00 PMI candle reversed the opening flush. The pair broke UP at 10:30 and was back inside by 11:45, then a 4-hour pin. SPY +4.73%, QQQ +6.97%, NVDA +31.59%.
+  - **Radar:**
+    - SPY/QQQ UP: CONF-PAID (R-2, on targets already behind price; strict 3:00 reading against).
+    - DELL UP: CONF-PAID (R-2).
+    - NVDA UP: CONF-FAILED (−2.00% at the close).
+  - **Watchlist:** precision 22/23; recall 16/20.
+  - **✗ items:** QQQ's "Friday low 608.92" (actual 606.23), and our last-print moves relabelled "verified closes" by the brief.
+- **Owner (R-3, day 44): TRADED.**
+  - Bought 1 NVDA 2027-02-19 205C at 5.35 ($535), filled 9:59:30 — 30 s before the NVDA card's first eligible close, in its direction.
+  - No stop on record; ~89% of equity; over the $400 premium cap.
+  - Review-assigned grade **D** (the owner overrides). Position OPEN, marked −$70.
+  - Account $537.11 after an inferred ~$598 inflow (banking records not pulled).
+  - DAY-TYPE row appended; totals note the open position.
+- **Correction to 11/20 (additive):** official closes; SPY's auction close was $1.10 under the last print; no grade changes.
+- **Scorecard:**
+  - n=66; cumulatives updated.
+  - DAY-TYPE row added; UNCLEAR now 16 days.
+  - A dated recount note was appended (6 held / 5 reversed).
+- **Ledger:**
+  - Evidence appended to I-36: the thirteenth hand application, plus the brief quoting our last prints as verified.
+  - **New PROPOSED item I-37** (R-2 targets already behind price at the trigger close).
+- **Option marks:** 8 recorded, 0 missing. Session 35, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no credentials. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-fourth night.** Credentials are still not provisioned.
+- **My own error, named:** the 9:46 card said a 10:16 check would follow. On a 9:45-release day there is none (10/23, 10/30 precedent). The card text is left as written (append-only after the open); this entry records the error.
+- **Grading judgements, named:**
+  1. **SPY/QQQ and DELL graded CONF-PAID on R-2** although their targets were behind price at the trigger close and both were red against the trigger at the deadline. That is ratified R-2 as written. The concern is proposed as I-37, not applied.
+  2. **The 9:46 lean graded MISS**, not MIXED: the down lean never paid at any point after 9:45.
+  3. **The owner's trade graded D:** card direction, 1 lot and a non-0DTE contract for it; no stop, ~89% of equity, over the cap and filled before the required 15-minute close against it. The grade is the review's, and the owner overrides.
+  4. **§6A "verified closes" graded ✗** although the figures came from our own review. They were last prints relabelled as verified.
+  5. **Five more ~0.1-pt last-print moves (row 10) were not counted separately.**
+
+  Each is my reading of the rubric, not a new rule.
+- **Inference, labelled:** the ~$598 account inflow is computed from cash arithmetic. Banking records were deliberately not pulled (standing constraint).
+- **A previously published record was amended:** the 11/20 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-36 and I-37 are cited as proposals only.
+- **Read-only brokerage held:** no order was placed, modified or cancelled, and no entry, size or contract was recommended. The trade above is the owner's own.
+- **Standing:**
+  - The time-exit RESULTS (to regenerate on request).
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler (I-35).
