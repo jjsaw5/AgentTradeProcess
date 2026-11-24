@@ -3451,3 +3451,45 @@ Session launched from this repository (§0 satisfied).
   - The time-exit RESULTS (to regenerate on request).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler (I-35).
+
+## 2026-11-24 (day + evening) — First-bar checks #57–58; scheduled post-close review #53 (n=67); owner did not trade (11/23 NVDA call still open, account $417.20); DB sync DEFERRED (twenty-fifth night); option marks session 36 (post-sample)
+
+- **The brief was on time** (committed 9:21:40 ET). Its calls: UNCLEAR on a split open (SPY on its floor, QQQ below Monday's range), mildly bearish, high-vol into tomorrow's PCE; DELL tonight.
+- **First-bar checks:**
+  - **9:46:** UNCLEAR, no lean (the split held).
+  - **10:16:** UNCLEAR, no lean — the pair's UP fired by 3¢ at 10:00 and was lost at 10:15; NVDA DOWN fired.
+- **Evening review** (`brief-review/reviews/2026-11-24.md`):
+  - F 13/13 · Open HIT · Mood HIT · Regime HIT · first-bar checks 9:46 HIT / 10:16 HIT.
+  - **The day:** two-way and split. SPY −0.48%, QQQ −1.98%, SMH −7.08%, IWM / DIA green; ANT closed below $83.
+  - **Radar:**
+    - SPY/QQQ UP: CONF-FAILED.
+    - NVDA DOWN: CONF-PAID, thin (+0.47% in favour).
+    - XLE: NO-TRIGGER.
+    - **DELL vol test OPEN:** re-marked ±13.4% at today's close; reported 9.45 vs 6.55 after hours.
+  - **Watchlist:** precision 20/25; recall 12/13.
+  - **I-36 candidate observed in use:** the brief computed prior-day moves from official closes.
+- **Owner (R-3, day 45):** no option orders. The NVDA 2027-02-19 205C is open, marked $345 (−$190). Account $417.20.
+- **Correction to 11/23 (additive):** official closes; no grade changes.
+- **Scorecard:** n=67; cumulatives updated; no DAY-TYPE row (no trade; the 11/23 position is still open).
+- **Ledger:** evidence appended to I-36 (the fourteenth hand application, plus the brief-side candidate observed). No new proposal.
+- **Option marks:** 8 recorded, 0 missing. Session 36, post-sample.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no credentials. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-fifth night.** Credentials are still not provisioned.
+- **Grading judgements, named:**
+  1. **NVDA DOWN graded CONF-PAID on a thin +0.47% strict close.** A final-bar ramp nearly erased it. It will be re-checked against tomorrow's official close (I-36) and flipped additively if it crosses.
+  2. **The SPY/QQQ UP fire counted on a 3¢ QQQ close on the release candle.** The card allowed the 9:45–10:00 candle; no minimum-margin rule exists.
+  3. **DELL's "close below 300" positioning read was not graded** — the card called it "not an entry card".
+  4. **The "eighth consecutive week" UW count was not graded** (the week basis is ambiguous).
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/23 review gained an appended correction. The original text was not rewritten.
+- **The first-bar checks were graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-36 and I-37 are cited as proposals only.
+- **Read-only brokerage held:** no order was placed, modified or cancelled, and no entry, exit, size or contract was recommended for the owner's open position.
+- **Standing:**
+  - The time-exit RESULTS (regenerable).
+  - The UW key (revoked); Turso rotation and re-provisioning.
+  - The brief scheduler (I-35).
