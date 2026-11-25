@@ -3493,3 +3493,45 @@ Session launched from this repository (§0 satisfied).
   - The time-exit RESULTS (regenerable).
   - The UW key (revoked); Turso rotation and re-provisioning.
   - The brief scheduler (I-35).
+
+## 2026-11-25 (day + evening) — NO BRIEF (fourth full miss); first-bar check #59 (10:16 not run); no-brief review (n stays 67); owner did not trade (NVDA call open, account $375.23); DB sync DEFERRED (twenty-sixth night); option marks session 37 (post-sample)
+
+- **No brief** at 9:47, 10:16 or 17:00 ET.
+- **First-bar checks:**
+  - **9:46 (no-brief fallback):** UNCLEAR, leaning RUNNING-down. Both opening bars closed at their lows after a −3% gap; it carried a written caution that opening-bar leans had been reversed three times in five sessions.
+  - **10:16:** not run (no brief §3; precedent).
+- **The day:** the lows were in the 9:45–9:50 bar. The 10:00 candle reversed the flush, and both failed-gap lines were reclaimed by 2:15. SPY closed −0.28%, QQQ −0.65%, IWM / DIA green, TLT +0.91%. Driver: NO CLEAR DRIVER FOUND (the 8:30 numbers were not sourced).
+- **No-brief review** (`brief-review/reviews/2026-11-25.md`):
+  - The 9:46 check graded **MISS**.
+  - The **DELL vol test resolved RICH** (+0.63% vs ±13.4% after a 9.45 vs 6.55 beat).
+  - The 11/24 NVDA thin CONF-PAID was confirmed on the official close (−0.54% in favour).
+- **Owner (R-3, day 46):** no option orders. NVDA 2027-02-19 205C open, marked $303 (−$232). Account $375.23.
+- **Correction to 11/24 (additive):** official closes; no grade changes.
+- **Scorecard:** NO-BRIEF row; first-bar and radar cumulatives updated; n unchanged.
+- **Ledger:**
+  - I-27 evidence (fifth instance).
+  - I-36 (the fifteenth hand application).
+  - No new proposal.
+- **Option marks:**
+  - 8 recorded, 0 missing. Session 37, post-sample.
+  - The 1DTE leg is Friday 11/27, because Thursday is the holiday. The tool picked it up from the option file; a `--next-expiry` flag on `record` was rejected, since only `plan` takes it.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no credentials. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-sixth night.** Credentials are still not provisioned.
+- **The brief did not run.** This is not a deviation of this session, but it means the morning process ran without its spec-defined input. The first-bar fallback ran on yesterday's levels.
+- **Grading judgements, named:**
+  1. **The 9:46 check graded MISS**, although its failed-gap lines and its written caution both described the reversal. The lean is what is graded.
+  2. **The DELL vol test graded close-to-close** (as written), ignoring the −10.3% intraday swing.
+  3. **"1DTE" in the marks file for a Friday expiry two calendar days out** (one trading day).
+
+  Each is my reading of the rubric, not a new rule.
+- **A previously published record was amended:** the 11/24 review gained an appended correction. The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-27 and I-36 are cited as proposals only.
+- **Read-only brokerage held:** no order was placed, modified or cancelled, and no entry, exit or size was recommended for the owner's open position.
+- **Standing:**
+  - The brief scheduler (I-27 / I-35).
+  - The time-exit RESULTS (regenerable).
+  - The UW key (revoked); Turso rotation and re-provisioning.
