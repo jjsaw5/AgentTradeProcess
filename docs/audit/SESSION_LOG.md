@@ -3535,3 +3535,37 @@ Session launched from this repository (§0 satisfied).
   - The brief scheduler (I-27 / I-35).
   - The time-exit RESULTS (regenerable).
   - The UW key (revoked); Turso rotation and re-provisioning.
+
+## 2026-11-26 — market holiday (Thanksgiving)
+
+- The 9:46, 10:16 and evening routines fired. Each replied with one quiet line and wrote nothing.
+- **DEVIATIONS:** None.
+
+## 2026-11-27 (half day) — NO BRIEF (second session running); first-bar check #60 (10:16 not run); no-brief review (n stays 67); owner did not trade (NVDA call open, account $338.31); DB sync DEFERRED (twenty-seventh night); option marks session 38 (post-sample)
+
+- **No brief** at 9:47, 10:16 or 17:00 ET.
+- **First-bar checks:**
+  - **9:46 (no-brief fallback):** UNCLEAR, no lean — the gap up faded through the opening bar but held above Wednesday's range.
+  - **10:16:** not run.
+- **The day:** the 10:05 dip held Wednesday's highs. The opening highs broke at 11:45 and the session closed at its highs at 1:00. SPY +1.68%, QQQ +2.66%, SMH +4.07%. Driver: NO CLEAR DRIVER FOUND.
+- **No-brief review** (`brief-review/reviews/2026-11-27.md`):
+  - The 9:46 check graded **MIXED**.
+  - The 11/25 DELL vol test re-checked on the official 297.06: still RICH.
+- **Owner (R-3, day 47):** no option orders. NVDA 2027-02-19 205C open, marked $266 (−$269). Account $338.31.
+- **Scorecard:** NO-BRIEF row; first-bar cumulative updated; n unchanged.
+- **Ledger:** I-27 evidence (sixth instance). No new proposal.
+- **Option marks:** 8 recorded. Session 38, post-sample.
+  - 2 checkpoints per row (2:00, 3:30) are `NA_no_data` because of the 1:00 PM close.
+  - The next expiry is Mon 11/30.
+- **DB sync DEFERRED; MUST_MENTION NOT regenerated.** There are no credentials. No credential recovery was attempted.
+
+### DEVIATIONS
+
+- **DB sync and MUST_MENTION regeneration skipped for the twenty-seventh night.** Credentials are still not provisioned.
+- **The brief did not run for the second session running.** The first-bar fallback ran on Wednesday's levels.
+- **Sentinel judgement, named:** the marks tool wrote `NA_no_data` for the post-close 2:00 / 3:30 checkpoints on a half day. Arguably the concept does not apply (there was no session at 2:00). It is kept as the tool wrote it, flagged in the review, and no tool change was made (tools are outside the standing push scope).
+- **Grading judgement, named:** the 9:46 check graded MIXED (UNCLEAR with no lean on a day that ran), although both of its named lines were correct.
+- **Previously published record amended:** the 11/25 review gained an appended correction (the official DELL close). The original text was not rewritten.
+- **The first-bar check was graded by me, of my own output.** This is a standing self-grading conflict, named.
+- **No unratified rule applied.** I-27 is cited as a proposal only.
+- **Read-only brokerage held:** no order was placed, modified or cancelled, and no entry, exit or size was recommended for the owner's open position.
